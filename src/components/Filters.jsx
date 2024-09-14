@@ -83,18 +83,18 @@ const Section = () => {
         <div className="flex flex-col lg:flex-row gap-4 items-center m-2">
           <div className="bg-gray-100 rounded inline-flex space-x-2 px-3 py-1">
             <button className="text-black px-4 py-2 rounded active:bg-gray-500 active:text-white">
-              Все
+              Bce
             </button>
             <button className="text-black px-4 py-2 rounded active:bg-gray-500 active:text-white">
               Новье
             </button>
             <button className="text-black px-4 py-2 rounded active:bg-gray-500 active:text-white">
-              С пробегом
+              C пробегом
             </button>
           </div>
           <div className="flex gap-2">
             <input type="checkbox" />
-            <p>В наличии</p>
+            <p>B наличии</p>
           </div>
           <div className="flex gap-2">
             <input type="checkbox" />
@@ -120,7 +120,7 @@ const Section = () => {
         </div>
         <br />
         <div className="flex gap-4 justify-end items-center">
-          <button>Сбросить Х</button>
+          <button>Сбросить X</button>
           <button className="bg-blue-500 text-white py-2 px-4 rounded text-sm">
             23 Предложений
           </button>

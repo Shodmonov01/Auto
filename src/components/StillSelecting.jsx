@@ -13,7 +13,7 @@ const StillSelecting = () => {
       >
         <div className="flex flex-col justify-center items-center md:items-start">
           <b className="text-2xl text-white mb-2">
-            Не можете определиться с выбором?
+             He можете определиться c выбором?
           </b>
           <p className="text-white mb-4 text-center md:text-left">
             Оставьте заявку, и наши менеджеры <br /> проконсультируют вас!

@@ -109,7 +109,7 @@ const Footer = () => {
               Citroen
             </a>
             <a href="#" className="text-gray-400">
-              daewoo
+              Daewoo
             </a>
           </div>
         </div>

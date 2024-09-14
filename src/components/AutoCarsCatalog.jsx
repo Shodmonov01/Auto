@@ -219,9 +219,11 @@ const Katalog = () => {
     const endIndex = startIndex + carsPerPage;
     return cars.slice(startIndex, endIndex);
   };
+   const navigate = useNavigate();
+   
   const handleLinkClick = (path) => {
     window.scrollTo(0, 0);
-    useNavigate(navigate(path));
+    navigate(path);
   };
 
   return (

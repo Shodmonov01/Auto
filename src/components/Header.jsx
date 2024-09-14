@@ -23,7 +23,7 @@ const Header = () => {
     ru: {
       home: "Главная",
       catalog: "Каталог",
-      about: "О нас",
+      about: "O нас",
       news: "Новости",
       contacts: "Контакты",
       searchPlaceholder: "Поиск по названию",
@@ -38,7 +38,7 @@ const Header = () => {
       about: "Biz haqimizda",
       news: "Yangiliklar",
       contacts: "Aloqalar",
-      searchPlaceholder: "Nomi bo‘yicha qidirish",
+      searchPlaceholder: "Nomi boyicha qidirish",
       personName: "Hamzat Husenovich Arslanaliev",
       cars: "Avtomobillar",
       commercialTransport: "Tijorat transporti",
