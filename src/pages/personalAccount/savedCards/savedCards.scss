@@ -1,0 +1,55 @@
+.savedCards-section {
+  width: 105rem;
+  height: auto;
+  border-radius: 20px;
+  padding: 3rem;
+  background-color: #fff;
+  h1 {
+    font-size: 3rem;
+  }
+  .savedCards {
+    grid-template-columns: auto auto;
+    padding: 3rem 0rem;
+    gap: 2rem;
+    .savedCard {
+      width: 39rem;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 10px 15px -2px rgba(0, 0, 0, 0.1);
+      .cardCarImg {
+        width: 35rem;
+        border-radius: 2rem;
+      }
+      .carInfo {
+        margin-top: 2rem;
+        h2 {
+          font-size: 2rem;
+          letter-spacing: 0.2rem;
+        }
+        h3 {
+          font-size: 1.8rem;
+          margin-top: 0.6rem;
+        }
+        h4 {
+          color: #989898;
+          font-size: 1.5rem;
+        }
+        .flex-class {
+          margin-top: 1rem;
+          justify-content: space-between;
+          .savedCardFlex1,
+          .savedCardFlex2 {
+            margin-top: 3rem;
+          }
+        }
+        .savedCardFlex3 {
+            gap: 25rem;
+          img {
+            cursor: pointer;
+            width: 2rem;
+          }
+        }
+      }
+    }
+  }
+}
