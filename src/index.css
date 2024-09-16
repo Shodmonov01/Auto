@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @import url("https://fonts.cdnfonts.com/css/arial-2");
 * {
   margin: 0;
@@ -73,3 +74,13 @@ button {
   margin-left: 5rem;
   margin-top: 5rem;
 }
+=======
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+body{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+>>>>>>> becc9b1fcaeb035f80a29f979ee9a620a2c47b3c
