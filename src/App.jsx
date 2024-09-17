@@ -23,6 +23,7 @@ function Layout({ children }) {
       <div className="w-full max-w-[1440px] mx-auto flex-grow">
         <div className="flex-grow flex justify-center">
           <div className="w-full max-w-[1440px]">{children}</div>
+          <div>something has changed</div>
         </div>
       </div>
       {!isNotFound && <Footer />}
