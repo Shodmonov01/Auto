@@ -1,35 +1,82 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useLocation,
+} from "react-router-dom";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import MainPage from "./page/MainPage";
+import AboutCarsPage from "./page/AboutCarPage"
+import CarDetails from "./components/CarDetails";
+import { AutoCarsProvider } from "./components/AboutCarsContext";
+import PageTitle from "./components/PageTitle";
+import NotFoundPage from "./page/NotFoundPage";
 
-function App() {
-  const [count, setCount] = useState(0)
+function Layout({ children }) {
+  const location = useLocation();
+  const isNotFound = location.pathname === "/404" || location.pathname === "*";
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="flex flex-col min-h-screen">
+      {!isNotFound && <Header />}
+      <div className="w-full max-w-[1440px] mx-auto flex-grow">
+        <div className="flex-grow flex justify-center">
+          <div className="w-full max-w-[1440px]">{children}</div>
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+      {!isNotFound && <Footer />}
+    </div>
+  );
 }
 
-export default App
+function App() {
+  return (
+    <AutoCarsProvider>
+      <Router>
+        <Layout>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <>
+                  <PageTitle title="Home" />
+                  <MainPage />
+                </>
+              }
+            />
+            <Route
+              path="/about-cars"
+              element={
+                <>
+                  <PageTitle title="About Cars" />
+                  <AboutCarsPage />
+                </>
+              }
+            />
+            <Route
+              path="/about-cars/:id"
+              element={
+                <>
+                  <PageTitle title="Car Details" />
+                  <CarDetails />
+                </>
+              }
+            />
+            <Route
+              path="*"
+              element={
+                <>
+                  <PageTitle title="404 | Page Not Found" />
+                  <NotFoundPage />
+                </>
+              }
+            />
+          </Routes>
+        </Layout>
+      </Router>
+    </AutoCarsProvider>
+  );
+}
+
+export default App;
