@@ -1,0 +1,32 @@
+.errorsavedCards {
+    justify-content: center;
+    align-items: center;
+    margin-top: 5rem;
+    .errorsavedCards2 {
+      text-align: center;
+      h3 {
+        font-size: 1.7rem;
+        color: rgba(152, 152, 152, 1);
+      }
+      p {
+        width: 40rem;
+        font-size: 1.5rem;
+        color: rgba(41, 56, 67, 1);
+        margin-top: 1rem;
+      }
+      button {
+        padding: 2rem 5rem;
+        background-color: rgba(38, 132, 229, 1);
+        border: 1px solid rgba(38, 132, 229, 1);
+        border-radius: 5px;
+        color: #fff;
+        margin-top: 2rem;
+        transition: 0.1s linear;
+        &:hover {
+          background-color: transparent;
+          color: #000;
+          transition: 0.1s linear;
+        }
+      }
+    }
+  }
