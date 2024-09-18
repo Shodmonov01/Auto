@@ -10,7 +10,10 @@ lerna-debug.log*
 node_modules
 dist
 dist-ssr
+<<<<<<< HEAD
 mySpecial/
+=======
+>>>>>>> 79af27027b7908b8740dcd46cd7d2648df9b2f53
 *.local
 
 # Editor directories and files
