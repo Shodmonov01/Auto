@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-function App() {
-  return <div>
-    <h1>Hello World</h1>
-  </div>;
-=======
 import {
   BrowserRouter as Router,
   Routes,
@@ -13,11 +7,12 @@ import {
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import MainPage from "./page/MainPage";
-import AboutCarsPage from "./page/AboutCarPage"
+import AboutCarsPage from "./page/AboutCarPage";
 import CarDetails from "./components/CarDetails";
 import { AutoCarsProvider } from "./components/AboutCarsContext";
 import PageTitle from "./components/PageTitle";
 import NotFoundPage from "./page/NotFoundPage";
+import AccauntSettings from "./pages/personalAccount/accauntSettings/AccauntSettings";
 
 function Layout({ children }) {
   const location = useLocation();
@@ -56,7 +51,7 @@ function App() {
               element={
                 <>
                   <PageTitle title="About Cars" />
-                  <AboutCarsPage />
+                  <AccauntSettings/> 
                 </>
               }
             />
@@ -83,7 +78,6 @@ function App() {
       </Router>
     </AutoCarsProvider>
   );
->>>>>>> 79af27027b7908b8740dcd46cd7d2648df9b2f53
 }
 
 export default App;
