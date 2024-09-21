@@ -7,12 +7,10 @@ import {
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import MainPage from "./page/MainPage";
-import AboutCarsPage from "./page/AboutCarPage";
 import CarDetails from "./components/CarDetails";
-import { AutoCarsProvider } from "./components/AboutCarsContext";
 import PageTitle from "./components/PageTitle";
 import NotFoundPage from "./page/NotFoundPage";
-import AccauntSettings from "./pages/personalAccount/accauntSettings/AccauntSettings";
+import AboutCarsCatalog from "./components/AboutCarsCatalog"
 
 function Layout({ children }) {
   const location = useLocation();
@@ -33,7 +31,6 @@ function Layout({ children }) {
 
 function App() {
   return (
-    <AutoCarsProvider>
       <Router>
         <Layout>
           <Routes>
@@ -51,7 +48,7 @@ function App() {
               element={
                 <>
                   <PageTitle title="About Cars" />
-                  <AccauntSettings/> 
+                  <AboutCarsCatalog/> 
                 </>
               }
             />
@@ -76,7 +73,6 @@ function App() {
           </Routes>
         </Layout>
       </Router>
-    </AutoCarsProvider>
   );
 }
 
