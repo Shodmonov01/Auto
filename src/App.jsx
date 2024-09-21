@@ -17,7 +17,7 @@ function Layout({ children }) {
   const isNotFound = location.pathname === "/404" || location.pathname === "*";
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen max-w-[1440px] mx-auto">
       {!isNotFound && <Header />}
       <div className="w-full max-w-[1440px] mx-auto flex-grow">
         <div className="flex-grow flex justify-center">

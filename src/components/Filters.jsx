@@ -82,13 +82,13 @@ const Section = () => {
       <div className="p-4 shadow-slate-500 sm:shadow-md lg:shadow-lg">
         <div className="flex flex-col lg:flex-row gap-4 items-center m-2">
           <div className="bg-gray-100 rounded inline-flex space-x-2 px-3 py-1">
-            <button className="text-black px-4 py-2 rounded active:bg-gray-500 active:text-white">
+            <button className="text-white px-4 py-2 rounded bg-[#293843] active:text-white">
               Bce
             </button>
-            <button className="text-black px-4 py-2 rounded active:bg-gray-500 active:text-white">
+            <button className="text-black px-4 py-2 rounded active:bg-[#293843] active:text-white">
               Новье
             </button>
-            <button className="text-black px-4 py-2 rounded active:bg-gray-500 active:text-white">
+            <button className="text-black px-4 py-2 rounded active:bg-[#293843] active:text-white">
               C пробегом
             </button>
           </div>

@@ -65,8 +65,8 @@ const Header = () => {
 
   return (
     <>
-      <header className="bg-slate-200 w-full px-6">
-        <div className="flex flex-wrap justify-between items-center p-4">
+      <header className="bg-[#F6F6F6] w-full px-6">
+        <div className="flex flex-wrap items-center p-4">
           <div className="md:hidden">
             {/* <button onClick={toggleMenu}>
               {menuOpen ? <MdClose size={24} /> : <MdMenu size={24} />}
@@ -79,7 +79,10 @@ const Header = () => {
               {Object.keys(translations[language])
                 .slice(0, 5)
                 .map((key) => (
-                  <li key={key} className="p-2 hover:text-blue-600">
+                  <li
+                    key={key}
+                    className="p-2 hover:text-blue-600 text-[#434343]"
+                  >
                     {translations[language][key]}
                   </li>
                 ))}
@@ -92,21 +95,21 @@ const Header = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FaWhatsapp size={24} />
+              <FaWhatsapp className="text-[#989898]" size={24} />
             </a>
             <a
               href="https://telegram.me/yourtelegramlink"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FaTelegramPlane size={24} />
+              <FaTelegramPlane className="text-[#989898]" size={24} />
             </a>
             <a
               href="https://instagram.com/yourinstagramlink"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FaInstagram size={24} />
+              <FaInstagram className="text-[#989898]" size={24} />
             </a>
           </div>
 
@@ -143,7 +146,10 @@ const Header = () => {
                   {Object.keys(translations[language])
                     .slice(0, 5)
                     .map((key) => (
-                      <li key={key} className="text-lg p-4 hover:text-blue-600">
+                      <li
+                        key={key}
+                        className="text-lg p-4 hover:text-blue-600 text-[#989898]"
+                      >
                         {translations[language][key]}
                       </li>
                     ))}
@@ -164,29 +170,29 @@ const Header = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      <FaWhatsapp size={24} />
+                      <FaWhatsapp className="text-[#989898]" size={24} />
                     </a>
                     <a
                       href="https://telegram.me/yourtelegramlink"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      <FaTelegramPlane size={24} />
+                      <FaTelegramPlane className="text-[#989898]" size={24} />
                     </a>
                     <a
                       href="https://instagram.com/yourinstagramlink"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      <FaInstagram size={24} />
+                      <FaInstagram className="text-[#989898]" size={24} />
                     </a>
                   </div>
                   <div className="flex gap-2 items-center">
-                    <MdCall size={24} />
+                    <MdCall className="text=[#989898]" size={24} />
                     <p className="text-sm">+7(777)777-77-77</p>
                   </div>
                   <div className="flex gap-2 items-center">
-                    <MdEmail size={24} />
+                    <MdEmail className="text-[#989898]" size={24} />
                     <p className="cursor-pointer text-sm">info@mail.ru</p>
                   </div>
                 </div>
@@ -195,11 +201,11 @@ const Header = () => {
           </Dialog>
           <div className="hidden md:flex items-center space-x-4">
             <div className="flex gap-2 items-center">
-              <MdCall size={24} />
-              <p className="text-sm">+7(777)777-77-77</p>
+              <MdCall className="text-[#989898]" size={24} />
+              <p className="text-sm text-[#989898]">+7(777)777-77-77</p>
             </div>
             <div className="flex gap-2 items-center">
-              <MdEmail size={24} />
+              <MdEmail className="text-[#989898]" size={24} />
               <p className="cursor-pointer text-sm">info@mail.ru</p>
             </div>
             <div>
@@ -221,7 +227,7 @@ const Header = () => {
         style={{ boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)" }}
         className="flex items-center py-4 px-11 shadow-slate-100 md:justify-between md:space-x-4"
       >
-        <div className="flex-grow flex justify-center pr-4">
+        <div className="flex-grow flex justify-between pr-4">
           <Link to="/" className="flex items-center">
             <div className="flex items-center">
               <b className="text-2xl text-blue-600">You</b>
@@ -231,7 +237,7 @@ const Header = () => {
         </div>
 
         {/* Navigation items hidden on mobile */}
-        <ul className="hidden md:flex space-x-4">
+        <ul className="hidden md:flex space-x-8">
           <li className="flex items-center gap-2">
             <a href="#">{translations[language].cars}</a>
             <MdKeyboardArrowRight className="text-blue-600" />
@@ -255,7 +261,7 @@ const Header = () => {
             className="p-[4px] border rounded-lg outline-none sm:p-2 sm:pl-6"
           />
           <button className="absolute left-2 hidden md:block">
-            <MdSearch />
+            <MdSearch className="text-[#989898]" />
           </button>
           {/* Hamburger menu for mobile view */}
           <div className="md:hidden ml-2 mt-2">
@@ -267,7 +273,7 @@ const Header = () => {
 
         {/* Hidden on mobile, visible on larger screens */}
         <div className="hidden md:flex items-center space-x-4">
-          <TbBellRingingFilled size={24} />
+          <TbBellRingingFilled className="text-[#989898]" size={24} />
           <button className="bg-gray-200 py-2 px-4 rounded text-sm">
             Войти
           </button>
