@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axiosInstance from "../axiosConfig";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const LoginPage = () => {
@@ -26,7 +26,7 @@ const LoginPage = () => {
     if (token) {
       navigate("/");
     }
-  }, []);
+  }, [navigate]);
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
@@ -84,7 +84,12 @@ const LoginPage = () => {
 
         <button
           type="submit"
-          className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600"
+          disabled={!rememberMe} // Disable button if rememberMe is false
+          className={`w-full py-2 rounded ${
+            rememberMe
+              ? "bg-blue-500 hover:bg-blue-600 text-white"
+              : "bg-gray-300 text-gray-500 cursor-not-allowed"
+          }`}
         >
           Войти
         </button>

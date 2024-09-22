@@ -22,7 +22,7 @@ const Header = () => {
   };
     useEffect(() => {
       const token = localStorage.getItem("token");
-      setHasToken(!!token);
+      setHasToken(!!token); // Set to true if token exists, false otherwise
     }, []);
 
   const translations = {

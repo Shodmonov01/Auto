@@ -51,17 +51,22 @@ const RegisterPage = () => {
       alert("Вы должны согласиться c политикой обработки данных!");
       return;
     }
+
+    // Call the registration API only if the validation passes
   };
 
   const HandleClick = () => {
     axiosInstance
       .post("/user-register", formData)
       .then((response) => {
+        // Save the token to localStorage
         const token = response.data.token;
         localStorage.setItem("token", token);
+        alert("Регистрация успешна!");
         navigate("/");
       })
       .catch((error) => {
+        console.error(error.response.data.error);
         alert(error.response.data.error);
       });
   };
