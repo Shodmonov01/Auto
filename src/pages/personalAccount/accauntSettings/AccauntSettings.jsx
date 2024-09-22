@@ -1,16 +1,13 @@
- import React, { useState, useEffect, ChangeEvent, FormEvent } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import "./accauntSettings.scss";
 
-const AccauntSettings = () => {
+const AccountSettings = () => {
   const [userData, setUserData] = useState({
     name: "",
     email: "",
     oldPassword: "",
     newPassword: "",
     confirmNewPassword: "",
-    password: "",
-    tariff: "",
   });
 
   const [originalUserData, setOriginalUserData] = useState({
@@ -19,15 +16,15 @@ const AccauntSettings = () => {
     oldPassword: "",
     newPassword: "",
     confirmNewPassword: "",
-    password: "",
-    tariff: ""
   });
 
   const navigate = useNavigate();
 
   const fetchUserData = async () => {
     try {
-      const response = await fetch("https://668b0ea52c68eaf3211e8742.mockapi.io/api/v1/cars/1"); // ID 2 uchun o'zgartiring
+      const response = await fetch(
+        "https://668b0ea52c68eaf3211e8742.mockapi.io/api/v1/cars/1"
+      );
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
@@ -38,8 +35,6 @@ const AccauntSettings = () => {
         oldPassword: "",
         newPassword: "",
         confirmNewPassword: "",
-        password: "",
-        tariff: "",    
       });
       setOriginalUserData({
         name: data.user.name || "",
@@ -47,8 +42,6 @@ const AccauntSettings = () => {
         oldPassword: "",
         newPassword: "",
         confirmNewPassword: "",
-        password: "",
-        tariff: ""    
       });
     } catch (error) {
       console.error("Failed to fetch user data:", error);
@@ -71,24 +64,36 @@ const AccauntSettings = () => {
     e.preventDefault();
     try {
       const updatedUser = {
-        name: userData.name !== originalUserData.name ? userData.name : originalUserData.name,
-        email: userData.email !== originalUserData.email ? userData.email : originalUserData.email,
+        name:
+          userData.name !== originalUserData.name
+            ? userData.name
+            : originalUserData.name,
+        email:
+          userData.email !== originalUserData.email
+            ? userData.email
+            : originalUserData.email,
       };
 
-      if (updatedUser.name === originalUserData.name && updatedUser.email === originalUserData.email) {
+      if (
+        updatedUser.name === originalUserData.name &&
+        updatedUser.email === originalUserData.email
+      ) {
         console.log("No changes detected.");
         return;
       }
 
-      const response = await fetch("https://668b0ea52c68eaf3211e8742.mockapi.io/api/v1/cars/1", { // ID 2 uchun o'zgartiring
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          user: updatedUser,
-        }),
-      });
+      const response = await fetch(
+        "https://668b0ea52c68eaf3211e8742.mockapi.io/api/v1/cars/1",
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            user: updatedUser,
+          }),
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -108,17 +113,20 @@ const AccauntSettings = () => {
       return;
     }
     try {
-      const response = await fetch("https://668b0ea52c68eaf3211e8742.mockapi.io/api/v1/cars/1", { 
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          user: {
-            password: userData.newPassword,
+      const response = await fetch(
+        "https://668b0ea52c68eaf3211e8742.mockapi.io/api/v1/cars/1",
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
           },
-        }),
-      });
+          body: JSON.stringify({
+            user: {
+              password: userData.newPassword,
+            },
+          }),
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -132,14 +140,16 @@ const AccauntSettings = () => {
   };
 
   return (
-    <section className="accountSettigns-section">
-      <h1>Настройки</h1>
+    <section className="w-[105rem] h-auto rounded-[20px] p-12 bg-white">
+      <h1 className="text-3xl">Настройки</h1>
 
       <form onSubmit={handleAccountUpdate}>
-        <h2>аккаунт</h2>
-        <div className="flex-class">
-          <div className="input grid-class">
-            <label htmlFor="name">Имя</label>
+        <h2 className="capitalize mb-4 text-2xl">аккаунт</h2>
+        <div className="flex gap-12 items-center mt-8">
+          <div className="grid gap-4">
+            <label htmlFor="name" className="text-base">
+              Имя
+            </label>
             <input
               type="text"
               id="name"
@@ -147,10 +157,13 @@ const AccauntSettings = () => {
               value={userData.name}
               onChange={handleInputChange}
               placeholder="Введите свое имя"
+              className="w-[30rem] h-[5rem] p-4 bg-gray-100 border-none"
             />
           </div>
-          <div className="input grid-class">
-            <label htmlFor="email">E-mail</label>
+          <div className="grid gap-4">
+            <label htmlFor="email" className="text-base">
+              E-mail
+            </label>
             <input
               type="email"
               id="email"
@@ -158,20 +171,22 @@ const AccauntSettings = () => {
               value={userData.email}
               onChange={handleInputChange}
               placeholder="Введите адрес электронной почты"
+              className="w-[30rem] h-[5rem] p-4 bg-gray-100 border-none"
             />
-            <label htmlFor="email" className="extraLabel">
-              <span>Политика обработки данных</span>
-            </label>
           </div>
         </div>
-        <button type="submit">Сохранить</button>
+        <button className="px-16 py-7 mt-12 bg-blue-600 text-white border border-blue-600 hover:bg-white hover:text-black transition-all duration-100">
+          Сохранить
+        </button>
       </form>
 
       <form onSubmit={handlePasswordChange}>
-        <h2>Смена пароля</h2>
-        <div className="flex-class">
-          <div className="input grid-class">
-            <label htmlFor="oldPass">Текущий пароль</label>
+        <h2 className="capitalize mb-4 text-2xl">Смена пароля</h2>
+        <div className="flex gap-12 items-center mt-8">
+          <div className="grid gap-4">
+            <label htmlFor="oldPass" className="text-base">
+              Текущий пароль
+            </label>
             <input
               type="password"
               id="oldPass"
@@ -179,13 +194,13 @@ const AccauntSettings = () => {
               value={userData.oldPassword}
               onChange={handleInputChange}
               placeholder="Текущий пароль"
+              className="w-[30rem] h-[5rem] p-4 bg-gray-100 border-none"
             />
-            <label htmlFor="oldPass" className="extraLabel">
-              <span>Забыли пароль?</span>
-            </label>
           </div>
-          <div className="input grid-class">
-            <label htmlFor="newPass">Новый пароль</label>
+          <div className="grid gap-4">
+            <label htmlFor="newPass" className="text-base">
+              Новый пароль
+            </label>
             <input
               type="password"
               id="newPass"
@@ -193,10 +208,13 @@ const AccauntSettings = () => {
               value={userData.newPassword}
               onChange={handleInputChange}
               placeholder="Новый пароль"
+              className="w-[30rem] h-[5rem] p-4 bg-gray-100 border-none"
             />
           </div>
-          <div className="input grid-class">
-            <label htmlFor="confirmNewPass">Подтвердите пароль</label>
+          <div className="grid gap-4">
+            <label htmlFor="confirmNewPass" className="text-base">
+              Подтвердите пароль
+            </label>
             <input
               type="password"
               id="confirmNewPass"
@@ -204,13 +222,16 @@ const AccauntSettings = () => {
               value={userData.confirmNewPassword}
               onChange={handleInputChange}
               placeholder="Подтвердите пароль"
+              className="w-[30rem] h-[5rem] p-4 bg-gray-100 border-none"
             />
           </div>
         </div>
-        <button type="submit">Сохранить</button>
+        <button className="px-16 py-7 mt-12 bg-blue-600 text-white border border-blue-600 hover:bg-white hover:text-black transition-all duration-100">
+          Сохранить
+        </button>
       </form>
     </section>
   );
 };
 
-export default AccauntSettings;
+export default AccountSettings;

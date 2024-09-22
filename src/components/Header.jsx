@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { FaWhatsapp, FaTelegramPlane, FaInstagram } from "react-icons/fa";
 import { TbBellRingingFilled } from "react-icons/tb";
 import { MdCall } from "react-icons/md";
@@ -15,10 +15,15 @@ import {
 const Header = () => {
   const [language, setLanguage] = useState("ru");
   const [menuOpen, setMenuOpen] = useState(false);
+  const [hasToken, setHasToken ] = useState("");
 
   const handleLanguageChange = (e) => {
     setLanguage(e.target.value);
   };
+    useEffect(() => {
+      const token = localStorage.getItem("token");
+      setHasToken(!!token);
+    }, []);
 
   const translations = {
     ru: {
@@ -272,15 +277,22 @@ const Header = () => {
         </div>
 
         {/* Hidden on mobile, visible on larger screens */}
-        <div className="hidden md:flex items-center space-x-4">
-          <TbBellRingingFilled className="text-[#989898]" size={24} />
-          <button className="bg-gray-200 py-2 px-4 rounded text-sm">
-            Войти
-          </button>
-          <button className="bg-blue-500 text-white py-2 px-4 rounded text-sm">
-            Регистрация
-          </button>
-        </div>
+
+        {hasToken ? (
+          <div>Javohir</div>
+        ) : (
+          <div className="hidden md:flex items-center space-x-4">
+            <TbBellRingingFilled className="text-[#989898]" size={24} />
+            <button className="bg-gray-200 py-2 px-4 rounded text-sm">
+              <Link to={"/login"}>Войти</Link>
+            </button>
+            <Link to={"/register"}>
+              <button className="bg-blue-500 text-white py-2 px-4 rounded text-sm">
+                Регистрация
+              </button>
+            </Link>
+          </div>
+        )}
       </div>
     </>
   );

@@ -10,7 +10,9 @@ import MainPage from "./page/MainPage";
 import CarDetails from "./components/CarDetails";
 import PageTitle from "./components/PageTitle";
 import NotFoundPage from "./page/NotFoundPage";
-import AboutCarsCatalog from "./components/AboutCarsCatalog"
+import AboutCarsCatalog from "./components/AboutCarsCatalog";
+import RegisterPage from "./page/RegisterPage";
+import LoginPage from "./page/LoginPage";
 
 function Layout({ children }) {
   const location = useLocation();
@@ -31,48 +33,67 @@ function Layout({ children }) {
 
 function App() {
   return (
-      <Router>
-        <Layout>
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <>
-                  <PageTitle title="Home" />
-                  <MainPage />
-                </>
-              }
-            />
-            <Route
-              path="/about-cars"
-              element={
-                <>
-                  <PageTitle title="About Cars" />
-                  <AboutCarsCatalog/> 
-                </>
-              }
-            />
-            <Route
-              path="/about-cars/:id"
-              element={
-                <>
-                  <PageTitle title="Car Details" />
-                  <CarDetails />
-                </>
-              }
-            />
-            <Route
-              path="*"
-              element={
-                <>
-                  <PageTitle title="404 | Page Not Found" />
-                  <NotFoundPage />
-                </>
-              }
-            />
-          </Routes>
-        </Layout>
-      </Router>
+    <Router>
+      <Layout>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <PageTitle title="AutoSite" />
+                <MainPage />
+              </>
+            }
+          />
+          <Route
+            path="/about-cars"
+            element={
+              <>
+                <PageTitle title="About Cars" />
+                <AboutCarsCatalog />
+              </>
+            }
+          />
+          <Route
+            path="/about-cars/:id"
+            element={
+              <>
+                <PageTitle title="Car Details" />
+                <CarDetails />
+              </>
+            }
+          />
+          {/* Nested route for PersonalAccount */}
+          <Route
+            path="/register"
+            element={
+              <>
+                <PageTitle title="Register" />
+                <RegisterPage />
+              </>
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <>
+                <PageTitle title="Login" />
+                <LoginPage />
+              </>
+            }
+          />
+          <Route
+            path="*"
+            element={
+              <>
+                <PageTitle title="404 | Page Not Found" />
+                <NotFoundPage />
+              </>
+            }
+          />
+        </Routes>
+      </Layout>
+    </Router>
   );
 }
 
