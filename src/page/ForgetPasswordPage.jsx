@@ -35,8 +35,10 @@ const ForgetPasswordPage = () => {
         className="bg-white p-10 rounded shadow-md w-[563px]"
         onSubmit={handleSubmit}
       >
-        <h2 className="text-2xl font-bold mb-[10px] text-center">Забыли пароль? </h2>
-        <h4 className="text-xl text-center">
+        <h2 className="text-[35px] font-bold mb-[10px] text-center">
+          Забыли пароль?
+        </h2>
+        <h4 className="text-[14px] text-center">
           Введите e-mail для восстановления
         </h4>
 
@@ -51,7 +53,7 @@ const ForgetPasswordPage = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="w-full border rounded px-3 py-2"
+                className="bg-[#F6F6F6] w-full border rounded px-3 py-2"
               />
             </div>
 

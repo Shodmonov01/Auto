@@ -66,6 +66,10 @@ const Header = () => {
       motorcycles: "Motorcycles",
     },
   };
+  const clearStorage = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("userData");
+  };
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -288,7 +292,7 @@ const Header = () => {
               <>
                 <h1>{UserData.name}</h1>
                 <p className="bg-[#EEEEEE] rounded-[50%] p-4">
-                  {UserData.name ? UserData.name.charAt(0) : "" }
+                  {UserData.name ? UserData.name.charAt(0) : ""}
                 </p>
               </>
             ) : (
@@ -304,6 +308,9 @@ const Header = () => {
             <Link to={"/register"}>
               <button className="bg-blue-500 text-white py-2 px-4 rounded text-sm">
                 Регистрация
+              </button>
+              <button onClick={clearStorage} className="bg-red-500 text-white py-2 px-4 rounded text-sm">
+                Log out
               </button>
             </Link>
           </div>

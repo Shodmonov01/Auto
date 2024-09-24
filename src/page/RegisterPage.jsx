@@ -78,7 +78,12 @@ const RegisterPage = () => {
         className="bg-white p-10 rounded shadow-md w-[563px]"
         onSubmit={handleSubmit}
       >
-        <h2 className="text-2xl font-bold mb-6 text-center">Регистрация</h2>
+        <h2 className="text-[35px] font-bold mb-[10px] text-center">
+          Регистрация
+        </h2>
+        <h4 className="text-[14px] text-center">
+          Заполните поля ниже для создания аккаунта.
+        </h4>
 
         <div className="my-8">
           <input
@@ -88,7 +93,7 @@ const RegisterPage = () => {
             value={formData.name}
             onChange={handleChange}
             required
-            className="w-full border rounded px-3 py-2"
+            className=" bg-[#F6F6F6] w-full border rounded px-3 py-2"
           />
         </div>
 
@@ -100,7 +105,7 @@ const RegisterPage = () => {
             value={formData.email}
             onChange={handleChange}
             required
-            className="w-full border rounded px-3 py-2"
+            className="bg-[#F6F6F6] w-full border rounded px-3 py-2"
           />
         </div>
 
@@ -113,7 +118,7 @@ const RegisterPage = () => {
               value={formData.password}
               onChange={handleChange}
               required
-              className="w-full border rounded px-3 py-2"
+              className=" bg-[#F6F6F6] w-full border rounded px-3 py-2"
             />
             <span
               onClick={toggleShowPassword}
@@ -132,7 +137,7 @@ const RegisterPage = () => {
               value={confirmPassword}
               onChange={handleConfirmPasswordChange}
               required
-              className="w-full border rounded px-3 py-2"
+              className=" bg-[#F6F6F6] w-full border rounded px-3 py-2"
             />
             <span
               onClick={toggleShowConfirmPassword}

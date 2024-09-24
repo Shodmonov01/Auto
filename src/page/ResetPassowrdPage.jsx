@@ -43,9 +43,13 @@ const ResetPasswordPage = () => {
         className="bg-white p-10 rounded shadow-md w-[563px]"
         onSubmit={handleSubmit}
       >
-        <h2 className="text-2xl font-bold mb-[10px] text-center">Забыли пароль?</h2>
-        <h4 className="text-xl text-center" >Введите e-mail для восстановления</h4>
- 
+        <h2 className="text-[35px] font-bold mb-[10px] text-center">
+          Забыли пароль?
+        </h2>
+        <h4 className="text-[14px] text-center">
+          Введите e-mail для восстановления
+        </h4>
+
         {success ? (
           <p className="text-green-600 text-center">
             Password reset successful! Redirecting to login...
@@ -59,7 +63,7 @@ const ResetPasswordPage = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="w-full border rounded px-3 py-2"
+                className="bg-[#F6F6F6] w-full border rounded px-3 py-2"
               />
               <span
                 className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer"
@@ -76,7 +80,7 @@ const ResetPasswordPage = () => {
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 required
-                className="w-full border rounded px-3 py-2"
+                className="bg-[#F6F6F6] w-full border rounded px-3 py-2"
               />
               <span
                 className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer"
