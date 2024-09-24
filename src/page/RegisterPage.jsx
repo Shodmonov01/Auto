@@ -73,7 +73,7 @@ const RegisterPage = () => {
   const passwordsMatch = formData.password === confirmPassword;
 
   return (
-    <div className="flex items-center justify-center min-h-[627px] bg-gray-100">
+    <div className="flex items-center justify-center min-h-[670px] bg-gray-100">
       <form
         className="bg-white p-10 rounded shadow-md w-[563px]"
         onSubmit={handleSubmit}
