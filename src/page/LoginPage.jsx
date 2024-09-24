@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axiosInstance from "../axiosConfig";
 import { useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -15,6 +16,7 @@ const LoginPage = () => {
     try {
       const response = await axiosInstance.post("/login", { email, password });
       localStorage.setItem("token", response.data.token);
+      localStorage.setItem("userData", JSON.stringify(response.data.userData));
       navigate("/");
     } catch (error) {
       console.error("Ошибка входа:", error);
@@ -29,16 +31,16 @@ const LoginPage = () => {
   }, [navigate]);
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+    <div className="flex items-center justify-center min-h-[480px] bg-gray-100">
       <form
-        className="bg-white p-8 rounded shadow-md w-96"
+        className="bg-white p-10 rounded shadow-md w-[563px]"
         onSubmit={handleSubmit}
       >
         <h2 className="text-2xl font-bold mb-6 text-center">Вход</h2>
 
-        <div className="mb-4">
-          <label className="block text-gray-700 mb-2">Электронная почта</label>
+        <div className="my-8">
           <input
+            placeholder="E-mail"
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -47,10 +49,10 @@ const LoginPage = () => {
           />
         </div>
 
-        <div className="mb-4">
-          <label className="block text-gray-700 mb-2">Пароль</label>
+        <div className="my-8">
           <div className="relative">
             <input
+              placeholder="Введите пароль"
               type={showPassword ? "text" : "password"}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -59,27 +61,28 @@ const LoginPage = () => {
             />
             <span
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-3 top-2 cursor-pointer"
+              className="absolute right-3 top-3 cursor-pointer"
             >
               {showPassword ? <FaEyeSlash /> : <FaEye />}
             </span>
           </div>
         </div>
 
-        <div className="mb-4 flex items-center">
-          <input
-            type="checkbox"
-            checked={rememberMe}
-            onChange={() => setRememberMe(!rememberMe)}
-            className="mr-2"
-          />
-          <label className="text-gray-700">Запомнить меня</label>
-        </div>
-
-        <div className="mb-4">
-          <a href="/forgot-password" className="text-blue-500">
-            Забыли пароль?
-          </a>
+        <div className="mb-4 flex justify-between items-center">
+          <div>
+            <input
+              type="checkbox"
+              checked={rememberMe}
+              onChange={() => setRememberMe(!rememberMe)}
+              className="mr-2"
+            />
+            <label className="text-gray-700">Запомнить меня</label>
+          </div>
+          <div className="">
+            <Link to={"/forgot-password"} className="text-blue-500">
+              Забыли пароль?
+            </Link>
+          </div>
         </div>
 
         <button
@@ -93,6 +96,12 @@ const LoginPage = () => {
         >
           Войти
         </button>
+        <div className="flex items-center mt-4 p-2 space-x-2 text-gray-600">
+          <p className="text-sm">Еще нет аккаунта?</p>
+          <Link className="text-sm text-blue-500" to="/register">
+            Зарегистрироваться
+          </Link>
+        </div>
       </form>
     </div>
   );

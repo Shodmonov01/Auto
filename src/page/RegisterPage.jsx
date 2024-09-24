@@ -51,19 +51,16 @@ const RegisterPage = () => {
       alert("Вы должны согласиться c политикой обработки данных!");
       return;
     }
-
-    // Call the registration API only if the validation passes
   };
 
   const HandleClick = () => {
     axiosInstance
       .post("/user-register", formData)
       .then((response) => {
-        // Save the token to localStorage
         const token = response.data.token;
         const userData = response.data.userData;
-        localStorage.setItem("token",token);
-        localStorage.setItem("userData",userData);
+        localStorage.setItem("token", token);
+        localStorage.setItem("userData", JSON.stringify(userData));
         alert("Регистрация успешна!");
         navigate("/");
       })
@@ -76,101 +73,109 @@ const RegisterPage = () => {
   const passwordsMatch = formData.password === confirmPassword;
 
   return (
-    <div className="max-w-md mx-auto m-6 p-8 bg-white shadow-md rounded-md">
-      <h2 className="text-2xl font-bold mb-6 text-center">Регистрация</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
+    <div className="flex items-center justify-center min-h-[627px] bg-gray-100">
+      <form
+        className="bg-white p-10 rounded shadow-md w-[563px]"
+        onSubmit={handleSubmit}
+      >
+        <h2 className="text-2xl font-bold mb-6 text-center">Регистрация</h2>
+
+        <div className="my-8">
           <input
             placeholder="Имя"
             type="text"
-            id="name"
             name="name"
             value={formData.name}
             onChange={handleChange}
             required
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            className="w-full border rounded px-3 py-2"
           />
         </div>
-        <div>
+
+        <div className="my-8">
           <input
             placeholder="E-mail"
             type="email"
-            id="email"
             name="email"
             value={formData.email}
             onChange={handleChange}
             required
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            className="w-full border rounded px-3 py-2"
           />
         </div>
-        <div className="relative">
-          <input
-            placeholder="Введите пароль"
-            type={showPassword ? "text" : "password"}
-            id="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            required
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-          />
-          <span
-            className="absolute inset-y-0 right-3 top-3 cursor-pointer"
-            onClick={toggleShowPassword}
-          >
-            {showPassword ? <FaEyeSlash /> : <FaEye />}
-          </span>
+
+        <div className="my-8">
+          <div className="relative">
+            <input
+              placeholder="Введите пароль"
+              type={showPassword ? "text" : "password"}
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+              className="w-full border rounded px-3 py-2"
+            />
+            <span
+              onClick={toggleShowPassword}
+              className="absolute right-3 top-3 cursor-pointer"
+            >
+              {showPassword ? <FaEyeSlash /> : <FaEye />}
+            </span>
+          </div>
         </div>
-        <div className="relative">
-          <input
-            placeholder="Повторите пароль"
-            type={showConfirmPassword ? "text" : "password"}
-            id="confirmPassword"
-            value={confirmPassword}
-            onChange={handleConfirmPasswordChange}
-            required
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-          />
-          <span
-            className="absolute inset-y-0 right-3 top-3 cursor-pointer"
-            onClick={toggleShowConfirmPassword}
-          >
-            {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
-          </span>
+
+        <div className="my-8">
+          <div className="relative">
+            <input
+              placeholder="Повторите пароль"
+              type={showConfirmPassword ? "text" : "password"}
+              value={confirmPassword}
+              onChange={handleConfirmPasswordChange}
+              required
+              className="w-full border rounded px-3 py-2"
+            />
+            <span
+              onClick={toggleShowConfirmPassword}
+              className="absolute right-3 top-3 cursor-pointer"
+            >
+              {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
+            </span>
+          </div>
         </div>
-        <div className="flex items-center">
+
+        <div className="mb-4 flex items-center">
           <input
             type="checkbox"
             name="agree"
-            id="agree"
             checked={formData.agree}
             onChange={handleChange}
-            required
-            className="h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"
+            className="mr-2"
           />
-          <label htmlFor="agree" className="ml-2 block text-sm text-gray-900">
+          <label className="text-gray-700 text-[14px]">
             Согласен с политикой обработки данных
           </label>
         </div>
+
         <button
           onClick={() => HandleClick()}
           type="submit"
           disabled={!formData.agree || !passwordsMatch}
-          className={`w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white ${
+          className={`w-full py-2 rounded ${
             formData.agree && passwordsMatch
-              ? "bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-              : "bg-gray-400 cursor-not-allowed"
+              ? "bg-blue-500 hover:bg-blue-600 text-white"
+              : "bg-gray-300 text-gray-500 cursor-not-allowed"
           }`}
         >
-          <Link to={"/"}>Зарегистрироваться</Link>
+          Зарегистрироваться
         </button>
+
+        <div className="flex items-center justify-center mt-4 p-2 space-x-2 text-gray-600">
+          <p className="text-sm">Уже есть аккаунт?</p>
+          <Link className="text-sm text-blue-500" to="/login">
+            Войти
+          </Link>
+        </div>
       </form>
-      <p className="mt-4 text-center">
-        Уже есть аккаунт?
-        <Link to={"/login"} className="text-indigo-600 hover:text-indigo-500">
-          Войти
-        </Link>
-      </p>
     </div>
   );
 };

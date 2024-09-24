@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { FaWhatsapp, FaTelegramPlane, FaInstagram } from "react-icons/fa";
 import { TbBellRingingFilled } from "react-icons/tb";
 import { MdCall } from "react-icons/md";
@@ -15,15 +15,18 @@ import {
 const Header = () => {
   const [language, setLanguage] = useState("ru");
   const [menuOpen, setMenuOpen] = useState(false);
-  const [hasToken, setHasToken ] = useState("");
+  const [hasToken, setHasToken] = useState("");
+  const [UserData, setUserData] = useState("");
 
   const handleLanguageChange = (e) => {
     setLanguage(e.target.value);
   };
-    useEffect(() => {
-      const token = localStorage.getItem("token");
-      setHasToken(!!token); // Set to true if token exists, false otherwise
-    }, []);
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const storedUserData = localStorage.getItem("userData");
+    setHasToken(!!token); // Set to true if token exists, false otherwise
+    setUserData(storedUserData ? JSON.parse(storedUserData) : null); // parse the JSON data or set it to null
+  }, []);
 
   const translations = {
     ru: {
@@ -279,7 +282,19 @@ const Header = () => {
         {/* Hidden on mobile, visible on larger screens */}
 
         {hasToken ? (
-          <div>Javohir</div>
+          <div className="flex gap-6 items-center">
+            <TbBellRingingFilled className="text-[#989898]" size={24} />
+            {UserData ? (
+              <>
+                <h1>{UserData.name}</h1>
+                <p className="bg-[#EEEEEE] rounded-[50%] p-4">
+                  {UserData.name ? UserData.name.charAt(0) : "" }
+                </p>
+              </>
+            ) : (
+              <h1 className="text-red">Not Found</h1>
+            )}
+          </div>
         ) : (
           <div className="hidden md:flex items-center space-x-4">
             <TbBellRingingFilled className="text-[#989898]" size={24} />

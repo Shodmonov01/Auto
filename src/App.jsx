@@ -13,6 +13,8 @@ import NotFoundPage from "./page/NotFoundPage";
 import AboutCarsCatalog from "./components/AboutCarsCatalog";
 import RegisterPage from "./page/RegisterPage";
 import LoginPage from "./page/LoginPage";
+import ForgetPasswordPage from "./page/ForgetPasswordPage";
+import ResetPassowrdPage from "./page/ResetPassowrdPage";
 
 function Layout({ children }) {
   const location = useLocation();
@@ -79,6 +81,24 @@ function App() {
               <>
                 <PageTitle title="Login" />
                 <LoginPage />
+              </>
+            }
+          />
+          <Route
+            path="/forgot-password"
+            element={
+              <>
+                <PageTitle title="forgot-password" />
+                <ForgetPasswordPage />
+              </>
+            }
+          />
+          <Route
+            path="/reset-password"
+            element={
+              <>
+                <PageTitle title="reset-password" />
+                <ResetPassowrdPage />
               </>
             }
           />
