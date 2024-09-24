@@ -61,7 +61,9 @@ const RegisterPage = () => {
       .then((response) => {
         // Save the token to localStorage
         const token = response.data.token;
-        localStorage.setItem("token", token);
+        const userData = response.data.userData;
+        localStorage.setItem("token",token);
+        localStorage.setItem("userData",userData);
         alert("Регистрация успешна!");
         navigate("/");
       })
