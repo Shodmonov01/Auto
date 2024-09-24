@@ -35,9 +35,10 @@ const ForgetPasswordPage = () => {
         className="bg-white p-10 rounded shadow-md w-[563px]"
         onSubmit={handleSubmit}
       >
-        <h2 className="text-2xl font-bold mb-6 text-center">
-          Восстановление пароля
-        </h2>
+        <h2 className="text-2xl font-bold mb-[10px] text-center">Забыли пароль? </h2>
+        <h4 className="text-xl text-center">
+          Введите e-mail для восстановления
+        </h4>
 
         {isSubmitted ? (
           <p className="text-green-600 text-center">Token sent to your email</p>
@@ -60,7 +61,7 @@ const ForgetPasswordPage = () => {
               type="submit"
               className="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 rounded"
             >
-              Отправить
+              Восстановить
             </button>
           </>
         )}

@@ -20,6 +20,7 @@ const LoginPage = () => {
       navigate("/");
     } catch (error) {
       console.error("Ошибка входа:", error);
+      alert("Ошибка: неверный логин или пароль. Попробуйте снова.");
     }
   };
 
