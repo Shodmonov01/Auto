@@ -21,6 +21,7 @@ const ResetPasswordPage = () => {
 
     try {
       const token = localStorage.getItem("resetToken");
+      console.log(token);
       const response = await axiosInstance.post(`/reset-password/${token}`, {
         password,
         token,

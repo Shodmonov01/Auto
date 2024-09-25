@@ -20,7 +20,6 @@ const ForgetPasswordPage = () => {
 
         setIsSubmitted(true);
         setError("");
-
         navigate("/reset-password");
       }
     } catch (error) {

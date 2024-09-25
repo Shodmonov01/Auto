@@ -15,6 +15,7 @@ import RegisterPage from "./page/RegisterPage";
 import LoginPage from "./page/LoginPage";
 import ForgetPasswordPage from "./page/ForgetPasswordPage";
 import ResetPassowrdPage from "./page/ResetPassowrdPage";
+import Contact from "./components/Contact";
 
 function Layout({ children }) {
   const location = useLocation();
@@ -99,6 +100,15 @@ function App() {
               <>
                 <PageTitle title="reset-password" />
                 <ResetPassowrdPage />
+              </>
+            }
+          />
+          <Route
+            path="/contact"
+            element={
+              <>
+                <PageTitle title="contact" />
+                <Contact />
               </>
             }
           />
