@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import axiosInstance from "../axiosConfig";
-import StillSelecting from "./StillSelecting";
+import axiosInstance from "../../axiosConfig";
+import StillSelecting from "../StillSelecting";
 
-const CarDetails = () => {
+const MotorcycleDetails = () => {
   const { id } = useParams();
   const [car, setCar] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -13,7 +13,7 @@ const CarDetails = () => {
     const fetchCar = async () => {
       try {
         setLoading(true);
-        const response = await axiosInstance.get(`/cars/${id}`);
+        const response = await axiosInstance.get(`/motorcycles/${id}`);
         setCar(response.data);
       } catch (error) {
         setError(error.response ? error.response.data.message : error.message);
@@ -126,4 +126,4 @@ const CarDetails = () => {
   );
 };
 
-export default CarDetails;
+export default MotorcycleDetails;

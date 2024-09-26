@@ -3,9 +3,9 @@ import { FcLike } from "react-icons/fc";
 import { IoHeartDislikeOutline } from "react-icons/io5";
 import { MdOutlineArrowRightAlt } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
-import axiosInstance from "../axiosConfig";
+import axiosInstance from "../../axiosConfig";
 
-const Katalog = () => {
+const Motorcycles = () => {
   const carsPerPage = 6;
   const [cars, setCars] = useState([]);
   const [likedCars, setLikedCars] = useState(new Set());
@@ -15,9 +15,9 @@ const Katalog = () => {
 
   useEffect(() => {
     axiosInstance
-      .get("/cars")
+      .get("/motorcycles")
       .then((response) => {
-        console.log("API Response:", response.data); // Log the response data
+        console.log("API Response:", response.data);
 
         if (Array.isArray(response.data)) {
           const apiCars = response.data.map((car) => ({
@@ -96,9 +96,9 @@ const Katalog = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 mt-4">
             {getCurrentPageCars().map((car) => (
               <div key={car.id} className="border p-4 rounded-lg shadow-md">
-                <Link to={`/about-cars/${car.id}`}>
+                <Link to={`/motorcycles/${car.id}`}>
                   <button
-                    onClick={() => handleLinkClick(`/about-cars/${car.id}`)}
+                    onClick={() => handleLinkClick(`/motorcycles/${car.id}`)}
                     className="w-full h-40"
                   >
                     <img
@@ -170,8 +170,8 @@ const Katalog = () => {
         <div>
           <b className="text-xl">
             <u>
-              <button onClick={() => handleLinkClick("/about-cars")}>
-                <Link className="text-[#293843]" to="/about-cars">
+              <button onClick={() => handleLinkClick("/motorcycles")}>
+                <Link className="text-[#293843]" to="/motorcycles">
                   Перейти в каталог
                 </Link>
               </button>
@@ -179,12 +179,11 @@ const Katalog = () => {
           </b>
         </div>
         <div>
-         <MdOutlineArrowRightAlt size={30} />
+          <MdOutlineArrowRightAlt size={30} />
         </div>
       </div>
-      
     </>
   );
 };
 
-export default Katalog;
+export default Motorcycles;

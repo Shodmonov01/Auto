@@ -7,15 +7,19 @@ import {
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import MainPage from "./page/MainPage";
-import CarDetails from "./components/CarDetails";
+import CarDetails from "./components/Automobile/CarDetails";
 import PageTitle from "./components/PageTitle";
 import NotFoundPage from "./page/NotFoundPage";
-import AboutCarsCatalog from "./components/AboutCarsCatalog";
+import AboutCarsCatalog from "./components/Automobile/AboutCarsCatalog";
 import RegisterPage from "./page/RegisterPage";
 import LoginPage from "./page/LoginPage";
 import ForgetPasswordPage from "./page/ForgetPasswordPage";
 import ResetPassowrdPage from "./page/ResetPassowrdPage";
 import Contact from "./components/Contact";
+import CommerceCar from "./components/CommerceCar/CommerceCar";
+import CommerceCarDetails from "./components/CommerceCar/CommerceCarDetails";
+import Motorcycles from "./components/Motorcycles/Motorcycle";
+import MotorcycleDetails from "./components/Motorcycles/MotorcycleDetails";
 
 function Layout({ children }) {
   const location = useLocation();
@@ -109,6 +113,42 @@ function App() {
               <>
                 <PageTitle title="contact" />
                 <Contact />
+              </>
+            }
+          />
+          <Route
+            path="/commerce-cars"
+            element={
+              <>
+                <PageTitle title="Commerce-cars" />
+                <CommerceCar />
+              </>
+            }
+          />
+          <Route
+            path="/commerce-cars/:id"
+            element={
+              <>
+                <PageTitle title="Car Details" />
+                <CommerceCarDetails />
+              </>
+            }
+          />
+          <Route
+            path="/motorcycles"
+            element={
+              <>
+                <PageTitle title="motocycles" />
+                <Motorcycles />
+              </>
+            }
+          />
+          <Route
+            path="/motorcycles/:id"
+            element={
+              <>
+                <PageTitle title="motocycles" />
+                <MotorcycleDetails />
               </>
             }
           />

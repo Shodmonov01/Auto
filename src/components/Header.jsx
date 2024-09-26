@@ -50,10 +50,11 @@ const Header = () => {
     setUserData(storedUserData ? JSON.parse(storedUserData) : null);
   }, []);
 
-  const clearStorage = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("userData");
-  };
+  // const clearStorage = () => {
+  //   localStorage.removeItem("token");
+  //   localStorage.removeItem("userData");
+  //   localStorage.removeItem("resetToken");
+  // };
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -63,11 +64,6 @@ const Header = () => {
     <>
       <header className="bg-[#F6F6F6] w-full px-6">
         <div className="flex flex-wrap items-center p-4">
-          <div className="md:hidden">
-            <button onClick={toggleMenu}>
-              {menuOpen ? <MdClose size={24} /> : <MdMenu size={24} />}
-            </button>
-          </div>
           <nav className="hidden md:flex flex-grow">
             <ul className="flex space-x-4 cursor-pointer">
               <Link to={"/none"}>
@@ -224,21 +220,25 @@ const Header = () => {
         </div>
         <ul className="hidden md:flex space-x-8">
           <li className="flex items-center gap-2">
-            <a href="#">{translations[language].cars}</a>
+            <Link to={"/about-cars"}>{translations[language].cars}</Link>
             <MdKeyboardArrowRight className="text-blue-600" />
           </li>
           <li className="flex items-center gap-2">
-            <a href="#">{translations[language].commercialTransport}</a>
+            <Link to={"/motorcycles"}>
+              {translations[language].motorcycles}
+            </Link>
             <MdKeyboardArrowRight className="text-blue-600" />
           </li>
           <li className="flex items-center gap-2">
-            <a href="#">{translations[language].motorcycles}</a>
+            <Link to={"/commerce-cars"}>
+              {translations[language].commercialTransport}
+            </Link>
             <MdKeyboardArrowRight className="text-blue-600" />
           </li>
         </ul>
         <div className="relative flex items-center justify-center mx-auto">
           <input
-            style={{ maxWidth: "120px" }}
+            style={{ maxWidth: "250px" }}
             type="text"
             placeholder={translations[language].searchPlaceholder}
             className="p-[4px] border rounded-lg outline-none sm:p-2 sm:pl-6"
@@ -257,10 +257,16 @@ const Header = () => {
             <TbBellRingingFilled className="text-[#989898]" size={24} />
             {UserData ? (
               <>
-                <h1>{UserData.name}</h1>
-                <p className="bg-gradient-to-r from-[#FF7E5F] to-[#FF5C00] text-white rounded-full p-4 flex items-center justify-center shadow-lg transform transition-transform duration-300 hover:scale-105">
+                <h1 className="mx-6">{UserData.name}</h1>
+                <p className="rounded-full py-2 px-4 flex items-center justify-center bg-[#EEEEEE]">
                   {UserData.name ? UserData.name.charAt(0).toUpperCase() : ""}
                 </p>
+                {/* <button
+                  onClick={clearStorage}
+                  className="bg-red-500 text-white py-2 px-4 rounded text-sm"
+                >
+                  Log out
+                </button> */}
               </>
             ) : (
               <h1 className="text-red">Not Found</h1>
@@ -277,12 +283,6 @@ const Header = () => {
                 Регистрация
               </button>
             </Link>
-            <button
-              onClick={clearStorage}
-              className="bg-red-500 text-white py-2 px-4 rounded text-sm"
-            >
-              Log out
-            </button>
           </div>
         )}
       </div>

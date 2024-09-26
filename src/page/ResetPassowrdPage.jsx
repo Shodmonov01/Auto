@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa"; // Import the icons
 
 const ResetPasswordPage = () => {
-  const [password, setPassword] = useState("");
+  const [newPassword, setnewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
@@ -14,7 +14,7 @@ const ResetPasswordPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (password !== confirmPassword) {
+    if (newPassword !== confirmPassword) {
       setError("Passwords do not match");
       return;
     }
@@ -23,8 +23,7 @@ const ResetPasswordPage = () => {
       const token = localStorage.getItem("resetToken");
       console.log(token);
       const response = await axiosInstance.post(`/reset-password/${token}`, {
-        password,
-        token,
+        newPassword,
       });
 
       if (response.status === 200) {
@@ -61,8 +60,8 @@ const ResetPasswordPage = () => {
               <input
                 placeholder="Введите новый пароль"
                 type={showPassword ? "text" : "password"} // Toggle input type
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                value={newPassword}
+                onChange={(e) => setnewPassword(e.target.value)}
                 required
                 className="bg-[#F6F6F6] w-full border rounded px-3 py-2"
               />
