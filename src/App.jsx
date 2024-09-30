@@ -20,6 +20,7 @@ import CommerceCar from "./components/CommerceCar/CommerceCar";
 import CommerceCarDetails from "./components/CommerceCar/CommerceCarDetails";
 import Motorcycles from "./components/Motorcycles/Motorcycle";
 import MotorcycleDetails from "./components/Motorcycles/MotorcycleDetails";
+import Profile from "./components/Profile/Profile";
 
 function Layout({ children }) {
   const location = useLocation();
@@ -149,6 +150,15 @@ function App() {
               <>
                 <PageTitle title="motocycles" />
                 <MotorcycleDetails />
+              </>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <>
+                <PageTitle title="profile" />
+                <Profile />
               </>
             }
           />

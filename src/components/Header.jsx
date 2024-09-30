@@ -224,14 +224,14 @@ const Header = () => {
             <MdKeyboardArrowRight className="text-blue-600" />
           </li>
           <li className="flex items-center gap-2">
+            <li className="flex items-center gap-2">
+              <Link to={"/commerce-cars"}>
+                {translations[language].commercialTransport}
+              </Link>
+              <MdKeyboardArrowRight className="text-blue-600" />
+            </li>
             <Link to={"/motorcycles"}>
               {translations[language].motorcycles}
-            </Link>
-            <MdKeyboardArrowRight className="text-blue-600" />
-          </li>
-          <li className="flex items-center gap-2">
-            <Link to={"/commerce-cars"}>
-              {translations[language].commercialTransport}
             </Link>
             <MdKeyboardArrowRight className="text-blue-600" />
           </li>
@@ -258,15 +258,11 @@ const Header = () => {
             {UserData ? (
               <>
                 <h1 className="mx-6">{UserData.name}</h1>
-                <p className="rounded-full py-2 px-4 flex items-center justify-center bg-[#EEEEEE]">
-                  {UserData.name ? UserData.name.charAt(0).toUpperCase() : ""}
-                </p>
-                {/* <button
-                  onClick={clearStorage}
-                  className="bg-red-500 text-white py-2 px-4 rounded text-sm"
-                >
-                  Log out
-                </button> */}
+                <Link to={"/profile"}>
+                  <p className="rounded-full py-2 px-4 flex items-center justify-center bg-[#EEEEEE]">
+                    {UserData.name ? UserData.name.charAt(0).toUpperCase() : ""}
+                  </p>
+                </Link>
               </>
             ) : (
               <h1 className="text-red">Not Found</h1>
