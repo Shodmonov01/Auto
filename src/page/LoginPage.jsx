@@ -3,6 +3,7 @@ import axiosInstance from "../axiosConfig";
 import { useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -18,11 +19,20 @@ const LoginPage = () => {
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("userData", JSON.stringify(response.data.userData));
       navigate("/");
+      window.location.reload();
     } catch (error) {
       console.error("Ошибка входа:", error);
-      alert("Ошибка: неверный логин или пароль. Попробуйте снова.");
+
+      // Displaying the error message using Swal
+      Swal.fire({
+        icon: "error",
+        title: "Ошибка входа",
+        text: "Неверный логин или пароль. Попробуйте снова.",
+        confirmButtonText: "Ок",
+      });
     }
   };
+
 
   React.useEffect(() => {
     const token = localStorage.getItem("token");

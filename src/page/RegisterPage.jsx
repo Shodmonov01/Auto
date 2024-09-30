@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import axiosInstance from "../axiosConfig";
 import { Link, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const RegisterPage = () => {
   const [formData, setFormData] = useState({
@@ -39,18 +40,38 @@ const RegisterPage = () => {
     );
   };
 
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.onmouseenter = Swal.stopTimer;
+      toast.onmouseleave = Swal.resumeTimer;
+    },
+  });
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (formData.password !== confirmPassword) {
-      alert("Пароли не совпадают!");
+      Toast.fire({
+        icon: "error",
+        title: "Пароли не совпадают",
+      });
       return;
     }
 
     if (!formData.agree) {
-      alert("Вы должны согласиться c политикой обработки данных!");
+      Toast.fire({
+        icon: "error",
+        title: "Вы должны согласиться с политикой обработки данных",
+      });
       return;
     }
+
+    HandleClick();
   };
 
   const HandleClick = () => {
@@ -61,12 +82,21 @@ const RegisterPage = () => {
         const userData = response.data.userData;
         localStorage.setItem("token", token);
         localStorage.setItem("userData", JSON.stringify(userData));
-        alert("Регистрация успешна!");
+
+        Toast.fire({
+          icon: "success",
+          title: "Успешная регистрация",
+        });
+
         navigate("/");
+        window.location.reload();
       })
       .catch((error) => {
         console.error(error.response.data.error);
-        alert(error.response.data.error);
+        Toast.fire({
+          icon: "error",
+          title: error.response.data.error,
+        });
       });
   };
 
@@ -162,7 +192,6 @@ const RegisterPage = () => {
         </div>
 
         <button
-          onClick={() => HandleClick()}
           type="submit"
           disabled={!formData.agree || !passwordsMatch}
           className={`w-full py-2 rounded ${
