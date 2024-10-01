@@ -12,9 +12,19 @@ import Message from "./Message";
 import Rate from "./Rate";
 import Update from "./Update";
 import Setting from "./Setting";
+import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
   const [userData, setUserData] = useState(null);
+  const navigate = useNavigate();
+
+  const logout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("userData");
+    localStorage.removeItem("resetToken");
+    navigate("/");
+    window.location.reload();
+  };
 
   useEffect(() => {
     const storedUserData = localStorage.getItem("userData");
@@ -23,7 +33,7 @@ const Profile = () => {
 
   return (
     <>
-      <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-6 gap-6 h-screen bg-gray-100">
+      <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-6 gap-6 min-h-screen bg-gray-100">
         {/* Sidebar */}
         <aside className="col-span-1 lg:col-span-2 bg-white rounded-lg shadow-lg p-6 m-4">
           <div className="flex gap-4 items-center">
@@ -57,46 +67,51 @@ const Profile = () => {
               </p>
             </div>
           </div>
-          <div className="m-4">
+          <div className="my-6">
             <Link to="/profile/favorite">
-              <div className="flex items-center gap-4 rounded justify-start hover:bg-[#F3F5FC] p-2 my-2 cursor-pointer">
+              <div className="flex items-center gap-4 rounded justify-start hover:bg-[#F3F5FC] p-4 my-2 cursor-pointer">
                 <CiStar />
                 <button>Избранное</button>
               </div>
             </Link>
-            <Link to="/profile/messages">
-              <div className="flex items-center gap-4 rounded justify-start hover:bg-[#F3F5FC] p-2 my-2">
+            <Link to="message">
+              <div className="flex items-center gap-4 rounded justify-start hover:bg-[#F3F5FC] p-4 my-2">
                 <AiOutlineMessage />
                 <button>Сообщения</button>
               </div>
             </Link>
-            <Link to="/profile/update">
-              <div className="flex items-center gap-4 rounded justify-start hover:bg-[#F3F5FC] p-2 my-2">
+            <Link to="update">
+              <div className="flex items-center gap-4 rounded justify-start hover:bg-[#F3F5FC] p-4 my-2">
                 <BsLayoutSidebarReverse />
                 <button>Разместить объявление</button>
                 <IoIosArrowDown />
               </div>
             </Link>
-            <Link to="/profile/rate">
-              <div className="flex items-center gap-4 rounded justify-start hover:bg-[#F3F5FC] p-2 my-2">
+            <Link to="rate">
+              <div className="flex items-center gap-4 rounded justify-start hover:bg-[#F3F5FC] p-4 my-2">
                 <BsLightning />
                 <button>Тариф</button>
               </div>
             </Link>
-            <Link to="/profile/setting">
-              <div className="flex items-center gap-4 rounded justify-start hover:bg-[#F3F5FC] p-2 my-2">
+            <Link to="setting">
+              <div className="flex items-center gap-4 rounded justify-start hover:bg-[#F3F5FC] p-4 my-2">
                 <AiOutlineSetting />
                 <button>Настройки аккаунта</button>
               </div>
             </Link>
           </div>
+          <div className="flex justify-center items-end">
+            <button className="w-full py-4 bg-[#F6F6F6]" onClick={logout}>
+              Выйти
+            </button>
+          </div>
         </aside>
 
         {/* Main Content */}
-        <main className="col-span-1 sm:col-span-2 lg:col-span-4 bg-white rounded-lg shadow-lg p-8 m-4">
+        <main className="col-span-1 sm:col-span-3 lg:col-span-4 bg-white rounded-lg shadow-lg p-8 m-4">
           <Routes>
             <Route
-              path="/profile/favorite"
+              path="favorite"
               element={
                 <>
                   <PageTitle title="favorite" />
@@ -105,7 +120,7 @@ const Profile = () => {
               }
             />
             <Route
-              path="/profile/message"
+              path="message"
               element={
                 <>
                   <PageTitle title="message" />
@@ -114,7 +129,7 @@ const Profile = () => {
               }
             />
             <Route
-              path="/profile/update"
+              path="update"
               element={
                 <>
                   <PageTitle title="update" />
@@ -123,7 +138,7 @@ const Profile = () => {
               }
             />
             <Route
-              path="/profile/rate"
+              path="rate"
               element={
                 <>
                   <PageTitle title="rate" />
@@ -132,7 +147,7 @@ const Profile = () => {
               }
             />
             <Route
-              path="/profile/setting"
+              path="setting"
               element={
                 <>
                   <PageTitle title="setting" />

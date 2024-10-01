@@ -21,6 +21,12 @@ import CommerceCarDetails from "./components/CommerceCar/CommerceCarDetails";
 import Motorcycles from "./components/Motorcycles/Motorcycle";
 import MotorcycleDetails from "./components/Motorcycles/MotorcycleDetails";
 import Profile from "./components/Profile/Profile";
+import Rate from "./components/Profile/Rate";
+import Setting from "./components/Profile/Setting";
+import Update from "./components/Profile/Setting";
+import Favorite from "./components/Profile/Setting";
+import Message from "./components/Profile/Message";
+import NewsBy from "./components/NewsBy";
 
 function Layout({ children }) {
   const location = useLocation();
@@ -154,11 +160,20 @@ function App() {
             }
           />
           <Route
-            path="/profile"
+            path="/profile/*"
             element={
               <>
                 <PageTitle title="profile" />
                 <Profile />
+              </>
+            }
+          />
+          <Route
+            path="/news"
+            element={
+              <>
+                <PageTitle title="news" />
+                <NewsBy />
               </>
             }
           />

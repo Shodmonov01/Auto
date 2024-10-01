@@ -1,6 +1,7 @@
 import React from "react";
 import imageFaimly from "../../src/assets/images/imageFamily.svg";
 import { FaArrowRightLong } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 
 const News = () => {
   return (
@@ -25,9 +26,9 @@ const News = () => {
               подвергся...
             </p>
             <div className="flex items-center gap-4">
-              <a href="#">
+              <Link to={"/news"}>
                 <u>Подробнее</u>
-              </a>
+              </Link>
               <FaArrowRightLong />
             </div>
           </div>

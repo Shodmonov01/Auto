@@ -23,7 +23,6 @@ const LoginPage = () => {
     } catch (error) {
       console.error("Ошибка входа:", error);
 
-      // Displaying the error message using Swal
       Swal.fire({
         icon: "error",
         title: "Ошибка входа",
