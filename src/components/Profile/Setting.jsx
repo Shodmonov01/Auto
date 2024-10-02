@@ -12,7 +12,6 @@ const Setting = () => {
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState("");
   const [loading, setLoading] = useState(false);
-
   const [showPassword, setShowPassword] = useState(false); // State to toggle password visibility
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showReEnterPassword, setShowReEnterPassword] = useState(false);
@@ -145,7 +144,7 @@ const Setting = () => {
               Текущий пароль
             </label>
             <input
-              type={showPassword ? "text" : "password"} 
+              type={showPassword ? "text" : "password"}
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -158,7 +157,7 @@ const Setting = () => {
               className="absolute  right-2 top-10"
               onClick={() => setShowPassword(!showPassword)}
             >
-              {showPassword ? <FaEyeSlash /> : <FaEye />} 
+              {showPassword ? <FaEyeSlash /> : <FaEye />}
             </button>
             <Link
               to="/forgot-password"
@@ -181,7 +180,7 @@ const Setting = () => {
               value={newPassword}
               onChange={(e) => setNewPassword(e.target.value)}
               className="w-full p-3 border border-gray-300 bg-[#F6F6F6] rounded"
-              placeholder="Введите новый пароль"
+              placeholder="Новый пароль"
               required
             />
             <button

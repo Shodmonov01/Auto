@@ -253,16 +253,22 @@ const Header = () => {
           </div>
         </div>
         {hasToken ? (
-          <div className="flex gap-6 items-center">
+          <div className="flex gap-8 items-center">
             <TbBellRingingFilled className="text-[#989898]" size={24} />
             {UserData ? (
               <>
-                <h1 className="mx-6">{UserData.name}</h1>
-                <Link to={"/profile"}>
-                  <p className="rounded-full py-2 px-4 flex items-center justify-center bg-[#EEEEEE]">
-                    {UserData.name ? UserData.name.charAt(0).toUpperCase() : ""}
-                  </p>
-                </Link>
+                <div className="flex items-center">
+                  <div className="flex flex-wrap">
+                    <h1 className="mx-6">{UserData.name}</h1>
+                  </div>
+                  <Link to={"/profile"}>
+                    <p className="rounded-full py-2 px-4 flex items-center justify-center bg-[#EEEEEE]">
+                      {UserData.name
+                        ? UserData.name.charAt(0).toUpperCase()
+                        : ""}
+                    </p>
+                  </Link>
+                </div>
               </>
             ) : (
               <h1 className="text-red">Not Found</h1>
