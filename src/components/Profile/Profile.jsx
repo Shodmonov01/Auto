@@ -80,7 +80,7 @@ const Profile = () => {
                 <button>Сообщения</button>
               </div>
             </Link>
-            <Link to="update">
+            <Link to="/update">
               <div className="flex items-center gap-4 rounded justify-start hover:bg-[#F3F5FC] p-4 my-2">
                 <BsLayoutSidebarReverse />
                 <button>Разместить объявление</button>
@@ -128,7 +128,7 @@ const Profile = () => {
                 </>
               }
             />
-            <Route
+            {/* <Route
               path="update"
               element={
                 <>
@@ -136,7 +136,7 @@ const Profile = () => {
                   <Update />
                 </>
               }
-            />
+            /> */}
             <Route
               path="rate"
               element={
