@@ -1,6 +1,10 @@
-import React from "react";
+import React, { useState,useEffect } from "react";
+import axiosInstance from "../axiosConfig";
 
 const CarsLogo = () => {
+  // const [logo, setLogo] = useState([]);
+
+
   const logo = [
     {
       name: "Toyota",
@@ -95,6 +99,21 @@ const CarsLogo = () => {
       logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Mercedes-Logo.svg/2048px-Mercedes-Logo.svg.png",
     },
   ];
+
+
+
+
+  // useEffect(() => {
+  //   axiosInstance
+  //     .get("/marks")
+  //     .then((response) => {
+  //       console.log(response.data);
+  //       setLogo(response.data); 
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error fetching the car logos:", error);
+  //     });
+  // }, []);
 
   return (
     <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 p-4">
