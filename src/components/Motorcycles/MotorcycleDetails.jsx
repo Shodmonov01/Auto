@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import axiosInstance from "../../axiosConfig";
 import StillSelecting from "../StillSelecting";
+import { AiOutlineMessage } from "react-icons/ai";
 
 const CarDetails = () => {
   const { id } = useParams();
   const [car, setCar] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [userData, setUserData] = useState(null);
 
   useEffect(() => {
     const fetchCar = async () => {
@@ -24,6 +26,10 @@ const CarDetails = () => {
 
     fetchCar();
   }, [id]);
+  useEffect(() => {
+    const storedUserData = localStorage.getItem("userData");
+    setUserData(storedUserData ? JSON.parse(storedUserData) : null);
+  }, []);
 
   if (loading) {
     return (
@@ -113,10 +119,47 @@ const CarDetails = () => {
                 </span>
               </span>
             </p>
-          <div>
-            <h1>javohir</h1>
+            {userData ? (
+              <>
+                <div className="flex items-center justify-between shadow p-2 rounded ">
+                  <div className="flex items-center gap-4">
+                    <Link to={"/profile"}>
+                      <p className="rounded-full py-2 px-4 flex items-center justify-center bg-[#EEEEEE]">
+                        {userData.name
+                          ? userData.name.charAt(0).toUpperCase()
+                          : ""}
+                      </p>
+                    </Link>
+                    <div className="flex flex-col">
+                      <h1>{userData.name}</h1>
+                      <p className="text-[#989898]">Рейтинг 5.0</p>
+                    </div>
+                  </div>
+                  <Link to={"/none"}>
+                    <div className="border-l-2 border-[#F0F0F0] flex items-center gap-2 p-2">
+                      <AiOutlineMessage className="text-blue-500" />
+                      <p>Написать</p>
+                    </div>
+                  </Link>
+                </div>
+              </>
+            ) : (
+              <h1 className="text-red">Not Found</h1>
+            )}
           </div>
-          </div>
+        </div>
+        <div className="my-4 bg-white shadow rounded p-4">
+          <h1 className="font-bold text-[23px]">Описание</h1>
+          <p>
+            Автомобиль в наличии, находиться y нас в Автосалоне AUTOCAPITAL. Вы
+            можете приехать, посмотреть, сделать тест драйв и приобрести eгo.
+            Если Вы хотите приобрести другой автомобиль, мы c радостью вам
+            поможем. Мы найдем и доставим любой автомобиль под ваши запросы.
+          </p>
+        </div>
+        <div>
+          <div></div>
+          <div></div>
         </div>
         <div className="my-12">
           <StillSelecting />
