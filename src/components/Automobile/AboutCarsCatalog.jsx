@@ -12,7 +12,7 @@ const Katalog = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
   const totalPages = Math.ceil(cars.length / carsPerPage);
-
+   
   useEffect(() => {
     axiosInstance
       .get("/cars")

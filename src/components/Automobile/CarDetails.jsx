@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import axiosInstance from "../../axiosConfig";
 import StillSelecting from "../StillSelecting";
+import { AiOutlineMessage } from "react-icons/ai";
 
 const CarDetails = () => {
   const { id } = useParams();
   const [car, setCar] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [userData, setUserData] = useState(null);
 
   useEffect(() => {
     const fetchCar = async () => {
@@ -24,6 +26,10 @@ const CarDetails = () => {
 
     fetchCar();
   }, [id]);
+  useEffect(() => {
+    const storedUserData = localStorage.getItem("userData");
+    setUserData(storedUserData ? JSON.parse(storedUserData) : null);
+  }, []);
 
   if (loading) {
     return (
@@ -48,75 +54,112 @@ const CarDetails = () => {
   return (
     <div className="bg-gray-50 py-12">
       <div className="container mx-auto px-4">
-        <h1 className="text-5xl font-extrabold text-gray-900 mb-8 text-center">
-          {car.body} - {car.year}
-        </h1>
         <div className="bg-white shadow-xl rounded-lg overflow-hidden lg:grid lg:grid-cols-2 lg:gap-8">
           <div className="relative">
             <img
               src={car.image[0]}
-              alt={car.body}
+              alt={car.marka}
               className="w-full object-cover transition-transform transform hover:scale-105 rounded-lg"
             />
             <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-black via-transparent to-transparent opacity-30"></div>
           </div>
           <div className="p-6 lg:p-8 space-y-6">
-            <p className="text-3xl font-bold text-gray-900">
-              <span className="text-green-600">
-                ${car.cost.toLocaleString()}
-              </span>
-            </p>
+            <h1 className="text-5xl font-extrabold text-gray-900 mb-8">
+              {car.model} ({car.year})
+            </h1>
             <div className="text-lg text-gray-700 space-y-2">
               <p>
-                <span className="font-semibold text-gray-900">Country:</span>
-                {car.country}
+                <span className="font-semibold text-gray-900">Марка:</span>
+                {car.marka}
               </p>
               <p>
-                <span className="font-semibold text-gray-900">Year:</span>
-                {car.year}
-              </p>
-              <p>
-                <span className="font-semibold text-gray-900">Mileage:</span>
-                {car.milage.toLocaleString()} km
-              </p>
-              <p>
-                <span className="font-semibold text-gray-900">Doors:</span>
-                {car.doors}
-              </p>
-              <p>
-                <span className="font-semibold text-gray-900">Drive:</span>
-                {car.drive}
-              </p>
-              <p>
-                <span className="font-semibold text-gray-900">Engine:</span>
-                {car.engine}
-              </p>
-              <p>
-                <span className="font-semibold text-gray-900">Horsepower:</span>
-                {car.horsepower} HP
-              </p>
-              <p>
-                <span className="font-semibold text-gray-900">Volume:</span>
-                {car.volume} L
-              </p>
-              <p>
-                <span className="font-semibold text-gray-900">Statement:</span>
-                {car.statement}
+                <span className="font-semibold text-gray-900">Модель:</span>
+                {car.model}
               </p>
               <p>
                 <span className="font-semibold text-gray-900">
-                  Description:
+                  Год выпуска:
                 </span>
+                {car.year}
+              </p>
+              <p>
+                <span className="font-semibold text-gray-900">Километры:</span>
+                {car.milage.toLocaleString()} км
+              </p>
+              <p>
+                <span className="font-semibold text-gray-900">Цвет:</span>
+                {car.color}
+              </p>
+              <p>
+                <span className="font-semibold text-gray-900">Двигатель:</span>
+                {car.engine}
+              </p>
+              <p>
+                <span className="font-semibold text-gray-900">
+                  Лошадиные силы:
+                </span>
+                {car.horsepower} л.с.
+              </p>
+              <p>
+                <span className="font-semibold text-gray-900">
+                  Где произведен:
+                </span>
+                {car.country}
+              </p>
+              <p>
+                <span className="font-semibold text-gray-900">Описание:</span>
                 <br />
                 {car.description}
               </p>
             </div>
-            <div className="flex justify-center">
-              <button className="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition-colors">
-                <a href="/">Inquire Now</a>
-              </button>
-            </div>
+            <p className="text-3xl font-bold text-gray-900">
+              <span className="text-green-600">
+                <span className="bg-blue-600 text-white px-4 py-2 rounded">
+                  Цена: ${car.cost.toLocaleString()}
+                </span>
+              </span>
+            </p>
+            {userData ? (
+              <>
+                <div className="flex items-center justify-between shadow p-2 rounded ">
+                  <div className="flex items-center gap-4">
+                    <Link to={"/profile"}>
+                      <p className="rounded-full py-2 px-4 flex items-center justify-center bg-[#EEEEEE]">
+                        {userData.name
+                          ? userData.name.charAt(0).toUpperCase()
+                          : ""}
+                      </p>
+                    </Link>
+                    <div className="flex flex-col">
+                      <h1>{userData.name}</h1>
+                      <p className="text-[#989898]">Рейтинг 5.0</p>
+                    </div>
+                  </div>
+                  <Link to={"/none"}>
+                    <div className="border-l-2 border-[#F0F0F0] flex items-center gap-2 p-2">
+                      <AiOutlineMessage className="text-blue-500" />
+                      <p>Написать</p>
+                    </div>
+                  </Link>
+                </div>
+              </>
+            ) : (
+              <h1 className="text-red">Not Found</h1>
+            )}
           </div>
+        </div>
+        <div className="my-4 bg-white shadow rounded p-4">
+          <h1 className="font-bold text-[23px]">Описание</h1>
+          <p>
+            Автомобиль в наличии, находиться y нас в Автосалоне AUTOCAPITAL. Вы
+            можете приехать, посмотреть, сделать тест драйв и приобрести eгo.
+            Если Вы хотите приобрести другой автомобиль, мы c радостью вам
+            поможем. Мы найдем и доставим любой автомобиль под ваши запросы.
+          </p>
+        </div>
+        <div>
+          <div></div>
+          <div></div>
         </div>
         <div className="my-12">
           <StillSelecting />

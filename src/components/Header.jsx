@@ -50,12 +50,6 @@ const Header = () => {
     setUserData(storedUserData ? JSON.parse(storedUserData) : null);
   }, []);
 
-  // const clearStorage = () => {
-  //   localStorage.removeItem("token");
-  //   localStorage.removeItem("userData");
-  //   localStorage.removeItem("resetToken");
-  // };
-
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };

@@ -11,6 +11,7 @@ const RegisterPage = () => {
     password: "",
     role: "customer",
     agree: false,
+    userrate: "yearly",
   });
 
   const [confirmPassword, setConfirmPassword] = useState("");
