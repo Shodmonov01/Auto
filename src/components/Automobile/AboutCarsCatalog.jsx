@@ -17,7 +17,7 @@ const Katalog = () => {
     axiosInstance
       .get("/cars")
       .then((response) => {
-        console.log("API Response:", response.data); // Log the response data
+        console.log("API Response:", response.data);
 
         if (Array.isArray(response.data)) {
           const apiCars = response.data.map((car) => ({
