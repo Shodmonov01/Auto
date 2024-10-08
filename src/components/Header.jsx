@@ -14,19 +14,35 @@ import { CiMenuFries } from "react-icons/ci";
 
 const translations = {
   ru: {
+    basic: "Главная",
+    katalog: "Каталог",
+    about: "O нас",
+    news: "Новости",
+    contact: "Контакты",
     cars: "Машины",
     commercialTransport: "Коммерческий транспорт",
     motorcycles: "Мотоциклы",
     searchPlaceholder: "Поиск...",
   },
   uzb: {
+    basic: "Uy",
+    katalog: "Katalog",
+    about: "Biz haqimizda",
+    news: "Yangiliklar",
+    contact: "Kontaktlar",
+
     cars: "Avtomobillar",
     commercialTransport: "Tijorat transporti",
     motorcycles: "Mototsikllar",
     searchPlaceholder: "Qidiruv...",
   },
   en: {
+    basic: "Home",
+    katalog: "Catalog",
+    about: "About us",
     cars: "Cars",
+    news: "News",
+    contact: "Contact",
     commercialTransport: "Commercial Transport",
     motorcycles: "Motorcycles",
     searchPlaceholder: "Search...",
@@ -62,27 +78,27 @@ const Header = () => {
             <ul className="flex space-x-4 cursor-pointer">
               <Link to={"/none"}>
                 <li className="p-2 hover:text-blue-600 text-[#434343]">
-                  Главная
+                  {translations[language].basic}
                 </li>
               </Link>
               <Link to={"/katalog"}>
                 <li className="p-2 hover:text-blue-600 text-[#434343]">
-                  Каталог
+                  {translations[language].katalog}
                 </li>
               </Link>
               <Link to={"/none"}>
                 <li className="p-2 hover:text-blue-600 text-[#434343]">
-                  O нас
+                  {translations[language].about}
                 </li>
               </Link>
               <Link to={"/news"}>
                 <li className="p-2 hover:text-blue-600 text-[#434343]">
-                  Новости
+                  {translations[language].news}
                 </li>
               </Link>
               <Link to={"/contact"}>
                 <li className="p-2 hover:text-blue-600 text-[#434343]">
-                  Контакты
+                  {translations[language].contact}
                 </li>
               </Link>
             </ul>
@@ -137,16 +153,10 @@ const Header = () => {
                 </div>
                 {hasToken ? (
                   <div className="flex gap-4 md:gap-8 items-center">
-                    <TbBellRingingFilled
-                      className="text-[#989898]"
-                      size={24}
-                    />
                     {UserData ? (
                       <>
-                        <div className="flex flex-col md:flex-row items-center">
-                          <div className="flex flex-wrap">
-                            <h1 className=" mx-4 md:mx-6">{UserData.name}</h1>
-                          </div>
+                        <div className="flex md:flex-row border items-center">
+                          <div className="flex flex-wrap"></div>
                           <Link to={"/profile"}>
                             <p className="rounded-full py-1 md:py-2 px-3 md:px-4 flex items-center justify-center bg-[#EEEEEE]">
                               {UserData.name
@@ -154,11 +164,13 @@ const Header = () => {
                                 : ""}
                             </p>
                           </Link>
+                          <h1 className=" mx-4 md:mx-6">{UserData.name}</h1>
                         </div>
                       </>
                     ) : (
                       <h1 className="text-red">Not Found</h1>
                     )}
+                    <TbBellRingingFilled className="text-[#989898]" size={24} />
                   </div>
                 ) : (
                   <div className="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-4">
