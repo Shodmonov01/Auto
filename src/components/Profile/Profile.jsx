@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { CiStar } from "react-icons/ci";
 import { AiOutlineMessage } from "react-icons/ai";
 import { BsLayoutSidebarReverse } from "react-icons/bs";
-import { IoIosArrowDown } from "react-icons/io";
 import { BsLightning } from "react-icons/bs";
 import { AiOutlineSetting } from "react-icons/ai";
 import { Routes, Route, Link } from "react-router-dom";
@@ -13,10 +12,12 @@ import Rate from "./Rate";
 import Update from "./Update";
 import Setting from "./Setting";
 import { useNavigate } from "react-router-dom";
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
 const Profile = () => {
   const [userData, setUserData] = useState(null);
   const navigate = useNavigate();
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const logout = () => {
     localStorage.removeItem("token");
@@ -30,6 +31,9 @@ const Profile = () => {
     const storedUserData = localStorage.getItem("userData");
     setUserData(storedUserData ? JSON.parse(storedUserData) : null);
   }, []);
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
 
   return (
     <>
@@ -80,13 +84,31 @@ const Profile = () => {
                 <button>Сообщения</button>
               </div>
             </Link>
-            <Link to="/update">
-              <div className="flex items-center gap-4 rounded justify-start hover:bg-[#F3F5FC] p-4 my-2">
+            <div className="relative">
+              <div
+                onClick={toggleDropdown}
+                className="flex items-center gap-4 rounded justify-start hover:bg-[#F3F5FC] p-4 my-2 cursor-pointer"
+              >
                 <BsLayoutSidebarReverse />
                 <button>Разместить объявление</button>
-                <IoIosArrowDown />
+                {isDropdownOpen ? <IoIosArrowUp /> : <IoIosArrowDown />}
               </div>
-            </Link>
+
+              {/* Dropdown Menu */}
+              {isDropdownOpen && (
+                <div className="absolute left-0 mt-2 w-full bg-white shadow-md rounded z-50">
+                  <Link to="/update" className="block p-4 hover:bg-gray-200">
+                    Обновить объявление
+                  </Link>
+                  <Link
+                    to="/other-route"
+                    className="block p-4 hover:bg-gray-200"
+                  >
+                    Другое действие
+                  </Link>
+                </div>
+              )}
+            </div>
             <Link to="rate">
               <div className="flex items-center gap-4 rounded justify-start hover:bg-[#F3F5FC] p-4 my-2">
                 <BsLightning />
