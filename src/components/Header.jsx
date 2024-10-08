@@ -6,11 +6,11 @@ import {
   MdEmail,
   MdKeyboardArrowRight,
   MdSearch,
-  MdMenu,
   MdClose,
 } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { Dialog } from "@headlessui/react";
+import { CiMenuFries } from "react-icons/ci";
 
 const translations = {
   ru: {
@@ -135,6 +135,44 @@ const Header = () => {
                     <option value="en">Eng</option>
                   </select>
                 </div>
+                {hasToken ? (
+                  <div className="flex gap-4 md:gap-8 items-center">
+                    <TbBellRingingFilled
+                      className="text-[#989898]"
+                      size={24}
+                    />
+                    {UserData ? (
+                      <>
+                        <div className="flex flex-col md:flex-row items-center">
+                          <div className="flex flex-wrap">
+                            <h1 className=" mx-4 md:mx-6">{UserData.name}</h1>
+                          </div>
+                          <Link to={"/profile"}>
+                            <p className="rounded-full py-1 md:py-2 px-3 md:px-4 flex items-center justify-center bg-[#EEEEEE]">
+                              {UserData.name
+                                ? UserData.name.charAt(0).toUpperCase()
+                                : ""}
+                            </p>
+                          </Link>
+                        </div>
+                      </>
+                    ) : (
+                      <h1 className="text-red">Not Found</h1>
+                    )}
+                  </div>
+                ) : (
+                  <div className="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-4">
+                    <TbBellRingingFilled className="text-[#989898]" size={24} />
+                    <button className="bg-gray-200 py-2 px-4 rounded text-sm">
+                      <Link to={"/login"}>Войти</Link>
+                    </button>
+                    <Link to={"/register"}>
+                      <button className="bg-blue-500 text-white py-2 px-4 rounded text-sm">
+                        Регистрация
+                      </button>
+                    </Link>
+                  </div>
+                )}
                 <ul className="flex flex-col items-center space-y-4 mb-4">
                   <li className="text-lg p-4 hover:text-blue-600">Главная</li>
                   <li className="text-lg p-4 hover:text-blue-600">Каталог</li>
@@ -242,21 +280,26 @@ const Header = () => {
           </button>
           <div className="md:hidden ml-2 mt-2">
             <button onClick={toggleMenu}>
-              {menuOpen ? <MdClose size={24} /> : <MdMenu size={24} />}
+              {menuOpen ? <MdClose size={24} /> : <CiMenuFries size={24} />}
             </button>
           </div>
         </div>
         {hasToken ? (
-          <div className="flex gap-8 items-center">
-            <TbBellRingingFilled className="text-[#989898]" size={24} />
+          <div className="flex gap-4 md:gap-8 items-center">
+            <TbBellRingingFilled
+              className=" hidden md:block text-[#989898]"
+              size={24}
+            />
             {UserData ? (
               <>
-                <div className="flex items-center">
+                <div className="flex flex-col md:flex-row items-center">
                   <div className="flex flex-wrap">
-                    <h1 className="mx-6">{UserData.name}</h1>
+                    <h1 className=" hidden md:block mx-4 md:mx-6">
+                      {UserData.name}
+                    </h1>
                   </div>
-                  <Link to={"/profile"}>
-                    <p className="rounded-full py-2 px-4 flex items-center justify-center bg-[#EEEEEE]">
+                  <Link className="hidden md:block" to={"/profile"}>
+                    <p className="rounded-full py-1 md:py-2 px-3 md:px-4 flex items-center justify-center bg-[#EEEEEE]">
                       {UserData.name
                         ? UserData.name.charAt(0).toUpperCase()
                         : ""}
@@ -269,7 +312,7 @@ const Header = () => {
             )}
           </div>
         ) : (
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-4">
             <TbBellRingingFilled className="text-[#989898]" size={24} />
             <button className="bg-gray-200 py-2 px-4 rounded text-sm">
               <Link to={"/login"}>Войти</Link>

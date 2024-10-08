@@ -136,7 +136,7 @@ const CarDetails = () => {
                       <p className="text-[#989898]">Рейтинг 5.0</p>
                     </div>
                   </div>
-                  <Link to={"/none"}>
+                  <Link to={"/message"}>
                     <div className="border-l-2 border-[#F0F0F0] flex items-center gap-2 p-2">
                       <AiOutlineMessage className="text-blue-500" />
                       <p>Написать</p>

@@ -1,15 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axiosInstance from "../axiosConfig";
 import { useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+// import { socket } from "../socket";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
+  // const [isConnected, setIsConnected] = useState(socket.connected);
+
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -32,8 +35,8 @@ const LoginPage = () => {
     }
   };
 
-
-  React.useEffect(() => {
+  useEffect(() => {
+    console.log(isConnected);
     const token = localStorage.getItem("token");
     if (token) {
       navigate("/");

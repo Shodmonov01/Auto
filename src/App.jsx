@@ -23,6 +23,7 @@ import MotorcycleDetails from "./components/Motorcycles/MotorcycleDetails";
 import Profile from "./components/Profile/Profile";
 import Update from "./components/Profile/Update";
 import NewsBy from "./components/NewsBy";
+import PersonalMessage from "./components/Profile/PersonalMessage";
 
 function Layout({ children }) {
   const location = useLocation();
@@ -179,6 +180,15 @@ function App() {
               <>
                 <PageTitle title="news" />
                 <NewsBy />
+              </>
+            }
+          />
+          <Route
+            path="/message"
+            element={
+              <>
+                <PageTitle title="message" />
+                <PersonalMessage/>
               </>
             }
           />

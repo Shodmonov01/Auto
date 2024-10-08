@@ -1,6 +1,7 @@
 import React from "react";
 import { IoCheckmarkDoneSharp } from "react-icons/io5";
 import { BiSolidVolumeMute } from "react-icons/bi";
+import { Link } from "react-router-dom";
 
 const Message = () => {
   const messages = [
@@ -41,47 +42,51 @@ const Message = () => {
 
           {messages.map((item, index) => {
             return (
-              <div
-                key={index}
-                className="flex items-center justify-between shadow rounded m-2 p-4 bg-[#F6F6F6]"
-              >
-                <div className="flex justify-start items-center space-x-2">
-                  <div className="flex items-center relative ">
-                    <p className="rounded-full py-2.5 px-5 flex items-center justify-center bg-[#D9D9D9]">
-                      J
-                    </p>
-                    <span
-                      className={`ml-2 w-3 h-3 rounded-full  ${
-                        item.isOnline ? "bg-[#07C553]" : "bg-[#989898]"
-                      } absolute bottom-[1px] right-[1px]`}
-                    />
+              <>
+                <Link to={"/message"}>
+                  <div
+                    key={index}
+                    className="flex items-center justify-between shadow rounded m-2 p-4 bg-[#F6F6F6]"
+                  >
+                    <div className="flex justify-start items-center space-x-2">
+                      <div className="flex items-center relative ">
+                        <p className="rounded-full py-2.5 px-5 flex items-center justify-center bg-[#D9D9D9]">
+                          J
+                        </p>
+                        <span
+                          className={`ml-2 w-3 h-3 rounded-full  ${
+                            item.isOnline ? "bg-[#07C553]" : "bg-[#989898]"
+                          } absolute bottom-[1px] right-[1px]`}
+                        />
+                      </div>
+                      <div>
+                        <h1 className="font-semibold">{item.name}</h1>
+                        <p className="text-[#989898]">
+                          Здравствуйте, цена окончательная?
+                        </p>
+                      </div>
+                    </div>
+                    <div>
+                      <div className="flex items-center justify-end">
+                        <p className=" text-sm rounded-full py-0.5 px-2 text-white flex items-center justify-start bg-[#2684E5]">
+                          {item.count}
+                        </p>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        {item.isMute ? (
+                          <BiSolidVolumeMute className="text-[#A7A5A5]" />
+                        ) : (
+                          ""
+                        )}
+                        <p className="text-[#A7A5A5]">{item.time}</p>
+                      </div>
+                      <div className="flex justify-end items-center mt-2">
+                        <IoCheckmarkDoneSharp />
+                      </div>
+                    </div>
                   </div>
-                  <div>
-                    <h1 className="font-semibold">{item.name}</h1>
-                    <p className="text-[#989898]">
-                      Здравствуйте, цена окончательная?
-                    </p>
-                  </div>
-                </div>
-                <div>
-                  <div className="flex items-center justify-end">
-                    <p className=" text-sm rounded-full py-0.5 px-2 text-white flex items-center justify-start bg-[#2684E5]">
-                      {item.count}
-                    </p>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    {item.isMute ? (
-                      <BiSolidVolumeMute className="text-[#A7A5A5]" />
-                    ) : (
-                      ""
-                    )}
-                    <p className="text-[#A7A5A5]">{item.time}</p>
-                  </div>
-                  <div className="flex justify-end items-center mt-2">
-                    <IoCheckmarkDoneSharp />
-                  </div>
-                </div>
-              </div>
+                </Link>
+              </>
             );
           })}
         </div>

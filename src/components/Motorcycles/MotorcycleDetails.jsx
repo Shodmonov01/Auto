@@ -26,6 +26,7 @@ const CarDetails = () => {
 
     fetchCar();
   }, [id]);
+
   useEffect(() => {
     const storedUserData = localStorage.getItem("userData");
     setUserData(storedUserData ? JSON.parse(storedUserData) : null);
@@ -69,41 +70,41 @@ const CarDetails = () => {
             </h1>
             <div className="text-lg text-gray-700 space-y-2">
               <p>
-                <span className="font-semibold text-gray-900">Марка:</span>
+                <span className="font-semibold text-gray-900">Марка:</span>{" "}
                 {car.marka}
               </p>
               <p>
-                <span className="font-semibold text-gray-900">Модель:</span>
+                <span className="font-semibold text-gray-900">Модель:</span>{" "}
                 {car.model}
               </p>
               <p>
                 <span className="font-semibold text-gray-900">
                   Год выпуска:
-                </span>
+                </span>{" "}
                 {car.year}
               </p>
               <p>
-                <span className="font-semibold text-gray-900">Километры:</span>
+                <span className="font-semibold text-gray-900">Километры:</span>{" "}
                 {car.milage.toLocaleString()} км
               </p>
               <p>
-                <span className="font-semibold text-gray-900">Цвет:</span>
+                <span className="font-semibold text-gray-900">Цвет:</span>{" "}
                 {car.color}
               </p>
               <p>
-                <span className="font-semibold text-gray-900">Двигатель:</span>
+                <span className="font-semibold text-gray-900">Двигатель:</span>{" "}
                 {car.engine}
               </p>
               <p>
                 <span className="font-semibold text-gray-900">
                   Лошадиные силы:
-                </span>
+                </span>{" "}
                 {car.horsepower} л.с.
               </p>
               <p>
                 <span className="font-semibold text-gray-900">
                   Где произведен:
-                </span>
+                </span>{" "}
                 {car.country}
               </p>
               <p>
@@ -121,7 +122,7 @@ const CarDetails = () => {
             </p>
             {userData ? (
               <>
-                <div className="flex items-center justify-between shadow p-2 rounded ">
+                <div className="flex items-center justify-between shadow p-2 rounded">
                   <div className="flex items-center gap-4">
                     <Link to={"/profile"}>
                       <p className="rounded-full py-2 px-4 flex items-center justify-center bg-[#EEEEEE]">
@@ -135,7 +136,7 @@ const CarDetails = () => {
                       <p className="text-[#989898]">Рейтинг 5.0</p>
                     </div>
                   </div>
-                  <Link to={"/none"}>
+                  <Link to={"/message"}>
                     <div className="border-l-2 border-[#F0F0F0] flex items-center gap-2 p-2">
                       <AiOutlineMessage className="text-blue-500" />
                       <p>Написать</p>
@@ -148,6 +149,8 @@ const CarDetails = () => {
             )}
           </div>
         </div>
+
+        {/* Description Section */}
         <div className="my-4 bg-white shadow rounded p-4">
           <h1 className="font-bold text-[23px]">Описание</h1>
           <p>
@@ -157,10 +160,82 @@ const CarDetails = () => {
             поможем. Мы найдем и доставим любой автомобиль под ваши запросы.
           </p>
         </div>
-        <div>
-          <div></div>
-          <div></div>
+
+        {/* Technical Specifications Section */}
+        <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4">
+          {/* Left side - Car specifications */}
+          <div className="mx-auto shadow rounded p-6">
+            <h1 className="text-[23px] font-bold mb-6">
+              Технические характеристики
+            </h1>
+            <div className="flex gap-4 items-start">
+              <div className="flex items-start space-x-10">
+                <div className="space-y-4">
+                  <p>
+                    <span className="text-[#989898]">Марка </span>
+                    {car.mark}
+                  </p>
+                  <p>
+                    <span className="text-[#989898]">Модель </span>
+                    {car.body}
+                  </p>
+                  <p>
+                    <span className="text-[#989898]">Год выпуска </span>
+                    {car.year}
+                  </p>
+                  <p>
+                    <span className="text-[#989898]">Пробег </span>
+                    {car.milage}
+                  </p>
+                  <p>
+                    <span className="text-[#989898]">Цвет </span>
+                    {car.color}
+                  </p>
+                </div>
+                <div className="space-y-4">
+                  <p>
+                    <span className="text-[#989898]">Двигатель </span>
+                    {car.engine}
+                  </p>
+                  <p>
+                    <span className="text-[#989898]">Страна </span>
+                    {car.country}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Right side - Seller's question section */}
+          <div className="flex flex-col justify-center items-center bg-gray-100 shadow rounded p-6">
+            <h1 className="text-[23px] font-bold mb-4">
+              Задайте вопрос продавцу
+            </h1>
+            <div className="flex items-center space-x-4 space-y-4">
+              <div className="space-y-4">
+                <button className="px-6 py-3 bg-[#293843] text-white rounded">
+                  Здравствуйте
+                </button>
+                <button className="px-6 py-3 bg-[#293843] text-white rounded">
+                  Какой срок доставки?
+                </button>
+                <button className="px-6 py-3 bg-[#293843] text-white rounded">
+                  птс ОРИГИНАЛ?
+                </button>
+              </div>
+              <div className="space-y-4">
+                <button className="px-6 py-3 bg-[#293843] text-white rounded">
+                  Какой бензин?
+                </button>
+                <button className="px-6 py-3 bg-[#293843] text-white rounded">
+                  Пробег оригинал?
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
+
+        {/* StillSelecting Component */}
         <div className="my-12">
           <StillSelecting />
         </div>
