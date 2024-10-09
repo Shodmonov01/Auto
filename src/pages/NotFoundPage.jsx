@@ -7,14 +7,24 @@ export default function PageNotFound() {
   const translations = {
     ru: {
       notfound: "Упс! Страница не найдена",
+      description:
+        "Запрашиваемая страница была удалена или временно недоступна.",
+      button: "Вернуться на главную",
     },
     uzb: {
       notfound: "Voy! Sahifa topilmadi",
+      description:
+        "Qidirayotgan sahifangiz o'chirilgan yoki vaqtincha mavjud emas.",
+      button: "Bosh sahifaga qaytish",
     },
     en: {
       notfound: "Oops! Page Not Found",
+      description:
+        "The page you are looking for might have been removed or is temporarily unavailable.",
+      button: "Go Back to Home",
     },
   };
+
   return (
     <div className="flex items-center justify-center h-screen bg-gray-100">
       <div className="text-center">
@@ -23,14 +33,13 @@ export default function PageNotFound() {
           {translations[language].notfound}
         </h2>
         <p className="text-lg mt-2 text-gray-500">
-          The page you are looking for might have been removed or is temporarily
-          unavailable.
+          {translations[language].description}
         </p>
         <Link
           to="/"
-          className="mt-6 inline-block px-6 py-3 text-lg font-medium text-white bg-blue-500 rounded-md shadow hover:bg-blue-600"
+          className="mt-6 inline-block px-6 py-3 text-lg font-medium text-white bg-blue-500 rounded-md shadow hover:bg-blue-600 transition duration-200"
         >
-          Go Back to Home
+          {translations[language].button}
         </Link>
       </div>
     </div>

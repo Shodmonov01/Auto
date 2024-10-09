@@ -9,15 +9,16 @@ import Favorite from "./Favorite";
 import PageTitle from "../PageTitle";
 import Message from "./Message";
 import Rate from "./Rate";
-import Update from "./Update";
 import Setting from "./Setting";
 import { useNavigate } from "react-router-dom";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import { useLanguage } from "../Context/LanguageContext";
 
 const Profile = () => {
   const [userData, setUserData] = useState(null);
   const navigate = useNavigate();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const { language } = useLanguage();
 
   const logout = () => {
     localStorage.removeItem("token");
@@ -31,8 +32,51 @@ const Profile = () => {
     const storedUserData = localStorage.getItem("userData");
     setUserData(storedUserData ? JSON.parse(storedUserData) : null);
   }, []);
+
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  const translations = {
+    ru: {
+      rate: "Рейтинг",
+      email: "Электронная почта:",
+      tariff: "Тариф:",
+      favorite: "Избранное",
+      message: "Сообщения",
+      postAd: "Разместить объявление",
+      updateAd: "Обновить объявление",
+      otherAction: "Другое действие",
+      tariffText: "Тариф",
+      accountSettings: "Настройки аккаунта",
+      logout: "Выйти",
+    },
+    uzb: {
+      rate: "Reyting",
+      email: "Elektron pochta:",
+      tariff: "Tarif:",
+      favorite: "Sevimli",
+      message: "Xabarlar",
+      postAd: "E'lon joylashtirish",
+      updateAd: "E'lonni yangilash",
+      otherAction: "Boshqa amal",
+      tariffText: "Tarif",
+      accountSettings: "Hisob sozlamalari",
+      logout: "Chiqish",
+    },
+    en: {
+      rate: "Rating",
+      email: "Email:",
+      tariff: "Tariff:",
+      favorite: "Favorite",
+      message: "Messages",
+      postAd: "Post Ad",
+      updateAd: "Update Ad",
+      otherAction: "Other Action",
+      tariffText: "Tariff",
+      accountSettings: "Account Settings",
+      logout: "Logout",
+    },
   };
 
   return (
@@ -50,14 +94,18 @@ const Profile = () => {
               <p className="text-xl font-semibold text-gray-900">
                 {userData?.name}
               </p>
-              <p className="text-sm text-gray-600">Reyting: 5.0</p>
+              <p className="text-sm text-gray-600">
+                {translations[language].rate}: 5.0
+              </p>
             </div>
           </div>
           <br />
           <hr />
           <div className="mt-6">
             <div className="flex gap-4 items-center">
-              <p className="text-sm text-gray-700">Email:</p>
+              <p className="text-sm text-gray-700">
+                {translations[language].email}
+              </p>
               <p className="text-[#2684E5] cursor-pointer text-sm hover:underline">
                 {userData?.email}
               </p>
@@ -65,7 +113,9 @@ const Profile = () => {
           </div>
           <div className="mt-6">
             <div className="flex gap-4 items-center">
-              <p className="text-sm text-gray-700">Тариф:</p>
+              <p className="text-sm text-gray-700">
+                {translations[language].tariff}
+              </p>
               <p className="text-[#2684E5] cursor-pointer text-sm hover:underline">
                 {userData?.email}
               </p>
@@ -75,13 +125,13 @@ const Profile = () => {
             <Link to="/profile/favorite">
               <div className="flex items-center gap-4 rounded justify-start hover:bg-[#F3F5FC] p-4 my-2 cursor-pointer">
                 <CiStar />
-                <button>Избранное</button>
+                <button>{translations[language].favorite}</button>
               </div>
             </Link>
             <Link to="message">
               <div className="flex items-center gap-4 rounded justify-start hover:bg-[#F3F5FC] p-4 my-2">
                 <AiOutlineMessage />
-                <button>Сообщения</button>
+                <button>{translations[language].message}</button>
               </div>
             </Link>
             <div className="relative">
@@ -90,7 +140,7 @@ const Profile = () => {
                 className="flex items-center gap-4 rounded justify-start hover:bg-[#F3F5FC] p-4 my-2 cursor-pointer"
               >
                 <BsLayoutSidebarReverse />
-                <button>Разместить объявление</button>
+                <button>{translations[language].postAd}</button>
                 {isDropdownOpen ? <IoIosArrowUp /> : <IoIosArrowDown />}
               </div>
 
@@ -98,13 +148,10 @@ const Profile = () => {
               {isDropdownOpen && (
                 <div className="absolute left-0 mt-2 w-full bg-white shadow-md rounded z-50">
                   <Link to="/update" className="block p-4 hover:bg-gray-200">
-                    Обновить объявление
+                    {translations[language].updateAd}
                   </Link>
-                  <Link
-                    to="myupdate/*"
-                    className="block p-4 hover:bg-gray-200"
-                  >
-                    Другое действие
+                  <Link to="myupdate/*" className="block p-4 hover:bg-gray-200">
+                    {translations[language].otherAction}
                   </Link>
                 </div>
               )}
@@ -112,19 +159,19 @@ const Profile = () => {
             <Link to="rate">
               <div className="flex items-center gap-4 rounded justify-start hover:bg-[#F3F5FC] p-4 my-2">
                 <BsLightning />
-                <button>Тариф</button>
+                <button>{translations[language].tariffText}</button>
               </div>
             </Link>
             <Link to="setting">
               <div className="flex items-center gap-4 rounded justify-start hover:bg-[#F3F5FC] p-4 my-2">
                 <AiOutlineSetting />
-                <button>Настройки аккаунта</button>
+                <button>{translations[language].accountSettings}</button>
               </div>
             </Link>
           </div>
           <div className="flex justify-center items-end">
             <button className="w-full py-4 bg-[#F6F6F6]" onClick={logout}>
-              Выйти
+              {translations[language].logout}
             </button>
           </div>
         </aside>
@@ -136,7 +183,7 @@ const Profile = () => {
               path="favorite"
               element={
                 <>
-                  <PageTitle title="favorite" />
+                  <PageTitle title={translations[language].favorite} />
                   <Favorite />
                 </>
               }
@@ -145,25 +192,16 @@ const Profile = () => {
               path="message"
               element={
                 <>
-                  <PageTitle title="message" />
+                  <PageTitle title={translations[language].message} />
                   <Message />
                 </>
               }
             />
-            {/* <Route
-              path="update"
-              element={
-                <>
-                  <PageTitle title="update" />
-                  <Update />
-                </>
-              }
-            /> */}
             <Route
               path="rate"
               element={
                 <>
-                  <PageTitle title="rate" />
+                  <PageTitle title={translations[language].rate} />
                   <Rate />
                 </>
               }
@@ -172,7 +210,7 @@ const Profile = () => {
               path="setting"
               element={
                 <>
-                  <PageTitle title="setting" />
+                  <PageTitle title={translations[language].setting} />
                   <Setting />
                 </>
               }
