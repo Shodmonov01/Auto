@@ -11,6 +11,7 @@ import {
 import { Link } from "react-router-dom";
 import { Dialog } from "@headlessui/react";
 import { CiMenuFries } from "react-icons/ci";
+import { useLanguage } from "./Context/LanguageContext";
 
 const translations = {
   ru: {
@@ -23,6 +24,8 @@ const translations = {
     commercialTransport: "Коммерческий транспорт",
     motorcycles: "Мотоциклы",
     searchPlaceholder: "Поиск...",
+    login: "Войти",
+    register: "Регистрация",
   },
   uzb: {
     basic: "Uy",
@@ -30,11 +33,12 @@ const translations = {
     about: "Biz haqimizda",
     news: "Yangiliklar",
     contact: "Kontaktlar",
-
     cars: "Avtomobillar",
     commercialTransport: "Tijorat transporti",
     motorcycles: "Mototsikllar",
     searchPlaceholder: "Qidiruv...",
+    login: "Tizimga kirish",
+    register: "Ro'yxatdan o'tish",
   },
   en: {
     basic: "Home",
@@ -46,6 +50,8 @@ const translations = {
     commercialTransport: "Commercial Transport",
     motorcycles: "Motorcycles",
     searchPlaceholder: "Search...",
+    login: "Login",
+    register: "Register",
   },
 };
 
@@ -53,10 +59,10 @@ const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [hasToken, setHasToken] = useState(false);
   const [UserData, setUserData] = useState(null);
-  const [language, setLanguage] = useState("ru");
+  const { language, toggleLanguage } = useLanguage();
 
   const handleLanguageChange = (e) => {
-    setLanguage(e.target.value);
+    toggleLanguage(e.target.value);
   };
 
   useEffect(() => {
@@ -327,11 +333,11 @@ const Header = () => {
           <div className="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-4">
             <TbBellRingingFilled className="text-[#989898]" size={24} />
             <button className="bg-gray-200 py-2 px-4 rounded text-sm">
-              <Link to={"/login"}>Войти</Link>
+              <Link to={"/login"}>{translations[language].login}</Link>
             </button>
             <Link to={"/register"}>
               <button className="bg-blue-500 text-white py-2 px-4 rounded text-sm">
-                Регистрация
+                {translations[language].register}
               </button>
             </Link>
           </div>

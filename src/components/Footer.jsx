@@ -1,7 +1,84 @@
 import React from "react";
 import { FaWhatsapp, FaTelegramPlane, FaInstagram } from "react-icons/fa";
+import { useLanguage } from "./Context/LanguageContext";
+import { Launch } from "@mui/icons-material";
 
 const Footer = () => {
+  const { language } = useLanguage();
+  const translations = {
+    ru: {
+      chance: "© 1-й автоброкер Внесём качественные изменения в Вашу жизнь!",
+      company: "Компания",
+      catalog: "Каталог",
+      about: "O нас",
+      news: "Новости",
+      contacts: "Контакты",
+      favorites: "Избранные",
+      cars: "автомобили",
+      fromEurope: "Из Европы",
+      fromUSA: "Из США",
+      fromUAE: "Из ОАЭ",
+      fromChina: "Из Китая",
+      fromKorea: "Из Кореи",
+      brands: "Марки",
+      audi: "Audi",
+      astonMartin: "Aston Martin",
+      acura: "Acura",
+      alfaRomeo: "Alfa Romeo",
+      avatr: "Avatr",
+      privacy: "Политика конфиденциальности",
+      created: "Сделано в UserTech",
+    },
+    uzb: {
+      chance:
+        "© 1-avto broker Biz sizning hayotingizga sifatli o'zgarishlar kiritamiz!",
+      company: "Kompaniya",
+      catalog: "Katalog",
+      about: "Biz haqimizda",
+      news: "Yangiliklar",
+      contacts: "Aloqa",
+      favorites: "Sevimlilar",
+      cars: "Avtomobillar",
+      fromEurope: "Yevropadan",
+      fromUSA: "AQShdan",
+      fromUAE: "BAAdan",
+      fromChina: "Xitoydan",
+      fromKorea: "Koreyadan",
+      brands: "Brendlar",
+      audi: "Audi",
+      astonMartin: "Aston Martin",
+      acura: "Acura",
+      alfaRomeo: "Alfa Romeo",
+      avatr: "Avatr",
+      privacy: "Maxfiylik siyosati",
+      created: "UserTech tomonidan ishlab chiqarilgan",
+    },
+    en: {
+      chance:
+        "© 1st Autobroker We will bring qualitative changes to your life!",
+      company: "Company",
+      catalog: "Catalog",
+      about: "About Us",
+      news: "News",
+      contacts: "Contacts",
+      favorites: "Favorites",
+      cars: "Cars",
+      fromEurope: "From Europe",
+      fromUSA: "From USA",
+      fromUAE: "From UAE",
+      fromChina: "From China",
+      fromKorea: "From Korea",
+      brands: "Brands",
+      audi: "Audi",
+      astonMartin: "Aston Martin",
+      acura: "Acura",
+      alfaRomeo: "Alfa Romeo",
+      avatr: "Avatr",
+      privacy: "Privacy Policy",
+      created: "Made in UserTech",
+    },
+  };
+
   return (
     <>
       <div className="p-6">
@@ -16,108 +93,108 @@ const Footer = () => {
               <FaTelegramPlane size={30} />
               <FaInstagram size={30} />
             </div>
-            <p>© 1-й автоброкер Внесём качественные изменения в Вашу жизнь!</p>
+            <p>{translations[language].chance}</p>
           </div>
           <div className="flex flex-col">
-            <b className="mb-2">Компания</b>
+            <b className="mb-2">{translations[language].company}</b>
             <a href="#" className="text-gray-400 mb-1">
-              Каталог
+              {translations[language].catalog}
             </a>
             <a href="#" className="text-gray-400 mb-1">
-              O нас
+              {translations[language].about}
             </a>
             <a href="#" className="text-gray-400 mb-1">
-              Новости
+              {translations[language].news}
             </a>
             <a href="#" className="text-gray-400">
-              Контакты
+              {translations[language].contacts}
             </a>
             <a href="#" className="text-gray-400">
-              Избранные
-            </a>
-          </div>
-          <div className="flex flex-col">
-            <b className="mb-2">автомобили</b>
-            <a href="#" className="text-gray-400 mb-1">
-              Из Европы
-            </a>
-            <a href="#" className="text-gray-400 mb-1">
-              Из США
-            </a>
-            <a href="#" className="text-gray-400 mb-1">
-              Из ОАЭ
-            </a>
-            <a href="#" className="text-gray-400">
-              Из Китая
-            </a>
-            <a href="#" className="text-gray-400">
-              Из Кореи
+              {translations[language].favorites}
             </a>
           </div>
           <div className="flex flex-col">
-            <b className="mb-2">Марки</b>
+            <b className="mb-2">{translations[language].cars}</b>
             <a href="#" className="text-gray-400 mb-1">
-              Audi
+              {translations[language].fromEurope}
             </a>
             <a href="#" className="text-gray-400 mb-1">
-              Aston Martin
+              {translations[language].fromUSA}
             </a>
             <a href="#" className="text-gray-400 mb-1">
-              Acura
+              {translations[language].fromUAE}
             </a>
             <a href="#" className="text-gray-400">
-              Alfa Romeo
+              {translations[language].fromChina}
             </a>
             <a href="#" className="text-gray-400">
-              Avatr
+              {translations[language].fromKorea}
             </a>
           </div>
           <div className="flex flex-col">
+            <b className="mb-2">{translations[language].brands}</b>
             <a href="#" className="text-gray-400 mb-1">
-              BMW
-            </a>
-            <a href="#" className="text-gray-400 mb-1">
-              Baic
+              {translations[language].audi}
             </a>
             <a href="#" className="text-gray-400 mb-1">
-              Byd
+              {translations[language].astonMartin}
+            </a>
+            <a href="#" className="text-gray-400 mb-1">
+              {translations[language].acura}
             </a>
             <a href="#" className="text-gray-400">
-              Chery
+              {translations[language].alfaRomeo}
             </a>
             <a href="#" className="text-gray-400">
-              Bently
-            </a>
-            <a href="#" className="text-gray-400">
-              Dodge
+              {translations[language].avatr}
             </a>
           </div>
           <div className="flex flex-col">
             <a href="#" className="text-gray-400 mb-1">
-              Chery
+              bmw
             </a>
             <a href="#" className="text-gray-400 mb-1">
-              Cadillac
+              baic
             </a>
             <a href="#" className="text-gray-400 mb-1">
-              Changan
+              byd
             </a>
             <a href="#" className="text-gray-400">
-              Chevrolet
+              chery
             </a>
             <a href="#" className="text-gray-400">
-              Citroen
+              bentley
             </a>
             <a href="#" className="text-gray-400">
-              Daewoo
+              dodge
+            </a>
+          </div>
+          <div className="flex flex-col">
+            <a href="#" className="text-gray-400 mb-1">
+              chery
+            </a>
+            <a href="#" className="text-gray-400 mb-1">
+              cadillac
+            </a>
+            <a href="#" className="text-gray-400 mb-1">
+              changan
+            </a>
+            <a href="#" className="text-gray-400">
+              chevrolet
+            </a>
+            <a href="#" className="text-gray-400">
+              citroen
+            </a>
+            <a href="#" className="text-gray-400">
+              daewoo
             </a>
           </div>
         </div>
       </div>
       <div className="flex items-center justify-around p-4 text-black text-center">
         <p className="text-white">.</p>
-        <p>Политика конфиденциальности</p>
-        <p>Сделано в UserTech</p>
+        <p>{translations[language].privacy}</p>
+        <p>{translations[language].created}</p>
       </div>
     </>
   );

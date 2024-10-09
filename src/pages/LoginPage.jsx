@@ -1,19 +1,57 @@
 import React, { useState, useEffect } from "react";
 import axiosInstance from "../axiosConfig";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
-// import { socket } from "../socket";
+import { useLanguage } from "../components/Context/LanguageContext";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
-  // const [isConnected, setIsConnected] = useState(socket.connected);
+  const { language } = useLanguage();
 
   const navigate = useNavigate();
+  const translations = {
+    ru: {
+      enter: "Вход",
+      emailPlaceholder: "Электронная почта",
+      passwordPlaceholder: "Введите пароль",
+      rememberMe: "Запомнить меня",
+      forgotPassword: "Забыли пароль?",
+      login: "Войти",
+      noAccount: "Еще нет аккаунта?",
+      register: "Зарегистрироваться",
+      loginError: "Ошибка входа",
+      invalidCredentials: "Неверный логин или пароль. Попробуйте снова.",
+    },
+    uzb: {
+      enter: "Kirish",
+      emailPlaceholder: "Elektron pochta",
+      passwordPlaceholder: "Parolni kiriting",
+      rememberMe: "Meni eslab qol",
+      forgotPassword: "Parolni unuting?",
+      login: "Kirish",
+      noAccount: "Hali hisobingiz yo'qmi?",
+      register: "Ro'yxatdan o'tish",
+      loginError: "Kirish xatosi",
+      invalidCredentials:
+        "Noto'g'ri login yoki parol. Iltimos, qayta urinib ko'ring.",
+    },
+    en: {
+      enter: "Entrance",
+      emailPlaceholder: "E-mail",
+      passwordPlaceholder: "Enter password",
+      rememberMe: "Remember me",
+      forgotPassword: "Forgot password?",
+      login: "Login",
+      noAccount: "Don't have an account?",
+      register: "Register",
+      loginError: "Login Error",
+      invalidCredentials: "Invalid login or password. Please try again.",
+    },
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -28,15 +66,14 @@ const LoginPage = () => {
 
       Swal.fire({
         icon: "error",
-        title: "Ошибка входа",
-        text: "Неверный логин или пароль. Попробуйте снова.",
+        title: translations[language].loginError,
+        text: translations[language].invalidCredentials,
         confirmButtonText: "Ок",
       });
     }
   };
 
   useEffect(() => {
-    console.log(isConnected);
     const token = localStorage.getItem("token");
     if (token) {
       navigate("/");
@@ -49,23 +86,25 @@ const LoginPage = () => {
         className="bg-white p-10 rounded shadow-md w-[563px]"
         onSubmit={handleSubmit}
       >
-        <h2 className="text-2xl font-bold mb-6 text-center">Вход</h2>
+        <h2 className="text-2xl font-bold mb-6 text-center">
+          {translations[language].enter}
+        </h2>
 
         <div className="my-8">
           <input
-            placeholder="E-mail"
+            placeholder={translations[language].emailPlaceholder}
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className=" bg-[#F6F6F6] w-full border rounded px-3 py-2"
+            className="bg-[#F6F6F6] w-full border rounded px-3 py-2"
           />
         </div>
 
         <div className="my-8">
           <div className="relative">
             <input
-              placeholder="Введите пароль"
+              placeholder={translations[language].passwordPlaceholder}
               type={showPassword ? "text" : "password"}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -89,11 +128,13 @@ const LoginPage = () => {
               onChange={() => setRememberMe(!rememberMe)}
               className="mr-2"
             />
-            <label className="text-gray-700">Запомнить меня</label>
+            <label className="text-gray-700">
+              {translations[language].rememberMe}
+            </label>
           </div>
-          <div className="">
+          <div>
             <Link to={"/forgot-password"} className="text-blue-500">
-              Забыли пароль?
+              {translations[language].forgotPassword}
             </Link>
           </div>
         </div>
@@ -107,12 +148,12 @@ const LoginPage = () => {
               : "bg-gray-300 text-gray-500 cursor-not-allowed"
           }`}
         >
-          Войти
+          {translations[language].login}
         </button>
         <div className="flex items-center mt-4 p-2 space-x-2 text-gray-600">
-          <p className="text-sm">Еще нет аккаунта?</p>
+          <p className="text-sm">{translations[language].noAccount}</p>
           <Link className="text-sm text-blue-500" to="/register">
-            Зарегистрироваться
+            {translations[language].register}
           </Link>
         </div>
       </form>

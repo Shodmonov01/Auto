@@ -2,15 +2,17 @@ import React, { useState } from "react";
 import axiosInstance from "../axiosConfig";
 import { useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa"; // Import the icons
+import { useLanguage } from "../components/Context/LanguageContext";
 
 const ResetPasswordPage = () => {
-  const [newPassword, setnewPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
   const [showPassword, setShowPassword] = useState(false); // State to toggle password visibility
   const [showConfirmPassword, setShowConfirmPassword] = useState(false); // For confirm password visibility
   const navigate = useNavigate();
+  const { language } = useLanguage();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,7 +23,6 @@ const ResetPasswordPage = () => {
 
     try {
       const token = localStorage.getItem("resetToken");
-      console.log(token);
       const response = await axiosInstance.post(`/reset-password/${token}`, {
         newPassword,
       });
@@ -37,6 +38,36 @@ const ResetPasswordPage = () => {
     }
   };
 
+  const translations = {
+    ru: {
+      resetTitle: "Сброс пароля",
+      enterNewPassword: "Введите новый пароль",
+      confirmNewPassword: "Подтвердите новый пароль",
+      resetButton: "Восстановить",
+      passwordResetSuccess:
+        "Сброс пароля выполнен успешно! Перенаправление на страницу входа...",
+      passwordsDoNotMatch: "Пароли не совпадают",
+    },
+    uzb: {
+      resetTitle: "Parolni tiklash",
+      enterNewPassword: "Yangi parolni kiriting",
+      confirmNewPassword: "Yangi parolni tasdiqlang",
+      resetButton: "Qayta tiklash",
+      passwordResetSuccess:
+        "Parol muvaffaqiyatli tiklandi! Kirish sahifasiga o'tkazilyapti...",
+      passwordsDoNotMatch: "Parollar mos kelmayapti",
+    },
+    en: {
+      resetTitle: "Reset Password",
+      enterNewPassword: "Enter new password",
+      confirmNewPassword: "Confirm new password",
+      resetButton: "Reset",
+      passwordResetSuccess:
+        "Password reset successful! Redirecting to login...",
+      passwordsDoNotMatch: "Passwords do not match",
+    },
+  };
+
   return (
     <div className="flex items-center justify-center min-h-[437px] bg-gray-100">
       <form
@@ -44,24 +75,21 @@ const ResetPasswordPage = () => {
         onSubmit={handleSubmit}
       >
         <h2 className="text-[35px] font-bold mb-[10px] text-center">
-          Забыли пароль?
+          {translations[language].resetTitle}
         </h2>
-        <h4 className="text-[14px] text-center">
-          Введите e-mail для восстановления
-        </h4>
 
         {success ? (
           <p className="text-green-600 text-center">
-            Password reset successful! Redirecting to login...
+            {translations[language].passwordResetSuccess}
           </p>
         ) : (
           <>
             <div className="my-8 relative">
               <input
-                placeholder="Введите новый пароль"
+                placeholder={translations[language].enterNewPassword}
                 type={showPassword ? "text" : "password"} // Toggle input type
                 value={newPassword}
-                onChange={(e) => setnewPassword(e.target.value)}
+                onChange={(e) => setNewPassword(e.target.value)}
                 required
                 className="bg-[#F6F6F6] w-full border rounded px-3 py-2"
               />
@@ -75,7 +103,7 @@ const ResetPasswordPage = () => {
 
             <div className="my-8 relative">
               <input
-                placeholder="Подтвердите новый пароль"
+                placeholder={translations[language].confirmNewPassword}
                 type={showConfirmPassword ? "text" : "password"} // Toggle input type
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
@@ -96,7 +124,7 @@ const ResetPasswordPage = () => {
               type="submit"
               className="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 rounded"
             >
-              Восстановить
+              {translations[language].resetButton}
             </button>
           </>
         )}

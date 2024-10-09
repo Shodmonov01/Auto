@@ -2,7 +2,7 @@ import React from "react";
 import CaruselHeader from "../components/Carusel/CaruselHeader";
 import Filters from "../components/Filters";
 import AutoCarsCatalog from "../components/Automobile/AboutCarsCatalog";
-import WhyWe from "../components//WhyWe";
+import WhyWe from "../components/WhyWe";
 import AboutUs from "../components/AboutUs";
 import CarsLogo from "../components/CarsLogo";
 import StillSelecting from "../components/StillSelecting";

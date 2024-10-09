@@ -101,7 +101,7 @@ const Profile = () => {
                     Обновить объявление
                   </Link>
                   <Link
-                    to="/other-route"
+                    to="myupdate/*"
                     className="block p-4 hover:bg-gray-200"
                   >
                     Другое действие

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { FaLongArrowAltLeft, FaLongArrowAltRight } from "react-icons/fa";
+import { useLanguage } from "../Context/LanguageContext";
 
 const CarouselHeader = () => {
   const images = [
@@ -9,6 +10,7 @@ const CarouselHeader = () => {
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
+  const { language } = useLanguage();
 
   const nextSlide = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
@@ -23,19 +25,38 @@ const CarouselHeader = () => {
   const goToSlide = (index) => {
     setCurrentIndex(index);
   };
+ const translations = {
+   ru: {
+     geely: "Новый Geely Monjaro!",
+     description:
+       "Кроссовер Monjaro - премиальная модель Geely по уровню дизайна, материалов и технологий.",
+     details: "Подробнее",
+   },
+   uzb: {
+     geely: "Yangi Geely Monjaro",
+     description:
+       "Monjaro krossoveri - Geely'ning dizayn, materiallar va texnologiyalar darajasida premium modeli.",
+     details: "Batafsil",
+   },
+   en: {
+     geely: "New Geely Monjaro",
+     description:
+       "The Monjaro crossover is Geely's premium model in terms of design, materials, and technology.",
+     details: "Learn more",
+   },
+ };
+
 
   return (
     <div className="relative bg-slate-200 p-10 m-6 rounded">
       <div className="flex flex-col md:flex-row justify-around items-center">
         <div className="p-4 md:w-1/2">
-          <b className="text-4xl">Новый Geely Monjaro!</b>
+          <b className="text-4xl">{translations[language].geely}</b>
           <br />
-          <p className="mt-4">
-            Lorem ipsum dolor sit amet consectetur adipisicing <br /> elit.
-            Quaerat, ut?
-          </p>
+          <p className="mt-4">{translations[language].description}</p>
+
           <button className="bg-blue-500 text-white py-2 px-6 mt-4 rounded hover:bg-blue-600">
-            Подробнее
+            {translations[language].details}
           </button>
         </div>
         <div className="relative w-full md:w-1/2 h-64 overflow-hidden">

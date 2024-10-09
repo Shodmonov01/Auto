@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import axiosInstance from "../axiosConfig";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { useLanguage } from "../components/Context/LanguageContext";
 
 const ForgetPasswordPage = () => {
   const [email, setEmail] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate(); // use navigate to redirect the user
+  const { language } = useLanguage();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -17,7 +19,6 @@ const ForgetPasswordPage = () => {
       const { token } = response.data;
       if (token) {
         localStorage.setItem("resetToken", token);
-
         setIsSubmitted(true);
         setError("");
         navigate("/reset-password");
@@ -28,6 +29,33 @@ const ForgetPasswordPage = () => {
     }
   };
 
+  const translations = {
+    ru: {
+      forgotYourPassword: "Забыли пароль?",
+      enterEmail: "Введите ваш E-mail",
+      resetButton: "Восстановить",
+      rememberedPassword: "Вспомнили пароль?",
+      loginLink: "Войти",
+      tokenSent: "Токен отправлен на ваш email",
+    },
+    uzb: {
+      forgotYourPassword: "Parolingiz esingizdan chiqdimi?",
+      enterEmail: "E-mailingizni kiriting",
+      resetButton: "Qayta tiklash",
+      rememberedPassword: "Parolni esladingizmi?",
+      loginLink: "Kirish",
+      tokenSent: "Tokeningiz elektron pochtangizga yuborildi",
+    },
+    en: {
+      forgotYourPassword: "Forgot your password?",
+      enterEmail: "Enter your E-mail",
+      resetButton: "Reset",
+      rememberedPassword: "Remembered your password?",
+      loginLink: "Login",
+      tokenSent: "Token sent to your email",
+    },
+  };
+
   return (
     <div className="flex items-center justify-center min-h-[437px] bg-gray-100">
       <form
@@ -35,19 +63,21 @@ const ForgetPasswordPage = () => {
         onSubmit={handleSubmit}
       >
         <h2 className="text-[35px] font-bold mb-[10px] text-center">
-          Забыли пароль?
+          {translations[language].forgotYourPassword}
         </h2>
         <h4 className="text-[14px] text-center">
-          Введите e-mail для восстановления
+          {translations[language].enterEmail}
         </h4>
 
         {isSubmitted ? (
-          <p className="text-green-600 text-center">Token sent to your email</p>
+          <p className="text-green-600 text-center">
+            {translations[language].tokenSent}
+          </p>
         ) : (
           <>
             <div className="my-8">
               <input
-                placeholder="Введите ваш E-mail"
+                placeholder={translations[language].enterEmail}
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -62,15 +92,15 @@ const ForgetPasswordPage = () => {
               type="submit"
               className="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 rounded"
             >
-              Восстановить
+              {translations[language].resetButton}
             </button>
           </>
         )}
 
         <div className="flex items-center mt-4 p-2 space-x-2 text-gray-600">
-          <p className="text-sm">Вспомнили пароль?</p>
+          <p className="text-sm">{translations[language].rememberedPassword}</p>
           <Link className="text-sm text-blue-500" to="/login">
-            Войти
+            {translations[language].loginLink}
           </Link>
         </div>
       </form>
