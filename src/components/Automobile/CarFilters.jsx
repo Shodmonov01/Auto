@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Select from "react-select";
 import { FaCarAlt, FaGlobe, FaCalendarAlt, FaDollarSign } from "react-icons/fa";
 import { useLanguage } from "../Context/LanguageContext";
+import axiosInstance from "../../axiosConfig";
 
 const CarFilters = () => {
+  const [cars, setCars] = useState([]);
+  const [selectedFilters, setSelectedFilters] = useState({});
   const { language } = useLanguage();
+
   const options = [
     {
       label: {
@@ -65,6 +69,33 @@ const CarFilters = () => {
       ],
     },
   ];
+
+  useEffect(() => {
+    const fetchCars = async () => {
+      try {
+        const response = await axiosInstance.post("/cars-filter", {
+          params: selectedFilters,
+        });
+        setCars(response.data); // assuming the response has the car data
+      } catch (error) {
+        console.error("Error fetching cars:", error);
+      }
+    };
+
+    fetchCars();
+  }, [selectedFilters]);
+
+  const handleSelectChange = (selectedOption, idx) => {
+    setSelectedFilters((prev) => ({
+      ...prev,
+      [options[idx].label[language].toLowerCase()]: selectedOption,
+    }));
+  };
+
+  const handleResetFilters = () => {
+    setSelectedFilters({});
+    setCars([]); // reset cars list
+  };
 
   const translations = {
     ru: {
@@ -169,6 +200,9 @@ const CarFilters = () => {
                 styles={customStyles}
                 formatOptionLabel={formatOptionLabel}
                 className="bg-gray-100 rounded"
+                onChange={(selectedOption) =>
+                  handleSelectChange(selectedOption, idx)
+                }
                 defaultValue={
                   item.label[language] === "Страна производства"
                     ? item.options[0]
@@ -180,9 +214,19 @@ const CarFilters = () => {
         </div>
         <br />
         <div className="flex gap-4 justify-end items-center">
-          <button>{translations[language].reset} X</button>
-          <button className="bg-[#989898] text-white py-2 px-4 rounded text-sm">
-             {translations[language].offers}
+          <button onClick={handleResetFilters}>
+            {translations[language].reset} X
+          </button>
+          <button
+            className="bg-[#989898] text-white py-2 px-4 rounded text-sm"
+            onClick={() =>
+              console.log(
+                "Search for cars with the following filters:",
+                selectedFilters
+              )
+            }
+          >
+            {translations[language].offers}
           </button>
         </div>
       </div>
