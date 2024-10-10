@@ -12,7 +12,7 @@ import MainPageCarsCatalog from "../components/MainPageCarsCatalog";
 const MainPage = () => {
   return (
     <>
-      <div>
+      <div className="w-full max-w-[1440px] mx-auto flex-grow">
         <CaruselHeader />
         <Filters />
         <MainPageCarsCatalog />
