@@ -5,6 +5,7 @@ import { MdOutlineArrowRightAlt } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
 import axiosInstance from "../../axiosConfig";
 import { useLanguage } from "../Context/LanguageContext";
+import CommerceFilters from "./CommerceFilters";
 
 const CommerceCar = () => {
   const carsPerPage = 6;
@@ -14,15 +15,12 @@ const CommerceCar = () => {
   const { language } = useLanguage();
   const translations = {
     ru: {
-      catalog: "Электромобили",
       watchCatalog: "Перейти в каталог",
     },
     uzb: {
-      catalog: "Elektr avtomobillari",
       watchCatalog: "Katalogga o'ting",
     },
     en: {
-      catalog: "Electric cars",
       watchCatalog: "Go to the catalog",
     },
   };
@@ -106,9 +104,9 @@ const CommerceCar = () => {
 
   return (
     <>
+      <CommerceFilters />
       <div className="p-4">
         <div>
-          <b className="text-2xl">{translations[language].catalog}</b>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 mt-4">
             {getCurrentPageCars().map((car) => (
               <div key={car.id} className="border p-4 rounded-lg shadow-md">

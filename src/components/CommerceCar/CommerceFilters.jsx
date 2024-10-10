@@ -3,7 +3,7 @@ import Select from "react-select";
 import { FaCarAlt, FaGlobe, FaCalendarAlt, FaDollarSign } from "react-icons/fa";
 import { useLanguage } from "../Context/LanguageContext";
 
-const CarFilters = () => {
+const CommerceFilters = () => {
   const { language } = useLanguage();
   const options = [
     {
@@ -68,7 +68,7 @@ const CarFilters = () => {
 
   const translations = {
     ru: {
-      select: "Каталог",
+      catalog: "Электромобили",
       all: "Bce",
       new: "Новье",
       used: "C пробегом",
@@ -79,7 +79,7 @@ const CarFilters = () => {
       selection: "Выберите",
     },
     uzb: {
-      select: "Mashina tanlash",
+      catalog: "Elektr avtomobillari",
       all: "Hammasi",
       new: "Yangi",
       used: "Ishlatilgan",
@@ -90,7 +90,7 @@ const CarFilters = () => {
       selection: "Tanlash",
     },
     en: {
-      select: "Selecting a car",
+      catalog: "Electric cars",
       all: "All",
       new: "New",
       used: "Used",
@@ -134,7 +134,7 @@ const CarFilters = () => {
   return (
     <div className="p-4">
       <div>
-        <b className="text-2xl">{translations[language].select}</b>
+        <b className="text-2xl">{translations[language].catalog}</b>
       </div>
       <br />
       <div className="p-4 shadow-slate-500 sm:shadow-md lg:shadow-lg">
@@ -190,4 +190,4 @@ const CarFilters = () => {
   );
 };
 
-export default CarFilters;
+export default CommerceFilters;

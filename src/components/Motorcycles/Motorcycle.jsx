@@ -5,6 +5,7 @@ import { MdOutlineArrowRightAlt } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
 import axiosInstance from "../../axiosConfig";
 import { useLanguage } from "../Context/LanguageContext";
+import MotorcyclesFilters from "./MotorcyclesFilters";
 
 const Motorcycles = () => {
   const carsPerPage = 6;
@@ -12,20 +13,20 @@ const Motorcycles = () => {
   const [likedCars, setLikedCars] = useState(new Set());
   const [currentPage, setCurrentPage] = useState(1);
   const { language } = useLanguage();
-   const translations = {
-     ru: {
-       catalog: "Мотоциклы",
-       watchCatalog: "Перейти в каталог",
-     },
-     uzb: {
-       catalog: "Mototsikllar",
-       watchCatalog: "Katalogga o'ting",
-     },
-     en: {
-       catalog: "Motorcycles",
-       watchCatalog: "Go to the catalog",
-     },
-   };
+  const translations = {
+    ru: {
+      catalog: "Мотоциклы",
+      watchCatalog: "Перейти в каталог",
+    },
+    uzb: {
+      catalog: "Mototsikllar",
+      watchCatalog: "Katalogga o'ting",
+    },
+    en: {
+      catalog: "Motorcycles",
+      watchCatalog: "Go to the catalog",
+    },
+  };
 
   const totalPages = Math.ceil(cars.length / carsPerPage);
 
@@ -106,9 +107,9 @@ const Motorcycles = () => {
 
   return (
     <>
+      <MotorcyclesFilters />
       <div className="p-4">
         <div>
-          <b className="text-2xl">{translations[language].catalog}</b>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 mt-4">
             {getCurrentPageCars().map((car) => (
               <div key={car.id} className="border p-4 rounded-lg shadow-md">

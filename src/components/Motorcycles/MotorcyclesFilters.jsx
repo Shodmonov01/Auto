@@ -3,7 +3,7 @@ import Select from "react-select";
 import { FaCarAlt, FaGlobe, FaCalendarAlt, FaDollarSign } from "react-icons/fa";
 import { useLanguage } from "../Context/LanguageContext";
 
-const CarFilters = () => {
+const MotorcyclesFilters = () => {
   const { language } = useLanguage();
   const options = [
     {
@@ -68,7 +68,7 @@ const CarFilters = () => {
 
   const translations = {
     ru: {
-      select: "Каталог",
+      catalog: "Мотоциклы",
       all: "Bce",
       new: "Новье",
       used: "C пробегом",
@@ -79,7 +79,7 @@ const CarFilters = () => {
       selection: "Выберите",
     },
     uzb: {
-      select: "Mashina tanlash",
+      catalog: "Mototsikllar",
       all: "Hammasi",
       new: "Yangi",
       used: "Ishlatilgan",
@@ -90,7 +90,7 @@ const CarFilters = () => {
       selection: "Tanlash",
     },
     en: {
-      select: "Selecting a car",
+      catalog: "Motorcycles",
       all: "All",
       new: "New",
       used: "Used",
@@ -134,7 +134,7 @@ const CarFilters = () => {
   return (
     <div className="p-4">
       <div>
-        <b className="text-2xl">{translations[language].select}</b>
+        <b className="text-2xl">{translations[language].catalog}</b>
       </div>
       <br />
       <div className="p-4 shadow-slate-500 sm:shadow-md lg:shadow-lg">
@@ -182,7 +182,7 @@ const CarFilters = () => {
         <div className="flex gap-4 justify-end items-center">
           <button>{translations[language].reset} X</button>
           <button className="bg-[#989898] text-white py-2 px-4 rounded text-sm">
-             {translations[language].offers}
+            {translations[language].offers}
           </button>
         </div>
       </div>
@@ -190,4 +190,4 @@ const CarFilters = () => {
   );
 };
 
-export default CarFilters;
+export default MotorcyclesFilters;
