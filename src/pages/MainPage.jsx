@@ -1,13 +1,13 @@
 import React from "react";
 import CaruselHeader from "../components/Carusel/CaruselHeader";
 import Filters from "../components/Filters";
-import AutoCarsCatalog from "../components/Automobile/AboutCarsCatalog";
 import WhyWe from "../components/WhyWe";
 import AboutUs from "../components/AboutUs";
 import CarsLogo from "../components/CarsLogo";
 import StillSelecting from "../components/StillSelecting";
 import News from "../components/News";
 import Comments from "../components/Comments";
+import MainPageCarsCatalog from "../components/MainPageCarsCatalog";
 
 const MainPage = () => {
   return (
@@ -15,7 +15,7 @@ const MainPage = () => {
       <div>
         <CaruselHeader />
         <Filters />
-        <AutoCarsCatalog />
+        <MainPageCarsCatalog />
         <WhyWe />
         <AboutUs />
         <CarsLogo />

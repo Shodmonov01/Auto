@@ -4,12 +4,28 @@ import { IoHeartDislikeOutline } from "react-icons/io5";
 import { MdOutlineArrowRightAlt } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
 import axiosInstance from "../../axiosConfig";
+import { useLanguage } from "../Context/LanguageContext";
 
 const CommerceCar = () => {
   const carsPerPage = 6;
   const [cars, setCars] = useState([]);
   const [likedCars, setLikedCars] = useState(new Set());
   const [currentPage, setCurrentPage] = useState(1);
+  const { language } = useLanguage();
+  const translations = {
+    ru: {
+      catalog: "Электромобили",
+      watchCatalog: "Перейти в каталог",
+    },
+    uzb: {
+      catalog: "Elektr avtomobillari",
+      watchCatalog: "Katalogga o'ting",
+    },
+    en: {
+      catalog: "Electric cars",
+      watchCatalog: "Go to the catalog",
+    },
+  };
 
   const totalPages = Math.ceil(cars.length / carsPerPage);
 
@@ -92,7 +108,7 @@ const CommerceCar = () => {
     <>
       <div className="p-4">
         <div>
-          <b className="text-2xl">АВТОМОБИЛЬНЫЙ КАТАЛОГ</b>
+          <b className="text-2xl">{translations[language].catalog}</b>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 mt-4">
             {getCurrentPageCars().map((car) => (
               <div key={car.id} className="border p-4 rounded-lg shadow-md">
@@ -172,7 +188,7 @@ const CommerceCar = () => {
             <u>
               <button onClick={() => handleLinkClick("/about-cars")}>
                 <Link className="text-[#293843]" to="/about-cars">
-                  Перейти в каталог
+                  {translations[language].watchCatalog}
                 </Link>
               </button>
             </u>

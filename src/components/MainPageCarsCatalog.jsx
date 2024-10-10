@@ -3,35 +3,37 @@ import { FcLike } from "react-icons/fc";
 import { IoHeartDislikeOutline } from "react-icons/io5";
 import { MdOutlineArrowRightAlt } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
-import axiosInstance from "../../axiosConfig";
-import { useLanguage } from "../Context/LanguageContext";
+import axiosInstance from "../axiosConfig";
+import { useLanguage } from "../components/Context/LanguageContext";
 
-const Motorcycles = () => {
+const MainPageCarsCatalog = () => {
   const carsPerPage = 6;
   const [cars, setCars] = useState([]);
   const [likedCars, setLikedCars] = useState(new Set());
   const [currentPage, setCurrentPage] = useState(1);
   const { language } = useLanguage();
-   const translations = {
-     ru: {
-       catalog: "Мотоциклы",
-       watchCatalog: "Перейти в каталог",
-     },
-     uzb: {
-       catalog: "Mototsikllar",
-       watchCatalog: "Katalogga o'ting",
-     },
-     en: {
-       catalog: "Motorcycles",
-       watchCatalog: "Go to the catalog",
-     },
-   };
 
+  const translations = {
+    ru: {
+      catalog: "АВТОМОБИЛЬНЫЙ КАТАЛОГ",
+      watchCatalog: "Перейти в каталог",
+    },
+    uzb: {
+      catalog: "AVTO KATALOGI",
+
+      watchCatalog: "Katalogga o'ting",
+    },
+    en: {
+      catalog: "AUTOMOBILE CATALOG",
+
+      watchCatalog: "Go to the catalog",
+    },
+  };
   const totalPages = Math.ceil(cars.length / carsPerPage);
 
   useEffect(() => {
     axiosInstance
-      .get("/motorcycles")
+      .get("/cars")
       .then((response) => {
         console.log("API Response:", response.data);
 
@@ -112,9 +114,9 @@ const Motorcycles = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 mt-4">
             {getCurrentPageCars().map((car) => (
               <div key={car.id} className="border p-4 rounded-lg shadow-md">
-                <Link to={`/motorcycles/${car.id}`}>
+                <Link to={`/about-cars/${car.id}`}>
                   <button
-                    onClick={() => handleLinkClick(`/motorcycles/${car.id}`)}
+                    onClick={() => handleLinkClick(`/about-cars/${car.id}`)}
                     className="w-full h-40"
                   >
                     <img
@@ -186,8 +188,8 @@ const Motorcycles = () => {
         <div>
           <b className="text-xl">
             <u>
-              <button onClick={() => handleLinkClick("/motorcycles")}>
-                <Link className="text-[#293843]" to="/motorcycles">
+              <button onClick={() => handleLinkClick("/about-cars")}>
+                <Link className="text-[#293843]" to="/about-cars">
                   {translations[language].watchCatalog}
                 </Link>
               </button>
@@ -202,4 +204,4 @@ const Motorcycles = () => {
   );
 };
 
-export default Motorcycles;
+export default MainPageCarsCatalog;

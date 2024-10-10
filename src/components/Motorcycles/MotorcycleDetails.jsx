@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import axiosInstance from "../../axiosConfig";
 import StillSelecting from "../StillSelecting";
 import { AiOutlineMessage } from "react-icons/ai";
+import { useLanguage } from "../Context/LanguageContext";
 
 const CarDetails = () => {
   const { id } = useParams();
@@ -10,6 +11,81 @@ const CarDetails = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [userData, setUserData] = useState(null);
+  const { language } = useLanguage();
+  const translations = {
+    ru: {
+      logo: "Марка",
+      model: "Модель",
+      year: "Год выпуска",
+      milage: "Километры",
+      color: "Цвет",
+      engine: "Двигатель",
+      horsepower: "Лошадиные силы",
+      country: "Где произведен",
+      description: "Описание",
+      price: "Цена",
+      notFound: "He найдено",
+      rating: "Рейтинг",
+      writeMessage: "Написать",
+      carDescription: "Описание",
+      carSpecs: "Технические характеристики",
+      askSeller: "Задайте вопрос продавцу",
+      hello: "Здравствуйте",
+      deliveryTime: "Какой срок доставки?",
+      originalPTS: "ПТС ОРИГИНАЛ?",
+      gasType: "Какой бензин?",
+      originalMilage: "Пробег оригинал?",
+      inStock: "Автомобиль в наличии",
+    },
+    uzb: {
+      logo: "Brend",
+      model: "Model",
+      year: "Yili",
+      milage: "Kilometrlar",
+      color: "Rang",
+      engine: "Dvigatel",
+      horsepower: "Ot kuchi",
+      country: "Ishlab chiqarilgan mamlakat",
+      description: "Tavsif",
+      price: "Narx",
+      notFound: "Topilmadi",
+      rating: "Reyting",
+      writeMessage: "Xabar yozing",
+      carDescription: "Tavsif",
+      carSpecs: "Texnik tavsifnoma",
+      askSeller: "Sotuvchiga savol bering",
+      hello: "Salom",
+      deliveryTime: "Yetkazib berish muddati qancha?",
+      originalPTS: "Asl PTS?",
+      gasType: "Benzin turi?",
+      originalMilage: "Asl yurilgan masofa?",
+      inStock: "Avtomobil mavjud",
+    },
+    en: {
+      logo: "Brand",
+      model: "Model",
+      year: "Year",
+      milage: "Kilometers",
+      color: "Color",
+      engine: "Engine",
+      horsepower: "Horsepower",
+      country: "Country of Manufacture",
+      description: "Description",
+      price: "Price",
+      notFound: "Not Found",
+      rating: "Rating",
+      writeMessage: "Write a Message",
+      carDescription: "Description",
+      carSpecs: "Technical Specifications",
+      askSeller: "Ask the Seller",
+      hello: "Hello",
+      deliveryTime: "What is the delivery time?",
+      originalPTS: "Original PTS?",
+      gasType: "What type of gas?",
+      originalMilage: "Original milage?",
+      inStock: "The car is in stock",
+    },
+  };
 
   useEffect(() => {
     const fetchCar = async () => {
@@ -70,45 +146,57 @@ const CarDetails = () => {
             </h1>
             <div className="text-lg text-gray-700 space-y-2">
               <p>
-                <span className="font-semibold text-gray-900">Марка:</span>{" "}
+                <span className="font-semibold text-gray-900">
+                  {translations[language].logo}:
+                </span>
                 {car.marka}
               </p>
               <p>
-                <span className="font-semibold text-gray-900">Модель:</span>{" "}
+                <span className="font-semibold text-gray-900">
+                  {translations[language].model}:
+                </span>
                 {car.model}
               </p>
               <p>
                 <span className="font-semibold text-gray-900">
-                  Год выпуска:
-                </span>{" "}
+                  {translations[language].year}:
+                </span>
                 {car.year}
               </p>
               <p>
-                <span className="font-semibold text-gray-900">Километры:</span>{" "}
+                <span className="font-semibold text-gray-900">
+                  {translations[language].milage}:
+                </span>
                 {car.milage.toLocaleString()} км
               </p>
               <p>
-                <span className="font-semibold text-gray-900">Цвет:</span>{" "}
+                <span className="font-semibold text-gray-900">
+                  {translations[language].color}:
+                </span>
                 {car.color}
               </p>
               <p>
-                <span className="font-semibold text-gray-900">Двигатель:</span>{" "}
+                <span className="font-semibold text-gray-900">
+                  {translations[language].engine}:
+                </span>
                 {car.engine}
               </p>
               <p>
                 <span className="font-semibold text-gray-900">
-                  Лошадиные силы:
-                </span>{" "}
-                {car.horsepower} л.с.
+                  {translations[language].horsepower}:
+                </span>
+                {car.horsepower} л.c.
               </p>
               <p>
                 <span className="font-semibold text-gray-900">
-                  Где произведен:
-                </span>{" "}
+                  {translations[language].country}:
+                </span>
                 {car.country}
               </p>
               <p>
-                <span className="font-semibold text-gray-900">Описание:</span>
+                <span className="font-semibold text-gray-900">
+                  {translations[language].description}:
+                </span>
                 <br />
                 {car.description}
               </p>
@@ -116,7 +204,7 @@ const CarDetails = () => {
             <p className="text-3xl font-bold text-gray-900">
               <span className="text-green-600">
                 <span className="bg-blue-600 text-white px-4 py-2 rounded">
-                  Цена: ${car.cost.toLocaleString()}
+                  {translations[language].price}: ${car.cost.toLocaleString()}
                 </span>
               </span>
             </p>
@@ -133,32 +221,31 @@ const CarDetails = () => {
                     </Link>
                     <div className="flex flex-col">
                       <h1>{userData.name}</h1>
-                      <p className="text-[#989898]">Рейтинг 5.0</p>
+                      <p className="text-[#989898]">
+                        {translations[language].rating} 5.0
+                      </p>
                     </div>
                   </div>
                   <Link to={"/message"}>
                     <div className="border-l-2 border-[#F0F0F0] flex items-center gap-2 p-2">
                       <AiOutlineMessage className="text-blue-500" />
-                      <p>Написать</p>
+                      <p>{translations[language].writeMessage}</p>
                     </div>
                   </Link>
                 </div>
               </>
             ) : (
-              <h1 className="text-red">Not Found</h1>
+              <h1 className="text-red">{translations[language].notFound}</h1>
             )}
           </div>
         </div>
 
         {/* Description Section */}
         <div className="my-4 bg-white shadow rounded p-4">
-          <h1 className="font-bold text-[23px]">Описание</h1>
-          <p>
-            Автомобиль в наличии, находиться y нас в Автосалоне AUTOCAPITAL. Вы
-            можете приехать, посмотреть, сделать тест драйв и приобрести eгo.
-            Если Вы хотите приобрести другой автомобиль, мы c радостью вам
-            поможем. Мы найдем и доставим любой автомобиль под ваши запросы.
-          </p>
+          <h1 className="font-bold text-[23px]">
+            {translations[language].carDescription}
+          </h1>
+          <p>{car.description}</p>
         </div>
 
         {/* Technical Specifications Section */}
@@ -166,39 +253,53 @@ const CarDetails = () => {
           {/* Left side - Car specifications */}
           <div className="mx-auto shadow rounded p-6">
             <h1 className="text-[23px] font-bold mb-6">
-              Технические характеристики
+              {translations[language].carSpecs}
             </h1>
             <div className="flex gap-4 items-start">
               <div className="flex items-start space-x-10">
                 <div className="space-y-4">
                   <p>
-                    <span className="text-[#989898]">Марка </span>
+                    <span className="text-[#989898]">
+                      {translations[language].logo}:
+                    </span>
                     {car.mark}
                   </p>
                   <p>
-                    <span className="text-[#989898]">Модель </span>
+                    <span className="text-[#989898]">
+                      {translations[language].model}:
+                    </span>
                     {car.body}
                   </p>
                   <p>
-                    <span className="text-[#989898]">Год выпуска </span>
+                    <span className="text-[#989898]">
+                      {translations[language].year}:
+                    </span>
                     {car.year}
                   </p>
                   <p>
-                    <span className="text-[#989898]">Пробег </span>
+                    <span className="text-[#989898]">
+                      {translations[language].milage}:
+                    </span>
                     {car.milage}
                   </p>
                   <p>
-                    <span className="text-[#989898]">Цвет </span>
+                    <span className="text-[#989898]">
+                      {translations[language].color}:
+                    </span>
                     {car.color}
                   </p>
                 </div>
                 <div className="space-y-4">
                   <p>
-                    <span className="text-[#989898]">Двигатель </span>
+                    <span className="text-[#989898]">
+                      {translations[language].engine}:
+                    </span>
                     {car.engine}
                   </p>
                   <p>
-                    <span className="text-[#989898]">Страна </span>
+                    <span className="text-[#989898]">
+                      {translations[language].country}:
+                    </span>
                     {car.country}
                   </p>
                 </div>
@@ -209,26 +310,26 @@ const CarDetails = () => {
           {/* Right side - Seller's question section */}
           <div className="flex flex-col justify-center items-center bg-gray-100 shadow rounded p-6">
             <h1 className="text-[23px] font-bold mb-4">
-              Задайте вопрос продавцу
+              {translations[language].askSeller}
             </h1>
             <div className="flex items-center space-x-4 space-y-4">
               <div className="space-y-4">
                 <button className="px-6 py-3 bg-[#293843] text-white rounded">
-                  Здравствуйте
+                  {translations[language].hello}
                 </button>
                 <button className="px-6 py-3 bg-[#293843] text-white rounded">
-                  Какой срок доставки?
+                  {translations[language].deliveryTime}
                 </button>
                 <button className="px-6 py-3 bg-[#293843] text-white rounded">
-                  птс ОРИГИНАЛ?
+                  {translations[language].originalPTS}
                 </button>
               </div>
               <div className="space-y-4">
                 <button className="px-6 py-3 bg-[#293843] text-white rounded">
-                  Какой бензин?
+                  {translations[language].gasType}
                 </button>
                 <button className="px-6 py-3 bg-[#293843] text-white rounded">
-                  Пробег оригинал?
+                  {translations[language].originalMilage}
                 </button>
               </div>
             </div>
