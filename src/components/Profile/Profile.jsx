@@ -32,7 +32,7 @@ const Profile = () => {
     const storedUserData = localStorage.getItem("userData");
     setUserData(storedUserData ? JSON.parse(storedUserData) : null);
   }, []);
-
+  
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
@@ -81,9 +81,9 @@ const Profile = () => {
 
   return (
     <>
-      <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-6 gap-6 min-h-screen bg-gray-100">
+      <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-6 gap-6 min-h-screen bg-gray-100">
         {/* Sidebar */}
-        <aside className="col-span-1 lg:col-span-2 bg-white rounded-lg shadow-lg p-6 m-4">
+        <aside className="col-span-1 sm:col-span-1 lg:col-span-2 bg-white rounded-lg shadow-lg p-6 my-4">
           <div className="flex gap-4 items-center">
             <p className="rounded-full py-3 px-6 bg-gray-200 text-lg font-bold text-gray-800">
               {userData && userData.name
@@ -177,7 +177,7 @@ const Profile = () => {
         </aside>
 
         {/* Main Content */}
-        <main className="col-span-1 sm:col-span-3 lg:col-span-4 bg-white rounded-lg shadow-lg p-8 m-4">
+        <main className="col-span-1 sm:col-span-1 lg:col-span-4 bg-white rounded-lg shadow-lg p-8 my-4">
           <Routes>
             <Route
               path="favorite"

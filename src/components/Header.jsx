@@ -138,7 +138,7 @@ const Header = () => {
             className="fixed inset-0 z-50"
           >
             <div
-              className="fixed inset-0 bg-black opacity-30"
+              className="fixed inset-0 bg-black opacity-60"
               aria-hidden="true"
             />
             <div className="fixed inset-0 flex justify-center items-center">
@@ -158,25 +158,41 @@ const Header = () => {
                   </select>
                 </div>
                 {hasToken ? (
-                  <div className="flex gap-4 md:gap-8 items-center">
+                  <div>
                     {UserData ? (
                       <>
-                        <div className="flex md:flex-row border items-center">
-                          <div className="flex flex-wrap"></div>
+                        <div className="flex items-center justify-between p-4 bg-[#F6F6F6] rounded-[5px]">
+                          <div className="flex md:flex-row  items-center">
+                            <Link to={"/profile"}>
+                              <p className="rounded-full py-1 md:py-3 px-3 md:px-6 flex items-center justify-center bg-[#EEEEEE]">
+                                {UserData.name
+                                  ? UserData.name.charAt(0).toUpperCase()
+                                  : ""}
+                              </p>
+                            </Link>
+                            <h1 className="text-xl mx-4 md:mx-6">
+                              {UserData.name}
+                            </h1>
+                          </div>
                           <Link to={"/profile"}>
-                            <p className="rounded-full py-1 md:py-2 px-3 md:px-4 flex items-center justify-center bg-[#EEEEEE]">
-                              {UserData.name
-                                ? UserData.name.charAt(0).toUpperCase()
-                                : ""}
-                            </p>
+                            <div>
+                              <MdKeyboardArrowRight
+                                size={24}
+                                className="text-blue-600"
+                              />
+                            </div>
                           </Link>
-                          <h1 className=" mx-4 md:mx-6">{UserData.name}</h1>
                         </div>
                       </>
                     ) : (
                       <h1 className="text-red">Not Found</h1>
                     )}
-                    <TbBellRingingFilled className="text-[#989898]" size={24} />
+                    <div className="my-4 flex items-center justify-end">
+                      <TbBellRingingFilled
+                        className="text-[#989898]"
+                        size={24}
+                      />
+                    </div>
                   </div>
                 ) : (
                   <div className="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-4">
@@ -267,7 +283,7 @@ const Header = () => {
             </div>
           </Link>
         </div>
-        <ul className="hidden md:flex space-x-8">
+        <ul className="sm:hidden md:hidden lg:flex space-x-8">
           <li className="flex items-center gap-2">
             <Link to={"/about-cars"}>{translations[language].cars}</Link>
             <MdKeyboardArrowRight className="text-blue-600" />
@@ -285,6 +301,7 @@ const Header = () => {
             <MdKeyboardArrowRight className="text-blue-600" />
           </li>
         </ul>
+
         <div className="relative flex items-center justify-center mx-auto">
           <input
             style={{ maxWidth: "250px" }}
@@ -331,7 +348,7 @@ const Header = () => {
         ) : (
           <div className="hidden md:flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-4">
             <TbBellRingingFilled className="text-[#989898]" size={24} />
-            <button className=" py-2 px-4 rounded text-sm">
+            <button className="py-2 px-4 rounded text-sm">
               <Link to={"/login"}>{translations[language].login}</Link>
             </button>
             <Link to={"/register"}>
