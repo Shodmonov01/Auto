@@ -198,19 +198,61 @@ const Header = () => {
                   <div className="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-4">
                     <TbBellRingingFilled className="text-[#989898]" size={24} />
                     <button className="bg-gray-200 py-2 px-4 rounded text-sm">
-                      <Link to={"/login"}>Войти</Link>
+                      <Link to={"/login"}>{translations[language].login}</Link>
                     </button>
                     <Link to={"/register"}>
                       <button className="bg-blue-500 text-white py-2 px-4 rounded text-sm">
-                        Регистрация
+                        {translations[language].register}
                       </button>
                     </Link>
                   </div>
                 )}
                 <ul className="flex flex-col items-center space-y-4 mb-4">
-                  <li className="text-lg p-4 hover:text-blue-600">Главная</li>
-                  <li className="text-lg p-4 hover:text-blue-600">Каталог</li>
-                  <li className="text-lg p-4 hover:text-blue-600">O нас</li>
+                  <Link to={"/none"}>
+                    <li className="p-2 hover:text-blue-600 text-[#434343]">
+                      {translations[language].basic}
+                    </li>
+                  </Link>
+                  <Link to={"/katalog"}>
+                    <li className="p-2 hover:text-blue-600 text-[#434343]">
+                      {translations[language].katalog}
+                    </li>
+                  </Link>
+                  <Link to={"/none"}>
+                    <li className="p-2 hover:text-blue-600 text-[#434343]">
+                      {translations[language].about}
+                    </li>
+                  </Link>
+                  <Link to={"/news"}>
+                    <li className="p-2 hover:text-blue-600 text-[#434343]">
+                      {translations[language].news}
+                    </li>
+                  </Link>
+                  <Link to={"/contact"}>
+                    <li className="p-2 hover:text-blue-600 text-[#434343]">
+                      {translations[language].contact}
+                    </li>
+                  </Link>
+                </ul>
+                <ul>
+                  <li className="flex items-center justify-between bg-[#F6F6F6] p-4 m-2">
+                    <Link to={"/about-cars"}>
+                      {translations[language].cars}
+                    </Link>
+                    <MdKeyboardArrowRight className="text-blue-600" />
+                  </li>
+                  <li className="flex items-center justify-between bg-[#F6F6F6] p-4 m-2">
+                    <Link to={"/commerce-cars"}>
+                      {translations[language].commercialTransport}
+                    </Link>
+                    <MdKeyboardArrowRight className="text-blue-600" />
+                  </li>
+                  <li className="flex items-center justify-between bg-[#F6F6F6] p-4 m-2">
+                    <Link to={"/motorcycles"}>
+                      {translations[language].motorcycles}
+                    </Link>
+                    <MdKeyboardArrowRight className="text-blue-600" />
+                  </li>
                 </ul>
                 <div className="flex flex-col items-center space-y-4">
                   <div className="flex space-x-4">
@@ -283,7 +325,7 @@ const Header = () => {
             </div>
           </Link>
         </div>
-        <ul className="sm:hidden md:hidden lg:flex space-x-8">
+        <ul className="hidden lg:flex space-x-8">
           <li className="flex items-center gap-2">
             <Link to={"/about-cars"}>{translations[language].cars}</Link>
             <MdKeyboardArrowRight className="text-blue-600" />
