@@ -40,7 +40,7 @@ const StillSelecting = () => {
           <p className="text-white mb-4 text-center md:text-left">
             {translations[language].description}
           </p>
-          <button className="bg-[#71B2F7] text-white px-6 py-4 rounded">
+          <button className="bg-[#71B2F7] text-white px-[43px] py-[13px] rounded">
             {translations[language].button}
           </button>
         </div>

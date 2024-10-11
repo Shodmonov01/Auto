@@ -86,28 +86,28 @@ const Section3 = () => {
         <b className="text-2xl">{translations[language].whywe}</b>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-4">
-        <div className="flex flex-col justify-center items-start w-[306px] h-[236px] p-[35px_0_22px_25px] bg-white rounded-tl-[5px] shadow-lg opacity-90 mx-auto">
+        <div className="flex flex-col justify-center items-start w-[306px] h-[236px] p-[35px_0_22px_25px] bg-white rounded-[3px] shadow-lg opacity-90 mx-auto">
           <img src={Vector} alt="Vector" className="mb-4" />
           <b className="text-xl">{translations[language].work.title}</b>
           <p className="text-[#989898]">
             {translations[language].work.description}
           </p>
         </div>
-        <div className="flex flex-col justify-center items-start w-[306px] h-[236px] p-[35px_0_22px_25px] bg-white rounded-tl-[5px] shadow-lg opacity-90 mx-auto">
+        <div className="flex flex-col justify-center items-start w-[306px] h-[236px] p-[35px_0_22px_25px] bg-white rounded-[3px] shadow-lg opacity-90 mx-auto">
           <img src={chat} alt="chat" className="mb-4" />
           <b className="text-xl">{translations[language].chat.title}</b>
           <p className="text-[#989898]">
             {translations[language].chat.description}
           </p>
         </div>
-        <div className="flex flex-col justify-center items-start w-[306px] h-[236px] p-[35px_0_22px_25px] bg-white rounded-tl-[5px] shadow-lg opacity-90 mx-auto">
+        <div className="flex flex-col justify-center items-start w-[306px] h-[236px] p-[35px_0_22px_25px] bg-white rounded-[3px] shadow-lg opacity-90 mx-auto">
           <img src={third} alt="third" className="mb-4" />
           <b className="text-xl">{translations[language].choice.title}</b>
           <p className="text-[#989898]">
             {translations[language].choice.description}
           </p>
         </div>
-        <div className="flex flex-col justify-center items-start w-[306px] h-[236px] p-[35px_0_22px_25px] bg-white rounded-tl-[5px] shadow-lg opacity-90 mx-auto">
+        <div className="flex flex-col justify-center items-start w-[306px] h-[236px] p-[35px_0_22px_25px] bg-white rounded-[3px] shadow-lg opacity-90 mx-auto">
           <img src={deliver} alt="deliver" className=" mb-4" />
           <b className="text-xl">{translations[language].delivery.title}</b>
           <p className="text-[#989898]">

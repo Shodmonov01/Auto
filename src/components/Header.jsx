@@ -23,7 +23,7 @@ const translations = {
     cars: "Машины",
     commercialTransport: "Коммерческий транспорт",
     motorcycles: "Мотоциклы",
-    searchPlaceholder: "Поиск...",
+    searchPlaceholder: "Поиск по названию",
     login: "Войти",
     register: "Регистрация",
   },
@@ -36,7 +36,7 @@ const translations = {
     cars: "Avtomobillar",
     commercialTransport: "Tijorat transporti",
     motorcycles: "Mototsikllar",
-    searchPlaceholder: "Qidiruv...",
+    searchPlaceholder: "Ism bo'yicha qidirish",
     login: "Tizimga kirish",
     register: "Ro'yxatdan o'tish",
   },
@@ -49,7 +49,7 @@ const translations = {
     contact: "Contact",
     commercialTransport: "Commercial Transport",
     motorcycles: "Motorcycles",
-    searchPlaceholder: "Search...",
+    searchPlaceholder: "Search by name",
     login: "Login",
     register: "Register",
   },
@@ -115,14 +115,14 @@ const Header = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FaWhatsapp className="text-[#989898]" size={24} />
+              <FaTelegramPlane className="text-[#989898]" size={24} />
             </a>
             <a
               href="https://telegram.me/yourtelegramlink"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FaTelegramPlane className="text-[#989898]" size={24} />
+              <FaWhatsapp className="text-[#989898]" size={24} />
             </a>
             <a
               href="https://instagram.com/yourinstagramlink"
@@ -203,15 +203,14 @@ const Header = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      <FaWhatsapp className="text-[#989898]" size={24} />
+                      <FaTelegramPlane className="text-[#989898]" size={24} />
                     </a>
                     <a
                       href="https://telegram.me/yourtelegramlink"
                       target="_blank"
                       rel="noopener noreferrer"
-                    >
-                      <FaTelegramPlane className="text-[#989898]" size={24} />
-                    </a>
+                    ></a>
+                    <FaWhatsapp className="text-[#989898]" size={24} />
                     <a
                       href="https://instagram.com/yourinstagramlink"
                       target="_blank"
@@ -291,7 +290,7 @@ const Header = () => {
             style={{ maxWidth: "250px" }}
             type="text"
             placeholder={translations[language].searchPlaceholder}
-            className="p-[4px] border rounded-lg outline-none sm:p-2 sm:pl-6"
+            className="p-[4px] border rounded-[3px] outline-none sm:p-2 sm:pl-6"
           />
           <button className="absolute left-2 hidden md:block">
             <MdSearch className="text-[#989898]" />
@@ -330,13 +329,13 @@ const Header = () => {
             )}
           </div>
         ) : (
-          <div className="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-4">
+          <div className="hidden md:flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-4">
             <TbBellRingingFilled className="text-[#989898]" size={24} />
-            <button className="bg-gray-200 py-2 px-4 rounded text-sm">
+            <button className=" py-2 px-4 rounded text-sm">
               <Link to={"/login"}>{translations[language].login}</Link>
             </button>
             <Link to={"/register"}>
-              <button className="bg-blue-500 text-white py-2 px-4 rounded text-sm">
+              <button className="bg-[#2684E5] text-white py-[17px] px-[43px] rounded text-sm">
                 {translations[language].register}
               </button>
             </Link>

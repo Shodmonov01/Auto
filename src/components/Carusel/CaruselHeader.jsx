@@ -55,7 +55,7 @@ const CarouselHeader = () => {
           <br />
           <p className="mt-4">{translations[language].description}</p>
 
-          <button className="bg-blue-500 text-white py-2 px-6 mt-4 rounded hover:bg-blue-600">
+          <button className="bg-[#2684E5] text-white py-[17px] px-[43px] mt-4 rounded-[3px]">
             {translations[language].details}
           </button>
         </div>

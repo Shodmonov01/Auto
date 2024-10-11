@@ -189,7 +189,7 @@ const MainPageCarsCatalog = () => {
           <b className="text-xl">
             <u>
               <button onClick={() => handleLinkClick("/about-cars")}>
-                <Link className="text-[#293843]" to="/about-cars">
+                <Link className="text-[#293843] hover:underline" to="/about-cars">
                   {translations[language].watchCatalog}
                 </Link>
               </button>
