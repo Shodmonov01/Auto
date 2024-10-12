@@ -115,187 +115,39 @@ const Header = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FaTelegramPlane className="text-[#989898]" size={24} />
+              <FaTelegramPlane
+                className="text-[#989898] hover:text-black"
+                size={24}
+              />
             </a>
             <a
               href="https://telegram.me/yourtelegramlink"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FaWhatsapp className="text-[#989898]" size={24} />
+              <FaWhatsapp
+                className="text-[#989898] hover:text-black"
+                size={24}
+              />
             </a>
             <a
               href="https://instagram.com/yourinstagramlink"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FaInstagram className="text-[#989898]" size={24} />
+              <FaInstagram
+                className="text-[#989898] hover:text-black"
+                size={24}
+              />
             </a>
           </div>
-          <Dialog
-            open={menuOpen}
-            onClose={toggleMenu}
-            className="fixed inset-0 z-50"
-          >
-            <div
-              className="fixed inset-0 bg-black opacity-60"
-              aria-hidden="true"
-            />
-            <div className="fixed inset-0 flex justify-center items-center">
-              <div className="bg-slate-200 p-4 sm:p-6 w-full max-w-md mx-auto rounded-lg shadow-lg h-full max-h-screen overflow-auto">
-                <div className="flex justify-between items-center w-full mb-6">
-                  <button onClick={toggleMenu}>
-                    <MdClose size={24} />
-                  </button>
-                  <select
-                    className="border rounded p-1 text-sm"
-                    value={language}
-                    onChange={handleLanguageChange}
-                  >
-                    <option value="ru">Rus</option>
-                    <option value="uzb">Uzb</option>
-                    <option value="en">Eng</option>
-                  </select>
-                </div>
-                {hasToken ? (
-                  <div>
-                    {UserData ? (
-                      <>
-                        <div className="flex items-center justify-between p-4 bg-[#F6F6F6] rounded-[5px]">
-                          <div className="flex md:flex-row  items-center">
-                            <Link to={"/profile"}>
-                              <p className="rounded-full py-1 md:py-3 px-3 md:px-6 flex items-center justify-center bg-[#EEEEEE]">
-                                {UserData.name
-                                  ? UserData.name.charAt(0).toUpperCase()
-                                  : ""}
-                              </p>
-                            </Link>
-                            <h1 className="text-xl mx-4 md:mx-6">
-                              {UserData.name}
-                            </h1>
-                          </div>
-                          <Link to={"/profile"}>
-                            <div>
-                              <MdKeyboardArrowRight
-                                size={24}
-                                className="text-blue-600"
-                              />
-                            </div>
-                          </Link>
-                        </div>
-                      </>
-                    ) : (
-                      <h1 className="text-red">Not Found</h1>
-                    )}
-                    <div className="my-4 flex items-center justify-end">
-                      <TbBellRingingFilled
-                        className="text-[#989898]"
-                        size={24}
-                      />
-                    </div>
-                  </div>
-                ) : (
-                  <div className="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-4">
-                    <TbBellRingingFilled className="text-[#989898]" size={24} />
-                    <button className="bg-gray-200 py-2 px-4 rounded text-sm">
-                      <Link to={"/login"}>{translations[language].login}</Link>
-                    </button>
-                    <Link to={"/register"}>
-                      <button className="bg-blue-500 text-white py-2 px-4 rounded text-sm">
-                        {translations[language].register}
-                      </button>
-                    </Link>
-                  </div>
-                )}
-                <ul className="flex flex-col items-center space-y-4 mb-4">
-                  <Link to={"/none"}>
-                    <li className="p-2 hover:text-blue-600 text-[#434343]">
-                      {translations[language].basic}
-                    </li>
-                  </Link>
-                  <Link to={"/katalog"}>
-                    <li className="p-2 hover:text-blue-600 text-[#434343]">
-                      {translations[language].katalog}
-                    </li>
-                  </Link>
-                  <Link to={"/none"}>
-                    <li className="p-2 hover:text-blue-600 text-[#434343]">
-                      {translations[language].about}
-                    </li>
-                  </Link>
-                  <Link to={"/news"}>
-                    <li className="p-2 hover:text-blue-600 text-[#434343]">
-                      {translations[language].news}
-                    </li>
-                  </Link>
-                  <Link to={"/contact"}>
-                    <li className="p-2 hover:text-blue-600 text-[#434343]">
-                      {translations[language].contact}
-                    </li>
-                  </Link>
-                </ul>
-                <ul>
-                  <li className="flex items-center justify-between bg-[#F6F6F6] p-4 m-2">
-                    <Link to={"/about-cars"}>
-                      {translations[language].cars}
-                    </Link>
-                    <MdKeyboardArrowRight className="text-blue-600" />
-                  </li>
-                  <li className="flex items-center justify-between bg-[#F6F6F6] p-4 m-2">
-                    <Link to={"/commerce-cars"}>
-                      {translations[language].commercialTransport}
-                    </Link>
-                    <MdKeyboardArrowRight className="text-blue-600" />
-                  </li>
-                  <li className="flex items-center justify-between bg-[#F6F6F6] p-4 m-2">
-                    <Link to={"/motorcycles"}>
-                      {translations[language].motorcycles}
-                    </Link>
-                    <MdKeyboardArrowRight className="text-blue-600" />
-                  </li>
-                </ul>
-                <div className="flex flex-col items-center space-y-4">
-                  <div className="flex space-x-4">
-                    <a
-                      href="https://wa.me/yourwhatsapplink"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <FaTelegramPlane className="text-[#989898]" size={24} />
-                    </a>
-                    <a
-                      href="https://telegram.me/yourtelegramlink"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    ></a>
-                    <FaWhatsapp className="text-[#989898]" size={24} />
-                    <a
-                      href="https://instagram.com/yourinstagramlink"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <FaInstagram className="text-[#989898]" size={24} />
-                    </a>
-                  </div>
-                  <div className="flex gap-2 items-center">
-                    <MdCall className="text-[#989898]" size={24} />
-                    <p className="text-sm">+7(777)777-77-77</p>
-                  </div>
-                  <div className="flex gap-2 items-center">
-                    <MdEmail className="text-[#989898]" size={24} />
-                    <p className="cursor-pointer text-sm">info@mail.ru</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </Dialog>
           <div className="hidden md:flex items-center space-x-4">
             <div className="flex gap-2 items-center">
-              <MdCall className="text-[#989898]" size={24} />
+              <MdCall className="text-[#989898] hover:text-black" size={24} />
               <p className="text-sm text-[#989898]">+7(777)777-77-77</p>
             </div>
             <div className="flex gap-2 items-center">
-              <MdEmail className="text-[#989898]" size={24} />
+              <MdEmail className="text-[#989898] hover:text-black" size={24} />
               <p className="cursor-pointer text-sm">info@mail.ru</p>
             </div>
             <div>
@@ -327,17 +179,19 @@ const Header = () => {
         </div>
         <ul className="hidden lg:flex space-x-8">
           <li className="flex items-center gap-2">
-            <Link to={"/about-cars"}>{translations[language].cars}</Link>
+            <Link className="hover:text-blue-600 " to={"/about-cars"}>
+              {translations[language].cars}
+            </Link>
             <MdKeyboardArrowRight className="text-blue-600" />
           </li>
           <li className="flex items-center gap-2">
             <li className="flex items-center gap-2">
-              <Link to={"/commerce-cars"}>
+              <Link className="hover:text-blue-600 " to={"/commerce-cars"}>
                 {translations[language].commercialTransport}
               </Link>
               <MdKeyboardArrowRight className="text-blue-600" />
             </li>
-            <Link to={"/motorcycles"}>
+            <Link className="hover:text-blue-600 " to={"/motorcycles"}>
               {translations[language].motorcycles}
             </Link>
             <MdKeyboardArrowRight className="text-blue-600" />
@@ -363,7 +217,7 @@ const Header = () => {
         {hasToken ? (
           <div className="flex gap-4 md:gap-8 items-center">
             <TbBellRingingFilled
-              className=" hidden md:block text-[#989898]"
+              className="hidden md:block hover:text-black text-[#989898]"
               size={24}
             />
             {UserData ? (
@@ -389,18 +243,205 @@ const Header = () => {
           </div>
         ) : (
           <div className="hidden md:flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-4">
-            <TbBellRingingFilled className="text-[#989898]" size={24} />
-            <button className="py-2 px-4 rounded text-sm">
+            <TbBellRingingFilled
+              className="text-[#989898] hover:text-black"
+              size={24}
+            />
+            <button className="py-[17px] hover:bg-gray-200 px-[43px] rounded text-sm">
               <Link to={"/login"}>{translations[language].login}</Link>
             </button>
             <Link to={"/register"}>
-              <button className="bg-[#2684E5] text-white py-[17px] px-[43px] rounded text-sm">
+              <button className="bg-blue-500 hover:bg-blue-600 text-white py-[17px] px-[43px] rounded text-sm">
                 {translations[language].register}
               </button>
             </Link>
           </div>
         )}
       </div>
+
+      <Dialog
+        open={menuOpen}
+        onClose={toggleMenu}
+        className="fixed inset-0 z-50"
+      >
+        <div className="fixed inset-0 bg-black opacity-60" aria-hidden="true" />
+        <div className="fixed inset-0 flex justify-center items-center">
+          <div className="bg-white p-4 sm:p-6 w-full max-w-md mx-auto rounded-lg shadow-lg h-full max-h-screen overflow-auto">
+            <div className="flex justify-between items-center w-full mb-6">
+              <button onClick={toggleMenu}>
+                <MdClose size={24} />
+              </button>
+            </div>
+            {hasToken ? (
+              <div>
+                {UserData ? (
+                  <>
+                    <div className="flex items-center justify-between p-4 bg-[#F6F6F6] rounded-[5px]">
+                      <div className="flex md:flex-row  items-center">
+                        <Link to={"/profile"}>
+                          <p className="rounded-full py-1 md:py-3 px-3 md:px-6 flex items-center justify-center bg-[#EEEEEE]">
+                            {UserData.name
+                              ? UserData.name.charAt(0).toUpperCase()
+                              : ""}
+                          </p>
+                        </Link>
+                        <h1 className="text-xl mx-4 md:mx-6">
+                          {UserData.name}
+                        </h1>
+                      </div>
+                      <Link to={"/profile"}>
+                        <div>
+                          <MdKeyboardArrowRight
+                            size={24}
+                            className="text-blue-600"
+                          />
+                        </div>
+                      </Link>
+                    </div>
+                  </>
+                ) : (
+                  <h1 className="text-red">Not Found</h1>
+                )}
+                <br />
+              </div>
+            ) : (
+              <div className="flex flex-col items-center space-y-2">
+                <Link to={"/register"}>
+                  <button className="w-[334px] bg-blue-500 hover:bg-blue-600 text-white py-[17px] px-[43px] rounded-[3px] text-[13px]">
+                    {translations[language].register}
+                  </button>
+                </Link>
+                <Link to={"/login"}>
+                  <button className="w-[334px] bg-[#EEEEEE] hover:bg-gray-300 text-[#ACACAC] py-[17px] px-[43px] rounded-[3px] text-[13px]">
+                    {translations[language].login}
+                  </button>
+                </Link>
+                <br />
+              </div>
+            )}
+            <div className="flex items-start justify-between">
+              <ul className="flex flex-col items-center space-y-2 mb-4">
+                <Link to={"/none"}>
+                  <li className="p-2 hover:text-blue-600 text-[14px] text-[#434343]">
+                    {translations[language].basic}
+                  </li>
+                </Link>
+                <Link to={"/katalog"}>
+                  <li className="p-2 hover:text-blue-600 text-[14px] text-[#434343]">
+                    {translations[language].katalog}
+                  </li>
+                </Link>
+                <Link to={"/none"}>
+                  <li className="p-2 hover:text-blue-600 text-[14px] text-[#434343]">
+                    {translations[language].about}
+                  </li>
+                </Link>
+                <Link to={"/news"}>
+                  <li className="p-2 hover:text-blue-600 text-[14px] text-[#434343]">
+                    {translations[language].news}
+                  </li>
+                </Link>
+                <Link to={"/contact"}>
+                  <li className="p-2 hover:text-blue-600 text-[14px] text-[#434343]">
+                    {translations[language].contact}
+                  </li>
+                </Link>
+              </ul>
+              <div className="flex items-center space-x-4">
+                <select
+                  className="rounded p-2 bg:white text-sm"
+                  value={language}
+                  onChange={handleLanguageChange}
+                >
+                  <option value="rus">Rus</option>
+                  <option value="uzb">Uzb</option>
+                  <option value="en">Eng</option>
+                </select>
+                <TbBellRingingFilled
+                  className="text-[#989898] hover:text-black"
+                  size={24}
+                />
+              </div>
+            </div>
+            <ul>
+              <li className="flex items-center justify-between bg-[#F6F6F6] p-4 m-2">
+                <Link
+                  className="hover:text-blue-600 text-[14px]"
+                  to={"/about-cars"}
+                >
+                  {translations[language].cars}
+                </Link>
+                <MdKeyboardArrowRight className="text-blue-600" />
+              </li>
+              <li className="flex items-center justify-between bg-[#F6F6F6] p-4 m-2">
+                <Link
+                  className="hover:text-blue-600 text-[14px]"
+                  to={"/commerce-cars"}
+                >
+                  {translations[language].commercialTransport}
+                </Link>
+                <MdKeyboardArrowRight className="text-blue-600" />
+              </li>
+              <li className="flex items-center justify-between bg-[#F6F6F6] p-4 m-2">
+                <Link
+                  className="hover:text-blue-600 text-[14px]"
+                  to={"/motorcycles"}
+                >
+                  {translations[language].motorcycles}
+                </Link>
+                <MdKeyboardArrowRight className="text-blue-600" />
+              </li>
+            </ul>
+            <div className="flex flex-col items-start space-y-4">
+              <div className="flex gap-2 items-center">
+                <MdCall
+                  className="text-[#989898] hover:text-black transition-colors duration-200"
+                  size={24}
+                />
+                <p className="text-sm">+7(777)777-77-77</p>
+              </div>
+              <div className="flex gap-2 items-center">
+                <MdEmail
+                  className="text-[#989898] hover:text-black transition-colors duration-200"
+                  size={24}
+                />
+                <p className="cursor-pointer text-sm">info@mail.ru</p>
+              </div>
+              <div className="flex space-x-4">
+                <a
+                  href="https://wa.me/yourwhatsapplink"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <FaTelegramPlane
+                    className="text-[#989898] hover:text-black transition-colors duration-200"
+                    size={24}
+                  />
+                </a>
+                <a
+                  href="https://telegram.me/yourtelegramlink"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                ></a>
+                <FaWhatsapp
+                  className="text-[#989898] hover:text-black transition-colors duration-200"
+                  size={24}
+                />
+                <a
+                  href="https://instagram.com/yourinstagramlink"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <FaInstagram
+                    className="text-[#989898] hover:text-black transition-colors duration-200"
+                    size={24}
+                  />
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Dialog>
     </>
   );
 };
