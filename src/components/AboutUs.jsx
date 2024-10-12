@@ -34,7 +34,11 @@ const AboutUs = () => {
           alt="Background of person"
           className="absolute inset-0"
         />
-        <img src={imageOfPerson} alt="Person" className="relative" />
+        <img
+          src={imageOfPerson}
+          alt="Person"
+          className="relative transition-transform duration-200 hover:scale-110"
+        />
       </div>
 
       <div className="w-full md:w-1/3 mb-4 md:mb-0 text-center md:text-left relative">
@@ -42,12 +46,16 @@ const AboutUs = () => {
         <p className="text-[#989898] mt-4">
           {translations[language].description}
         </p>
-        <button className="bg-[#2684E5] p-4 mt-4 text-white">
+        <button className="bg-[#2684E5] hover:bg-blue-600 p-4 mt-4 text-white">
           {translations[language].contactUs}
         </button>
 
         <div className="absolute bottom-[-50px] right-[-50px] hidden sm:block">
-          <img src={tires} alt="Tires" className="w-24 md:w-auto" />
+          <img
+            src={tires}
+            alt="Tires"
+            className="w-24 md:w-auto hover:scale-110 transition-transform duration-200"
+          />
         </div>
       </div>
     </div>

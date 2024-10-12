@@ -153,7 +153,7 @@ const Header = () => {
             <div>
               <select
                 style={{ outline: "none" }}
-                className="border rounded p-1 text-sm bg-inherit"
+                className="rounded p-1 text-sm bg-inherit"
                 value={language}
                 onChange={handleLanguageChange}
               >

@@ -40,12 +40,16 @@ const StillSelecting = () => {
           <p className="text-white mb-4 text-center md:text-left">
             {translations[language].description}
           </p>
-          <button className="bg-[#71B2F7] text-white px-[43px] py-[13px] rounded">
+          <button className="bg-[#71B2F7] hover:bg-blue-400 text-white px-[43px] py-[17px] px-[43px] rounded">
             {translations[language].button}
           </button>
         </div>
-        <div className="flex justify-center items-center">
-          <img src={car} alt="car" />
+        <div className="flex justify-center items-center ">
+          <img
+            src={car}
+            alt="car"
+            className="hover:scale-110 transform-transition duration-200"
+          />
         </div>
       </div>
     </div>

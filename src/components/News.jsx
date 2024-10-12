@@ -48,7 +48,7 @@ const News = () => {
             <b className="text-xl mb-2 block">{translations[language].title}</b>
             <p className="mb-4">{translations[language].description}</p>
             <div className="flex items-center gap-4">
-              <Link to={"/news"}>
+              <Link className="text-[#293843] hover:text-black" to={"/news"}>
                 <u>{translations[language].readMore}</u>
               </Link>
               <FaArrowRightLong />

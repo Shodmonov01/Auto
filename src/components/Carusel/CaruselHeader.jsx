@@ -6,7 +6,7 @@ const CarouselHeader = () => {
   const images = [
     "/car.svg",
     "https://freepngimg.com/save/31679-audi/440x247",
-    "https://www.pngitem.com/pimgs/m/310-3109300_download-corvette-car-transparent-background-hd-png-download.png",
+    "https://www.freeiconspng.com/thumbs/car-png/red-hyundai-car-png-15.png",
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -55,7 +55,7 @@ const CarouselHeader = () => {
           <br />
           <p className="mt-4">{translations[language].description}</p>
 
-          <button className="bg-[#2684E5] text-white py-[17px] px-[43px] mt-4 rounded-[3px]">
+          <button className="bg-[#2684E5] hover:bg-blue-600  text-white py-[17px] px-[43px] mt-4 rounded-[3px]">
             {translations[language].details}
           </button>
         </div>
@@ -73,7 +73,7 @@ const CarouselHeader = () => {
             <button
               key={index}
               onClick={() => goToSlide(index)}
-              className={`w-3 h-3 rounded-full ${
+              className={`w-3 h-3 rounded-full  ${
                 index === currentIndex ? "bg-blue-500" : "bg-gray-300"
               }`}
             />
@@ -81,13 +81,13 @@ const CarouselHeader = () => {
         </div>
         <button
           onClick={prevSlide}
-          className=" bg-white text-gray p-2 rounded-full"
+          className="bg-white hover:bg-gray-200 text-gray p-2 rounded-full"
         >
           <FaLongArrowAltLeft />
         </button>
         <button
           onClick={nextSlide}
-          className="bg-white text-gray p-2 rounded-full"
+          className="bg-white text-gray hover:bg-gray-200 p-2 rounded-full"
         >
           <FaLongArrowAltRight />
         </button>
