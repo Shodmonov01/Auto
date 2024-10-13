@@ -33,7 +33,7 @@ const Comments = () => {
   };
 
   return (
-    <div className="p-4">
+    <div className="mx-2 my-2 lg:mx-[72px] lg:my-4">
       <div className="mb-4">
         <b className="text-2xl">{translations[language].comments}</b>
       </div>

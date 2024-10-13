@@ -27,7 +27,7 @@ const AboutUs = () => {
     },
   };
   return (
-    <div className="bg-[#F6F6F6] relative p-4 flex flex-col md:flex-row justify-around items-center">
+    <div className="mx-2 lg:mx-[72px] bg-[#F6F6F6] relative p-4 flex flex-col md:flex-row justify-around items-center">
       <div className="relative w-full md:w-1/3 mb-4 md:mb-0">
         <img
           src={bgOfPerson}

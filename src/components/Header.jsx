@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 import { Dialog } from "@headlessui/react";
 import { CiMenuFries } from "react-icons/ci";
 import { useLanguage } from "./Context/LanguageContext";
-import icon1 from "../../src/assets/images/icon1.svg";
+import { FaVk } from "react-icons/fa";
 
 const translations = {
   ru: {
@@ -111,11 +111,13 @@ const Header = () => {
             </ul>
           </nav>
           <div className="hidden lg:flex items-center space-x-4 lg:space-x-6 me-8">
-            <img
-              src={icon1}
-              alt="icon1"
-              className="opacity-75 hover:opacity-100"
-            />
+            <a
+              href="https://telegram.me/yourtelegramlink"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaVk className="text-[#989898] hover:text-black" size={24} />
+            </a>
             <a
               href="https://telegram.me/yourtelegramlink"
               target="_blank"
@@ -123,7 +125,7 @@ const Header = () => {
             >
               <FaWhatsapp
                 className="text-[#989898] hover:text-black"
-                size={20}
+                size={24}
               />
             </a>
             <a
@@ -133,18 +135,22 @@ const Header = () => {
             >
               <FaInstagram
                 className="text-[#989898] hover:text-black"
-                size={20}
+                size={24}
               />
             </a>
           </div>
           <div className="hidden md:flex items-center space-x-4">
-            <div className="flex gap-2 items-center">
+            <div className="flex gap-2 cursor-pointer items-center">
               <MdCall className="text-[#989898] hover:text-black" size={24} />
-              <p className="text-sm text-[#989898]">+7(777)777-77-77</p>
+              <p className="text-sm text-[#989898] hover:text-black">
+                +7(777)777-77-77
+              </p>
             </div>
-            <div className="flex gap-2 items-center">
+            <div className="flex gap-2 cursor-pointer hover:text-black items-center">
               <MdEmail className="text-[#989898] hover:text-black" size={24} />
-              <p className="cursor-pointer text-sm">info@mail.ru</p>
+              <p className="cursor-pointer text-[#989898] hover:text-black text-sm">
+                info@mail.ru
+              </p>
             </div>
             <div>
               <select
@@ -196,11 +202,11 @@ const Header = () => {
 
         <div className="relative flex items-center justify-center mx-auto">
           <input
-            style={{ maxWidth: "250px" }}
             type="text"
             placeholder={translations[language].searchPlaceholder}
-            className="p-[4px] border rounded-[3px] outline-none sm:p-2 sm:pl-6"
+            className="p-[4px] border rounded-[3px] bg-[#F6F6F6] outline-none w-[193px] sm:w-[193px] lg:w-[345px] sm:p-2 sm:pl-6"
           />
+
           <button className="absolute left-2 hidden md:block">
             <MdSearch className="text-[#989898]" />
           </button>
@@ -213,7 +219,7 @@ const Header = () => {
         {hasToken ? (
           <div className="flex gap-4 md:gap-8 items-center">
             <TbBellRingingFilled
-              className="hidden md:block hover:text-black text-[#989898]"
+              className="hidden md:block cursor-pointer hover:text-black text-[#989898]"
               size={24}
             />
             {UserData ? (
@@ -240,7 +246,7 @@ const Header = () => {
         ) : (
           <div className="hidden md:flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-4">
             <TbBellRingingFilled
-              className="text-[#989898] hover:text-black"
+              className="text-[#989898] cursor-pointer hover:text-black"
               size={24}
             />
             <button className="py-[17px] hover:bg-gray-200 px-[43px] rounded text-sm">
@@ -289,7 +295,7 @@ const Header = () => {
                         <div>
                           <MdKeyboardArrowRight
                             size={24}
-                            className="text-blue-600"
+                            className="text-blue-600 cursor-pointer"
                           />
                         </div>
                       </Link>
@@ -316,7 +322,7 @@ const Header = () => {
               </div>
             )}
             <div className="flex items-start justify-between">
-              <ul className="flex flex-col items-center space-y-2 mb-4">
+              <ul className="flex flex-col items-center space-y-2 ml-2 mb-4">
                 <Link to={"/none"}>
                   <li className="p-2 hover:text-blue-600 text-[14px] text-[#434343]">
                     {translations[language].basic}
@@ -354,7 +360,7 @@ const Header = () => {
                   <option value="en">Eng</option>
                 </select>
                 <TbBellRingingFilled
-                  className="text-[#989898] hover:text-black"
+                  className="text-[#989898] cursor-pointer hover:text-black"
                   size={24}
                 />
               </div>
@@ -388,28 +394,32 @@ const Header = () => {
                 <MdKeyboardArrowRight className="text-blue-600" />
               </li>
             </ul>
-            <div className="flex flex-col items-start space-y-4">
-              <div className="flex gap-2 items-center">
+            <div className=" m-2 flex flex-col items-start space-y-4">
+              <div className="flex gap-2 mt-2 items-center cursor-pointer">
                 <MdCall
                   className="text-[#989898] hover:text-black transition-colors duration-200"
                   size={24}
                 />
-                <p className="text-sm">+7(777)777-77-77</p>
+                <p className="text-sm text-[#989898] hover:text-black">
+                  +7(777)777-77-77
+                </p>
               </div>
-              <div className="flex gap-2 items-center">
+              <div className="flex gap-2 items-cente cursor-pointer">
                 <MdEmail
                   className="text-[#989898] hover:text-black transition-colors duration-200"
                   size={24}
                 />
-                <p className="cursor-pointer text-sm">info@mail.ru</p>
+                <p className="cursor-pointer text-[#989898] hover:text-black text-sm">
+                  info@mail.ru
+                </p>
               </div>
-              <div className="flex space-x-4">
+              <div className="flex space-x-4 cursor-pointer">
                 <a
                   href="https://wa.me/yourwhatsapplink"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <FaTelegramPlane
+                  <FaVk
                     className="text-[#989898] hover:text-black transition-colors duration-200"
                     size={24}
                   />

@@ -108,7 +108,7 @@ const MainPageCarsCatalog = () => {
 
   return (
     <>
-      <div className="p-4">
+      <div className="mx-2 mb-2 lg:mx-[72px] lg:mb-2">
         <div>
           <b className="text-2xl">{translations[language].catalog}</b>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 mt-4">
@@ -184,12 +184,12 @@ const MainPageCarsCatalog = () => {
           ))}
         </div>
       </div>
-      <div className="flex items-center justify-end gap-2 m-4">
+      <div className="flex items-center justify-end gap-[10px] m-4">
         <div>
           <b className="text-xl">
             <u>
               <button onClick={() => handleLinkClick("/about-cars")}>
-                <Link className="text-[#293843] hover:underline" to="/about-cars">
+                <Link className="text-[#293843] underline text-[15px] hover:text-black" to="/about-cars">
                   {translations[language].watchCatalog}
                 </Link>
               </button>

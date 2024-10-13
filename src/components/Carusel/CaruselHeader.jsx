@@ -48,7 +48,7 @@ const CarouselHeader = () => {
 
 
   return (
-    <div className="relative bg-[#F4F4F4] p-10 m-6 rounded">
+    <div className="relative bg-[#F4F4F4] h-[409px] p-4 m-6 lg:p-4 lg:mx-[72px] rounded">
       <div className="flex flex-col md:flex-row justify-around items-center">
         <div className="p-4 md:w-1/2">
           <b className="text-4xl">{translations[language].geely}</b>
@@ -63,7 +63,7 @@ const CarouselHeader = () => {
           <img
             src={images[currentIndex]}
             alt={`Image ${currentIndex + 1}`}
-            className="absolute rounded inset-0 object-cover transition-opacity duration-1000 ease-in-out opacity-100"
+            className="absolute rounded object-cover"
           />
         </div>
       </div>

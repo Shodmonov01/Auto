@@ -81,7 +81,7 @@ const Section3 = () => {
   };
 
   return (
-    <div className="p-4">
+    <div className="m-2 lg:mx-[72px] lg:my-4">
       <div>
         <b className="text-2xl">{translations[language].whywe}</b>
       </div>
@@ -107,7 +107,7 @@ const Section3 = () => {
             {translations[language].choice.description}
           </p>
         </div>
-        <div className="flex flex-col justify-center items-start w-[306px] h-[236px] p-[35px_0_22px_25px] bg-white rounded-[3px] shadow-lg opacity-90 mx-auto">
+        <div className="flex flex-col justify-start items-start w-[306px] h-[236px] p-[35px_0_22px_25px] bg-white rounded-[3px] shadow-lg opacity-90 mx-auto">
           <img src={deliver} alt="deliver" className=" mb-4" />
           <b className="text-xl">{translations[language].delivery.title}</b>
           <p className="text-[#989898]">

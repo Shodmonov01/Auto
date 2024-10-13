@@ -25,7 +25,7 @@ const StillSelecting = () => {
   };
 
   return (
-    <div className="p-4">
+    <div className="p-2 m-2 lg:mx-[72px] lg:my-4">
       <div
         className="grid grid-cols-1 md:grid-cols-2 gap-4 p-8"
         style={{
@@ -34,10 +34,10 @@ const StillSelecting = () => {
         }}
       >
         <div className="flex flex-col justify-center items-center md:items-start">
-          <b className="text-2xl text-white mb-2">
+          <b className="text-[28px] text-white mb-2">
             {translations[language].choice}
           </b>
-          <p className="text-white mb-4 text-center md:text-left">
+          <p className="text-white mb-4 text-center text-[15px] md:text-left sm:text-left">
             {translations[language].description}
           </p>
           <button className="bg-[#71B2F7] hover:bg-blue-400 text-white px-[43px] py-[17px] px-[43px] rounded">

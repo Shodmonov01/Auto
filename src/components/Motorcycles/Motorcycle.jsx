@@ -5,29 +5,27 @@ import { MdOutlineArrowRightAlt } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
 import axiosInstance from "../../axiosConfig";
 import { useLanguage } from "../Context/LanguageContext";
+import StillSelecting from "../StillSelecting";
 import MotorcyclesFilters from "./MotorcyclesFilters";
 
-const Motorcycles = () => {
+const Katalog = () => {
   const carsPerPage = 6;
   const [cars, setCars] = useState([]);
   const [likedCars, setLikedCars] = useState(new Set());
   const [currentPage, setCurrentPage] = useState(1);
   const { language } = useLanguage();
+
   const translations = {
     ru: {
-      catalog: "Мотоциклы",
       watchCatalog: "Перейти в каталог",
     },
     uzb: {
-      catalog: "Mototsikllar",
       watchCatalog: "Katalogga o'ting",
     },
     en: {
-      catalog: "Motorcycles",
       watchCatalog: "Go to the catalog",
     },
   };
-
   const totalPages = Math.ceil(cars.length / carsPerPage);
 
   useEffect(() => {
@@ -108,7 +106,7 @@ const Motorcycles = () => {
   return (
     <>
       <MotorcyclesFilters />
-      <div className="p-4">
+      <div className="p-2 m-2 lg:mx-[72px]">
         <div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 mt-4">
             {getCurrentPageCars().map((car) => (
@@ -183,12 +181,12 @@ const Motorcycles = () => {
           ))}
         </div>
       </div>
-      <div className="flex items-center justify-end gap-2 m-4">
+      {/* <div className="flex items-center justify-end gap-2 m-4">
         <div>
           <b className="text-xl">
             <u>
-              <button onClick={() => handleLinkClick("/motorcycles")}>
-                <Link className="text-[#293843]" to="/motorcycles">
+              <button onClick={() => handleLinkClick("/about-cars")}>
+                <Link className="text-[#293843] hover:text-black" to="/about-cars">
                   {translations[language].watchCatalog}
                 </Link>
               </button>
@@ -198,9 +196,10 @@ const Motorcycles = () => {
         <div>
           <MdOutlineArrowRightAlt size={30} />
         </div>
-      </div>
+      </div> */}
+      <StillSelecting />
     </>
   );
 };
 
-export default Motorcycles;
+export default Katalog;
