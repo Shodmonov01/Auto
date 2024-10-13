@@ -48,14 +48,14 @@ const CarouselHeader = () => {
 
 
   return (
-    <div className="relative bg-slate-200 p-10 m-6 rounded">
+    <div className="relative bg-[#F4F4F4] p-10 m-6 rounded">
       <div className="flex flex-col md:flex-row justify-around items-center">
         <div className="p-4 md:w-1/2">
           <b className="text-4xl">{translations[language].geely}</b>
           <br />
           <p className="mt-4">{translations[language].description}</p>
 
-          <button className="bg-[#2684E5] hover:bg-blue-600  text-white py-[17px] px-[43px] mt-4 rounded-[3px]">
+          <button className="bg-[#2684E5] hover:bg-blue-600 text-[15px] text-white py-[17px] px-[43px] mt-4 rounded-[3px]">
             {translations[language].details}
           </button>
         </div>

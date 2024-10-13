@@ -12,6 +12,7 @@ import { Link } from "react-router-dom";
 import { Dialog } from "@headlessui/react";
 import { CiMenuFries } from "react-icons/ci";
 import { useLanguage } from "./Context/LanguageContext";
+import icon1 from "../../src/assets/images/icon1.svg";
 
 const translations = {
   ru: {
@@ -109,17 +110,12 @@ const Header = () => {
               </Link>
             </ul>
           </nav>
-          <div className="hidden lg:flex space-x-4 lg:space-x-6 me-8">
-            <a
-              href="https://wa.me/yourwhatsapplink"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <FaTelegramPlane
-                className="text-[#989898] hover:text-black"
-                size={24}
-              />
-            </a>
+          <div className="hidden lg:flex items-center space-x-4 lg:space-x-6 me-8">
+            <img
+              src={icon1}
+              alt="icon1"
+              className="opacity-75 hover:opacity-100"
+            />
             <a
               href="https://telegram.me/yourtelegramlink"
               target="_blank"
@@ -127,7 +123,7 @@ const Header = () => {
             >
               <FaWhatsapp
                 className="text-[#989898] hover:text-black"
-                size={24}
+                size={20}
               />
             </a>
             <a
@@ -137,7 +133,7 @@ const Header = () => {
             >
               <FaInstagram
                 className="text-[#989898] hover:text-black"
-                size={24}
+                size={20}
               />
             </a>
           </div>
