@@ -81,122 +81,167 @@ const Footer = () => {
 
   return (
     <>
-      <div className="p-6">
-        <hr className="my-6" />
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-8">
-          <div className="flex flex-col items-start">
-            <h1 className="text-2xl font-bold mb-4">
-              <span className="text-blue-600">You</span>Car
-            </h1>
-            <div className="flex gap-4 mb-4">
-              <FaWhatsapp size={30} />
-              <FaTelegramPlane size={30} />
-              <FaInstagram size={30} />
+      <footer>
+        <div className="p-6">
+          <hr className="my-6" />
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-8 gap-8">
+            <div className="flex flex-col items-start">
+              <h1 className="text-2xl font-bold mb-4">
+                <span className="text-blue-600">You</span>Car
+              </h1>
+              <div className="flex gap-4 mb-4">
+                <FaWhatsapp size={30} />
+                <FaTelegramPlane size={30} />
+                <FaInstagram size={30} />
+              </div>
+              <p>{translations[language].chance}</p>
             </div>
-            <p>{translations[language].chance}</p>
+            <div className="flex flex-col">
+              <b className="mb-2">{translations[language].company}</b>
+              <a href="#" className="text-gray-400 mb-1">
+                {translations[language].catalog}
+              </a>
+              <a href="#" className="text-gray-400 mb-1">
+                {translations[language].about}
+              </a>
+              <a href="#" className="text-gray-400 mb-1">
+                {translations[language].news}
+              </a>
+              <a href="#" className="text-gray-400">
+                {translations[language].contacts}
+              </a>
+              <a href="#" className="text-gray-400">
+                {translations[language].favorites}
+              </a>
+            </div>
+            <div className="flex flex-col">
+              <b className="mb-2">{translations[language].cars}</b>
+              <a href="#" className="text-gray-400 mb-1">
+                {translations[language].fromEurope}
+              </a>
+              <a href="#" className="text-gray-400 mb-1">
+                {translations[language].fromUSA}
+              </a>
+              <a href="#" className="text-gray-400 mb-1">
+                {translations[language].fromUAE}
+              </a>
+              <a href="#" className="text-gray-400">
+                {translations[language].fromChina}
+              </a>
+              <a href="#" className="text-gray-400">
+                {translations[language].fromKorea}
+              </a>
+            </div>
+            <div className="flex flex-col">
+              <b className="mb-2">{translations[language].brands}</b>
+              <a href="#" className="text-gray-400 mb-1">
+                {translations[language].audi}
+              </a>
+              <a href="#" className="text-gray-400 mb-1">
+                {translations[language].astonMartin}
+              </a>
+              <a href="#" className="text-gray-400 mb-1">
+                {translations[language].acura}
+              </a>
+              <a href="#" className="text-gray-400">
+                {translations[language].alfaRomeo}
+              </a>
+              <a href="#" className="text-gray-400">
+                {translations[language].avatr}
+              </a>
+            </div>
+            <div className="flex flex-col">
+              <br />
+              <a href="#" className="text-gray-400 mb-1">
+                bmw
+              </a>
+              <a href="#" className="text-gray-400 mb-1">
+                baic
+              </a>
+              <a href="#" className="text-gray-400 mb-1">
+                byd
+              </a>
+              <a href="#" className="text-gray-400">
+                chery
+              </a>
+              <a href="#" className="text-gray-400">
+                bentley
+              </a>
+              <a href="#" className="text-gray-400">
+                dodge
+              </a>
+            </div>
+            <div className="flex flex-col">
+              <br />
+              <a href="#" className="text-gray-400 mb-1">
+                chery
+              </a>
+              <a href="#" className="text-gray-400 mb-1">
+                cadillac
+              </a>
+              <a href="#" className="text-gray-400 mb-1">
+                changan
+              </a>
+              <a href="#" className="text-gray-400">
+                chevrolet
+              </a>
+              <a href="#" className="text-gray-400">
+                citroen
+              </a>
+              <a href="#" className="text-gray-400">
+                daewoo
+              </a>
+            </div>
+            <div className="flex flex-col">
+              <br />
+              <a href="#" className="text-gray-400 mb-1">
+                chery
+              </a>
+              <a href="#" className="text-gray-400 mb-1">
+                cadillac
+              </a>
+              <a href="#" className="text-gray-400 mb-1">
+                changan
+              </a>
+              <a href="#" className="text-gray-400">
+                chevrolet
+              </a>
+              <a href="#" className="text-gray-400">
+                citroen
+              </a>
+              <a href="#" className="text-gray-400">
+                daewoo
+              </a>
+            </div>
+            <div className="flex flex-col">
+              <br />
+              <a href="#" className="text-gray-400 mb-1">
+                chery
+              </a>
+              <a href="#" className="text-gray-400 mb-1">
+                cadillac
+              </a>
+              <a href="#" className="text-gray-400 mb-1">
+                changan
+              </a>
+              <a href="#" className="text-gray-400">
+                chevrolet
+              </a>
+              <a href="#" className="text-gray-400">
+                citroen
+              </a>
+              <a href="#" className="text-gray-400">
+                daewoo
+              </a>
+            </div>
           </div>
-          <div className="flex flex-col">
-            <b className="mb-2">{translations[language].company}</b>
-            <a href="#" className="text-gray-400 mb-1">
-              {translations[language].catalog}
-            </a>
-            <a href="#" className="text-gray-400 mb-1">
-              {translations[language].about}
-            </a>
-            <a href="#" className="text-gray-400 mb-1">
-              {translations[language].news}
-            </a>
-            <a href="#" className="text-gray-400">
-              {translations[language].contacts}
-            </a>
-            <a href="#" className="text-gray-400">
-              {translations[language].favorites}
-            </a>
-          </div>
-          <div className="flex flex-col">
-            <b className="mb-2">{translations[language].cars}</b>
-            <a href="#" className="text-gray-400 mb-1">
-              {translations[language].fromEurope}
-            </a>
-            <a href="#" className="text-gray-400 mb-1">
-              {translations[language].fromUSA}
-            </a>
-            <a href="#" className="text-gray-400 mb-1">
-              {translations[language].fromUAE}
-            </a>
-            <a href="#" className="text-gray-400">
-              {translations[language].fromChina}
-            </a>
-            <a href="#" className="text-gray-400">
-              {translations[language].fromKorea}
-            </a>
-          </div>
-          <div className="flex flex-col">
-            <b className="mb-2">{translations[language].brands}</b>
-            <a href="#" className="text-gray-400 mb-1">
-              {translations[language].audi}
-            </a>
-            <a href="#" className="text-gray-400 mb-1">
-              {translations[language].astonMartin}
-            </a>
-            <a href="#" className="text-gray-400 mb-1">
-              {translations[language].acura}
-            </a>
-            <a href="#" className="text-gray-400">
-              {translations[language].alfaRomeo}
-            </a>
-            <a href="#" className="text-gray-400">
-              {translations[language].avatr}
-            </a>
-          </div>
-          <div className="flex flex-col">
-            <a href="#" className="text-gray-400 mb-1">
-              bmw
-            </a>
-            <a href="#" className="text-gray-400 mb-1">
-              baic
-            </a>
-            <a href="#" className="text-gray-400 mb-1">
-              byd
-            </a>
-            <a href="#" className="text-gray-400">
-              chery
-            </a>
-            <a href="#" className="text-gray-400">
-              bentley
-            </a>
-            <a href="#" className="text-gray-400">
-              dodge
-            </a>
-          </div>
-          <div className="flex flex-col">
-            <a href="#" className="text-gray-400 mb-1">
-              chery
-            </a>
-            <a href="#" className="text-gray-400 mb-1">
-              cadillac
-            </a>
-            <a href="#" className="text-gray-400 mb-1">
-              changan
-            </a>
-            <a href="#" className="text-gray-400">
-              chevrolet
-            </a>
-            <a href="#" className="text-gray-400">
-              citroen
-            </a>
-            <a href="#" className="text-gray-400">
-              daewoo
-            </a>
-          </div>
-          
         </div>
-      </div>
-      <div className="flex items-center justify-around p-4 text-black text-center">
-        <p className="text-white">.</p>
-        <p>{translations[language].privacy}</p>
-        <p>{translations[language].created}</p>
-      </div>
+        <div className="flex items-center justify-between px-24 text-black text-center">
+          <p className="text-white">.</p>
+          <p>{translations[language].privacy}</p>
+          <p>{translations[language].created}</p>
+        </div>
+      </footer>
     </>
   );
 };

@@ -3,6 +3,7 @@ import imageOfPerson from "../../src/assets/images/imageOfPerson.svg";
 import tires from "../../src/assets/images/tires.svg";
 import bgOfPerson from "../../src/assets/images/bgOfPerson.svg";
 import { useLanguage } from "./Context/LanguageContext";
+import Rectangle from "../../src/assets/images/Rectangle.svg"
 
 const AboutUs = () => {
   const { language } = useLanguage();
@@ -50,12 +51,18 @@ const AboutUs = () => {
           {translations[language].contactUs}
         </button>
 
-        <div className="absolute bottom-[-50px] right-[-50px] hidden sm:block">
-          <img
-            src={tires}
-            alt="Tires"
-            className="w-24 md:w-auto hover:scale-110 transition-transform duration-200"
-          />
+        <div className="relative">
+          <div className="absolute bottom-[-90px] right-[-10px] hidden sm:block">
+            <img src={tires} alt="Tires" className="w-24 md:w-auto" />
+            <img
+              src={Rectangle}
+              alt="Rectangle"
+              className="absolute inset-0 m-auto w-[155px] h-[155px] left-[200px]"
+            />
+            <p className="absolute inset-0 left-[275px] font-semibold flex items-center justify-center text-white text-[35px]">
+              №1
+            </p>
+          </div>
         </div>
       </div>
     </div>

@@ -63,7 +63,7 @@ const Section = () => {
         <br />
         <div className="p-4 shadow-slate-500 sm:shadow-md lg:shadow-lg">
           <div className="flex flex-col lg:flex-row gap-4 items-center m-2">
-            <div className="bg-gray-100 rounded-[10px] inline-flex space-x-2 px-2 py-1">
+            <div className="bg-gray-100 rounded-[10px] inline-flex space-x-2">
               <button className="px-5 py-2.5 lg:w-[150px] w-[100px] rounded text-[15px] active:bg-[#293843] active:text-white">
                 {translations[language].auto}
               </button>
