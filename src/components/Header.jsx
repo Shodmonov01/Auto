@@ -140,15 +140,19 @@ const Header = () => {
             </a>
           </div>
           <div className="hidden md:flex items-center space-x-4">
-            <div className="flex gap-2 cursor-pointer items-center">
-              <MdCall className="text-[#989898] hover:text-black" size={24} />
-              <p className="text-sm text-[#989898] hover:text-black">
+            <div className="flex gap-2 items-center cursor-pointer group hover:text-black">
+              <MdCall
+                className="text-[#989898] group-hover:text-black"
+                size={24}
+              />
+              <p className="text-sm text-[#989898] group-hover:text-black">
                 +7(777)777-77-77
               </p>
             </div>
-            <div className="flex gap-2 cursor-pointer hover:text-black items-center">
-              <MdEmail className="text-[#989898] hover:text-black" size={24} />
-              <p className="cursor-pointer text-[#989898] hover:text-black text-sm">
+
+            <div className="flex gap-2 cursor-pointer group hover:text-black items-center">
+              <MdEmail className="text-[#989898] group-hover:text-black" size={24} />
+              <p className="cursor-pointer text-[#989898] group-hover:text-black text-sm">
                 info@mail.ru
               </p>
             </div>

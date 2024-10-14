@@ -32,7 +32,7 @@ const News = () => {
     },
   };
 
-  const newsItems = [1, 2, 3]; // Simulating multiple news items
+  const newsItems = [1, 2, 3];
 
   const handleNext = () => {
     if (currentIndex < newsItems.length - 1) {
@@ -53,16 +53,14 @@ const News = () => {
       </div>
       <br />
       <div className="relative">
-        {/* News card carousel */}
         <div className="relative flex justify-center items-center">
-          {/* News item container */}
           <div className="relative flex flex-col gap-4 md:flex-row md:gap-8">
             {newsItems.map((_, index) => (
               <div
                 key={index}
                 className={`relative flex-1 bg-white shadow-lg rounded-lg p-4 ${
                   index === currentIndex ? "block sm:block lg:block" : "hidden"
-                } md:block`} // Always visible on md
+                } md:block`} 
               >
                 <img
                   src={imageFamily}

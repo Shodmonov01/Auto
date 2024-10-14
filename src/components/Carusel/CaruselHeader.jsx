@@ -48,14 +48,16 @@ const CarouselHeader = () => {
 
 
   return (
-    <div className="relative bg-[#F4F4F4] h-[409px] p-4 m-6 lg:p-4 lg:mx-[72px] rounded">
+    <div className="relative bg-[#F4F4F4] h-[430px] p-4 m-6 lg:p-4 lg:mx-[72px] rounded">
       <div className="flex flex-col md:flex-row justify-around items-center">
         <div className="p-4 md:w-1/2">
-          <b className="text-4xl">{translations[language].geely}</b>
+          <b className="text-[24px] lg:text-[35px]">
+            {translations[language].geely}
+          </b>
           <br />
           <p className="mt-4">{translations[language].description}</p>
 
-          <button className="bg-[#2684E5] hover:bg-blue-600 text-[15px] text-white py-[17px] px-[43px] mt-4 rounded-[3px]">
+          <button className="bg-[#2684E5] hover:bg-blue-600 text:text-13px lg:text-[16px] text-white py-[17px] px-[43px] mt-4 rounded-[3px]">
             {translations[language].details}
           </button>
         </div>
@@ -63,11 +65,11 @@ const CarouselHeader = () => {
           <img
             src={images[currentIndex]}
             alt={`Image ${currentIndex + 1}`}
-            className="absolute rounded object-cover"
+            className="absolute rounded transition-opacity duration-1000 ease-in-out opacity-100"
           />
         </div>
       </div>
-      <div className="absolute bottom-4 right-4 md:right-10 md:bottom-10 flex items-center space-x-4">
+      <div className="absolute bottom-4 right-4 sm:bottom-6 sm:right-2 lg:right-10 lg:bottom-10 flex items-center space-x-4">
         <div className="flex space-x-2">
           {images.map((_, index) => (
             <button
@@ -81,13 +83,13 @@ const CarouselHeader = () => {
         </div>
         <button
           onClick={prevSlide}
-          className="bg-white hover:bg-gray-200 text-gray p-2 rounded-full"
+          className="bg-white hover:bg-gray-200 text-[#989898] p-2 rounded-full"
         >
           <FaLongArrowAltLeft />
         </button>
         <button
           onClick={nextSlide}
-          className="bg-white text-gray hover:bg-gray-200 p-2 rounded-full"
+          className="bg-white text-[#989898] hover:bg-gray-200 p-2 rounded-full"
         >
           <FaLongArrowAltRight />
         </button>

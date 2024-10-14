@@ -88,7 +88,7 @@ const CommerceFilters = () => {
             <div className="w-full">
               <p className="text-[14px]">{translations[language].selection}</p>
               <div className="relative flex items-center w-full">
-                <select className="text-[#5A5A5A] appearance-none bg-[#F4F4F4] rounded-[5px] pl-[18px] pr-[140px] py-[23px] w-full">
+                <select className="text-[#5A5A5A] appearance-none bg-[#F4F4F4] rounded-[5px] px-[18px] py-[23px] w-full">
                   <option value="Geely">Geely</option>
                   <option value="Monjaro">Monjaro</option>
                 </select>
@@ -102,7 +102,7 @@ const CommerceFilters = () => {
             <div className="w-full">
               <p className="text-[14px]">{translations[language].model}</p>
               <div className="relative flex items-center w-full">
-                <select className="text-[#5A5A5A] appearance-none bg-[#F4F4F4] rounded-[5px] pl-[18px] pr-[140px] py-[23px] w-full">
+                <select className="text-[#5A5A5A] appearance-none bg-[#F4F4F4] rounded-[5px] px-[18px] py-[23px] w-full">
                   <option value="Monjaro">Monjaro</option>
                   <option value="Monjaro">Monjaro</option>
                 </select>
@@ -116,7 +116,7 @@ const CommerceFilters = () => {
             <div className="w-full">
               <p className="text-[14px]">{translations[language].country}</p>
               <div className="relative flex items-center w-full">
-                <select className="text-[#5A5A5A] appearance-none bg-[#F4F4F4] rounded-[5px] pl-[18px] pr-[140px] py-[23px] w-full">
+                <select className="text-[#5A5A5A] appearance-none bg-[#F4F4F4] rounded-[5px] px-[18px] py-[23px] w-full">
                   <option value="China">China</option>
                   <option value="Monjaro">Monjaro</option>
                 </select>
@@ -130,7 +130,7 @@ const CommerceFilters = () => {
             <div className="w-full">
               <p className="text-[14px]">{translations[language].year}</p>
               <div className="relative flex items-center w-full">
-                <select className="text-[#5A5A5A] appearance-none bg-[#F4F4F4] rounded-[5px] pl-[18px] pr-[140px] py-[23px] w-full">
+                <select className="text-[#5A5A5A] appearance-none bg-[#F4F4F4] rounded-[5px] px-[18px]  py-[23px] w-full">
                   <option value="0 - 2024">0 - 2024</option>
                 </select>
               </div>
@@ -139,7 +139,7 @@ const CommerceFilters = () => {
             <div className="w-full">
               <p className="text-[14px]">{translations[language].price}</p>
               <div className="relative flex items-center w-full">
-                <select className="text-[#5A5A5A] appearance-none bg-[#F4F4F4] rounded-[5px] pl-[18px] pr-[140px] py-[23px] w-full">
+                <select className="text-[#5A5A5A] appearance-none bg-[#F4F4F4] rounded-[5px] px-[18px] py-[23px] w-full">
                   <option value="3 000 000 - 4 000 000">
                     3 000 000 - 4 000 000
                   </option>

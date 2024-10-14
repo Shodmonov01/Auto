@@ -63,7 +63,7 @@ const Section = () => {
         <br />
         <div className="p-4 shadow-slate-500 sm:shadow-md lg:shadow-lg">
           <div className="flex flex-col lg:flex-row gap-4 items-center m-2">
-            <div className="bg-gray-100 rounded-[10px] inline-flex space-x-2 px-2 py-1">
+            <div className="bg-gray-100 rounded-[10px] inline-flex space-x-2 ">
               <button className="px-5 py-2.5 lg:w-[150px] w-[100px] rounded text-[15px] active:bg-[#293843] active:text-white">
                 {translations[language].auto}
               </button>
@@ -130,7 +130,7 @@ const Section = () => {
             <div className="w-full">
               <p className="text-[14px]">{translations[language].year}</p>
               <div className="relative flex items-center w-full">
-                <select className="text-[#5A5A5A] appearance-none bg-[#F4F4F4] rounded-[5px] pl-[18px] pr-[140px] py-[23px] w-full">
+                <select className="text-[#5A5A5A] appearance-none bg-[#F4F4F4] rounded-[5px] px-[18px] py-[23px] w-full">
                   <option value="0 - 2024">0 - 2024</option>
                 </select>
               </div>
@@ -139,7 +139,7 @@ const Section = () => {
             <div className="w-full">
               <p className="text-[14px]">{translations[language].price}</p>
               <div className="relative flex items-center w-full">
-                <select className="text-[#5A5A5A] appearance-none bg-[#F4F4F4] rounded-[5px] pl-[18px] pr-[140px] py-[23px] w-full">
+                <select className="text-[#5A5A5A] appearance-none bg-[#F4F4F4] rounded-[5px] px-[18px] py-[23px] w-full">
                   <option value="3 000 000 - 4 000 000">
                     3 000 000 - 4 000 000
                   </option>
@@ -151,7 +151,7 @@ const Section = () => {
           <br />
           <div className="flex gap-4 justify-end items-center">
             <button className="hover:bg-gray-200 py-[8px] px-[16px]">
-              {translations[language].reset} x
+              {translations[language].reset} ×
             </button>
             <button className="bg-blue-500 hover:bg-blue-600 text-white py-[17px] px-[43px] rounded text-sm">
               23 {translations[language].offers}
