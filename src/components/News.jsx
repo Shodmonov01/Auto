@@ -1,12 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import imageFamily from "../../src/assets/images/imageFamily.svg";
-import { FaArrowRightLong, FaArrowLeftLong } from "react-icons/fa6";
+import { FaArrowRightLong } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { useLanguage } from "./Context/LanguageContext";
 
 const News = () => {
   const { language } = useLanguage();
-  const [currentIndex, setCurrentIndex] = useState(0);
 
   const translations = {
     ru: {
@@ -34,33 +33,19 @@ const News = () => {
 
   const newsItems = [1, 2, 3];
 
-  const handleNext = () => {
-    if (currentIndex < newsItems.length - 1) {
-      setCurrentIndex(currentIndex + 1);
-    }
-  };
-
-  const handlePrev = () => {
-    if (currentIndex > 0) {
-      setCurrentIndex(currentIndex - 1);
-    }
-  };
-
   return (
-    <div className="m-2 lg:mx-[72px]">
-      <div>
-        <b className="text-2xl">{translations[language].news}</b>
-      </div>
-      <br />
-      <div className="relative">
+    <>
+      <div className="m-2 lg:mx-[72px]">
+        <div>
+          <b className="text-2xl">{translations[language].news}</b>
+        </div>
+        <br />
         <div className="relative flex justify-center items-center">
-          <div className="relative flex flex-col gap-4 md:flex-row md:gap-8">
+          <div className="relative flex flex-row gap-[15px] overflow-x-auto">
             {newsItems.map((_, index) => (
               <div
                 key={index}
-                className={`relative flex-1 bg-white shadow-lg rounded-lg p-4 ${
-                  index === currentIndex ? "block sm:block lg:block" : "hidden"
-                } md:block`} 
+                className="flex-shrink-0 bg-white shadow-lg border rounded-lg p-4 w-[290px] lg:w-[416px]"
               >
                 <img
                   src={imageFamily}
@@ -83,29 +68,9 @@ const News = () => {
               </div>
             ))}
           </div>
-
-          {/* Left arrow button */}
-          {currentIndex > 0 && (
-            <button
-              onClick={handlePrev}
-              className="block lg:hidden absolute left-60 bottom-2 bg-white text-gray hover:bg-gray-200 p-2 rounded-full"
-            >
-              <FaArrowLeftLong size={24} />
-            </button>
-          )}
-
-          {/* Right arrow button */}
-          {currentIndex < newsItems.length - 1 && (
-            <button
-              onClick={handleNext}
-              className="block lg:hidden absolute right-4 bottom-2 bg-white text-gray hover:bg-gray-200 p-2 rounded-full"
-            >
-              <FaArrowRightLong size={24} />
-            </button>
-          )}
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

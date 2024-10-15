@@ -33,80 +33,88 @@ const Comments = () => {
   };
 
   return (
-    <div className="mx-2 my-2 lg:mx-[72px] lg:my-4">
-      <div className="mb-4">
-        <b className="text-2xl">{translations[language].comments}</b>
-      </div>
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        <div className="shadow-lg rounded-lg p-4">
-          <div>
-            <div className="flex items-center justify-between mb-2">
-              <div className="flex items-center">
-                <img src={yandeks} alt="yandeks" className="w-12 h-12 mr-4" />
-                <div>
-                  <div className="flex gap-4 items-center">
-                    <p className="text-[#8C8C8C] text-sm">Яндекс</p>
-                    <img src={link} alt="link" />
+    <>
+      <div className="mx-2 my-2 lg:mx-[72px] lg:my-4">
+        <div className="mb-4">
+          <b className="text-2xl">{translations[language].comments}</b>
+        </div>
+        <div className="overflow-x-auto">
+          <div className="flex gap-[15px] md:grid-cols-2 lg:grid-cols-3">
+            <div className="shadow-lg border rounded p-4 flex-shrink-0 w-[290px] lg:w-[416px]">
+              <div>
+                <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center">
+                    <img
+                      src={yandeks}
+                      alt="yandeks"
+                      className="w-12 h-12 mr-4"
+                    />
+                    <div>
+                      <div className="flex gap-4 items-center">
+                        <p className="text-[#8C8C8C] text-sm">Яндекс</p>
+                        <img src={link} alt="link" />
+                      </div>
+                      <p>Александра</p>
+                      <p className="text-[#8C8C8C] text-sm">Апрель 2024</p>
+                    </div>
                   </div>
-                  <p>Александра</p>
-                  <p className="text-[#8C8C8C] text-sm">Апрель 2024</p>
+                  <div className="flex gap-1">
+                    {stars.map((_, index) => (
+                      <FaStar key={index} className="text-yellow-500" />
+                    ))}
+                  </div>
                 </div>
               </div>
-              <div className="flex gap-1">
-                {stars.map((_, index) => (
-                  <FaStar key={index} className="text-yellow-500" />
-                ))}
-              </div>
+              <p>{translations[language].review1}</p>
             </div>
-          </div>
-          <p>{translations[language].review1}</p>
-        </div>
 
-        <div className="shadow-lg rounded-lg p-4">
-          <div className="flex items-center justify-between mb-2">
-            <div className="flex items-center">
-              <img src={yandeks} alt="yandeks" className="w-12 h-12 mr-4" />
-              <div>
-                <div className="flex gap-4 items-center">
-                  <p className="text-[#8C8C8C] text-sm">Яндекс</p>
-                  <img src={link} alt="link" />
+            <div className="shadow-lg border rounded p-4 flex-shrink-0 w-[290px] lg:w-[416px]">
+              <div className="flex items-center justify-between mb-2">
+                <div className="flex items-center">
+                  <img src={yandeks} alt="yandeks" className="w-12 h-12 mr-4" />
+                  <div>
+                    <div className="flex gap-4 items-center">
+                      <p className="text-[#8C8C8C] text-sm">Яндекс</p>
+                      <img src={link} alt="link" />
+                    </div>
+                    <p>Александра</p>
+                    <p className="text-[#8C8C8C] text-sm">Апрель 2024</p>
+                  </div>
                 </div>
-                <p>Александра</p>
-                <p className="text-[#8C8C8C] text-sm">Апрель 2024</p>
+                <div className="flex gap-1 mt-1">
+                  {stars.map((_, index) => (
+                    <FaStar key={index} className="text-yellow-500" />
+                  ))}
+                </div>
               </div>
+              <p>{translations[language].review2}</p>
             </div>
-            <div className="flex gap-1 mt-1">
-              {stars.map((_, index) => (
-                <FaStar key={index} className="text-yellow-500" />
-              ))}
-            </div>
-          </div>
-          <p>{translations[language].review2}</p>
-        </div>
 
-        <div className="shadow-lg rounded-lg p-4">
-          <div className="flex items-center justify-between mb-2">
-            <div className="flex items-center">
-              <img src={yandeks} alt="yandeks" className="w-12 h-12 mr-4" />
-              <div>
-                <div className="flex gap-4 items-center">
-                  <p className="text-[#8C8C8C] text-sm">Яндекс</p>
-                  <img src={link} alt="link" />
+            <div className="shadow-lg border rounded-lg p-4 flex-shrink-0 w-[290px] lg:w-[416px]">
+              <div className="flex items-center justify-between mb-2">
+                <div className="flex items-center">
+                  <img src={yandeks} alt="yandeks" className="w-12 h-12 mr-4" />
+                  <div>
+                    <div className="flex gap-4 items-center">
+                      <p className="text-[#8C8C8C] text-sm">Яндекс</p>
+                      <img src={link} alt="link" />
+                    </div>
+                    <p>Александра</p>
+                    <p className="text-[#8C8C8C] text-sm">Апрель 2024</p>
+                  </div>
                 </div>
-                <p>Александра</p>
-                <p className="text-[#8C8C8C] text-sm">Апрель 2024</p>
+                <div className="flex gap-1 mt-1">
+                  {stars.map((_, index) => (
+                    <FaStar key={index} className="text-yellow-500" />
+                  ))}
+                </div>
               </div>
-            </div>
-            <div className="flex gap-1 mt-1">
-              {stars.map((_, index) => (
-                <FaStar key={index} className="text-yellow-500" />
-              ))}
+              <p>{translations[language].review2}</p>
             </div>
           </div>
-          <p>{translations[language].review2}</p>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

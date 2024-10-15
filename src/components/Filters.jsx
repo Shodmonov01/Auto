@@ -56,7 +56,7 @@ const Section = () => {
 
   return (
     <>
-      <div className="mx-2 py-6 lg:mx-[72px] lg:py-6">
+      <div className="mx-[21px] py-6 lg:mx-[72px] lg:py-6">
         <div>
           <b className="text-2xl">{translations[language].select}</b>
         </div>
@@ -64,13 +64,13 @@ const Section = () => {
         <div className="p-4 shadow-slate-500 sm:shadow-md lg:shadow-lg">
           <div className="flex flex-col lg:flex-row gap-4 items-center m-2">
             <div className="bg-gray-100 rounded-[10px] inline-flex space-x-2 ">
-              <button className="px-5 py-2.5 lg:w-[150px] w-[100px] rounded text-[15px] active:bg-[#293843] active:text-white">
+              <button className="px-5 py-2.5 lg:w-[150px] w-[110px] rounded text-[15px] active:bg-[#293843] active:text-white">
                 {translations[language].auto}
               </button>
-              <button className="text-black px-4 py-2 lg:w-[150px] w-[100px] text-[15px]  rounded active:bg-[#293843] active:text-white">
+              <button className="text-black px-4 py-2 lg:w-[150px] w-[110px] text-[15px]  rounded active:bg-[#293843] active:text-white">
                 {translations[language].new}
               </button>
-              <button className="text-black px-4 py-2 lg:w-[150px] w-[100px] text-[15px] rounded active:bg-[#293843] active:text-white">
+              <button className="text-black px-3 py-2 lg:w-[150px] w-[110px] text-[15px] rounded active:bg-[#293843] active:text-white">
                 {translations[language].used}
               </button>
             </div>

@@ -38,7 +38,7 @@ const AboutUs = () => {
         <img
           src={imageOfPerson}
           alt="Person"
-          className="relative transition-transform duration-200 hover:scale-110"
+          className="relative"
         />
       </div>
 
@@ -52,7 +52,7 @@ const AboutUs = () => {
         </button>
 
         <div className="relative">
-          <div className="absolute bottom-[-90px] right-[-10px] hidden sm:block">
+          <div className="absolute bottom-[-90px] right-[-10px] hidden lg:block">
             <img src={tires} alt="Tires" className="w-24 md:w-auto" />
             <img
               src={Rectangle}

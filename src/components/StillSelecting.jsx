@@ -37,19 +37,15 @@ const StillSelecting = () => {
           <b className="text-[28px] text-white mb-2">
             {translations[language].choice}
           </b>
-          <p className="text-white mb-4 text-center text-[15px] md:text-left sm:text-left">
+          <p className="text-white mb-4 align-left text-[15px] lg:align-center">
             {translations[language].description}
           </p>
-          <button className="bg-[#71B2F7] hover:bg-blue-400 text-white px-[43px] py-[17px] px-[43px] rounded">
+          <button className="bg-[#71B2F7] hover:bg-blue-400 text-white px-[75px] py-[17px] lg:px-[43px] lg:py-[17px] rounded">
             {translations[language].button}
           </button>
         </div>
         <div className="flex justify-center items-center ">
-          <img
-            src={car}
-            alt="car"
-            className="hover:scale-110 transform-transition duration-200"
-          />
+          <img src={car} alt="car" />
         </div>
       </div>
     </div>
