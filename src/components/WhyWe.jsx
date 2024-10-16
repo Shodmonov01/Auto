@@ -83,7 +83,7 @@ const Section3 = () => {
   return (
     <div className="m-2 lg:mx-[72px] lg:my-4">
       <div>
-        <b className="text-2xl">{translations[language].whywe}</b>
+        <b className="lg:ml-0 ml-6 text-2xl">{translations[language].whywe}</b>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-4">
         <div className="flex flex-col justify-center items-start w-[306px] h-[236px] p-[35px_0_22px_25px] bg-white rounded-[3px] shadow-lg opacity-90 mx-auto">

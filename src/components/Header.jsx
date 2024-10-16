@@ -13,6 +13,7 @@ import { Dialog } from "@headlessui/react";
 import { CiMenuFries } from "react-icons/ci";
 import { useLanguage } from "./Context/LanguageContext";
 import { FaVk } from "react-icons/fa";
+import { useUser } from "./Context/UserContext";
 
 const translations = {
   ru: {
@@ -151,7 +152,10 @@ const Header = () => {
             </div>
 
             <div className="flex gap-2 cursor-pointer group hover:text-black items-center">
-              <MdEmail className="text-[#989898] group-hover:text-black" size={24} />
+              <MdEmail
+                className="text-[#989898] group-hover:text-black"
+                size={24}
+              />
               <p className="cursor-pointer text-[#989898] group-hover:text-black text-sm">
                 info@mail.ru
               </p>
@@ -223,12 +227,12 @@ const Header = () => {
         {hasToken ? (
           <div className="flex gap-4 md:gap-8 items-center">
             <TbBellRingingFilled
-              className="hidden md:block cursor-pointer hover:text-black text-[#989898]"
+              className="hidden md:block ml-[45px] mr-[92px] cursor-pointer hover:text-black text-[#989898]"
               size={24}
             />
             {UserData ? (
               <>
-                <div className="flex flex-col md:flex-row items-center">
+                <div className="flex flex-col mr-2 md:flex-row items-center">
                   <div className="flex flex-wrap">
                     <h1 className=" hidden md:block mx-4 md:mx-6">
                       {UserData.name}
@@ -253,9 +257,11 @@ const Header = () => {
               className="text-[#989898] cursor-pointer hover:text-black"
               size={24}
             />
-            <button className="py-[17px] hover:bg-gray-200 px-[43px] rounded text-sm">
-              <Link to={"/login"}>{translations[language].login}</Link>
-            </button>
+            <Link to={"/login"}>
+              <button className="py-[17px] hover:bg-gray-200 px-[43px] rounded text-sm">
+                {translations[language].login}
+              </button>
+            </Link>
             <Link to={"/register"}>
               <button className="bg-blue-500 hover:bg-blue-600 text-white py-[17px] px-[43px] rounded text-sm">
                 {translations[language].register}

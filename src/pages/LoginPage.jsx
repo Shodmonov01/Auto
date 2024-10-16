@@ -25,6 +25,8 @@ const LoginPage = () => {
       register: "Зарегистрироваться",
       loginError: "Ошибка входа",
       invalidCredentials: "Неверный логин или пароль. Попробуйте снова.",
+      loginSuccess: "Успешный вход!",
+      welcome: "Добро пожаловать обратно!",
     },
     uzb: {
       enter: "Kirish",
@@ -38,6 +40,8 @@ const LoginPage = () => {
       loginError: "Kirish xatosi",
       invalidCredentials:
         "Noto'g'ri login yoki parol. Iltimos, qayta urinib ko'ring.",
+      loginSuccess: "Muvaffaqiyatli kirish!",
+      welcome: "Qaytib kelganingizdan xursandmiz!",
     },
     en: {
       enter: "Entrance",
@@ -50,6 +54,8 @@ const LoginPage = () => {
       register: "Register",
       loginError: "Login Error",
       invalidCredentials: "Invalid login or password. Please try again.",
+      loginSuccess: "Login Successful!",
+      welcome: "Welcome back!",
     },
   };
 
@@ -59,8 +65,19 @@ const LoginPage = () => {
       const response = await axiosInstance.post("/login", { email, password });
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("userData", JSON.stringify(response.data.userData));
+
+      // Display success alert
+      await Swal.fire({
+        icon: "success",
+        title: translations[language].loginSuccess,
+        text: translations[language].welcome,
+        confirmButtonText: "OK",
+      });
+
       navigate("/");
-      window.location.reload();
+      setTimeout(() => {
+        window.location.reload();
+      }, 100);
     } catch (error) {
       console.error("Ошибка входа:", error);
 

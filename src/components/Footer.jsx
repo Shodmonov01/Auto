@@ -84,8 +84,8 @@ const Footer = () => {
       <footer>
         <div className="p-6">
           <hr className="my-6" />
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-8 gap-8">
-            <div className="flex flex-col items-start">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-10 gap-8">
+            <div className="flex flex-col col-span-3 items-start">
               <h1 className="text-2xl font-bold mb-4">
                 <span className="text-blue-600">You</span>Car
               </h1>
@@ -236,7 +236,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        <div className="flex items-center justify-between px-24 text-black text-center">
+        <div className="flex items-center justify-between px-16 text-black text-center">
           <p className="text-white">.</p>
           <p>{translations[language].privacy}</p>
           <p>{translations[language].created}</p>

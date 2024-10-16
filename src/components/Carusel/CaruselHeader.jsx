@@ -61,7 +61,7 @@ const CarouselHeader = () => {
             {translations[language].details}
           </button>
         </div>
-        <div className="relative w-full md:w-1/2 h-64 overflow-hidden">
+        <div className="relative w-full md:w-1/2 h-72 overflow-hidden">
           <img
             src={images[currentIndex]}
             alt={`Image ${currentIndex + 1}`}

@@ -61,10 +61,10 @@ const Section = () => {
           <b className="text-2xl">{translations[language].select}</b>
         </div>
         <br />
-        <div className="p-4 shadow-slate-500 sm:shadow-md lg:shadow-lg">
-          <div className="flex flex-col lg:flex-row gap-4 items-center m-2">
+        <div className="p-0 lg:p-4 shadow-slate-500 sm:shadow-md lg:shadow-lg">
+          <div className="flex flex-col lg:flex-row gap-4 px-0 lg:px-[14px] items-center m-2">
             <div className="bg-gray-100 rounded-[10px] inline-flex space-x-2 ">
-              <button className="px-5 py-2.5 lg:w-[150px] w-[110px] rounded text-[15px] active:bg-[#293843] active:text-white">
+              <button className="px-4 py-2.5 lg:w-[150px] w-[110px] rounded text-[15px] active:bg-[#293843] active:text-white">
                 {translations[language].auto}
               </button>
               <button className="text-black px-4 py-2 lg:w-[150px] w-[110px] text-[15px]  rounded active:bg-[#293843] active:text-white">
@@ -84,7 +84,7 @@ const Section = () => {
             </div>
           </div>
           <br />
-          <div className="grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-1 gap-4">
+          <div className="grid lg:grid-cols-5 px-0 lg:px-[21px] md:grid-cols-3 sm:grid-cols-1 gap-4">
             <div className="w-full">
               <p className="text-[14px]">{translations[language].selection}</p>
               <div className="relative flex items-center w-full">

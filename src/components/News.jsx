@@ -1,37 +1,75 @@
-import React from "react";
-import imageFamily from "../../src/assets/images/imageFamily.svg";
+import React, { useState, useEffect } from "react";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { useLanguage } from "./Context/LanguageContext";
+import axiosInstance from "../axiosConfig";
 
 const News = () => {
   const { language } = useLanguage();
+  const [news, setNews] = useState([]);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [expandedStates, setExpandedStates] = useState({}); // Track expanded states for each news item
 
   const translations = {
     ru: {
       news: "Новости",
-      title: "СРАВНЕНИЕ ЯПОНСКИХ И НЕМЕЦКИХ АВТОМОБИЛЕЙ: ЧТО ЛУЧШЕ?",
-      description:
-        "С начала весны 2022 года российский автомобильный рынок подвергся...",
       readMore: "Подробнее",
+      showLess: "Скрыть",
     },
     uzb: {
       news: "Yangiliklar",
-      title: "YAPON VA NEMIS MASHINALARINI TAQQOSLASH: QAYSI YAXSHI?",
-      description:
-        "2022-yil bahoridan boshlab Rossiya avtomobil bozori ta’sir ko‘rsatdi...",
       readMore: "Batafsil",
+      showLess: "Yopish",
     },
     en: {
       news: "News",
-      title: "COMPARISON OF JAPANESE AND GERMAN CARS: WHICH IS BETTER?",
-      description:
-        "Since the spring of 2022, the Russian car market has been affected...",
       readMore: "Read More",
+      showLess: "Show Less",
     },
   };
 
-  const newsItems = [1, 2, 3];
+  useEffect(() => {
+    const fetchNews = async () => {
+      setLoading(true);
+      try {
+        const response = await axiosInstance.get("/news");
+        setNews(response.data.slice(-3));
+        const initialStates = response.data.reduce((acc, item) => {
+          acc[item.id] = false;
+          return acc;
+        }, {});
+        setExpandedStates(initialStates);
+      } catch (err) {
+        setError("Error fetching news");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchNews();
+  }, []);
+
+  const truncateText = (text, limit) => {
+    if (text.length <= limit) return text;
+    return text.substring(0, limit) + "...";
+  };
+
+  if (error) {
+    return (
+      <div className="flex justify-center items-center h-64">
+        <p className="text-xl text-red-600">{error}</p>
+      </div>
+    );
+  }
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-64">
+        <p className="text-xl text-gray-500">Loading news...</p>
+      </div>
+    );
+  }
 
   return (
     <>
@@ -42,24 +80,26 @@ const News = () => {
         <br />
         <div className="relative flex justify-center items-center">
           <div className="relative flex flex-row gap-[15px] overflow-x-auto">
-            {newsItems.map((_, index) => (
+            {news.map((item) => (
               <div
-                key={index}
+                key={item.id}
                 className="flex-shrink-0 bg-white shadow-lg border rounded-lg p-4 w-[290px] lg:w-[416px]"
               >
                 <img
-                  src={imageFamily}
+                  src={item.image}
                   alt="imageFamily"
-                  className="w-full h-auto mb-4 rounded-t-lg"
+                  className="w-full h-[280px] object-cover mb-4 rounded-lg"
                 />
-                <b className="text-xl mb-2 block">
-                  {translations[language].title}
-                </b>
-                <p className="mb-4">{translations[language].description}</p>
+                <b className="text-xl mb-2 block">{item.title}</b>
+                <p className="mb-4">
+                  {expandedStates[item.id]
+                    ? item.content
+                    : truncateText(item.content, 90)}
+                </p>
                 <div className="flex items-center gap-4">
                   <Link
                     className="text-[#293843] hover:text-black"
-                    to={"/news"}
+                    to={`/news/${item.id}`}
                   >
                     <u>{translations[language].readMore}</u>
                   </Link>

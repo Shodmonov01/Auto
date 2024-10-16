@@ -141,7 +141,9 @@ const RegisterPage = () => {
         });
 
         navigate("/");
-        window.location.reload();
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000);
       })
       .catch((error) => {
         console.error(error.response.data.error);

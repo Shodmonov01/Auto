@@ -3,7 +3,7 @@ import imageOfPerson from "../../src/assets/images/imageOfPerson.svg";
 import tires from "../../src/assets/images/tires.svg";
 import bgOfPerson from "../../src/assets/images/bgOfPerson.svg";
 import { useLanguage } from "./Context/LanguageContext";
-import Rectangle from "../../src/assets/images/Rectangle.svg"
+import Rectangle from "../../src/assets/images/Rectangle.svg";
 
 const AboutUs = () => {
   const { language } = useLanguage();
@@ -28,18 +28,14 @@ const AboutUs = () => {
     },
   };
   return (
-    <div className="mx-2 lg:mx-[72px] bg-[#F6F6F6] relative p-4 flex flex-col md:flex-row justify-around items-center">
-      <div className="relative w-full md:w-1/3 mb-4 md:mb-0">
+    <div className="mx-2 lg:mx-[72px] bg-[#F6F6F6] relative flex flex-col md:flex-row justify-around items-center">
+      <div className="relative md:w-1/3 mb-4 md:mb-0">
         <img
           src={bgOfPerson}
           alt="Background of person"
-          className="absolute inset-0"
+          className="absolute top-[53px] right-2 inset-0"
         />
-        <img
-          src={imageOfPerson}
-          alt="Person"
-          className="relative"
-        />
+        <img src={imageOfPerson} alt="Person" className="relative h-[442px]" />
       </div>
 
       <div className="w-full md:w-1/3 mb-4 md:mb-0 text-center md:text-left relative">
@@ -57,9 +53,9 @@ const AboutUs = () => {
             <img
               src={Rectangle}
               alt="Rectangle"
-              className="absolute inset-0 m-auto w-[155px] h-[155px] left-[200px]"
+              className="absolute inset-0 bottom-4 m-auto w-[155px] h-[155px] left-[180px]"
             />
-            <p className="absolute inset-0 left-[275px] font-semibold flex items-center justify-center text-white text-[35px]">
+            <p className="absolute inset-0 left-[260px] font-semibold flex items-center justify-center text-white text-[35px]">
               №1
             </p>
           </div>
