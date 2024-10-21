@@ -5,8 +5,8 @@ const axiosInstance = axios.create({
   baseURL: 'https://api.youcarrf.ru', 
   headers: {
   'Content-Type': 'application/json',
-  'Access-Control-Allow-Origin': '*',
-  'Accep': 'application/json'  
+  // 'Access-Control-Allow-Origin': '*',
+  // 'Accep': 'application/json'  
 },
 });
 
