@@ -1,13 +1,13 @@
 import React from "react";
 import { FaWhatsapp, FaTelegramPlane, FaInstagram } from "react-icons/fa";
 import { useLanguage } from "./Context/LanguageContext";
-import { Launch } from "@mui/icons-material";
 
 const Footer = () => {
   const { language } = useLanguage();
   const translations = {
     ru: {
-      chance: "© 1-й автоброкер Внесём качественные изменения в Вашу жизнь!",
+      chance: "© 1-й автоброкер",
+      other: "Внесём качественные изменения в Вашу жизнь!",
       company: "Компания",
       catalog: "Каталог",
       about: "O нас",
@@ -30,8 +30,8 @@ const Footer = () => {
       created: "Сделано в UserTech",
     },
     uzb: {
-      chance:
-        "© 1-avto broker Biz sizning hayotingizga sifatli o'zgarishlar kiritamiz!",
+      chance: "© 1-avto broker ",
+      other: "Biz sizning hayotingizga sifatli o'zgarishlar kiritamiz!",
       company: "Kompaniya",
       catalog: "Katalog",
       about: "Biz haqimizda",
@@ -56,6 +56,7 @@ const Footer = () => {
     en: {
       chance:
         "© 1st Autobroker We will bring qualitative changes to your life!",
+      other: "We will bring qualitative changes to your life!",
       company: "Company",
       catalog: "Catalog",
       about: "About Us",
@@ -95,6 +96,7 @@ const Footer = () => {
                 <FaInstagram size={30} />
               </div>
               <p>{translations[language].chance}</p>
+              <p>{translations[language].other}</p>
             </div>
             <div className="flex flex-col">
               <b className="mb-2">{translations[language].company}</b>
@@ -167,8 +169,23 @@ const Footer = () => {
               <a href="#" className="text-gray-400">
                 bentley
               </a>
+            </div>
+            <div className="flex flex-col">
+              <br />
+              <a href="#" className="text-gray-400 mb-1">
+                chery
+              </a>
+              <a href="#" className="text-gray-400 mb-1">
+                cadillac
+              </a>
+              <a href="#" className="text-gray-400 mb-1">
+                changan
+              </a>
               <a href="#" className="text-gray-400">
-                dodge
+                chevrolet
+              </a>
+              <a href="#" className="text-gray-400">
+                citroen
               </a>
             </div>
             <div className="flex flex-col">
@@ -188,9 +205,6 @@ const Footer = () => {
               <a href="#" className="text-gray-400">
                 citroen
               </a>
-              <a href="#" className="text-gray-400">
-                daewoo
-              </a>
             </div>
             <div className="flex flex-col">
               <br />
@@ -208,30 +222,6 @@ const Footer = () => {
               </a>
               <a href="#" className="text-gray-400">
                 citroen
-              </a>
-              <a href="#" className="text-gray-400">
-                daewoo
-              </a>
-            </div>
-            <div className="flex flex-col">
-              <br />
-              <a href="#" className="text-gray-400 mb-1">
-                chery
-              </a>
-              <a href="#" className="text-gray-400 mb-1">
-                cadillac
-              </a>
-              <a href="#" className="text-gray-400 mb-1">
-                changan
-              </a>
-              <a href="#" className="text-gray-400">
-                chevrolet
-              </a>
-              <a href="#" className="text-gray-400">
-                citroen
-              </a>
-              <a href="#" className="text-gray-400">
-                daewoo
               </a>
             </div>
           </div>

@@ -3,6 +3,7 @@ import axios from "axios";
 
 const axiosInstance = axios.create({
   baseURL: 'https://api.youcarrf.ru', 
+  baseURL:'',
   headers: {
   'Content-Type': 'application/json',
   // 'Access-Control-Allow-Origin': '*',
