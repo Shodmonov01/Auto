@@ -34,6 +34,7 @@ const News = () => {
       setLoading(true);
       try {
         const response = await axiosInstance.get("/news");
+        console.log(response.data);
         setNews(response.data.slice(-3));
         const initialStates = response.data.reduce((acc, item) => {
           acc[item.id] = false;

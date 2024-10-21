@@ -62,22 +62,24 @@ const Header = () => {
   const [hasToken, setHasToken] = useState(false);
   const [UserData, setUserData] = useState(null);
   const { language, toggleLanguage } = useLanguage();
+  const { isLogged, setIsLogged } = useUser();
 
   const handleLanguageChange = (e) => {
     toggleLanguage(e.target.value);
   };
+  const token = localStorage.getItem("token");
+  const storedUserData = localStorage.getItem("userData");
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    const storedUserData = localStorage.getItem("userData");
     setHasToken(!!token);
     setUserData(storedUserData ? JSON.parse(storedUserData) : null);
   }, []);
-
+  if (token && UserData) {
+    setIsLogged(true);
+  }
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
-
   return (
     <>
       <header className="bg-[#F6F6F6] w-full px-6">
@@ -224,7 +226,7 @@ const Header = () => {
             </button>
           </div>
         </div>
-        {hasToken ? (
+        {isLogged ? (
           <div className="flex gap-4 md:gap-8 items-center">
             <TbBellRingingFilled
               className="hidden md:block ml-[45px] mr-[92px] cursor-pointer hover:text-black text-[#989898]"
@@ -365,7 +367,7 @@ const Header = () => {
                   value={language}
                   onChange={handleLanguageChange}
                 >
-                  <option value="rus">Rus</option>
+                  <option value="ru">Ru</option>
                   <option value="uzb">Uzb</option>
                   <option value="en">Eng</option>
                 </select>

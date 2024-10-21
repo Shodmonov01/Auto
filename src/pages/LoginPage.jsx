@@ -4,6 +4,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Swal from "sweetalert2";
 import { useLanguage } from "../components/Context/LanguageContext";
+import { useUser } from "../components/Context/UserContext";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -11,6 +12,7 @@ const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
   const { language } = useLanguage();
+  const { setIsLogged } = useUser();
 
   const navigate = useNavigate();
   const translations = {
@@ -66,7 +68,6 @@ const LoginPage = () => {
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("userData", JSON.stringify(response.data.userData));
 
-      // Display success alert
       await Swal.fire({
         icon: "success",
         title: translations[language].loginSuccess,
@@ -75,9 +76,10 @@ const LoginPage = () => {
       });
 
       navigate("/");
-      setTimeout(() => {
-        window.location.reload();
-      }, 100);
+      setIsLogged(true);
+      // setTimeout(() => {
+      //   window.location.reload();
+      // }, 100);
     } catch (error) {
       console.error("Ошибка входа:", error);
 

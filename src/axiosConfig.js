@@ -4,8 +4,10 @@ import axios from "axios";
 const axiosInstance = axios.create({
   baseURL: 'http://212.67.11.143:4035', 
   headers: {
-    'Content-Type': 'application/json'
-  },
+  'Content-Type': 'application/json',
+  'Access-Control-Allow-Origin': '*',
+  'Accep': 'application/json'  
+},
 });
 
 axiosInstance.interceptors.request.use(

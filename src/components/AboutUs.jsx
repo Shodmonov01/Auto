@@ -35,7 +35,7 @@ const AboutUs = () => {
           alt="Background of person"
           className="absolute top-[53px] right-2 inset-0"
         />
-        <img src={imageOfPerson} alt="Person" className="relative h-[442px]" />
+        <img src={imageOfPerson} alt="Person" className="relative h-[452px]" />
       </div>
 
       <div className="w-full md:w-1/3 mb-4 md:mb-0 text-center md:text-left relative">

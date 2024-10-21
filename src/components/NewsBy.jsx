@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axiosConfig from "../axiosConfig";
 import { useParams } from "react-router-dom";
+import StillSelecting from "./StillSelecting";
 
 const NewsBy = () => {
   const [newsBy, setNewsBy] = useState(null);
@@ -12,7 +13,6 @@ const NewsBy = () => {
     const fetchNews = async () => {
       try {
         const response = await axiosConfig.get(`/news/${id}`);
-        console.log(response.data);
         setNewsBy(response.data);
       } catch (err) {
         setError("Error fetching news");
@@ -27,7 +27,7 @@ const NewsBy = () => {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center">
+      <div className="flex justify-center items-center h-screen">
         <div className="loader animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-500"></div>
       </div>
     );
@@ -35,44 +35,43 @@ const NewsBy = () => {
 
   if (error) {
     return (
-      <div className="flex justify-center items-center h-64">
+      <div className="flex justify-center items-center h-screen">
         <p className="text-xl text-red-600">{error}</p>
       </div>
     );
   }
 
   return (
-    <div className="max-w-7xl mx-auto p-6">
-      <h1 className="text-5xl font-extrabold text-center text-gray-800 mb-10">
-        Latest News
-      </h1>
-      <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        {Array.isArray(newsBy) &&
-          newsBy?.map((item) => (
-            <li
-              key={index.id}
-              className="bg-white shadow-lg rounded-lg overflow-hidden transition-transform transform hover:scale-105 hover:shadow-2xl"
-            >
+    <>
+      <div className="p-2 m-2 sm:p-4 sm:m-4 lg:mx-[72px] lg:my-4">
+        <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-[26px] font-bold mb-3 text-gray-900">
+          {newsBy.title}
+        </h2>
+        <div className="grid gap-4 lg:grid-cols-3 sm:grid-cols-1">
+          <ul className="space-y-6 col-span-2">
+            <li key={newsBy.id}>
               <img
-                src={item.image}
-                alt={item.title}
-                className="w-full h-56 object-cover"
+                src={newsBy.image}
+                alt={newsBy.title}
+                className="w-full max-w-full h-auto sm:h-[300px] md:h-[350px lg:w-[857px] lg:h-[383px] rounded-[15px] object-cover"
               />
-              <div className="p-6">
-                <h2 className="text-2xl font-bold mb-3 text-gray-900">
-                  {item.title}
-                </h2>
-                <p className="text-gray-600 mb-4 line-clamp-3">
-                  {item.content}
+              <div className="py-6">
+                <p className="text-[#989898] text-[16px] sm:text-base md:text-lg mb-4">
+                  {newsBy.content}
                 </p>
-                <button className="text-indigo-600 hover:text-indigo-400 font-semibold">
-                  Read More
-                </button>
               </div>
             </li>
-          ))}
-      </ul>
-    </div>
+          </ul>
+          <div className="p-2 text-[20px] col-span-1 rounded-[15px] border shadow-lg h-[383px]">
+            <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-[26px] font-bold mb-3 text-gray-900">
+              Читайте другие статьи <br />в нашем блоге:
+            </h2>
+            
+          </div>
+        </div>
+      </div>
+      <StillSelecting />
+    </>
   );
 };
 

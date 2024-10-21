@@ -4,6 +4,7 @@ import axiosInstance from "../axiosConfig";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { useLanguage } from "../components/Context/LanguageContext";
+import { useUser } from "../components/Context/UserContext";
 
 const RegisterPage = () => {
   const [formData, setFormData] = useState({
@@ -20,6 +21,7 @@ const RegisterPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const navigate = useNavigate();
+  const { isLogged, setIsLogged } = useUser();
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -139,11 +141,13 @@ const RegisterPage = () => {
           icon: "success",
           title: translations[language].successfulRegistration,
         });
-
+        setIsLogged(true)
         navigate("/");
-        setTimeout(() => {
-          window.location.reload();
-        }, 3000);
+        console.log(isLogged);
+
+        // setTimeout(() => {
+        //   window.location.reload();
+        // }, 3000);
       })
       .catch((error) => {
         console.error(error.response.data.error);
