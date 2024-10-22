@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaStar } from "react-icons/fa";
 import yandeks from "../../src/assets/images/yandeks.svg";
 import link from "../../src/assets/images/link.svg";

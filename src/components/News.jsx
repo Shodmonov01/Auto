@@ -3,12 +3,14 @@ import { FaArrowRightLong } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { useLanguage } from "./Context/LanguageContext";
 import axiosInstance from "../axiosConfig";
+import { useNavigate } from "react-router-dom";
 
 const News = () => {
   const { language } = useLanguage();
   const [news, setNews] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const { navigate } = useNavigate();
   const [expandedStates, setExpandedStates] = useState({}); // Track expanded states for each news item
 
   const translations = {
@@ -50,6 +52,10 @@ const News = () => {
 
     fetchNews();
   }, []);
+  const HandleScroll = (path) => {
+    window.scrollTo(0, 0);
+    navigate(path);
+  };
 
   const truncateText = (text, limit) => {
     if (text.length <= limit) return text;
@@ -98,12 +104,14 @@ const News = () => {
                     : truncateText(item.content, 90)}
                 </p>
                 <div className="flex items-center gap-4">
-                  <Link
-                    className="text-[#293843] hover:text-black"
-                    to={`/news/${item.id}`}
-                  >
-                    <u>{translations[language].readMore}</u>
-                  </Link>
+                  <button onClick={() => HandleScroll(`/news/${item.id}`)}>
+                    <Link
+                      className="text-[#293843] hover:text-black"
+                      to={`/news/${item.id}`}
+                    >
+                      <u>{translations[language].readMore}</u>
+                    </Link>
+                  </button>
                   <FaArrowRightLong />
                 </div>
               </div>
