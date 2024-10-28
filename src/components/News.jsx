@@ -10,7 +10,7 @@ const News = () => {
   const [news, setNews] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  const { navigate } = useNavigate();
+  const  navigate  = useNavigate();
   const [expandedStates, setExpandedStates] = useState({}); // Track expanded states for each news item
 
   const translations = {
@@ -52,6 +52,7 @@ const News = () => {
 
     fetchNews();
   }, []);
+
   const HandleScroll = (path) => {
     window.scrollTo(0, 0);
     navigate(path);

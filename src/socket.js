@@ -1,5 +1,5 @@
 import { io } from 'socket.io-client';
 
-const URL = 'http://212.67.11.143:4035';
+const URL = 'https://api.youcarrf.ru';
 
 export const socket = io(URL);

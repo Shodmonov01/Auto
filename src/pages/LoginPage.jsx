@@ -5,6 +5,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Swal from "sweetalert2";
 import { useLanguage } from "../components/Context/LanguageContext";
 import { useUser } from "../components/Context/UserContext";
+import { socket } from "../socket";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -13,6 +14,8 @@ const LoginPage = () => {
   const [rememberMe, setRememberMe] = useState(false);
   const { language } = useLanguage();
   const { setIsLogged } = useUser();
+  const [isConnected, setIsConnected] = useState(socket.connected);
+  const [fooEvents, setFooEvents] = useState([]);
 
   const navigate = useNavigate();
   const translations = {

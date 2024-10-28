@@ -11,6 +11,7 @@ const CarouselHeader = () => {
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const { language } = useLanguage();
+  const [state, setState] = useState(null);
 
   const nextSlide = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
@@ -25,27 +26,26 @@ const CarouselHeader = () => {
   const goToSlide = (index) => {
     setCurrentIndex(index);
   };
- const translations = {
-   ru: {
-     geely: "Новый Geely Monjaro!",
-     description:
-       "Кроссовер Monjaro - премиальная модель Geely по уровню дизайна, материалов и технологий.",
-     details: "Подробнее",
-   },
-   uzb: {
-     geely: "Yangi Geely Monjaro",
-     description:
-       "Monjaro krossoveri - Geely'ning dizayn, materiallar va texnologiyalar darajasida premium modeli.",
-     details: "Batafsil",
-   },
-   en: {
-     geely: "New Geely Monjaro",
-     description:
-       "The Monjaro crossover is Geely's premium model in terms of design, materials, and technology.",
-     details: "Learn more",
-   },
- };
-
+  const translations = {
+    ru: {
+      geely: "Новый Geely Monjaro!",
+      description:
+        "Кроссовер Monjaro - премиальная модель Geely по уровню дизайна, материалов и технологий.",
+      details: "Подробнее",
+    },
+    uzb: {
+      geely: "Yangi Geely Monjaro",
+      description:
+        "Monjaro krossoveri - Geely'ning dizayn, materiallar va texnologiyalar darajasida premium modeli.",
+      details: "Batafsil",
+    },
+    en: {
+      geely: "New Geely Monjaro",
+      description:
+        "The Monjaro crossover is Geely's premium model in terms of design, materials, and technology.",
+      details: "Learn more",
+    },
+  };
 
   return (
     <div className="relative bg-[#F4F4F4] h-[430px] p-4 m-6 lg:p-4 lg:mx-[72px] rounded">

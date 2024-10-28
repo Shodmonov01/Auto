@@ -337,7 +337,7 @@ const CarDetails = () => {
         </div>
 
         {/* StillSelecting Component */}
-        <div className="my-12">
+        <div>
           <StillSelecting />
         </div>
       </div>

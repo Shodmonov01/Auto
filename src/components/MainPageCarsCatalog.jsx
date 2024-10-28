@@ -119,14 +119,14 @@ const MainPageCarsCatalog = () => {
                     onClick={() => handleLinkClick(`/about-cars/${car.id}`)}
                     className="w-full h-40"
                   >
-                    <img
-                      src={car.image}
-                      alt={`Car ${car.id}`}
-                      className="w-full h-40 object-cover mb-2"
-                    />
+                      <img
+                        src={car.image}
+                        alt={`Car ${car.id}`}
+                        className="w-full h-full rounded object-cover mb-2"
+                      />
                   </button>
                 </Link>
-                <p className="text-lg font-bold">{car.name}</p>
+                <p className="text-lg">{car.name}</p>
                 <div className="flex justify-between items-center">
                   <p className="text-lg font-bold">
                     ${car.price.toLocaleString()}
@@ -189,7 +189,10 @@ const MainPageCarsCatalog = () => {
           <b className="text-xl">
             <u>
               <button onClick={() => handleLinkClick("/about-cars")}>
-                <Link className="text-[#293843] underline text-[15px] hover:text-black" to="/about-cars">
+                <Link
+                  className="text-[#293843] underline text-[15px] hover:text-black"
+                  to="/about-cars"
+                >
                   {translations[language].watchCatalog}
                 </Link>
               </button>
