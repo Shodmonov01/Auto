@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useLanguage } from "../Context/LanguageContext";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { Routes, Route, Link } from "react-router-dom";
@@ -8,7 +8,7 @@ const CommerceFilters = () => {
 
   const translations = {
     ru: {
-      select: "Электромобили",
+      select: "Комм-транспорт",
       auto: "автомобили",
       new: "Комм-транспорт",
       used: "Мотоциклы",
@@ -23,7 +23,7 @@ const CommerceFilters = () => {
       price: "Цена",
     },
     uzb: {
-      select: "Elektr avtomobillari",
+      select: "Comm-transporti",
       auto: "Avtomobil",
       new: "Aloqa-transporti",
       used: "Mototsikllar",
@@ -38,7 +38,7 @@ const CommerceFilters = () => {
       price: "Narx",
     },
     en: {
-      select: "Electric cars",
+      select: "Comm-transport",
       auto: "Cars",
       new: "Comm-transport",
       used: "Motorcycles",
@@ -64,15 +64,29 @@ const CommerceFilters = () => {
         <div className="p-4 shadow-slate-500 sm:shadow-md lg:shadow-lg">
           <div className="flex flex-col lg:flex-row gap-4 items-center m-2">
             <div className="bg-gray-100 rounded-[10px] inline-flex space-x-2">
-              <button className="px-5 py-2.5 lg:w-[150px] w-[100px] rounded text-[15px] active:bg-[#293843] active:text-white">
-                {translations[language].auto}
-              </button>
-              <button className="text-black px-4 py-2 lg:w-[150px] w-[100px] text-[15px]  rounded active:bg-[#293843] active:text-white">
-                {translations[language].new}
-              </button>
-              <button className="text-black px-4 py-2 lg:w-[150px] w-[100px] text-[15px] rounded active:bg-[#293843] active:text-white">
-                {translations[language].used}
-              </button>
+              <Link to="/about-cars">
+                <button className="px-4 py-2 lg:w-[150px] w-[100px] rounded text-[15px] active:text-white active:bg-[#293843]">
+                  {translations[language].auto}
+                </button>
+              </Link>
+              <Link to="/commerce-cars">
+                <button
+                  className={
+                    "px-4 py-2 lg:w-[150px] w-[100px] rounded text-[15px] active:text-white active:bg-[#293843]"
+                  }
+                >
+                  {translations[language].new}
+                </button>
+              </Link>
+              <Link to="/motorcycles">
+                <button
+                  className={
+                    "px-4 py-2 lg:w-[150px] w-[100px] rounded text-[15px] active:text-white active:bg-[#293843]"
+                  }
+                >
+                  {translations[language].used}
+                </button>
+              </Link>
             </div>
             <div className="flex gap-2">
               <input type="checkbox" />
@@ -116,7 +130,7 @@ const CommerceFilters = () => {
             <div className="w-full">
               <p className="text-[14px]">{translations[language].country}</p>
               <div className="relative flex items-center w-full">
-                <select className="text-[#5A5A5A] appearance-none bg-[#F4F4F4] rounded-[5px] px-[18px] py-[23px] w-full">
+                <select className="text-[#5A5A5A] appearance-none bg-[#F4F4F4] rounded-[5px] px-[18px]  py-[23px] w-full">
                   <option value="China">China</option>
                   <option value="Monjaro">Monjaro</option>
                 </select>
@@ -130,7 +144,7 @@ const CommerceFilters = () => {
             <div className="w-full">
               <p className="text-[14px]">{translations[language].year}</p>
               <div className="relative flex items-center w-full">
-                <select className="text-[#5A5A5A] appearance-none bg-[#F4F4F4] rounded-[5px] px-[18px]  py-[23px] w-full">
+                <select className="text-[#5A5A5A] appearance-none bg-[#F4F4F4] rounded-[5px] px-[18px] py-[23px] w-full">
                   <option value="0 - 2024">0 - 2024</option>
                 </select>
               </div>

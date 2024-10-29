@@ -296,9 +296,9 @@ const CarDetails = () => {
         </div>
 
         {/* Technical Specifications Section */}
-        <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="w-full grid grid-cols-1 lg:grid-cols-2 md:grid-cols-2 gap-4">
           {/* Left side - Car specifications */}
-          <div className="mx-auto shadow rounded p-6">
+          <div className=" shadow col-span-1 rounded p-6">
             <h1 className="text-[23px] font-bold mb-6">
               {translations[language].carSpecs}
             </h1>
@@ -355,7 +355,7 @@ const CarDetails = () => {
           </div>
 
           {/* Right side - Seller's question section */}
-          <div className="flex flex-col justify-center items-center bg-gray-100 shadow rounded p-6">
+          <div className="col-span-1 flex flex-col justify-center items-center bg-gray-100 shadow rounded p-6">
             <h1 className="text-[23px] font-bold mb-4">
               {translations[language].askSeller}
             </h1>
