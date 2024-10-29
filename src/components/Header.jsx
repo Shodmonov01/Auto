@@ -14,6 +14,9 @@ import { CiMenuFries } from "react-icons/ci";
 import { useLanguage } from "./Context/LanguageContext";
 import { FaVk } from "react-icons/fa";
 import { useUser } from "./Context/UserContext";
+import { io } from "socket.io-client";
+
+const socket = io("https://api.youcarrf.ru");
 
 const translations = {
   ru: {
@@ -70,11 +73,17 @@ const Header = () => {
   const token = localStorage.getItem("token");
   const storedUserData = localStorage.getItem("userData");
 
+  const conncetWS = () => {
+    socket.emit("join", { userId: UserData.id });
+  };
+
   useEffect(() => {
     setHasToken(!!token);
     setUserData(storedUserData ? JSON.parse(storedUserData) : null);
   }, []);
   if (token && UserData) {
+    console.log(socket, "---");
+    conncetWS()
     setIsLogged(true);
   }
   const toggleMenu = () => {

@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import axiosInstance from "../../axiosConfig";
-import StillSelecting from "../StillSelecting";
 import { AiOutlineMessage } from "react-icons/ai";
 import { useLanguage } from "../Context/LanguageContext";
+import { IoIosArrowRoundForward } from "react-icons/io";
+import { IoIosArrowRoundBack } from "react-icons/io";
+import StillSelectingForDetails from "../StillSelectingForDetails";
 
 const CarDetails = () => {
   const { id } = useParams();
@@ -12,6 +14,7 @@ const CarDetails = () => {
   const [error, setError] = useState(null);
   const [userData, setUserData] = useState(null);
   const { language } = useLanguage();
+  const [currentIndex, setCurrentIndex] = useState(0);
   const translations = {
     ru: {
       logo: "Марка",
@@ -86,6 +89,21 @@ const CarDetails = () => {
       inStock: "The car is in stock",
     },
   };
+  const GotoPrevious = () => {
+    if (car?.result?.image?.length) {
+      setCurrentIndex((prevIndex) =>
+        prevIndex === 0 ? car.result.image.length - 1 : prevIndex - 1
+      );
+    }
+  };
+
+  const GotoNext = () => {
+    if (car?.result?.image?.length) {
+      setCurrentIndex((prevIndex) =>
+        prevIndex === car.result.image.length - 1 ? 0 : prevIndex + 1
+      );
+    }
+  };
 
   useEffect(() => {
     const fetchCar = async () => {
@@ -131,80 +149,109 @@ const CarDetails = () => {
   return (
     <div className="bg-gray-50 py-12">
       <div className="container mx-auto px-4">
-        <div className="bg-white shadow-xl rounded-lg overflow-hidden lg:grid lg:grid-cols-2 lg:gap-8">
-          <div className="relative">
-            <img
-              src={car.image[0]}
-              alt={car.marka}
-              className="w-full object-cover transition-transform transform hover:scale-105 rounded-lg"
-            />
-            <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-black via-transparent to-transparent opacity-30"></div>
+        <div className="bg-white shadow-xl overflow-hidden lg:grid lg:grid-cols-2 lg:gap-8">
+          <div>
+            <div className="relative w-full h-[526px]">
+              <img
+                src={car.result.image[currentIndex]}
+                alt={car.result.marka}
+                className="w-full h-full rounded-[10px] object-cover"
+              />
+              <div className="absolute inset-0 flex items-center justify-between px-4">
+                <button
+                  className="text-[#989898] bg-white rounded-full p-2"
+                  onClick={GotoPrevious}
+                >
+                  <IoIosArrowRoundBack size={24} />
+                </button>
+                <button
+                  className="text-[#989898] bg-white rounded-full p-2"
+                  onClick={GotoNext}
+                >
+                  <IoIosArrowRoundForward size={24} />
+                </button>
+              </div>
+            </div>
+
+            <br />
+            <div className="flex w-[600px] overflow-x-auto">
+              {car.result.image.slice(1, 8).map((imageSrc, index) => (
+                <img
+                  style={{ borderRadius: "20px" }}
+                  key={index}
+                  className="w-[150px] h-[150px] p-2 object-cover"
+                  src={imageSrc}
+                  alt={car.result.marka}
+                />
+              ))}
+            </div>
           </div>
           <div className="p-6 lg:p-8 space-y-6">
             <h1 className="text-5xl font-extrabold text-gray-900 mb-8">
-              {car.model} ({car.year})
+              {car.result.model} ({car.result.year})
             </h1>
             <div className="text-lg text-gray-700 space-y-2">
               <p>
                 <span className="font-semibold text-gray-900">
                   {translations[language].logo}:
                 </span>
-                {car.marka}
+                {car.result.marka}
               </p>
               <p>
                 <span className="font-semibold text-gray-900">
                   {translations[language].model}:
                 </span>
-                {car.model}
+                {car.result.model}
               </p>
               <p>
                 <span className="font-semibold text-gray-900">
                   {translations[language].year}:
                 </span>
-                {car.year}
+                {car.result.year}
               </p>
               <p>
                 <span className="font-semibold text-gray-900">
                   {translations[language].milage}:
                 </span>
-                {car.milage.toLocaleString()} км
+                {car.result.milage.toLocaleString()} км
               </p>
               <p>
                 <span className="font-semibold text-gray-900">
                   {translations[language].color}:
                 </span>
-                {car.color}
+                {car.result.color}
               </p>
               <p>
                 <span className="font-semibold text-gray-900">
                   {translations[language].engine}:
                 </span>
-                {car.engine}
+                {car.result.engine}
               </p>
               <p>
                 <span className="font-semibold text-gray-900">
                   {translations[language].horsepower}:
                 </span>
-                {car.horsepower} л.c.
+                {car.result.horsepower} л.c.
               </p>
               <p>
                 <span className="font-semibold text-gray-900">
                   {translations[language].country}:
                 </span>
-                {car.country}
+                {car.result.country}
               </p>
               <p>
                 <span className="font-semibold text-gray-900">
                   {translations[language].description}:
                 </span>
                 <br />
-                {car.description}
+                {car.result.description}
               </p>
             </div>
             <p className="text-3xl font-bold text-gray-900">
               <span className="text-green-600">
                 <span className="bg-blue-600 text-white px-4 py-2 rounded">
-                  {translations[language].price}: ${car.cost.toLocaleString()}
+                  {translations[language].price}: $
+                  {car.result.cost.toLocaleString()}
                 </span>
               </span>
             </p>
@@ -245,7 +292,7 @@ const CarDetails = () => {
           <h1 className="font-bold text-[23px]">
             {translations[language].carDescription}
           </h1>
-          <p>{car.description}</p>
+          <p>{car.result.description}</p>
         </div>
 
         {/* Technical Specifications Section */}
@@ -262,31 +309,31 @@ const CarDetails = () => {
                     <span className="text-[#989898]">
                       {translations[language].logo}:
                     </span>
-                    {car.mark}
+                    {car.result.mark}
                   </p>
                   <p>
                     <span className="text-[#989898]">
                       {translations[language].model}:
                     </span>
-                    {car.body}
+                    {car.result.body}
                   </p>
                   <p>
                     <span className="text-[#989898]">
                       {translations[language].year}:
                     </span>
-                    {car.year}
+                    {car.result.year}
                   </p>
                   <p>
                     <span className="text-[#989898]">
                       {translations[language].milage}:
                     </span>
-                    {car.milage}
+                    {car.result.milage}
                   </p>
                   <p>
                     <span className="text-[#989898]">
                       {translations[language].color}:
                     </span>
-                    {car.color}
+                    {car.result.color}
                   </p>
                 </div>
                 <div className="space-y-4">
@@ -294,13 +341,13 @@ const CarDetails = () => {
                     <span className="text-[#989898]">
                       {translations[language].engine}:
                     </span>
-                    {car.engine}
+                    {car.result.engine}
                   </p>
                   <p>
                     <span className="text-[#989898]">
                       {translations[language].country}:
                     </span>
-                    {car.country}
+                    {car.result.country}
                   </p>
                 </div>
               </div>
@@ -337,8 +384,8 @@ const CarDetails = () => {
         </div>
 
         {/* StillSelecting Component */}
-        <div className="my-12">
-          <StillSelecting />
+        <div>
+          <StillSelectingForDetails />
         </div>
       </div>
     </div>

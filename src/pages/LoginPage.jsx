@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axiosInstance from "../axiosConfig";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, json } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Swal from "sweetalert2";
 import { useLanguage } from "../components/Context/LanguageContext";
 import { useUser } from "../components/Context/UserContext";
-import { socket } from "../socket";
+import { io } from "socket.io-client";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -14,8 +14,6 @@ const LoginPage = () => {
   const [rememberMe, setRememberMe] = useState(false);
   const { language } = useLanguage();
   const { setIsLogged } = useUser();
-  const [isConnected, setIsConnected] = useState(socket.connected);
-  const [fooEvents, setFooEvents] = useState([]);
 
   const navigate = useNavigate();
   const translations = {
@@ -95,9 +93,14 @@ const LoginPage = () => {
     }
   };
 
+  const conncetWS = () => {
+    socket.emit("join", {userId: 2});
+  }
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
+      
       navigate("/");
     }
   }, [navigate]);

@@ -2,7 +2,7 @@ import React from "react";
 import car from "../../src/assets/images/car.svg";
 import { useLanguage } from "./Context/LanguageContext";
 
-const StillSelecting = () => {
+const StillSelectingForDetails = () => {
   const { language } = useLanguage();
 
   const translations = {
@@ -25,9 +25,7 @@ const StillSelecting = () => {
   };
 
   return (
-    <div
-     className="p-2 m-2 lg:mx-[72px] lg:my-4"
-     >
+    <div className="my-4">
       <div
         className="grid grid-cols-1 md:grid-cols-2 gap-4 p-8"
         style={{
@@ -54,4 +52,4 @@ const StillSelecting = () => {
   );
 };
 
-export default StillSelecting;
+export default StillSelectingForDetails;
