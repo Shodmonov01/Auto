@@ -1,0 +1,112 @@
+{
+  "cars": [
+    {
+      "id": "1",
+      "model": "Solaris",
+      "year": 2022,
+      "price": 19000,
+      "views": 20,
+      "message": {
+        "content": "Interested in this car.",
+        "time": "10:15"
+      },
+      "likes": 32,
+      "company": "Hyundai",
+      "country": "USA",
+      "mileage": 15000,
+      "color": "White",
+      "user": {
+        "name": "Хамзат Хусейнович Арслан...",
+        "email": "Khamzat.arslanaliyev@mail.ru",
+        "tariff": "Premium"
+      }
+    },
+    {
+      "id": "2",
+      "model": "Corolla",
+      "year": 2021,
+      "price": 22000,
+      "views": 50,
+      "message": {
+        "content": "Can I get a discount?",
+        "time": "09:30"
+      },
+      "likes": 40,
+      "company": "Toyota",
+      "country": "Japan",
+      "mileage": 30000,
+      "color": "Black",
+      "user": {
+        "name": "Хамзат Хусейнович Арслан...",
+        "email": "Khamzat.arslanaliyev@mail.ru",
+        "tariff": "Basic"
+      }
+    },
+    {
+      "id": "3",
+      "model": "Benz C-Class",
+      "year": 2020,
+      "price": 35000,
+      "views": 80,
+      "message": {
+        "content": "Can I see more pictures?",
+        "time": "08:50"
+      },
+      "likes": 60,
+      "company": "Mercedes-Benz",
+      "country": "Germany",
+      "mileage": 50000,
+      "color": "Silver",
+      "user": {
+        "name": "Emily Johnson",
+        "email": "emily.johnson@example.com",
+        "password": "mypassword",
+        "tariff": "Standard"
+      }
+    },
+    {
+      "id": "4",
+      "model": "Civic",
+      "year": 2019,
+      "price": 18000,
+      "views": 35,
+      "message": {
+        "content": "Is this car still in good condition?",
+        "time": "17:00"
+      },
+      "likes": 15,
+      "company": "Honda",
+      "country": "USA",
+      "mileage": 40000,
+      "color": "Red",
+      "user": {
+        "name": "Michael Brown",
+        "email": "michael.brown@example.com",
+        "password": "michael123",
+        "tariff": "Premium"
+      }
+    },
+    {
+      "id": "5",
+      "model": "Mustang",
+      "year": 2018,
+      "price": 40000,
+      "views": 100,
+      "message": {
+        "content": "What is the service history?",
+        "time": "11:00"
+      },
+      "likes": 70,
+      "company": "Ford",
+      "country": "USA",
+      "mileage": 60000,
+      "color": "Blue",
+      "user": {
+        "name": "Linda Davis",
+        "email": "linda.davis@example.com",
+        "password": "lindaPass",
+        "tariff": "Basic"
+      }
+    }
+  ]
+}

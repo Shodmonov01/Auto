@@ -14,6 +14,7 @@ const Katalog = () => {
   const [likedCars, setLikedCars] = useState(new Set());
   const [currentPage, setCurrentPage] = useState(1);
   const { language } = useLanguage();
+  const [filters, setFilters] = useState(null);
 
   const translations = {
     ru: {
@@ -32,8 +33,6 @@ const Katalog = () => {
     axiosInstance
       .get("/cars")
       .then((response) => {
-        console.log("API Response:", response.data);
-
         if (Array.isArray(response.data)) {
           const apiCars = response.data.map((car) => ({
             id: car.id,
@@ -97,15 +96,19 @@ const Katalog = () => {
   };
 
   const navigate = useNavigate();
-
   const handleLinkClick = (path) => {
     window.scrollTo(0, 0);
     navigate(path);
   };
 
+  const getFilters = (data) => {
+    console.log(data)
+    setFilters(data)
+  }
+
   return (
     <>
-      <CarFilters />
+      <CarFilters filters={getFilters} />
       <div className="p-2 m-2 lg:mx-[72px]">
         <div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 mt-4">

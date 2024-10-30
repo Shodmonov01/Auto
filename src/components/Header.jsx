@@ -83,7 +83,7 @@ const Header = () => {
   }, []);
   if (token && UserData) {
     console.log(socket, "---");
-    conncetWS()
+    conncetWS();
     setIsLogged(true);
   }
   const toggleMenu = () => {

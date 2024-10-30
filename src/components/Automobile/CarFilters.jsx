@@ -3,8 +3,15 @@ import { useLanguage } from "../Context/LanguageContext";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { Routes, Route, Link } from "react-router-dom";
 
-const Section = () => {
+const Section = ({ filters }) => {
   const { language } = useLanguage();
+  const [filterCars, setFiltersCars] = useState({
+    marka: null,
+    model: null,
+    country: null,
+    year: null,
+    priceRange: null,
+  });
 
   const translations = {
     ru: {
@@ -53,7 +60,16 @@ const Section = () => {
       price: "Price",
     },
   };
- 
+  const collectFilters = () => {
+    filters(filterCars);
+  };
+  const handleFilterChange = (e) => {
+    const { name, value } = e.target;
+    setFiltersCars((prevFilters) => ({
+      ...prevFilters,
+      [name]: value,
+    }));
+  };
 
   return (
     <>
@@ -66,9 +82,7 @@ const Section = () => {
           <div className="flex flex-col lg:flex-row gap-4 items-center m-2">
             <div className="bg-gray-100 rounded-[10px] inline-flex space-x-2">
               <Link to="/about-cars">
-                <button
-                  className="px-4 py-2 lg:w-[150px] w-[100px] rounded text-[15px] active:text-white active:bg-[#293843]"
-                >
+                <button className="px-4 py-2 lg:w-[150px] w-[100px] rounded text-[15px] active:text-white active:bg-[#293843]">
                   {translations[language].auto}
                 </button>
               </Link>
@@ -105,7 +119,12 @@ const Section = () => {
             <div className="w-full">
               <p className="text-[14px]">{translations[language].selection}</p>
               <div className="relative flex items-center w-full">
-                <select className="text-[#5A5A5A] appearance-none bg-[#F4F4F4] rounded-[5px] px-[18px] py-[23px] w-full">
+                <select
+                  name="marka"
+                  value={filterCars.marka}
+                  onChange={handleFilterChange}
+                  className="text-[#5A5A5A] appearance-none bg-[#F4F4F4] rounded-[5px] px-[18px] py-[23px] w-full"
+                >
                   <option value="Geely">Geely</option>
                   <option value="Monjaro">Monjaro</option>
                 </select>
@@ -119,7 +138,13 @@ const Section = () => {
             <div className="w-full">
               <p className="text-[14px]">{translations[language].model}</p>
               <div className="relative flex items-center w-full">
-                <select className="text-[#5A5A5A] appearance-none bg-[#F4F4F4] rounded-[5px] px-[18px] py-[23px] w-full">
+                <select
+                  name="model"
+                  value={filterCars.model}
+                  onChange={handleFilterChange}
+                  className="text-[#5A5A5A] appearance-none bg-[#F4F4F4] rounded-[5px] px-[18px] py-[23px] w-full"
+                >
+                  <option value="Monjaro">Monjaro</option>
                   <option value="Monjaro">Monjaro</option>
                   <option value="Monjaro">Monjaro</option>
                 </select>
@@ -133,8 +158,14 @@ const Section = () => {
             <div className="w-full">
               <p className="text-[14px]">{translations[language].country}</p>
               <div className="relative flex items-center w-full">
-                <select className="text-[#5A5A5A] appearance-none bg-[#F4F4F4] rounded-[5px] px-[18px]  py-[23px] w-full">
+                <select
+                  name="country"
+                  value={filterCars.country}
+                  onChange={handleFilterChange}
+                  className="text-[#5A5A5A] appearance-none bg-[#F4F4F4] rounded-[5px] px-[18px]  py-[23px] w-full"
+                >
                   <option value="China">China</option>
+                  <option value="Monjaro">Monjaro</option>
                   <option value="Monjaro">Monjaro</option>
                 </select>
                 <IoMdArrowDropdown
@@ -147,7 +178,13 @@ const Section = () => {
             <div className="w-full">
               <p className="text-[14px]">{translations[language].year}</p>
               <div className="relative flex items-center w-full">
-                <select className="text-[#5A5A5A] appearance-none bg-[#F4F4F4] rounded-[5px] px-[18px] py-[23px] w-full">
+                <select
+                  name="year"
+                  value={filterCars.year}
+                  onChange={handleFilterChange}
+                  className="text-[#5A5A5A] appearance-none bg-[#F4F4F4] rounded-[5px] px-[18px] py-[23px] w-full"
+                >
+                  <option value="0 - 2024">0 - 2024</option>
                   <option value="0 - 2024">0 - 2024</option>
                 </select>
               </div>
@@ -156,7 +193,15 @@ const Section = () => {
             <div className="w-full">
               <p className="text-[14px]">{translations[language].price}</p>
               <div className="relative flex items-center w-full">
-                <select className="text-[#5A5A5A] appearance-none bg-[#F4F4F4] rounded-[5px] px-[18px] py-[23px] w-full">
+                <select
+                  name="priceRange"
+                  value={filterCars.priceRange}
+                  onChange={handleFilterChange}
+                  className="text-[#5A5A5A] appearance-none bg-[#F4F4F4] rounded-[5px] px-[18px] py-[23px] w-full"
+                >
+                  <option value="3 000 000 - 4 000 000">
+                    3 000 000 - 4 000 000
+                  </option>
                   <option value="3 000 000 - 4 000 000">
                     3 000 000 - 4 000 000
                   </option>
@@ -170,7 +215,10 @@ const Section = () => {
             <button className="hover:bg-gray-200 py-[8px] px-[16px]">
               {translations[language].reset} x
             </button>
-            <button className="bg-[#989898] hover:bg-gray-600 text-white py-[17px] px-[43px] rounded text-[14px]">
+            <button
+              onClick={collectFilters}
+              className="bg-[#989898] hover:bg-gray-600 text-white py-[17px] px-[43px] rounded text-[14px]"
+            >
               {translations[language].offers}
             </button>
           </div>

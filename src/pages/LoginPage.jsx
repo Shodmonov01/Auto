@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axiosInstance from "../axiosConfig";
-import { useNavigate, Link, json } from "react-router-dom";
+import { useNavigate, Link, useLocation } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Swal from "sweetalert2";
 import { useLanguage } from "../components/Context/LanguageContext";
@@ -13,7 +13,12 @@ const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
   const { language } = useLanguage();
-  const { setIsLogged } = useUser();
+  const {isLogged, setIsLogged } = useUser();
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+
+  const next_url = searchParams.get("next_url");
+  const id = searchParams.get("user_id");
 
   const navigate = useNavigate();
   const translations = {
@@ -68,16 +73,16 @@ const LoginPage = () => {
       const response = await axiosInstance.post("/login", { email, password });
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("userData", JSON.stringify(response.data.userData));
-
-      await Swal.fire({
-        icon: "success",
-        title: translations[language].loginSuccess,
-        text: translations[language].welcome,
-        confirmButtonText: "OK",
-      });
-
-      navigate("/");
       setIsLogged(true);
+      // await Swal.fire({
+      //   icon: "success",
+      //   title: translations[language].loginSuccess,
+      //   text: translations[language].welcome,
+      //   confirmButtonText: "OK",
+      // });
+
+      // navigate("/");
+      // setIsLogged(true);
       // setTimeout(() => {
       //   window.location.reload();
       // }, 100);
@@ -94,16 +99,14 @@ const LoginPage = () => {
   };
 
   const conncetWS = () => {
-    socket.emit("join", {userId: 2});
-  }
+    socket.emit("join", { userId: 2 });
+  };
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      
-      navigate("/");
+    if (isLogged) {
+      next_url ? navigate(`/message?user_id=${id}`) : navigate('/')
     }
-  }, [navigate]);
+  }, [isLogged]);
 
   return (
     <div className="flex items-center justify-center min-h-[480px] bg-gray-100">
