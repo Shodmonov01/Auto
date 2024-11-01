@@ -84,15 +84,18 @@ const MainPageCarsCatalog = () => {
 
   return (
     <>
-      <div className="mx-2 mb-2 lg:mx-[72px] lg:mb-2">
+      <div className=" mx-2 mb-2 lg:mx-[72px] lg:mb-2">
         <b className="text-2xl">{translations[language].catalog}</b>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 mt-4">
           {cars.map((car) => (
-            <div key={car.id} className="border p-4 rounded-lg shadow-md">
+            <div
+              key={car.id}
+              className="h-[500px] border px-4 py-2 rounded-lg shadow-md"
+            >
               <Link to={`/about-cars/${car.id}`}>
                 <button
                   onClick={() => handleLinkClick(`/about-cars/${car.id}`)}
-                  className="w-full h-40"
+                  className="w-full h-48 sm:h-52 md:h-60 lg:h-64"
                 >
                   <img
                     src={car.image}
@@ -109,7 +112,7 @@ const MainPageCarsCatalog = () => {
                 <p className="text-md text-gray-600">{car.year}</p>
               </div>
               <div className="flex justify-between items-center">
-                <p className="text-md text-gray-600"> {car.mileage} km</p>
+                <p className="text-md text-gray-600">{car.mileage} km</p>
                 <p className="text-md text-gray-600">{car.fuelConsumption}</p>
               </div>
               <div className="flex justify-between items-center">
@@ -120,7 +123,7 @@ const MainPageCarsCatalog = () => {
               <div className="mt-2 flex justify-end items-center">
                 <button
                   onClick={() => handleLike(car.id)}
-                  className={`py-1 px-2 rounded ${
+                  className={` px-2 rounded ${
                     likedCars.has(car.id) ? "bg-gray-400" : ""
                   }`}
                 >

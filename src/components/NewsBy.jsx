@@ -1,29 +1,44 @@
 import React, { useState, useEffect } from "react";
 import axiosConfig from "../axiosConfig";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import StillSelecting from "./StillSelecting";
+import { IoIosArrowForward } from "react-icons/io";
+import { BsArrowUpRight } from "react-icons/bs";
+
 
 const NewsBy = () => {
-  const [newsBy, setNewsBy] = useState(null);
+  const [news, setNews] = useState(null);
+  const [newsBy, setNewsBy] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { id } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchNews = async () => {
+    const fetchNewsById = async () => {
       try {
         const response = await axiosConfig.get(`/news/${id}`);
-        setNewsBy(response.data);
+        setNews(response.data);
       } catch (err) {
         setError("Error fetching news");
       } finally {
         setLoading(false);
       }
     };
-    setTimeout(() => {
-      fetchNews();
-    }, 2000);
+    fetchNewsById();
   }, [id]);
+
+  useEffect(() => {
+    const fetchAllNews = async () => {
+      try {
+        const response = await axiosConfig.get("/news");
+        setNewsBy(response.data);
+      } catch (err) {
+        setError("Error fetching news list");
+      }
+    };
+    fetchAllNews();
+  }, []);
 
   if (loading) {
     return (
@@ -45,28 +60,45 @@ const NewsBy = () => {
     <>
       <div className="p-2 m-2 sm:p-4 sm:m-4 lg:mx-[72px] lg:my-4">
         <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-[26px] font-bold mb-3 text-gray-900">
-          {newsBy.title}
+          {news.title}
         </h2>
         <div className="grid gap-4 lg:grid-cols-3 sm:grid-cols-1">
           <ul className="space-y-6 col-span-2">
-            <li key={newsBy.id}>
+            <li key={news.id}>
               <img
-                src={newsBy.image}
-                alt={newsBy.title}
-                className="w-full max-w-full h-auto sm:h-[300px] md:h-[350px lg:w-[857px] lg:h-[383px] rounded-[15px] object-cover"
+                src={news.image}
+                alt={news.title}
+                className="w-full h-auto xs:w-[350px] md:w-[600px] lg:w-[857px] lg:h-[383px] rounded-[15px] object-cover"
               />
               <div className="py-6">
-                <p className="text-[#989898] text-[16px] sm:text-base md:text-lg mb-4">
-                  {newsBy.content}
+                <p className="text-[#989898] text-[14px] xs:text-sm sm:text-base md:text-lg mb-4">
+                  {news.content}
                 </p>
               </div>
             </li>
           </ul>
-          <div className="p-2 text-[20px] col-span-1 rounded-[15px] border shadow-lg h-[383px]">
+
+          <div className="p-2 w-[350px] lg:w-[414px] text-[20px] col-span-1 rounded-[15px] border shadow-lg h-[383px]">
             <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-[26px] font-bold mb-3 text-gray-900">
               Читайте другие статьи <br />в нашем блоге:
             </h2>
-            
+            <div className="space-y-2 w-full">
+              {newsBy.slice(-3).map((article) => (
+                <div
+                  className="flex items-center justify-between border-b pb-2 pt-4 px-4 cursor-pointer"
+                  onClick={() => navigate(`/news/${article.id}`)}
+                >
+                  <span className="flex-1 text-left text-[#5A5A5A] hover:underline">
+                    {article.title}
+                  </span>
+                  <IoIosArrowForward className="flex-none" />
+                </div>
+              ))}
+              <div className="flex items-center cursor-pointer hover:underline justify-start  pt-6">
+                <p className="text-[#202020] px-4">Читать больше новостей</p>
+                <BsArrowUpRight className="flex-none" />
+              </div>
+            </div>
           </div>
         </div>
       </div>
