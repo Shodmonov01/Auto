@@ -8,7 +8,7 @@ import {
   MdSearch,
   MdClose,
 } from "react-icons/md";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Dialog } from "@headlessui/react";
 import { CiMenuFries } from "react-icons/ci";
 import { useLanguage } from "./Context/LanguageContext";
@@ -66,9 +66,11 @@ const Header = () => {
   const [UserData, setUserData] = useState(null);
   const { language, toggleLanguage } = useLanguage();
   const { isLogged, setIsLogged } = useUser();
+  const navigate = useNavigate();
 
   const handleLanguageChange = (e) => {
     toggleLanguage(e.target.value);
+    setMenuOpen(!menuOpen);
   };
   const token = localStorage.getItem("token");
   const storedUserData = localStorage.getItem("userData");
@@ -76,18 +78,21 @@ const Header = () => {
   const conncetWS = () => {
     socket.emit("join", { userId: UserData.id });
   };
+  const handleCloseDialog = () => {
+    setMenuOpen(!menuOpen);
+  };
 
-  useEffect(() => {
-    setHasToken(!!token);
-    setUserData(storedUserData ? JSON.parse(storedUserData) : null);
-  }, []);
-  if (token && UserData) {
-    console.log(socket, "---");
-    conncetWS();
-    setIsLogged(true);
-  }
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
+    useEffect(() => {
+      setHasToken(!!token);
+      setUserData(storedUserData ? JSON.parse(storedUserData) : null);
+    }, []);
+    if (token && UserData) {
+      console.log(socket, "---");
+      conncetWS();
+      setIsLogged(true);
+    }
   };
   return (
     <>
@@ -296,7 +301,7 @@ const Header = () => {
                   <>
                     <div className="flex items-center justify-between p-4 bg-[#F6F6F6] rounded-[5px]">
                       <div className="flex md:flex-row  items-center">
-                        <Link to={"/profile"}>
+                        <Link onClick={handleCloseDialog} to={"/profile"}>
                           <p className="rounded-full py-1 md:py-3 px-3 md:px-6 flex items-center justify-center bg-[#EEEEEE]">
                             {UserData.name
                               ? UserData.name.charAt(0).toUpperCase()
@@ -307,7 +312,7 @@ const Header = () => {
                           {UserData.name}
                         </h1>
                       </div>
-                      <Link to={"/profile"}>
+                      <Link onClick={handleCloseDialog} to={"/profile"}>
                         <div>
                           <MdKeyboardArrowRight
                             size={24}
@@ -324,12 +329,12 @@ const Header = () => {
               </div>
             ) : (
               <div className="flex flex-col items-center space-y-2">
-                <Link to={"/register"}>
+                <Link onClick={handleCloseDialog} to={"/register"}>
                   <button className="w-[334px] bg-blue-500 hover:bg-blue-600 text-white py-[17px] px-[43px] rounded-[3px] text-[13px]">
                     {translations[language].register}
                   </button>
                 </Link>
-                <Link to={"/login"}>
+                <Link onClick={handleCloseDialog} to={"/login"}>
                   <button className="w-[334px] bg-[#EEEEEE] hover:bg-gray-300 text-[#ACACAC] py-[17px] px-[43px] rounded-[3px] text-[13px]">
                     {translations[language].login}
                   </button>
@@ -339,22 +344,22 @@ const Header = () => {
             )}
             <div className="flex items-start justify-between">
               <ul className="flex flex-col items-center space-y-2 ml-2 mb-4">
-                <Link to={"/none"}>
+                <Link onClick={handleCloseDialog} to={"/none"}>
                   <li className="p-2 hover:text-blue-600 text-[14px] text-[#434343]">
                     {translations[language].basic}
                   </li>
                 </Link>
-                <Link to={"/none"}>
+                <Link onClick={handleCloseDialog} to={"/none"}>
                   <li className="p-2 hover:text-blue-600 text-[14px] text-[#434343]">
                     {translations[language].about}
                   </li>
                 </Link>
-                <Link to={"/news"}>
+                <Link onClick={handleCloseDialog} to={"/news"}>
                   <li className="p-2 hover:text-blue-600 text-[14px] text-[#434343]">
                     {translations[language].news}
                   </li>
                 </Link>
-                <Link to={"/contact"}>
+                <Link onClick={handleCloseDialog} to={"/contact"}>
                   <li className="p-2 hover:text-blue-600 text-[14px] text-[#434343]">
                     {translations[language].contact}
                   </li>
@@ -379,6 +384,7 @@ const Header = () => {
             <ul>
               <li className="flex items-center justify-between bg-[#F6F6F6] p-4 m-2">
                 <Link
+                  onClick={handleCloseDialog}
                   className="hover:text-blue-600 text-[14px]"
                   to={"/about-cars"}
                 >
@@ -388,6 +394,7 @@ const Header = () => {
               </li>
               <li className="flex items-center justify-between bg-[#F6F6F6] p-4 m-2">
                 <Link
+                  onClick={handleCloseDialog}
                   className="hover:text-blue-600 text-[14px]"
                   to={"/commerce-cars"}
                 >
@@ -397,6 +404,7 @@ const Header = () => {
               </li>
               <li className="flex items-center justify-between bg-[#F6F6F6] p-4 m-2">
                 <Link
+                  onClick={handleCloseDialog}
                   className="hover:text-blue-600 text-[14px]"
                   to={"/motorcycles"}
                 >
