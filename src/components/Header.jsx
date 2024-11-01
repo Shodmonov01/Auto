@@ -70,7 +70,6 @@ const Header = () => {
 
   const handleLanguageChange = (e) => {
     toggleLanguage(e.target.value);
-    setMenuOpen(!menuOpen);
   };
   const token = localStorage.getItem("token");
   const storedUserData = localStorage.getItem("userData");
