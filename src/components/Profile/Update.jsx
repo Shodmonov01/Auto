@@ -9,27 +9,27 @@ import axiosInstance from "../../axiosConfig";
 
 const Update = () => {
   const [error, setError] = useState("");
+  const [imageFiles, setImageFiles] = useState([]);
   const [formData, setFormData] = useState({
-    mark: "BMW",
-    country: "Uzbekistan",
-    model: "BMW",
-    cost: 200000,
+    color: "",
+    country: "",
     year: 2024,
-    mileage: 100,
-    engine: "fuel",
-    volume: 5.0,
-    authoremail: "javohiryusupovvv2006@gmail.com",
+    cost: 200000,
+    engine: "",
+    milage: 0,
+    volume: "",
     horsepower: 500,
-    drive: "AWD",
-    checkpoint: "automatic",
-    bodyType: "Sedan",
-    doors: "4",
-    statement: "new",
-    color: "red",
+    drive: "",
+    checkpoint: "",
+    doors: 4,
+    body: "",
+    statement: "",
+    description: "",
     stock: 1,
-    image: [
-      "https://images.pexels.com/photos/112460/pexels-photo-112460.jpeg?cs=srgb&dl=pexels-mikebirdy-112460.jpg&fm=jpg",
-    ],
+    authoremail: "javohiryusupovvv2006@gmail.com",
+    rate: "",
+    model: "",
+    mark: "BMW",
   });
 
   const handleOptionChange = (field, value) => {
@@ -40,42 +40,51 @@ const Update = () => {
   };
 
   const handlePhotoUpload = (e) => {
-    const files = Array.from(e.target.files[0]);
-    let validFiles = [];
+    const files = Array.from(e.target.files);
 
-    files.forEach((file) => {
-      if (file.size > 1024 * 1024 * 2) {
-        setError("rasmni hajmi 2 mb dan kam bo'lishi kerak");
+    const maxFileSize = 2 * 1024 * 1024; // 2 MB in bytes
+
+    const validFiles = files.reduce((acc, file) => {
+      if (file.size > maxFileSize) {
+        setError("Rasm hajmi 2 MB dan kam bo'lishi kerak");
+        return acc;
       } else {
         setError("");
-        const imgUrl = URL.createObjectURL(file);
-        validFiles.push(imgUrl);
+        acc.push({
+          url: URL.createObjectURL(file),
+          file: file,
+        });
+        return acc;
       }
-    });
+    }, []);
 
-    setFormData((prev) => ({
-      ...prev,
-      image: [...prev.image, ...validFiles],
-    }));
+    setImageFiles((prevFiles) => [...prevFiles, ...validFiles]);
   };
 
   const deletePhoto = (index) => {
-    setFormData((prev) => ({
-      ...prev,
-      image: prev.image.filter((_, i) => i !== index),
-    }));
+    setImageFiles((prevFiles) => prevFiles.filter((_, i) => i !== index));
   };
-
-  console.log(formData);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const data = new FormData();
+    imageFiles.forEach((file) => data.append("image", file.file));
+
+    for (const key in formData) {
+      data.append(key, formData[key]);
+    }
     try {
-      const response = await axiosInstance.post("/add-car", formData);
+      const response = await axiosInstance.post("/add-car", data, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
       console.log("Car added successfully:", response.data);
     } catch (error) {
       console.error("Error adding car:", error);
     }
+    console.log(formData);
   };
 
   return (
@@ -121,12 +130,13 @@ const Update = () => {
           </nav>
           <div className="relative w-full">
             <select
-              value={formData.brand}
-              onChange={(e) => handleOptionChange("brand", e.target.value)}
+              value={formData.mark}
+              onChange={(e) => handleOptionChange("mark", e.target.value)}
               className="w-full bg-[#F6F6F6] p-4 rounded-[5px] my-[20px] text-[#989898] appearance-none"
             >
               <option value="Марка">Марка</option>
-              <option value="Марка">Марка</option>
+              <option value="Chevrolet">Chevrolet</option>
+              <option value="BMW">BMW</option>
             </select>
             <IoMdArrowDropdown
               className="absolute top-[50px] right-4 transform -translate-y-1/2 pointer-events-none"
@@ -135,12 +145,13 @@ const Update = () => {
           </div>
           <div className="relative w-full">
             <select
-              value={formData.modelv}
+              value={formData.model}
               onChange={(e) => handleOptionChange("model", e.target.value)}
               className="w-full bg-[#F6F6F6] p-4 rounded-[5px] text-[#989898] appearance-none"
             >
               <option value="Модель">Модель</option>
-              <option value="Модель">Модель</option>
+              <option value="Tahoe">Tahoe</option>
+              <option value="BMW m5 cs">BMW m5 cs</option>
             </select>
             <IoMdArrowDropdown
               className="absolute top-[28px] right-4 transform -translate-y-1/2 pointer-events-none"
@@ -166,13 +177,13 @@ const Update = () => {
           <div className="flex justify-between items-center border-t py-4">
             <p className="text-[15px] text-[#989898]">Пробег</p>
             <select
-              value={formData.mileage}
+              value={formData.milage}
               onChange={(e) => handleOptionChange("milage", e.target.value)}
               className="bg-[#F6F6F6] p-2 rounded-[5px]"
             >
-              <option value="16000">15000</option>
+              <option value="15000">15000</option>
               <option value="16000">16000</option>
-              <option value="16000">17000</option>
+              <option value="17000">17000</option>
             </select>
           </div>
           <div className="flex justify-between items-center border-t py-4">
@@ -190,13 +201,15 @@ const Update = () => {
           <div className="flex justify-between items-center border-t py-4">
             <p className="text-[15px] text-[#989898]">Топливо</p>
             <select
-              value={formData.fuel}
-              onChange={(e) => handleOptionChange("fuel", e.target.value)}
+              value={formData.engine}
+              onChange={(e) => handleOptionChange("engine", e.target.value)}
               className="bg-[#F6F6F6] p-2 rounded-[5px]"
             >
               <option value="Бензин">Бензин</option>
-              <option value="Gas">Gas</option>
-              <option value="Disel">Disel</option>
+              <option value="petrol">petrol</option>
+              <option value="electric">electric</option>
+              <option value="diesel">diesal</option>
+              <option value="hybrid">hybrid</option>
             </select>
           </div>
           <div className="flex justify-between items-center border-t py-4">
@@ -228,32 +241,32 @@ const Update = () => {
               onChange={(e) => handleOptionChange("drive", e.target.value)}
               className="bg-[#F6F6F6] p-2 rounded-[5px]"
             >
-              <option value="Передний">Передний</option>
-              <option value="Передний">Передний</option>
+              <option value="AWD">AWD</option>
+              <option value="FWD">FWD</option>
             </select>
           </div>
           <div className="flex justify-between items-center border-t py-4">
             <p className="text-[15px] text-[#989898]">КПП</p>
             <select
-              value={formData.transmission}
-              onChange={(e) =>
-                handleOptionChange("transmission", e.target.value)
-              }
+              value={formData.checkpoint}
+              onChange={(e) => handleOptionChange("checkpoint", e.target.value)}
               className="bg-[#F6F6F6] p-2 rounded-[5px]"
             >
-              <option value="автомат">автомат</option>
-              <option value="mexanik">mexanik</option>
+              <option value="automatic">automatic</option>
+              <option value="manual">manual</option>
             </select>
           </div>
           <div className="flex justify-between items-center border-t py-4">
             <p className="text-[15px] text-[#989898]">Кузов</p>
             <select
-              value={formData.bodyType}
-              onChange={(e) => handleOptionChange("bodyType", e.target.value)}
+              value={formData.body}
+              onChange={(e) => handleOptionChange("body", e.target.value)}
               className="bg-[#F6F6F6] p-2 rounded-[5px]"
             >
-              <option value="Седан">Седан</option>
-              <option value="Crossover">Crossover</option>
+              <option value="hatchback">hatchback</option>
+              <option value="crossover">crossover</option>
+              <option value="sedan">sedan</option>
+              <option value="convertible">convertible</option>
             </select>
           </div>
           <div className="flex justify-between items-center border-t py-4">
@@ -276,6 +289,8 @@ const Update = () => {
               className="bg-[#F6F6F6] p-2 rounded-[5px]"
             >
               <option value="C пробегом">C пробегом</option>
+              <option value="used">used</option>
+              <option value="new">new</option>
             </select>
           </div>
           <div className="flex justify-between items-center border-t py-4">
@@ -286,31 +301,43 @@ const Update = () => {
               className="bg-[#F6F6F6] p-2 rounded-[5px]"
             >
               <option value="Белый">Белый</option>
-              <option value="red">red</option>
+              <option value="red">Red</option>
+              <option value="black">Black</option>
+              <option value="white">White</option>
             </select>
           </div>
           <div className="flex gap-6 itmes-center">
             <div className="flex items-center gap-2 mt-[25px]">
-              <input type="radio" name="option" />
-              <p>B наличии</p>
+              <input
+                name="rate"
+                value="cash"
+                checked={formData.rate === "cash"}
+                type="radio"
+                onChange={(e) => handleOptionChange("rate", e.target.value)}
+              />
+              <p>cash</p>
             </div>
             <div className="flex items-center gap-2 mt-[25px]">
-              <input type="radio" name="option" />
-              <p>Под заказ</p>
+              <input
+                type="radio"
+                value="credit"
+                name="rate"
+                checked={formData.rate === "credit"}
+                onChange={(e) => handleOptionChange("rate", e.target.value)}
+              />
+              <p>credit</p>
             </div>
           </div>
         </div>
         <br />
 
         <div className="w-full max-w-[792px] flex flex-col p-24 shadow-lg justify-center rounded-[10px] items-center bg-white shadow">
-          <h1 className="text-2xl font-bold text-gray-800 mb-4 self-start">
-            Фото
-          </h1>
-          <p className="text-gray-600 mb-6 text-xs">
+          <h1 className="text-2xl font-bold text-gray-800 self-start">Фото</h1>
+          <p className=" self-start text-gray-600 mb-6 text-xs">
             Загрузите фото вашего автомобиля четко c разных ракурсов!
           </p>
 
-          <div>
+          <div className="w-[692px]">
             <label className="flex flex-col items-center justify-center w-full h-48 bg-gray-100 rounded-lg shadow-md cursor-pointer hover:bg-gray-200 transition-all duration-300 ease-in-out">
               <MdPhotoCamera className="text-5xl text-[#2684E5] mb-2" />
               <span className="text-[#2684E5] font-semibold">
@@ -327,11 +354,11 @@ const Update = () => {
 
             {error && <p className="text-red-500">{error}</p>}
 
-            <div className="flex flex-wrap justify-center gap-4 mt-6 md:gap-6 lg:gap-8 xl:gap-10">
-              {formData.image.map((imgUrl, index) => (
+            <div className=" flex flex-wrap justify-center gap-4 mt-6 md:gap-6 lg:gap-8 xl:gap-10">
+              {imageFiles.map((imgUrl, index) => (
                 <div key={index} className="relative group">
                   <img
-                    src={imgUrl}
+                    src={imgUrl.url}
                     alt={`uploaded preview ${index + 1}`}
                     className="w-40 h-40 object-cover rounded-lg shadow-md"
                   />
@@ -346,6 +373,27 @@ const Update = () => {
             </div>
           </div>
         </div>
+        <br />
+        <div className="w-full max-w-[792px] flex flex-col p-24 shadow-lg justify-center rounded-[10px] items-center bg-white">
+          <h1 className="text-2xl font-bold text-gray-800 self-start">
+            Описание
+          </h1>
+          <p className="self-start text-gray-600 mb-6 text-xs">
+            He указывайте ссылки на источники, цены, контакты и не предлагайте
+            другие услуги ! объявление не пройдет модерацию
+          </p>
+          <div className="w-full">
+            <textarea
+              value={formData.description}
+              onChange={(e) =>
+                handleOptionChange("description", e.target.value)
+              }
+              className="w-[627px] bg-[#F6F6F6] h-[178px] p-2 border border-gray-300 rounded-md"
+              placeholder="Введите описание..."
+            />
+          </div>
+        </div>
+
         <div>
           <button onClick={handleSubmit}>collect</button>
         </div>

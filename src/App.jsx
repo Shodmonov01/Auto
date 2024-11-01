@@ -27,6 +27,7 @@ import NewsBy from "./components/NewsBy";
 import PersonalMessage from "./components/Profile/PersonalMessage";
 import { LanguageProvider } from "./components/Context/LanguageContext";
 import { UserProvider } from "./components/Context/UserContext";
+import DeleteCar from "./components/Profile/deleteCar";
 
 function Layout({ children }) {
   const location = useLocation();

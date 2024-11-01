@@ -2,13 +2,13 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: 'https://api.youcarrf.ru',
-  // baseURL:"http://212.67.11.143:4035",
+  // baseURL: 'https://api.youcarrf.ru',
+  baseURL:"http://212.67.11.143:4035",
   headers: {
   'Content-Type': 'application/json',
   // 'Access-Control-Allow-Origin': '*',
   // 'Accep': 'application/json'  
-},
+},    
 });
 
 axiosInstance.interceptors.request.use(
