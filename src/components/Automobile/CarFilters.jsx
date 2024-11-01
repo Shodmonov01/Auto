@@ -80,7 +80,7 @@ const Section = ({ filters }) => {
         <br />
         <div className="p-4 shadow-slate-500 sm:shadow-md lg:shadow-lg">
           <div className="flex flex-col lg:flex-row gap-4 items-center m-2">
-            <div className="bg-gray-100 rounded-[10px] inline-flex space-x-2">
+            <div className="bg-gray-100 rounded-[10px] flex items-center pr-2 space-x-4">
               <Link to="/about-cars">
                 <button className="px-4 py-2 lg:w-[150px] w-[100px] rounded text-[15px] active:text-white active:bg-[#293843]">
                   {translations[language].auto}

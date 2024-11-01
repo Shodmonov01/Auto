@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axiosConfig from "../axiosConfig";
-import { useParams, useNavigate, Link } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import StillSelecting from "./StillSelecting";
 import { IoIosArrowForward } from "react-icons/io";
 import { BsArrowUpRight } from "react-icons/bs";
-
 
 const NewsBy = () => {
   const [news, setNews] = useState(null);
@@ -56,6 +55,10 @@ const NewsBy = () => {
     );
   }
 
+  const relatedNews = newsBy
+    .filter((article) => article.id !== news.id)
+    .slice(-3);
+
   return (
     <>
       <div className="p-2 m-2 sm:p-4 sm:m-4 lg:mx-[72px] lg:my-4">
@@ -83,8 +86,9 @@ const NewsBy = () => {
               Читайте другие статьи <br />в нашем блоге:
             </h2>
             <div className="space-y-2 w-full">
-              {newsBy.slice(-3).map((article) => (
+              {relatedNews.map((article) => (
                 <div
+                  key={article.id}
                   className="flex items-center justify-between border-b pb-2 pt-4 px-4 cursor-pointer"
                   onClick={() => navigate(`/news/${article.id}`)}
                 >
@@ -94,7 +98,7 @@ const NewsBy = () => {
                   <IoIosArrowForward className="flex-none" />
                 </div>
               ))}
-              <div className="flex items-center cursor-pointer hover:underline justify-start  pt-6">
+              <div className="flex items-center cursor-pointer hover:underline justify-start pt-6">
                 <p className="text-[#202020] px-4">Читать больше новостей</p>
                 <BsArrowUpRight className="flex-none" />
               </div>

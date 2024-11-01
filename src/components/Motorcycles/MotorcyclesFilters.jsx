@@ -63,7 +63,7 @@ const MotorcyclesFilters = () => {
         <br />
         <div className="p-4 shadow-slate-500 sm:shadow-md lg:shadow-lg">
           <div className="flex flex-col lg:flex-row gap-4 items-center m-2">
-            <div className="bg-gray-100 rounded-[10px] inline-flex space-x-2">
+            <div className="bg-gray-100 rounded-[10px] flex items-center space-x-4 pr-2">
               <Link to="/about-cars">
                 <button className="px-4 py-2 lg:w-[150px] w-[100px] rounded text-[15px] active:text-white active:bg-[#293843]">
                   {translations[language].auto}
@@ -88,13 +88,15 @@ const MotorcyclesFilters = () => {
                 </button>
               </Link>
             </div>
-            <div className="flex gap-2">
-              <input type="checkbox" />
-              <p>{translations[language].available}</p>
-            </div>
-            <div className="flex gap-2">
-              <input type="checkbox" />
-              <p>{translations[language].order}</p>
+            <div className="flex space-x-4">
+              <div className="flex gap-2">
+                <input type="checkbox" />
+                <p>{translations[language].available}</p>
+              </div>
+              <div className="flex gap-2">
+                <input type="checkbox" />
+                <p>{translations[language].order}</p>
+              </div>
             </div>
           </div>
           <br />
