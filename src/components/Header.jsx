@@ -95,12 +95,12 @@ const Header = () => {
         <div className="flex flex-wrap items-center p-4">
           <nav className="hidden md:flex flex-grow">
             <ul className="flex space-x-4 cursor-pointer">
-              <Link to={"/none"}>
+              <Link to={"/"}>
                 <li className="p-2 hover:text-blue-600 text-[#434343]">
                   {translations[language].basic}
                 </li>
               </Link>
-              <Link to={"/none"}>
+              <Link to={"/"}>
                 <li className="p-2 hover:text-blue-600 text-[#434343]">
                   {translations[language].about}
                 </li>

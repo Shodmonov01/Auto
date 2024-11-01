@@ -25,7 +25,7 @@ const Contact = () => {
     <>
       <div className="flex">
         <aside className="w-72 p-5 flex flex-col items-center">
-          <h1 className="font-semibold text-3xl text-center text-gray-700 mb-4">
+          <h1 className="font-semibold text-3xl text-center text-gray-700 mb-6">
             {translations[language].contact}
           </h1>
           <div className="space-y-10">

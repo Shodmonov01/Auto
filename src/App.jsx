@@ -80,7 +80,6 @@ function App() {
                   </>
                 }
               />
-              {/* Nested route for PersonalAccount */}
               <Route
                 path="/register"
                 element={
