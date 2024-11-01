@@ -100,11 +100,6 @@ const Header = () => {
                   {translations[language].basic}
                 </li>
               </Link>
-              <Link to={"/katalog"}>
-                <li className="p-2 hover:text-blue-600 text-[#434343]">
-                  {translations[language].katalog}
-                </li>
-              </Link>
               <Link to={"/none"}>
                 <li className="p-2 hover:text-blue-600 text-[#434343]">
                   {translations[language].about}
@@ -347,11 +342,6 @@ const Header = () => {
                 <Link to={"/none"}>
                   <li className="p-2 hover:text-blue-600 text-[14px] text-[#434343]">
                     {translations[language].basic}
-                  </li>
-                </Link>
-                <Link to={"/katalog"}>
-                  <li className="p-2 hover:text-blue-600 text-[14px] text-[#434343]">
-                    {translations[language].katalog}
                   </li>
                 </Link>
                 <Link to={"/none"}>
