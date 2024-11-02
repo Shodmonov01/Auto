@@ -83,16 +83,16 @@ const Header = () => {
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
-    useEffect(() => {
-      setHasToken(!!token);
-      setUserData(storedUserData ? JSON.parse(storedUserData) : null);
-    }, []);
-    if (token && UserData) {
-      console.log(socket, "---");
-      conncetWS();
-      setIsLogged(true);
-    }
   };
+  useEffect(() => {
+    setHasToken(!!token);
+    setUserData(storedUserData ? JSON.parse(storedUserData) : null);
+  }, []);
+  if (token && UserData) {
+    console.log(socket, "---");
+    conncetWS();
+    setIsLogged(true);
+  }
   return (
     <>
       <header className="bg-[#F6F6F6] w-full px-6">

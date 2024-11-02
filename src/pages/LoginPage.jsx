@@ -13,14 +13,14 @@ const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
   const { language } = useLanguage();
-  const {isLogged, setIsLogged } = useUser();
+  const { isLogged, setIsLogged } = useUser();
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
+  const navigate = useNavigate();
 
   const next_url = searchParams.get("next_url");
   const id = searchParams.get("user_id");
 
-  const navigate = useNavigate();
   const translations = {
     ru: {
       enter: "Вход",
@@ -104,7 +104,7 @@ const LoginPage = () => {
 
   useEffect(() => {
     if (isLogged) {
-      next_url ? navigate(`/message?user_id=${id}`) : navigate('/')
+      next_url ? navigate(`/message?user_id=${id}`) : navigate("/");
     }
   }, [isLogged]);
 
