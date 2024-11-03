@@ -6,6 +6,7 @@ import MotorBike from "./UpdatedCars.jsx/MotorBike";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { MdPhotoCamera } from "react-icons/md";
 import axiosInstance from "../../axiosConfig";
+import { FaDollarSign, FaCaretDown } from "react-icons/fa";
 
 const Update = () => {
   const [error, setError] = useState("");
@@ -14,7 +15,7 @@ const Update = () => {
     color: "",
     country: "",
     year: 2024,
-    cost: 200000,
+    cost: 0,
     engine: "",
     milage: 0,
     volume: "",
@@ -42,7 +43,7 @@ const Update = () => {
   const handlePhotoUpload = (e) => {
     const files = Array.from(e.target.files);
 
-    const maxFileSize = 2 * 1024 * 1024; // 2 MB in bytes
+    const maxFileSize = 2 * 1024 * 1024;
 
     const validFiles = files.reduce((acc, file) => {
       if (file.size > maxFileSize) {
@@ -65,26 +66,23 @@ const Update = () => {
     setImageFiles((prevFiles) => prevFiles.filter((_, i) => i !== index));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
+  const handleSubmit = async (url) => {
     const data = new FormData();
     imageFiles.forEach((file) => data.append("image", file.file));
-
     for (const key in formData) {
       data.append(key, formData[key]);
     }
+
     try {
-      const response = await axiosInstance.post("/add-car", data, {
+      const response = await axiosInstance.post(url, data, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
-      console.log("Car added successfully:", response.data);
+      console.log("Item added successfully:", response.data);
     } catch (error) {
-      console.error("Error adding car:", error);
+      console.error("Error adding item:", error);
     }
-    console.log(formData);
   };
 
   return (
@@ -110,18 +108,21 @@ const Update = () => {
           <br />
           <nav className="flex bg-[#F4F4F4] justify-between items-center border rounded-l-[50px] rounded-r-[50px]">
             <Link
+              onClick={(e) => handleSubmit("add-car")}
               to={"automobile"}
               className="font-bold py-2 px-4 rounded-full hover:bg-white transition duration-300 ease-in-out transform hover:scale-102"
             >
               Automobile
             </Link>
             <Link
+              onClick={(e) => handleSubmit("/add-commerce-car")}
               to={"electric"}
               className="font-bold py-2 px-4 rounded-full hover:bg-white transition duration-300 ease-in-out transform hover:scale-102"
             >
               Electric Car
             </Link>
             <Link
+              onClick={(e) => handleSubmit("/add-motorcycle")}
               to={"motorbike"}
               className="font-bold py-2 px-4 rounded-full hover:bg-white transition duration-300 ease-in-out transform hover:scale-102"
             >
@@ -331,16 +332,18 @@ const Update = () => {
         </div>
         <br />
 
-        <div className="w-full max-w-[792px] flex flex-col p-24 shadow-lg justify-center rounded-[10px] items-center bg-white shadow">
-          <h1 className="text-2xl font-bold text-gray-800 self-start">Фото</h1>
-          <p className=" self-start text-gray-600 mb-6 text-xs">
-            Загрузите фото вашего автомобиля четко c разных ракурсов!
+        <div className="w-full max-w-[792px] flex flex-col p-6 sm:p-8 md:p-12 lg:p-24 shadow-lg justify-center rounded-[10px] items-center bg-white">
+          <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-800 self-start">
+            Фото
+          </h1>
+          <p className="self-start text-gray-600 mb-4 sm:mb-6 text-xs sm:text-sm md:text-base">
+            Загрузите фото вашего автомобиля четко с разных ракурсов!
           </p>
 
-          <div className="w-[692px]">
-            <label className="flex flex-col items-center justify-center w-full h-48 bg-gray-100 rounded-lg shadow-md cursor-pointer hover:bg-gray-200 transition-all duration-300 ease-in-out">
-              <MdPhotoCamera className="text-5xl text-[#2684E5] mb-2" />
-              <span className="text-[#2684E5] font-semibold">
+          <div className="w-full max-w-[692px]">
+            <label className="flex flex-col items-center justify-center w-full h-32 sm:h-40 md:h-48 bg-gray-100 rounded-lg shadow-md cursor-pointer hover:bg-gray-200 transition-all duration-300 ease-in-out">
+              <MdPhotoCamera className="text-3xl sm:text-4xl md:text-5xl text-[#2684E5] mb-2" />
+              <span className="text-[#2684E5] font-semibold text-xs sm:text-sm md:text-base">
                 Нажмите для выбора фото
               </span>
               <input
@@ -354,13 +357,13 @@ const Update = () => {
 
             {error && <p className="text-red-500">{error}</p>}
 
-            <div className=" flex flex-wrap justify-center gap-4 mt-6 md:gap-6 lg:gap-8 xl:gap-10">
+            <div className="flex flex-wrap justify-center gap-3 sm:gap-4 md:gap-6 lg:gap-8 xl:gap-10 mt-4 sm:mt-6">
               {imageFiles.map((imgUrl, index) => (
                 <div key={index} className="relative group">
                   <img
                     src={imgUrl.url}
                     alt={`uploaded preview ${index + 1}`}
-                    className="w-40 h-40 object-cover rounded-lg shadow-md"
+                    className="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 object-cover rounded-lg shadow-md"
                   />
                   <button
                     onClick={() => deletePhoto(index)}
@@ -373,14 +376,16 @@ const Update = () => {
             </div>
           </div>
         </div>
+
         <br />
-        <div className="w-full max-w-[792px] flex flex-col p-24 shadow-lg justify-center rounded-[10px] items-center bg-white">
-          <h1 className="text-2xl font-bold text-gray-800 self-start">
+
+        <div className="w-full max-w-[792px] flex flex-col p-6 sm:p-8 md:p-12 lg:p-24 shadow-lg justify-center rounded-[10px] items-center bg-white">
+          <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-800 self-start">
             Описание
           </h1>
-          <p className="self-start text-gray-600 mb-6 text-xs">
+          <p className="self-start text-gray-600 mb-4 sm:mb-6 text-xs sm:text-sm md:text-base">
             He указывайте ссылки на источники, цены, контакты и не предлагайте
-            другие услуги ! объявление не пройдет модерацию
+            другие услуги! объявление не пройдет модерацию
           </p>
           <div className="w-full">
             <textarea
@@ -388,16 +393,48 @@ const Update = () => {
               onChange={(e) =>
                 handleOptionChange("description", e.target.value)
               }
-              className="w-[627px] bg-[#F6F6F6] h-[178px] p-2 border border-gray-300 rounded-md"
+              className="w-full bg-[#F6F6F6] h-32 sm:h-40 md:h-[178px] p-2 border border-gray-300 rounded-md"
               placeholder="Введите описание..."
             />
           </div>
         </div>
 
-        <div>
-          <button onClick={handleSubmit}>collect</button>
+        <br />
+
+        <div className="w-full max-w-[792px] flex flex-col p-6 sm:p-8 md:p-12 lg:p-24 shadow-lg justify-center rounded-[10px] items-center bg-white">
+          <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-800 self-start">
+            Цена
+          </h1>
+          <br />
+          <div className="w-full">
+            <div className="flex items-center w-full max-w-[637px] bg-[#F6F6F6] h-12 sm:h-14 md:h-[48px] border border-gray-300 rounded-md p-2">
+              <select
+                value={formData.cost}
+                onChange={(e) => handleOptionChange("cost", e.target.value)}
+                className="appearance-none bg-transparent flex-1 outline-none mx-2"
+              >
+                <option value="1 850 000">1 850 000</option>
+                <option value="2 000 000">2 000 000</option>
+                <option value="3 000 000">3 000 000</option>
+                <option value="4 000 000">4 000 000</option>
+              </select>
+
+              <FaDollarSign />
+              <FaCaretDown />
+            </div>
+          </div>
         </div>
-        <div className="mt-8 w-full flex justify-center">
+
+        <br />
+
+        <button
+          className="w-full max-w-[792px] text-[#2684E5] bg-[#D7EAFF] rounded-[5px] py-3 sm:py-4 md:py-[17px] px-4 sm:px-6 md:px-[43px] hover:bg-[#2684E5] hover:text-white transition duration-100"
+          onClick={handleSubmit}
+        >
+          Опубликовать объявление
+        </button>
+
+        <div className="mt-8 w-full flex justify-center ">
           <Routes>
             <Route path="automobile" element={<Automobile />} />
             <Route path="electric" element={<ElectricCar />} />

@@ -67,6 +67,18 @@ const LoginPage = () => {
     },
   };
 
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.onmouseenter = Swal.stopTimer;
+      toast.onmouseleave = Swal.resumeTimer;
+    },
+  });
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -74,18 +86,13 @@ const LoginPage = () => {
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("userData", JSON.stringify(response.data.userData));
       setIsLogged(true);
-      // await Swal.fire({
-      //   icon: "success",
-      //   title: translations[language].loginSuccess,
-      //   text: translations[language].welcome,
-      //   confirmButtonText: "OK",
-      // });
+      Toast.fire({
+        icon: "success",
+        title: translations[language].loginSuccess,
+      });
 
-      // navigate("/");
-      // setIsLogged(true);
-      // setTimeout(() => {
-      //   window.location.reload();
-      // }, 100);
+      navigate("/");
+      setIsLogged(true);
     } catch (error) {
       console.error("Ошибка входа:", error);
 

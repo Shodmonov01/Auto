@@ -74,6 +74,11 @@ const Header = () => {
   const token = localStorage.getItem("token");
   const storedUserData = localStorage.getItem("userData");
 
+  useEffect(() => {
+    setHasToken(!!token);
+    setUserData(storedUserData ? JSON.parse(storedUserData) : null);
+  }, [storedUserData]);
+
   const conncetWS = () => {
     socket.emit("join", { userId: UserData.id });
   };
@@ -84,10 +89,6 @@ const Header = () => {
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
-  useEffect(() => {
-    setHasToken(!!token);
-    setUserData(storedUserData ? JSON.parse(storedUserData) : null);
-  }, []);
   if (token && UserData) {
     console.log(socket, "---");
     conncetWS();

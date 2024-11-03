@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import axiosInstance from "../../axiosConfig";
 import { AiOutlineMessage } from "react-icons/ai";
 import { useLanguage } from "../Context/LanguageContext";
@@ -15,6 +15,8 @@ const CarDetails = () => {
   const [userData, setUserData] = useState(null);
   const { language } = useLanguage();
   const [currentIndex, setCurrentIndex] = useState(0);
+  const navigate = useNavigate();
+
   const translations = {
     ru: {
       logo: "Марка",
@@ -104,6 +106,11 @@ const CarDetails = () => {
       );
     }
   };
+  const handleClick = (id) => {
+    return userData
+      ? navigate(`/message?user_id=${id}`)
+      : navigate(`/login?next_url=${"/message"}&user_id=${id}`);
+  };
 
   useEffect(() => {
     const fetchCar = async () => {
@@ -121,10 +128,10 @@ const CarDetails = () => {
     fetchCar();
   }, [id]);
 
+  const storedUserData = localStorage.getItem("userData");
   useEffect(() => {
-    const storedUserData = localStorage.getItem("userData");
     setUserData(storedUserData ? JSON.parse(storedUserData) : null);
-  }, []);
+  }, [storedUserData]);
 
   if (loading) {
     return (
@@ -256,35 +263,32 @@ const CarDetails = () => {
                   </span>
                 </span>
               </p>
-              {userData ? (
-                <>
-                  <div className="flex items-center justify-between shadow p-2 rounded">
-                    <div className="flex items-center gap-4">
-                      <Link to={"/profile"}>
-                        <p className="rounded-full py-2 px-4 flex items-center justify-center bg-[#EEEEEE]">
-                          {userData.name
-                            ? userData.name.charAt(0).toUpperCase()
-                            : ""}
-                        </p>
-                      </Link>
-                      <div className="flex flex-col">
-                        <h1>{userData.name}</h1>
-                        <p className="text-[#989898]">
-                          {translations[language].rating} 5.0
-                        </p>
-                      </div>
-                    </div>
-                    <Link to={"/message"}>
-                      <div className="border-l-2 border-[#F0F0F0] flex items-center gap-2 p-2">
-                        <AiOutlineMessage className="text-blue-500" />
-                        <p>{translations[language].writeMessage}</p>
-                      </div>
+              <>
+                <div className="flex items-center justify-between shadow p-2 rounded">
+                  <div className="flex items-center gap-4">
+                    <Link to={"/profile"}>
+                      <p className="rounded-full py-2 px-4 flex items-center justify-center bg-[#EEEEEE]">
+                        {car.userData.name
+                          ? car.userData.name.charAt(0).toUpperCase()
+                          : ""}
+                      </p>
                     </Link>
+                    <div className="flex flex-col">
+                      <h1>{car.userData.name}</h1>
+                      <p className="text-[#989898]">
+                        {translations[language].rating} 5.0
+                      </p>
+                    </div>
                   </div>
-                </>
-              ) : (
-                <h1 className="text-red">{translations[language].notFound}</h1>
-              )}
+                  <div
+                    onClick={() => handleClick(car.userData.id)}
+                    className="border-l-2 border-[#F0F0F0] flex items-center gap-2 p-2 cursor-pointer"
+                  >
+                    <AiOutlineMessage className="text-blue-500" />
+                    <p>{translations[language].writeMessage}</p>
+                  </div>
+                </div>
+              </>
             </div>
           </div>
 
@@ -297,9 +301,9 @@ const CarDetails = () => {
           </div>
 
           {/* Technical Specifications Section */}
-          <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="w-full grid grid-cols-1 lg:grid-cols-2 md:grid-cols-2 gap-4">
             {/* Left side - Car specifications */}
-            <div className="mx-auto shadow rounded p-6">
+            <div className=" shadow col-span-1 rounded p-6">
               <h1 className="text-[23px] font-bold mb-6">
                 {translations[language].carSpecs}
               </h1>
@@ -356,7 +360,7 @@ const CarDetails = () => {
             </div>
 
             {/* Right side - Seller's question section */}
-            <div className="flex flex-col justify-center items-center bg-gray-100 shadow rounded p-6">
+            <div className="col-span-1 flex flex-col justify-center items-center bg-gray-100 shadow rounded p-6">
               <h1 className="text-[23px] font-bold mb-4">
                 {translations[language].askSeller}
               </h1>
@@ -383,8 +387,6 @@ const CarDetails = () => {
               </div>
             </div>
           </div>
-
-          {/* StillSelecting Component */}
         </div>
       </div>
       <div>

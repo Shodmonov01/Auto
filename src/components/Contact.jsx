@@ -66,12 +66,15 @@ const Contact = () => {
         </div>
       </aside>
 
-      <div className="flex-1 p-6">
-        <YMaps>
-          <Map defaultState={{ center, zoom: 10 }} style={mapContainerStyle}>
-            <Placemark geometry={center} />
-          </Map>
-        </YMaps>
+      <div className=" pl-10 p-6" style={{ width: "100%", height: "400px" }}>
+        <iframe
+          src="https://yandex.ru/map-widget/v1/-/CCU4R1F"
+          width="100%"
+          height="100%"
+          frameBorder="0"
+          allowFullScreen
+          title="Yandex Map"
+        ></iframe>
       </div>
     </div>
   );

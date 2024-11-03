@@ -16,6 +16,7 @@ const CarDetails = () => {
   const { language } = useLanguage();
   const [currentIndex, setCurrentIndex] = useState(0);
   const navigate = useNavigate();
+
   const translations = {
     ru: {
       logo: "Марка",
@@ -127,10 +128,10 @@ const CarDetails = () => {
     fetchCar();
   }, [id]);
 
+  const storedUserData = localStorage.getItem("userData");
   useEffect(() => {
-    const storedUserData = localStorage.getItem("userData");
     setUserData(storedUserData ? JSON.parse(storedUserData) : null);
-  }, []);
+  }, [storedUserData]);
 
   if (loading) {
     return (
@@ -262,7 +263,6 @@ const CarDetails = () => {
                   </span>
                 </span>
               </p>
-              {true ? (
                 <>
                   <div className="flex items-center justify-between shadow p-2 rounded">
                     <div className="flex items-center gap-4">
@@ -289,9 +289,7 @@ const CarDetails = () => {
                     </div>
                   </div>
                 </>
-              ) : (
                 <h1 className="text-red">{translations[language].notFound}</h1>
-              )}
             </div>
           </div>
 

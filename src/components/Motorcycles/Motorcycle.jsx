@@ -9,7 +9,7 @@ import StillSelecting from "../StillSelecting";
 import MotorcyclesFilters from "./MotorcyclesFilters";
 
 const Katalog = () => {
-  const carsPerPage = 6;
+  const [pageSize, setPageSize] = useState(12);
   const [cars, setCars] = useState([]);
   const [likedCars, setLikedCars] = useState(new Set());
   const [currentPage, setCurrentPage] = useState(1);
@@ -26,11 +26,10 @@ const Katalog = () => {
       watchCatalog: "Go to the catalog",
     },
   };
-  const totalPages = Math.ceil(cars.length / carsPerPage);
 
   useEffect(() => {
     axiosInstance
-      .get("/motorcycles")
+      .get("/motorcycles", { params: { page: currentPage, pageSize } })
       .then((response) => {
         console.log("API Response:", response.data);
 
@@ -59,7 +58,7 @@ const Katalog = () => {
           error.response ? error.response.data : error.message
         );
       });
-  }, []);
+  }, [pageSize, currentPage]);
 
   const handleLike = (id) => {
     setCars((prevCars) =>
@@ -84,17 +83,19 @@ const Katalog = () => {
   };
 
   const handlePageChange = (pageNumber) => {
-    if (pageNumber < 1 || pageNumber > totalPages) {
-      return;
+    if (currentPage === pageNumber) {
+      setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
+    } else {
+      setCurrentPage(pageNumber);
     }
-    setCurrentPage(pageNumber);
   };
+  const totalPages = 4;
 
-  const getCurrentPageCars = () => {
-    const startIndex = (currentPage - 1) * carsPerPage;
-    const endIndex = startIndex + carsPerPage;
-    return cars.slice(startIndex, endIndex);
-  };
+  // const getCurrentPageCars = () => {
+  //   const startIndex = (currentPage - 1) * carsPerPage;
+  //   const endIndex = startIndex + carsPerPage;
+  //   return cars.slice(startIndex, endIndex);
+  // };
 
   const navigate = useNavigate();
 
@@ -109,7 +110,7 @@ const Katalog = () => {
       <div className="p-2 m-2 lg:mx-[72px]">
         <div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 mt-4">
-            {getCurrentPageCars().map((car) => (
+            {cars.map((car) => (
               <div key={car.id} className="border p-4 rounded-lg shadow-md">
                 <Link to={`/motorcycles/${car.id}`}>
                   <button
@@ -163,22 +164,26 @@ const Katalog = () => {
         </div>
 
         <div className="flex justify-center mt-8">
-          {Array.from({ length: totalPages }).map((_, index) => (
-            <button
-              key={index + 1}
-              onClick={() => handlePageChange(index + 1)}
-              className={`px-4 py-2 mx-1 rounded-full transition-all duration-300 ease-in-out ${
-                currentPage === index + 1
-                  ? "bg-[#293843] text-white shadow-lg transform scale-110"
-                  : "bg-slate-100 hover:bg-blue-500 hover:text-white hover:shadow-lg hover:scale-105"
-              }`}
-              style={{
-                filter: currentPage === index + 1 ? "none" : "grayscale(100%)",
-              }}
-            >
-              {index + 1}
-            </button>
-          ))}
+          {[...Array(totalPages).keys()].map((_, index) => {
+            const pageNumber = index + 1;
+            return (
+              <button
+                key={pageNumber}
+                onClick={() => handlePageChange(pageNumber)}
+                className={`px-4 py-2 mx-1 rounded-full transition-all duration-300 ease-in-out ${
+                  currentPage === pageNumber
+                    ? "bg-[#293843] text-white shadow-lg transform scale-110"
+                    : "bg-slate-100 hover:bg-blue-500 hover:text-white hover:shadow-lg hover:scale-105"
+                }`}
+                style={{
+                  filter:
+                    currentPage === pageNumber ? "none" : "grayscale(100%)",
+                }}
+              >
+                {pageNumber}
+              </button>
+            );
+          })}
         </div>
       </div>
       {/* <div className="flex items-center justify-end gap-2 m-4">
