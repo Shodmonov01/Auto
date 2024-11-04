@@ -1,16 +1,9 @@
 import React from "react";
-import { YMaps, Map, Placemark } from "react-yandex-maps";
 import { useLanguage } from "./Context/LanguageContext";
 import { IoIosCall } from "react-icons/io";
 import { MdEmail } from "react-icons/md";
 import { CiLocationOn } from "react-icons/ci";
 import { FaVk, FaWhatsapp, FaInstagram } from "react-icons/fa";
-
-const center = [-3.745, -38.523];
-const mapContainerStyle = {
-  height: "400px",
-  width: "100%",
-};
 
 const translations = {
   ru: { contact: "Контакты" },

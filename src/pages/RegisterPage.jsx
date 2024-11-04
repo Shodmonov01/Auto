@@ -141,10 +141,9 @@ const RegisterPage = () => {
           icon: "success",
           title: translations[language].successfulRegistration,
         });
-        setIsLogged(true)
+        setIsLogged(true);
         navigate("/");
         console.log(isLogged);
-
       })
       .catch((error) => {
         console.error(error.response.data.error);
@@ -234,14 +233,14 @@ const RegisterPage = () => {
         </div>
 
         <div className="mb-4 flex items-center">
-          <input
-            type="checkbox"
-            name="agree"
-            checked={formData.agree}
-            onChange={handleChange}
-            className="mr-2"
-          />
           <label className="text-gray-700 text-[14px]">
+            <input
+              type="checkbox"
+              name="agree"
+              checked={formData.agree}
+              onChange={handleChange}
+              className="mr-2"
+            />
             {translations[language].agree}
           </label>
         </div>

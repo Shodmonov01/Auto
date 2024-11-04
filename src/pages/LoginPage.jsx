@@ -157,13 +157,14 @@ const LoginPage = () => {
 
         <div className="mb-4 flex justify-between items-center">
           <div>
-            <input
-              type="checkbox"
-              checked={rememberMe}
-              onChange={() => setRememberMe(!rememberMe)}
-              className="mr-2"
-            />
-            <label className="text-gray-700">
+            <label className="flex items-center text-gray-700">
+              <input
+                name="checkbox"
+                type="checkbox"
+                checked={rememberMe}
+                onChange={() => setRememberMe(!rememberMe)}
+                className="mr-2"
+              />
               {translations[language].rememberMe}
             </label>
           </div>
