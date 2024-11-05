@@ -84,8 +84,31 @@ const MainPageCarsCatalog = () => {
     navigate(path);
   };
   const handleTake = (filter) => {
-    console.log(filter);
+    axiosInstance
+      .post("cars-filter", { filter })
+      .then((response) => {
+        if (Array.isArray(response.data)) {
+          const apiCars = response.data.map((car) => ({
+            id: car.id,
+            name: `Sedan - ${car.drive}`,
+            year: car.year,
+            image: car.image[0],
+            price: car.cost,
+            mileage: car.milage,
+            createdIn: car.country,
+            fuelConsumption: `${car.volume} L`,
+            engineType: car.fuel,
+            likes: 0,
+            description: car.description,
+          }));
+          setCars(apiCars);
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
   };
+
   return (
     <>
       <CarFilters filters={handleTake} />

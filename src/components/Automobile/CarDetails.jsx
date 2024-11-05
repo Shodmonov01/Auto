@@ -289,7 +289,6 @@ const CarDetails = () => {
                     </div>
                   </div>
                 </>
-                <h1 className="text-red">{translations[language].notFound}</h1>
             </div>
           </div>
 

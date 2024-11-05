@@ -9,8 +9,9 @@ const Section = ({ filters }) => {
     marka: null,
     model: null,
     country: null,
-    year: null,
-    priceRange: null,
+    maxYear: 2024,
+    minPrice: 20000,
+    maxPrice: 2000000,
   });
 
   const translations = {
