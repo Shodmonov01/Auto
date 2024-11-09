@@ -10,7 +10,7 @@ const News = () => {
   const [news, setNews] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  const  navigate  = useNavigate();
+  const navigate = useNavigate();
   const [expandedStates, setExpandedStates] = useState({}); // Track expanded states for each news item
 
   const translations = {
@@ -93,11 +93,13 @@ const News = () => {
                 key={item.id}
                 className="flex-shrink-0 bg-white shadow-lg border rounded-lg p-4 w-[290px] lg:w-[416px]"
               >
-                <img
-                  src={item.image}
-                  alt="imageFamily"
-                  className="w-full h-[280px] object-cover mb-4 rounded-lg"
-                />
+                <Link to={`/news/${item.id}`}>
+                  <img
+                    src={item.image}
+                    alt="News"
+                    className="w-full h-[280px] object-cover mb-4 rounded-lg"
+                  />
+                </Link>
                 <b className="text-xl mb-2 block">{item.title}</b>
                 <p className="mb-4">
                   {expandedStates[item.id]

@@ -20,6 +20,7 @@ const LoginPage = () => {
 
   const next_url = searchParams.get("next_url");
   const id = searchParams.get("user_id");
+ 
 
   const translations = {
     ru: {

@@ -75,7 +75,7 @@ const Favorite = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-4 mt-4">
           {cars.map((car) => (
             <div key={car.id} className="border p-4 rounded-lg shadow-md">
-              <Link to={`/about-cars/${car.id}`}>
+              <Link to={`/liked-car/${car.id}`}>
                 <button
                   onClick={() => handleLinkClick(`/about-cars/${car.id}`)}
                   className="w-full h-40"

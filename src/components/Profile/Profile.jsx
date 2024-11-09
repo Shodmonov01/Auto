@@ -13,6 +13,7 @@ import Setting from "./Setting";
 import { useNavigate } from "react-router-dom";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { useLanguage } from "../Context/LanguageContext";
+import MyUpdate from "./MyUpdate/MyUpdate";
 
 const Profile = () => {
   const [userData, setUserData] = useState(null);
@@ -32,7 +33,7 @@ const Profile = () => {
     const storedUserData = localStorage.getItem("userData");
     setUserData(storedUserData ? JSON.parse(storedUserData) : null);
   }, []);
-  
+
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
@@ -47,6 +48,7 @@ const Profile = () => {
       postAd: "Разместить объявление",
       updateAd: "Обновить объявление",
       otherAction: "Другое действие",
+      myUpdate: "Мои объявления",
       tariffText: "Тариф",
       accountSettings: "Настройки аккаунта",
       logout: "Выйти",
@@ -60,6 +62,7 @@ const Profile = () => {
       postAd: "E'lon joylashtirish",
       updateAd: "E'lonni yangilash",
       otherAction: "Boshqa amal",
+      myUpdate: "Mening reklamalarim",
       tariffText: "Tarif",
       accountSettings: "Hisob sozlamalari",
       logout: "Chiqish",
@@ -73,6 +76,7 @@ const Profile = () => {
       postAd: "Post Ad",
       updateAd: "Update Ad",
       otherAction: "Other Action",
+      myUpdate: "My advertisements",
       tariffText: "Tariff",
       accountSettings: "Account Settings",
       logout: "Logout",
@@ -150,8 +154,11 @@ const Profile = () => {
                   <Link to="/update" className="block p-4 hover:bg-gray-200">
                     {translations[language].updateAd}
                   </Link>
-                  <Link to="myupdate/*" className="block p-4 hover:bg-gray-200">
+                  <Link to="*" className="block p-4 hover:bg-gray-200">
                     {translations[language].otherAction}
+                  </Link>
+                  <Link to="myupdate" className="block p-4 hover:bg-gray-200">
+                    {translations[language].myUpdate}
                   </Link>
                 </div>
               )}
@@ -212,6 +219,15 @@ const Profile = () => {
                 <>
                   <PageTitle title={translations[language].setting} />
                   <Setting />
+                </>
+              }
+            />
+            <Route
+              path="myupdate/*"
+              element={
+                <>
+                  <PageTitle title={translations[language].myUpdate} />
+                  <MyUpdate />
                 </>
               }
             />

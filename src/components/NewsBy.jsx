@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axiosConfig from "../axiosConfig";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import StillSelecting from "./StillSelecting";
 import { IoIosArrowForward } from "react-icons/io";
 import { BsArrowUpRight } from "react-icons/bs";
@@ -99,7 +99,9 @@ const NewsBy = () => {
                 </div>
               ))}
               <div className="flex items-center cursor-pointer hover:underline justify-start pt-6">
-                <p className="text-[#202020] px-4">Читать больше новостей</p>
+                <Link to={"/newspage"} className="text-[#202020] px-4">
+                  Читать больше новостей
+                </Link>
                 <BsArrowUpRight className="flex-none" />
               </div>
             </div>

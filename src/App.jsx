@@ -27,7 +27,7 @@ import NewsBy from "./components/NewsBy";
 import PersonalMessage from "./components/Profile/PersonalMessage";
 import { LanguageProvider } from "./components/Context/LanguageContext";
 import { UserProvider } from "./components/Context/UserContext";
-import DeleteCar from "./components/Profile/deleteCar";
+import NewsPage from "./pages/NewsPage";
 
 function Layout({ children }) {
   const location = useLocation();
@@ -185,6 +185,15 @@ function App() {
                   <>
                     <PageTitle title="news" />
                     <News />
+                  </>
+                }
+              />
+              <Route
+                path="/newspage"
+                element={
+                  <>
+                    <PageTitle title="newspage" />
+                    <NewsPage />
                   </>
                 }
               />

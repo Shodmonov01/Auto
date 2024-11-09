@@ -110,7 +110,7 @@ const Header = () => {
                   {translations[language].about}
                 </li>
               </Link>
-              <Link to={"/news"}>
+              <Link to={"/newspage"}>
                 <li className="p-2 hover:text-blue-600 text-[#434343]">
                   {translations[language].news}
                 </li>
