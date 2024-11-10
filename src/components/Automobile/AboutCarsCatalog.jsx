@@ -13,7 +13,8 @@ const MainPageCarsCatalog = () => {
   const [pageSize, setPageSize] = useState(12);
   const { language } = useLanguage();
   const [carId, setCarId] = useState(null);
-  const [userDataId, setUserDataId] = useState(null);
+  const storedUserData = JSON.parse(localStorage.getItem("userData"));
+  console.log(storedUserData);
 
   const translations = {
     ru: {
@@ -66,13 +67,14 @@ const MainPageCarsCatalog = () => {
   const totalPages = 4;
 
   useEffect(() => {
-    if (carId && userDataId) {
+    if (carId && storedUserData?.id) {
       const newLikes = likedCars.has(carId) ? -1 : 1;
       axiosInstance
-        .post("/liked-car", {
-          id: carId,
-          user_id: userDataId,
-          count: newLikes,
+        .get(`/liked-car/${carId}`, {
+          params: {
+            user_id: storedUserData.id,
+            count: newLikes,
+          },
         })
         .then((response) => {
           if (response.data.success) {
@@ -96,7 +98,7 @@ const MainPageCarsCatalog = () => {
           console.error("Error updating like:", error);
         });
     }
-  }, [carId, userDataId, likedCars]);
+  }, [carId, storedUserData, likedCars]);
 
   const navigate = useNavigate();
 
@@ -169,8 +171,7 @@ const MainPageCarsCatalog = () => {
               <div className="mt-2 flex justify-end items-center">
                 <button
                   onClick={() => {
-                    setCarId(car.result.id);
-                    setUserDataId(car.userData.id);
+                    setCarId(car.id);
                   }}
                   className={`py-1 px-2 rounded ${
                     likedCars.has(car.id) ? "" : ""
