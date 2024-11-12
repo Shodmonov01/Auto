@@ -25,9 +25,7 @@ const StillSelecting = () => {
   };
 
   return (
-    <div
-     className="p-2 m-2 lg:mx-[72px] lg:my-4"
-     >
+    <div className=" m-2 lg:mx-[72px] lg:my-4">
       <div
         className="grid grid-cols-1 md:grid-cols-2 gap-4 p-8"
         style={{

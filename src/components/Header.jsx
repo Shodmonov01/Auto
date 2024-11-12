@@ -16,8 +16,6 @@ import { FaVk } from "react-icons/fa";
 import { useUser } from "./Context/UserContext";
 import { io } from "socket.io-client";
 
-const socket = io("https://api.youcarrf.ru");
-
 const translations = {
   ru: {
     basic: "Главная",
@@ -67,6 +65,7 @@ const Header = () => {
   const { language, toggleLanguage } = useLanguage();
   const { isLogged, setIsLogged } = useUser();
   const navigate = useNavigate();
+  const [socket, setSocket] = useState(null);
 
   const handleLanguageChange = (e) => {
     toggleLanguage(e.target.value);
@@ -77,11 +76,37 @@ const Header = () => {
   useEffect(() => {
     setHasToken(!!token);
     setUserData(storedUserData ? JSON.parse(storedUserData) : null);
-  }, [storedUserData]);
 
-  const conncetWS = () => {
-    socket.emit("join", { userId: UserData.id });
+    let newSocket = io("http://212.67.11.143:4035/");
+    setSocket(newSocket);
+    if (socket) {
+      socket.emit("join", 47);
+    }
+    // if (socket) {
+    //   socket.emit("send message", {
+    //     senderId: 34,
+    //     receiverId: 43,
+    //     message: "Hello world",
+    //     type: "text",
+    //   });
+    // }
+  }, [storedUserData]);
+  const handleClick = () => {
+    if (socket) {
+      socket.emit("send message", {
+        senderId: 47,
+        receiverId: 40,
+        message: "Hello world",
+        type: "text",
+      });
+    }
   };
+  const handClick2 = () => {
+    if (socket) {
+      socket.emit("join", 47);
+    }
+  };
+
   const handleCloseDialog = () => {
     setMenuOpen(!menuOpen);
   };
@@ -90,8 +115,6 @@ const Header = () => {
     setMenuOpen(!menuOpen);
   };
   if (token && UserData) {
-    console.log(socket, "---");
-    conncetWS();
     setIsLogged(true);
   }
   return (
@@ -110,6 +133,9 @@ const Header = () => {
                   {translations[language].about}
                 </li>
               </Link>
+              <button onClick={handleClick}>click</button>
+              <button onClick={handClick2}>click2</button>
+
               <Link to={"/newspage"}>
                 <li className="p-2 hover:text-blue-600 text-[#434343]">
                   {translations[language].news}

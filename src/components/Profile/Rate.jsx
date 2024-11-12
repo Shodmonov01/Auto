@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axiosInstance from "../../axiosConfig";
 import { CiCircleMore } from "react-icons/ci";
+import { FaRegEye } from "react-icons/fa";
 
 const Rate = () => {
   const [car, setCar] = useState(null);
@@ -13,7 +14,7 @@ const Rate = () => {
         params: { page: 1, pageSize: 3 },
       });
       if (Array.isArray(response.data) && response.data.length > 0) {
-        const carData = response.data[0];
+        const carData = response.data[1];
         setCar({
           id: carData.id,
           name: `Sedan - ${carData.drive}`,
@@ -22,8 +23,9 @@ const Rate = () => {
           mark: carData.brand,
           country: carData.country,
           image: carData.image[0],
-          likes: 0,
+          liked: carData.liked,
           authoremail: carData.authoremail,
+          seen: carData.seen,
         });
       } else {
         console.error("Expected an array but received:", response.data);
@@ -65,23 +67,27 @@ const Rate = () => {
     <div className="flex w-full items-start bg-white shadow-md rounded-lg p-4 mx-auto">
       {car ? (
         <>
-          <div className="w-1/2">
+          <div className="w-1/2 flex gap-4">
             <img
               src={car.image}
               alt={car.name}
-              className="w-full h-auto rounded-lg"
+              className="w-[186px] h-[125px] object-cover rounded-lg"
             />
+            <div>
+              <h2 className="text-xl text-gray-800">{car.name}</h2>
+              <p className="text-lg font-semibold">{car.price}$</p>
+              <p>{car.country}</p>
+            </div>
           </div>
           <div className="w-1/2 pl-4 space-y-2">
-            <h2 className="text-xl font-bold text-gray-800">{car.name}</h2>
-            <p className="text-sm text-gray-600">Model: {car.model}</p>
-            <p className="text-sm text-gray-600">Mark: {car.mark}</p>
-            <p className="text-lg font-semibold text-blue-600">
-              Price: ${car.price}
-            </p>
+            <div className="flex space-x-2">
+              <FaRegEye />
+
+              <p className="text-sm text-gray-600"> {car.seen}</p>
+            </div>
             <div className="flex items-center space-x-2">
               <span className="text-gray-500">❤️</span>
-              <p className="text-sm">{car.likes} likes</p>
+              <p className="text-sm">{car.liked}</p>
             </div>
           </div>
           <button onClick={() => setIsDialogOpen(true)}>

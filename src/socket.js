@@ -1,5 +1,7 @@
-import { io } from 'socket.io-client';
+// import { io } from 'socket.io-client';
 
-const URL = 'https://api.youcarrf.ru';
 
-export const socket = io(URL);
+
+// const URL = 'https://api.youcarrf.ru';
+
+// export const socket = io(URL);

@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axiosInstance from "../../axiosConfig";
 import { useLanguage } from "../Context/LanguageContext";
 import CarFilters from "./CarFilters";
+import StillSelecting from "../StillSelecting";
 
 const MainPageCarsCatalog = () => {
   const [cars, setCars] = useState([]);
@@ -211,7 +212,7 @@ const MainPageCarsCatalog = () => {
           })}
         </div>
       </div>
-      <div className="flex items-center justify-end gap-[10px] m-4">
+      {/* <div className="flex items-center justify-end gap-[10px] m-4">
         <div>
           <b className="text-xl">
             <u>
@@ -229,7 +230,9 @@ const MainPageCarsCatalog = () => {
         <div className="flex items-center justify-center text-xl">
           <MdOutlineArrowRightAlt className="text-[22px]" />
         </div>
-      </div>
+      </div> */}
+      <br />
+      <StillSelecting />
     </>
   );
 };

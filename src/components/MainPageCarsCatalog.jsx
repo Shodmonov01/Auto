@@ -9,8 +9,6 @@ import { useLanguage } from "../components/Context/LanguageContext";
 const MainPageCarsCatalog = () => {
   const [cars, setCars] = useState([]);
   const [likedCars, setLikedCars] = useState(new Set());
-  const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize, setPageSize] = useState(12);
   const { language } = useLanguage();
 
   const translations = {
@@ -21,10 +19,10 @@ const MainPageCarsCatalog = () => {
 
   useEffect(() => {
     axiosInstance
-      .get("/cars", { params: { page: currentPage, pageSize } })
+      .get("/cars")
       .then((response) => {
         if (Array.isArray(response.data)) {
-          const apiCars = response.data.map((car) => ({
+          const apiCars = response.data.slice(-6).map((car) => ({
             id: car.id,
             name: `Sedan - ${car.drive}`,
             year: car.year,
@@ -48,16 +46,7 @@ const MainPageCarsCatalog = () => {
           error.response ? error.response.data : error.message
         );
       });
-  }, [currentPage, pageSize]);
-
-  const handlePageChange = (pageNumber) => {
-    if (currentPage === pageNumber) {
-      setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
-    } else {
-      setCurrentPage(pageNumber);
-    }
-  };
-  const totalPages = 4;
+  }, []);
 
   const handleLike = (id) => {
     setCars((prevCars) =>
@@ -90,7 +79,7 @@ const MainPageCarsCatalog = () => {
           {cars.map((car) => (
             <div
               key={car.id}
-              className="h-[500px] border px-4 py-2 rounded-lg shadow-md"
+              className="h-[450px] border  rounded-lg shadow-md"
             >
               <Link to={`/about-cars/${car.id}`}>
                 <button
@@ -104,41 +93,42 @@ const MainPageCarsCatalog = () => {
                   />
                 </button>
               </Link>
-              <p className="text-lg">{car.name}</p>
-              <div className="flex justify-between items-center">
-                <p className="text-lg font-bold">
-                  ${car.price.toLocaleString()}
-                </p>
-                <p className="text-md text-gray-600">{car.year}</p>
-              </div>
-              <div className="flex justify-between items-center">
-                <p className="text-md text-gray-600">{car.mileage} km</p>
-                <p className="text-md text-gray-600">{car.fuelConsumption}</p>
-              </div>
-              <div className="flex justify-between items-center">
-                <p className="text-md text-gray-600">{car.createdIn}</p>
-                <p className="text-md text-gray-600">{car.engineType}</p>
-              </div>
-              <p className="text-sm text-gray-800 mt-2">{car.description}</p>
-              <div className="mt-2 flex justify-end items-center">
-                <button
-                  onClick={() => handleLike(car.id)}
-                  className={` px-2 rounded ${
-                    likedCars.has(car.id) ? "bg-gray-400" : ""
-                  }`}
-                >
-                  {likedCars.has(car.id) ? (
-                    <IoHeartDislikeOutline className="mr-1" />
-                  ) : (
-                    <FcLike className="mr-1" />
-                  )}
-                </button>
+              <div className="px-4 py-2">
+                <p className="text-lg">{car.name}</p>
+                <div className="flex justify-between items-center">
+                  <p className="text-lg font-bold">
+                    ${car.price.toLocaleString()}
+                  </p>
+                  <p className="text-md text-gray-600">{car.year}</p>
+                </div>
+                <div className="flex justify-between items-center">
+                  <p className="text-md text-gray-600">{car.mileage} km</p>
+                  <p className="text-md text-gray-600">{car.fuelConsumption}</p>
+                </div>
+                <div className="flex justify-between items-center">
+                  <p className="text-md text-gray-600">{car.createdIn}</p>
+                  <p className="text-md text-gray-600">{car.engineType}</p>
+                </div>
+                <div className="mt-2 flex justify-end items-center">
+                  <button
+                    onClick={() => handleLike(car.id)}
+                    className={` px-2 rounded ${
+                      likedCars.has(car.id) ? "bg-gray-400" : ""
+                    }`}
+                  >
+                    {likedCars.has(car.id) ? (
+                      <IoHeartDislikeOutline className="mr-1" />
+                    ) : (
+                      <FcLike className="mr-1" />
+                    )}
+                  </button>
+                </div>
               </div>
             </div>
           ))}
         </div>
 
-        <div className="flex justify-center mt-8">
+        {/* <div className="flex justify-center mt-8">
           {[...Array(totalPages).keys()].map((_, index) => {
             const pageNumber = index + 1;
             return (
@@ -159,7 +149,7 @@ const MainPageCarsCatalog = () => {
               </button>
             );
           })}
-        </div>
+        </div>*/}
       </div>
       <div className="flex items-center justify-end gap-[10px] m-4">
         <div>

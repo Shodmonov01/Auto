@@ -106,9 +106,9 @@ const LoginPage = () => {
     }
   };
 
-  const conncetWS = () => {
-    socket.emit("join", { userId: 2 });
-  };
+  // const conncetWS = () => {
+  //   socket.emit("join", { userId: 2 });
+  // };
 
   useEffect(() => {
     if (isLogged) {
