@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { useLanguage } from "../Context/LanguageContext";
 import { IoMdArrowDropdown } from "react-icons/io";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Link, useLocation } from "react-router-dom";
 
 const CommerceFilters = () => {
   const { language } = useLanguage();
+  const location = useLocation();
 
   const translations = {
     ru: {
@@ -63,26 +64,28 @@ const CommerceFilters = () => {
         <br />
         <div className="p-4 shadow-slate-500 sm:shadow-md lg:shadow-lg">
           <div className="flex flex-col lg:flex-row gap-4 items-center m-2">
-            <div className="bg-gray-100 rounded-[10px] flex items-center space-x-4 pr-2">
-              <Link to="/about-cars">
-                <button className="px-4 py-2 lg:w-[150px] w-[100px] rounded text-[15px] active:text-white active:bg-[#293843]">
+            <div className="bg-gray-100 rounded-[10px] flex items-center space-x-4">
+              <Link to={"/about-cars"}>
+                <button
+                  className={`px-4 py-2.5 lg:w-[150px] w-[110px] rounded text-[15px] active:bg-[#293843] active:text-white `}
+                >
                   {translations[language].auto}
                 </button>
               </Link>
-              <Link to="/commerce-cars">
+              <Link to={"/commerce-cars"}>
                 <button
-                  className={
-                    "px-4 py-2 lg:w-[150px] w-[100px] rounded text-[15px] active:text-white active:bg-[#293843]"
-                  }
+                  className={`px-4 py-2 lg:w-[150px] w-[110px] text-[15px] rounded ${
+                    location.pathname === "/commerce-cars"
+                      ? "bg-[#293843] text-white"
+                      : ""
+                  }`}
                 >
                   {translations[language].new}
                 </button>
               </Link>
-              <Link to="/motorcycles">
+              <Link to={"/motorcycles"}>
                 <button
-                  className={
-                    "px-4 py-2 lg:w-[150px] w-[100px] rounded text-[15px] active:text-white active:bg-[#293843]"
-                  }
+                  className={`px-3 py-2 lg:w-[150px] w-[110px] text-[15px] rounded`}
                 >
                   {translations[language].used}
                 </button>

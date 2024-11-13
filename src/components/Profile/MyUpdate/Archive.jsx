@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axiosInstance from "../../../axiosConfig";
-import { CiCircleMore } from "react-icons/ci";
+import { PiDotsThreeCircleVerticalLight } from "react-icons/pi";
 
 const Archive = () => {
   const [car, setCar] = useState(null);
@@ -85,7 +85,7 @@ const Archive = () => {
             </div>
           </div>
           <button onClick={() => setIsDialogOpen(true)}>
-            <CiCircleMore size={24} />
+            <PiDotsThreeCircleVerticalLight size={24} />
           </button>
         </>
       ) : (

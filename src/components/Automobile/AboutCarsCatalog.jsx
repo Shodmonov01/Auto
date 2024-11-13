@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { FcLike } from "react-icons/fc";
-import { MdOutlineArrowRightAlt } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
 import axiosInstance from "../../axiosConfig";
 import { useLanguage } from "../Context/LanguageContext";
@@ -12,6 +11,7 @@ const MainPageCarsCatalog = () => {
   const [likedCars, setLikedCars] = useState(new Set());
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(12);
+  const totalPages = 4;
   const { language } = useLanguage();
   const [carId, setCarId] = useState(null);
   const storedUserData = JSON.parse(localStorage.getItem("userData"));
@@ -65,7 +65,6 @@ const MainPageCarsCatalog = () => {
       setCurrentPage(pageNumber);
     }
   };
-  const totalPages = 4;
 
   useEffect(() => {
     if (carId && storedUserData?.id) {
@@ -110,7 +109,7 @@ const MainPageCarsCatalog = () => {
 
   const handleTake = (filter) => {
     axiosInstance
-      .post("/cars-filter", { filter })
+      .post("/cars-filter", { params: { filter } })
       .then((response) => {
         if (Array.isArray(response.data)) {
           const apiCars = response.data.map((car) => ({

@@ -128,11 +128,9 @@ const Header = () => {
                   {translations[language].basic}
                 </li>
               </Link>
-              <Link to={"/"}>
-                <li className="p-2 hover:text-blue-600 text-[#434343]">
-                  {translations[language].about}
-                </li>
-              </Link>
+              <li className="p-2 hover:text-blue-600 text-[#434343]">
+                <a href="#aboutus">{translations[language].about}</a>
+              </li>
               <button onClick={handleClick}>click</button>
               <button onClick={handClick2}>click2</button>
 
