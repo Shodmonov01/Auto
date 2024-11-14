@@ -14,6 +14,8 @@ const Katalog = () => {
   const [likedCars, setLikedCars] = useState(new Set());
   const [currentPage, setCurrentPage] = useState(1);
   const { language } = useLanguage();
+  const [carId, setCarId] = useState(null);
+  const storedUserData = JSON.parse(localStorage.getItem("userData"));
 
   const translations = {
     ru: {
@@ -59,6 +61,41 @@ const Katalog = () => {
         );
       });
   }, [currentPage, pageSize]);
+  useEffect(() => {
+    if (carId && storedUserData?.id) {
+      const newLikes = likedCars.has(carId) ? -1 : 1;
+      console.log(carId, storedUserData.id, newLikes);
+      axiosInstance
+        .get(`/liked-commerce/`, {
+          params: {
+            id: carId,
+            user_id: storedUserData.id,
+            count: newLikes,
+          },
+        })
+        .then((response) => {
+          if (response.data.success) {
+            setCars((prevCars) =>
+              prevCars.map((car) =>
+                car.id === carId ? { ...car, likes: car.likes + newLikes } : car
+              )
+            );
+            setLikedCars((prevLikes) => {
+              const updatedLikes = new Set(prevLikes);
+              updatedLikes.has(carId)
+                ? updatedLikes.delete(carId)
+                : updatedLikes.add(carId);
+              return updatedLikes;
+            });
+          } else {
+            console.error("Error updating like:", response.data);
+          }
+        })
+        .catch((error) => {
+          console.log("Error updating like:", error);
+        });
+    }
+  }, [carId, storedUserData]);
 
   const handleLike = (id) => {
     setCars((prevCars) =>
@@ -142,10 +179,8 @@ const Katalog = () => {
                 <p className="text-sm text-gray-800 mt-2">{car.description}</p>
                 <div className="mt-2 flex justify-end items-center">
                   <button
-                    onClick={() => handleLike(car.id)}
-                    className={`py-1 px-2 rounded ${
-                      likedCars.has(car.id) ? "bg-gray-400" : ""
-                    }`}
+                    onClick={() => setCarId(car.id)}
+                    className={`py-1 px-2 rounded `}
                   >
                     {likedCars.has(car.id) ? (
                       <>

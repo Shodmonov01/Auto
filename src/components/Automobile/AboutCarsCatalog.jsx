@@ -15,7 +15,6 @@ const MainPageCarsCatalog = () => {
   const { language } = useLanguage();
   const [carId, setCarId] = useState(null);
   const storedUserData = JSON.parse(localStorage.getItem("userData"));
-  console.log(storedUserData);
 
   const translations = {
     ru: {
@@ -69,13 +68,11 @@ const MainPageCarsCatalog = () => {
   useEffect(() => {
     if (carId && storedUserData?.id) {
       const newLikes = likedCars.has(carId) ? -1 : 1;
+
       axiosInstance
-        .get(`/liked-car/${carId}`, {
-          params: {
-            user_id: storedUserData.id,
-            count: newLikes,
-          },
-        })
+        .post(
+          `/liked-car/${carId}?user_id=${storedUserData.id}&count=${newLikes}`
+        )
         .then((response) => {
           if (response.data.success) {
             setCars((prevCars) =>
@@ -83,11 +80,14 @@ const MainPageCarsCatalog = () => {
                 car.id === carId ? { ...car, likes: car.likes + newLikes } : car
               )
             );
+
             setLikedCars((prevLikes) => {
               const updatedLikes = new Set(prevLikes);
               if (updatedLikes.has(carId)) {
-                updatedLikes.delete(carId);
-              } else updatedLikes.add(carId);
+                updatedLikes.delete(carId); 
+              } else {
+                updatedLikes.add(carId); 
+              }
               return updatedLikes;
             });
           } else {
@@ -95,10 +95,14 @@ const MainPageCarsCatalog = () => {
           }
         })
         .catch((error) => {
-          console.error("Error updating like:", error);
+          console.error(
+            "Error updating like:",
+            error.response ? error.response.data : error.message
+          );
         });
     }
-  }, [carId, storedUserData, likedCars]);
+  }, [carId, storedUserData, likedCars, setCars, setLikedCars]);
+
 
   const navigate = useNavigate();
 
@@ -139,11 +143,14 @@ const MainPageCarsCatalog = () => {
       <div className="mx-2 mb-2 lg:mx-[72px] lg:mb-2">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 mt-4">
           {cars.map((car) => (
-            <div key={car.id} className="border p-4 rounded-lg shadow-md">
+            <div
+              key={car.id}
+              className=" h-[450px] border rounded-lg shadow-md"
+            >
               <Link to={`/about-cars/${car.id}`}>
                 <button
                   onClick={() => handleLinkClick(`/about-cars/${car.id}`)}
-                  className="w-full h-40"
+                  className="w-full h-48 sm:h-52 md:h-60 lg:h-64"
                 >
                   <img
                     src={car.image}
@@ -152,30 +159,29 @@ const MainPageCarsCatalog = () => {
                   />
                 </button>
               </Link>
-              <p className="text-lg">{car.name}</p>
-              <div className="flex justify-between items-center">
-                <p className="text-lg font-bold">
-                  ${car.price.toLocaleString()}
-                </p>
-                <p className="text-md text-gray-600">{car.year}</p>
+              <div className="px-4 py-2">
+                <p className="text-lg">{car.name}</p>
+                <div className="flex justify-between items-center">
+                  <p className="text-lg font-bold">
+                    ${car.price.toLocaleString()}
+                  </p>
+                  <p className="text-md text-gray-600">{car.year}</p>
+                </div>
+                <div className="flex justify-between items-center">
+                  <p className="text-md text-gray-600"> {car.mileage} km</p>
+                  <p className="text-md text-gray-600">{car.fuelConsumption}</p>
+                </div>
+                <div className="flex justify-between items-center">
+                  <p className="text-md text-gray-600">{car.createdIn}</p>
+                  <p className="text-md text-gray-600">{car.engineType}</p>
+                </div>
               </div>
-              <div className="flex justify-between items-center">
-                <p className="text-md text-gray-600"> {car.mileage} km</p>
-                <p className="text-md text-gray-600">{car.fuelConsumption}</p>
-              </div>
-              <div className="flex justify-between items-center">
-                <p className="text-md text-gray-600">{car.createdIn}</p>
-                <p className="text-md text-gray-600">{car.engineType}</p>
-              </div>
-              <p className="text-sm text-gray-800 mt-2">{car.description}</p>
               <div className="mt-2 flex justify-end items-center">
                 <button
                   onClick={() => {
                     setCarId(car.id);
                   }}
-                  className={`py-1 px-2 rounded ${
-                    likedCars.has(car.id) ? "" : ""
-                  }`}
+                  className={`py-1 px-2 rounded`}
                 >
                   {likedCars.has(car.id) ? (
                     <FcLike size={24} />
@@ -211,25 +217,6 @@ const MainPageCarsCatalog = () => {
           })}
         </div>
       </div>
-      {/* <div className="flex items-center justify-end gap-[10px] m-4">
-        <div>
-          <b className="text-xl">
-            <u>
-              <button onClick={() => handleLinkClick("/about-cars")}>
-                <Link
-                  className="text-[#293843] underline text-[15px] hover:text-black"
-                  to="/about-cars"
-                >
-                  {translations[language]?.watchCatalog}
-                </Link>
-              </button>
-            </u>
-          </b>
-        </div>
-        <div className="flex items-center justify-center text-xl">
-          <MdOutlineArrowRightAlt className="text-[22px]" />
-        </div>
-      </div> */}
       <br />
       <StillSelecting />
     </>
