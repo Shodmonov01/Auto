@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axiosInstance from "../../axiosConfig";
 import CommerceFilters from "./CommerceFilters";
 import StillSelecting from "../StillSelecting";
+import Swal from "sweetalert2";
 
 const Katalog = () => {
   const [pageSize, setPageSize] = useState(12);
@@ -11,6 +12,81 @@ const Katalog = () => {
   const [likedId, setLikedId] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const storedUserData = JSON.parse(localStorage.getItem("userData"));
+  const navigate = useNavigate();
+
+  const toggleLike = (id) => {
+    let ids = [...likedId];
+    let isLiked = !likedId.includes(id);
+
+    if (isLiked) {
+      ids.push(id);
+    } else {
+      ids = ids.filter((item) => item !== id);
+    }
+
+    localStorage.setItem("LikedCommerce-car", JSON.stringify(ids));
+    setLikedId(ids);
+
+    if (!storedUserData) {
+      navigate("/login");
+      return;
+    }
+
+    axiosInstance.get(
+      `/liked-commerce/${id}?user_id=${storedUserData.id}&count=${
+        isLiked ? 1 : -1
+      }`
+    );
+  };
+  const handleLikeButton = () => {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: "top-end",
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.onmouseenter = Swal.stopTimer;
+        toast.onmouseleave = Swal.resumeTimer;
+      },
+    });
+    Toast.fire({
+      icon: "success",
+      title: "Liked successfully!",
+    });
+  };
+
+  const handleUnLikeButton = () => {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: "top-end",
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.onmouseenter = Swal.stopTimer;
+        toast.onmouseleave = Swal.resumeTimer;
+      },
+    });
+    Toast.fire({
+      icon: "warning",
+      title: "Unfortunately unliked!",
+    });
+  };
+
+  const handlePageChange = (pageNumber) => {
+    if (currentPage === pageNumber) {
+      setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
+    } else {
+      setCurrentPage(pageNumber);
+    }
+  };
+  const totalPages = 4;
+
+  const handleLinkClick = (path) => {
+    window.scrollTo(0, 0);
+    navigate(path);
+  };
 
   useEffect(() => {
     const savedLikes =
@@ -51,41 +127,6 @@ const Katalog = () => {
         );
       });
   }, [currentPage, pageSize]);
-
-  const toggleLike = (id) => {
-    let ids = [...likedId];
-    if (!likedId.includes(id)) {
-      ids.push(id);
-    } else {
-      ids = ids.filter((item) => item !== id);
-    }
-    localStorage.setItem("LikedCommerce-car", JSON.stringify(ids));
-    setLikedId(ids);
-    const isLiked = ids.includes(id) ? 1 : -1;
-    if (!storedUserData.id) {
-      navigate("/login");
-    }
-    axiosInstance.get(
-      `/liked-commerce/${id}?user_id=${storedUserData.id}&count=${isLiked}`
-    );
-  };
-
-  const handlePageChange = (pageNumber) => {
-    if (currentPage === pageNumber) {
-      setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
-    } else {
-      setCurrentPage(pageNumber);
-    }
-  };
-  const totalPages = 4;
-
-  const navigate = useNavigate();
-
-  const handleLinkClick = (path) => {
-    window.scrollTo(0, 0);
-    navigate(path);
-  };
-
   return (
     <>
       <CommerceFilters />
@@ -136,9 +177,12 @@ const Katalog = () => {
                     className={`py-1 px-2 rounded `}
                   >
                     {likedId.includes(car.id) ? (
-                      <FcLike size={24} />
+                      <FcLike onClick={handleUnLikeButton} size={24} />
                     ) : (
-                      <span className="material-symbols-outlined text-[#989898]">
+                      <span
+                        onClick={handleLikeButton}
+                        className="material-symbols-outlined text-[#989898]"
+                      >
                         favorite
                       </span>
                     )}

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { FcLike } from "react-icons/fc";
-import { IoHeartDislikeOutline } from "react-icons/io5";
 import { MdOutlineArrowRightAlt } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
 import axiosInstance from "../axiosConfig";
 import { useLanguage } from "../components/Context/LanguageContext";
+import Swal from "sweetalert2";
 
 const MainPageCarsCatalog = () => {
   const [cars, setCars] = useState([]);
@@ -77,6 +77,41 @@ const MainPageCarsCatalog = () => {
     window.scrollTo(0, 0);
     navigate(path);
   };
+  const handleLikeButton = () => {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: "top-end",
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.onmouseenter = Swal.stopTimer;
+        toast.onmouseleave = Swal.resumeTimer;
+      },
+    });
+    Toast.fire({
+      icon: "success",
+      title: "Liked successfully!",
+    });
+  };
+
+  const handleUnLikeButton = () => {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: "top-end",
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.onmouseenter = Swal.stopTimer;
+        toast.onmouseleave = Swal.resumeTimer;
+      },
+    });
+    Toast.fire({
+      icon: "warning",
+      title: "Unfortunately unliked!",
+    });
+  };
 
   return (
     <>
@@ -124,9 +159,12 @@ const MainPageCarsCatalog = () => {
                     className={` px-2 rounded `}
                   >
                     {likedId.includes(car.id) ? (
-                      <FcLike size={24} />
+                      <FcLike onClick={handleUnLikeButton} size={24} />
                     ) : (
-                      <span className="material-symbols-outlined">
+                      <span
+                        onClick={handleLikeButton}
+                        className="material-symbols-outlined"
+                      >
                         favorite
                       </span>
                     )}

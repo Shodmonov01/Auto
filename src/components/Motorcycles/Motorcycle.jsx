@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axiosInstance from "../../axiosConfig";
 import StillSelecting from "../StillSelecting";
 import MotorcyclesFilters from "./MotorcyclesFilters";
+import Swal from "sweetalert2";
 
 const Katalog = () => {
   const [pageSize, setPageSize] = useState(12);
@@ -93,6 +94,41 @@ const Katalog = () => {
     window.scrollTo(0, 0);
     navigate(path);
   };
+  const handleLikeButton = () => {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: "top-end",
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.onmouseenter = Swal.stopTimer;
+        toast.onmouseleave = Swal.resumeTimer;
+      },
+    });
+    Toast.fire({
+      icon: "success",
+      title: "Liked successfully!",
+    });
+  };
+
+  const handleUnLikeButton = () => {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: "top-end",
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.onmouseenter = Swal.stopTimer;
+        toast.onmouseleave = Swal.resumeTimer;
+      },
+    });
+    Toast.fire({
+      icon: "warning",
+      title: "Unfortunately unliked!",
+    });
+  };
 
   return (
     <>
@@ -142,9 +178,12 @@ const Katalog = () => {
                     className={`py-1 px-2 rounded `}
                   >
                     {likedId.includes(car.id) ? (
-                      <FcLike size={24} />
+                      <FcLike onClick={handleUnLikeButton} size={24} />
                     ) : (
-                      <span className="material-symbols-outlined text-[#989898]">
+                      <span
+                        onClick={handleLikeButton}
+                        className="material-symbols-outlined text-[#989898]"
+                      >
                         favorite
                       </span>
                     )}
