@@ -81,7 +81,7 @@ const News = () => {
 
   return (
     <>
-      <div className="m-2 mx-[72px]">
+      <div className="m-2  lg:m-2 lg:mx-[72px]">
         <div>
           <b className="text-2xl">{translations[language].news}</b>
         </div>
