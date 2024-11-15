@@ -14,11 +14,13 @@ import { useNavigate } from "react-router-dom";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { useLanguage } from "../Context/LanguageContext";
 import MyUpdate from "./MyUpdate/MyUpdate";
+import { useLocation } from "react-router-dom";
 
 const Profile = () => {
   const [userData, setUserData] = useState(null);
   const navigate = useNavigate();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const location = useLocation();
   const { language } = useLanguage();
 
   const logout = () => {
@@ -33,6 +35,11 @@ const Profile = () => {
     const storedUserData = localStorage.getItem("userData");
     setUserData(storedUserData ? JSON.parse(storedUserData) : null);
   }, []);
+  useEffect(() => {
+    if (location.pathname === "/profile") {
+      navigate("/profile/favorite");
+    }
+  }, [location, navigate]);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);

@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { FcLike } from "react-icons/fc";
-import { IoHeartDislikeOutline } from "react-icons/io5";
-import { MdOutlineArrowRightAlt } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
 import axiosInstance from "../../axiosConfig";
 import { useLanguage } from "../Context/LanguageContext";
@@ -11,7 +9,7 @@ import StillSelecting from "../StillSelecting";
 const Katalog = () => {
   const [pageSize, setPageSize] = useState(12);
   const [cars, setCars] = useState([]);
-  const [likedCars, setLikedCars] = useState(new Set());
+  const [likedId, setLikedId] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const { language } = useLanguage();
   const [carId, setCarId] = useState(null);
@@ -28,6 +26,11 @@ const Katalog = () => {
       watchCatalog: "Go to the catalog",
     },
   };
+  useEffect(() => {
+    const savedLike =
+      JSON.parse(localStorage.getItem("likedCommerce-car")) || [];
+    setLikedId(savedLike);
+  }, []);
 
   useEffect(() => {
     axiosInstance
@@ -61,62 +64,22 @@ const Katalog = () => {
         );
       });
   }, [currentPage, pageSize]);
-  useEffect(() => {
-    if (carId && storedUserData?.id) {
-      const newLikes = likedCars.has(carId) ? -1 : 1;
-      console.log(carId, storedUserData.id, newLikes);
-      axiosInstance
-        .get(`/liked-commerce/`, {
-          params: {
-            id: carId,
-            user_id: storedUserData.id,
-            count: newLikes,
-          },
-        })
-        .then((response) => {
-          if (response.data.success) {
-            setCars((prevCars) =>
-              prevCars.map((car) =>
-                car.id === carId ? { ...car, likes: car.likes + newLikes } : car
-              )
-            );
-            setLikedCars((prevLikes) => {
-              const updatedLikes = new Set(prevLikes);
-              updatedLikes.has(carId)
-                ? updatedLikes.delete(carId)
-                : updatedLikes.add(carId);
-              return updatedLikes;
-            });
-          } else {
-            console.error("Error updating like:", response.data);
-          }
-        })
-        .catch((error) => {
-          console.log("Error updating like:", error);
-        });
+  const toggleLike = (id) => {
+    let ids = [...likedId];
+    if (!likedId.includes(id)) {
+      ids.push(id);
+    } else {
+      ids = ids.filter((item) => item !== id);
     }
-  }, [carId, storedUserData]);
-
-  const handleLike = (id) => {
-    setCars((prevCars) =>
-      prevCars.map((car) =>
-        car.id === id
-          ? {
-              ...car,
-              likes: likedCars.has(id) ? car.likes - 1 : car.likes + 1,
-            }
-          : car
-      )
+    localStorage.setItem("likedCommerce-car", JSON.stringify(ids));
+    setCarId(ids);
+    const isLiked = ids.includes(id) ? 1 : -1;
+    if (!storedUserData.id) {
+      navigate("/login");
+    }
+    axiosInstance.get(
+      `/liked-commerce/${id}?user_id=${storedUserData.id}&count=${isLiked}`
     );
-    setLikedCars((prevLikes) => {
-      const newLikes = new Set(prevLikes);
-      if (newLikes.has(id)) {
-        newLikes.delete(id);
-      } else {
-        newLikes.add(id);
-      }
-      return newLikes;
-    });
   };
 
   const handlePageChange = (pageNumber) => {
@@ -127,12 +90,6 @@ const Katalog = () => {
     }
   };
   const totalPages = 4;
-
-  // const getCurrentPageCars = () => {
-  //   const startIndex = (currentPage - 1) * carsPerPage;
-  //   const endIndex = startIndex + carsPerPage;
-  //   return cars.slice(startIndex, endIndex);
-  // };
 
   const navigate = useNavigate();
 
@@ -179,16 +136,18 @@ const Katalog = () => {
                 <p className="text-sm text-gray-800 mt-2">{car.description}</p>
                 <div className="mt-2 flex justify-end items-center">
                   <button
-                    onClick={() => setCarId(car.id)}
+                    onClick={() => toggleLike(car.id)}
                     className={`py-1 px-2 rounded `}
                   >
-                    {likedCars.has(car.id) ? (
+                    {likedId.includes(car.id) ? (
                       <>
-                        <IoHeartDislikeOutline className="mr-1" />
+                        <FcLike size={24} />
                       </>
                     ) : (
                       <>
-                        <FcLike className="mr-1" />
+                        <span className="material-symbols-outlined">
+                          favorite
+                        </span>
                       </>
                     )}
                   </button>

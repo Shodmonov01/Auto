@@ -14,7 +14,7 @@ import { CiMenuFries } from "react-icons/ci";
 import { useLanguage } from "./Context/LanguageContext";
 import { FaVk } from "react-icons/fa";
 import { useUser } from "./Context/UserContext";
-import { io } from "socket.io-client";
+import { socket } from "../socket";
 
 const translations = {
   ru: {
@@ -65,7 +65,7 @@ const Header = () => {
   const { language, toggleLanguage } = useLanguage();
   const { isLogged, setIsLogged } = useUser();
   const navigate = useNavigate();
-  const [socket, setSocket] = useState(null);
+  const [sockets, setSockets] = useState(false);
 
   const handleLanguageChange = (e) => {
     toggleLanguage(e.target.value);
@@ -75,13 +75,14 @@ const Header = () => {
 
   useEffect(() => {
     setHasToken(!!token);
+    console.log(socket.connected);
     setUserData(storedUserData ? JSON.parse(storedUserData) : null);
+    // if (sockets){
+    //   console.log('--');
+    // }
+    // let newSocket = io("https://api.youcarrf.ru/");
+    // setSocket(newSocket);
 
-    let newSocket = io("http://212.67.11.143:4035/");
-    setSocket(newSocket);
-    if (socket) {
-      socket.emit("join", 47);
-    }
     // if (socket) {
     //   socket.emit("send message", {
     //     senderId: 34,

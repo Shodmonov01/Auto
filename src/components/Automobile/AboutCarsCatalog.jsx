@@ -8,22 +8,24 @@ import StillSelecting from "../StillSelecting";
 
 const MainPageCarsCatalog = () => {
   const [cars, setCars] = useState([]);
-  const [likedCars, setLikedCars] = useState(new Set());
+  const [likedId, setLikedId] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(12);
   const totalPages = 4;
   const { language } = useLanguage();
-  const [carId, setCarId] = useState(null);
   const storedUserData = JSON.parse(localStorage.getItem("userData"));
+  const navigate = useNavigate();
 
   const translations = {
-    ru: {
-      catalog: "АВТОМОБИЛЬНЫЙ КАТАЛОГ",
-      watchCatalog: "Перейти в каталог",
-    },
+    ru: { catalog: "АВТОМОБИЛЬНЫЙ КАТАЛОГ", watchCatalog: "Перейти в каталог" },
     uzb: { catalog: "AVTO KATALOGI", watchCatalog: "Katalogga o'ting" },
     en: { catalog: "AUTOMOBILE CATALOG", watchCatalog: "Go to the catalog" },
   };
+
+  useEffect(() => {
+    const savedLikes = JSON.parse(localStorage.getItem("likedCars")) || [];
+    setLikedId(savedLikes);
+  }, []);
 
   useEffect(() => {
     axiosInstance
@@ -42,7 +44,6 @@ const MainPageCarsCatalog = () => {
             engineType: car.fuel,
             likes: 0,
             description: car.description,
-            userData: car.userData ? car.userData.id : null,
           }));
           setCars(apiCars);
         } else {
@@ -57,54 +58,32 @@ const MainPageCarsCatalog = () => {
       });
   }, [currentPage, pageSize]);
 
-  const handlePageChange = (pageNumber) => {
-    if (currentPage === pageNumber) {
-      setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
+  const toggleLike = (id) => {
+    let ids = [...likedId];
+    if (!likedId.includes(id)) {
+      ids.push(id);
     } else {
-      setCurrentPage(pageNumber);
+      ids = ids.filter((item) => item !== id);
     }
+    localStorage.setItem("likedCars", JSON.stringify(ids));
+    setLikedId(ids);
+    const isLiked = ids.includes(id) ? 1 : -1;
+    if (!storedUserData.id) {
+      navigate("/login");
+    }
+
+    axiosInstance.post(
+      `/liked-car/${id}?user_id=${storedUserData.id}&count=${isLiked}`
+    );
   };
 
-  useEffect(() => {
-    if (carId && storedUserData?.id) {
-      const newLikes = likedCars.has(carId) ? -1 : 1;
-
-      axiosInstance
-        .post(
-          `/liked-car/${carId}?user_id=${storedUserData.id}&count=${newLikes}`
-        )
-        .then((response) => {
-          if (response.data.success) {
-            setCars((prevCars) =>
-              prevCars.map((car) =>
-                car.id === carId ? { ...car, likes: car.likes + newLikes } : car
-              )
-            );
-
-            setLikedCars((prevLikes) => {
-              const updatedLikes = new Set(prevLikes);
-              if (updatedLikes.has(carId)) {
-                updatedLikes.delete(carId); 
-              } else {
-                updatedLikes.add(carId); 
-              }
-              return updatedLikes;
-            });
-          } else {
-            console.error("Error updating like:", response.data);
-          }
-        })
-        .catch((error) => {
-          console.error(
-            "Error updating like:",
-            error.response ? error.response.data : error.message
-          );
-        });
-    }
-  }, [carId, storedUserData, likedCars, setCars, setLikedCars]);
-
-
-  const navigate = useNavigate();
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(
+      pageNumber === currentPage
+        ? Math.min(pageNumber + 1, totalPages)
+        : pageNumber
+    );
+  };
 
   const handleLinkClick = (path) => {
     window.scrollTo(0, 0);
@@ -143,10 +122,7 @@ const MainPageCarsCatalog = () => {
       <div className="mx-2 mb-2 lg:mx-[72px] lg:mb-2">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 mt-4">
           {cars.map((car) => (
-            <div
-              key={car.id}
-              className=" h-[450px] border rounded-lg shadow-md"
-            >
+            <div key={car.id} className="h-[450px] border rounded-lg shadow-md">
               <Link to={`/about-cars/${car.id}`}>
                 <button
                   onClick={() => handleLinkClick(`/about-cars/${car.id}`)}
@@ -168,7 +144,7 @@ const MainPageCarsCatalog = () => {
                   <p className="text-md text-gray-600">{car.year}</p>
                 </div>
                 <div className="flex justify-between items-center">
-                  <p className="text-md text-gray-600"> {car.mileage} km</p>
+                  <p className="text-md text-gray-600">{car.mileage} km</p>
                   <p className="text-md text-gray-600">{car.fuelConsumption}</p>
                 </div>
                 <div className="flex justify-between items-center">
@@ -178,12 +154,10 @@ const MainPageCarsCatalog = () => {
               </div>
               <div className="mt-2 flex justify-end items-center">
                 <button
-                  onClick={() => {
-                    setCarId(car.id);
-                  }}
-                  className={`py-1 px-2 rounded`}
+                  onClick={() => toggleLike(car.id)}
+                  className="py-1 px-2 rounded"
                 >
-                  {likedCars.has(car.id) ? (
+                  {likedId.includes(car.id) ? (
                     <FcLike size={24} />
                   ) : (
                     <span className="material-symbols-outlined">favorite</span>
