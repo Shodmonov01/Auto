@@ -27,7 +27,7 @@ const MainPageCarsCatalog = () => {
         if (Array.isArray(response.data)) {
           const apiCars = response.data.map((car) => ({
             id: car.id,
-            name: `Sedan - ${car.drive}`,
+            name: car.model,
             year: car.year,
             image: car.image[0],
             price: car.cost,
@@ -36,6 +36,7 @@ const MainPageCarsCatalog = () => {
             fuelConsumption: `${car.volume} L`,
             engineType: car.fuel,
             likes: 0,
+            drive: car.drive,
             description: car.description,
           }));
           setCars(apiCars);
@@ -129,12 +130,14 @@ const MainPageCarsCatalog = () => {
                 </button>
               </Link>
               <div className="px-4 py-2">
-                <p className="text-lg">{car.name}</p>
+                <p className="text-lg">
+                  {car.name}, {car.year}
+                </p>
                 <div className="flex justify-between items-center">
                   <p className="text-lg font-bold">
                     ${car.price.toLocaleString()}
                   </p>
-                  <p className="text-md text-gray-600">{car.year}</p>
+                  <p>{car.drive}</p>
                 </div>
                 <div className="flex justify-between items-center">
                   <p className="text-md text-gray-600">{car.mileage} km</p>
@@ -153,7 +156,9 @@ const MainPageCarsCatalog = () => {
                   {likedId.includes(car.id) ? (
                     <FcLike size={24} />
                   ) : (
-                    <span className="material-symbols-outlined">favorite</span>
+                    <span className="material-symbols-outlined text-[#989898]">
+                      favorite
+                    </span>
                   )}
                 </button>
               </div>
@@ -184,7 +189,6 @@ const MainPageCarsCatalog = () => {
           })}
         </div>
       </div>
-      <br />
       <StillSelecting />
     </>
   );

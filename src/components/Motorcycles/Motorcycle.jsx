@@ -27,7 +27,7 @@ const Katalog = () => {
   useEffect(() => {
     const likedMotos = JSON.parse(localStorage.getItem("LikedMoto")) || [];
     setLikedId(likedMotos);
-  },[]);
+  }, []);
 
   useEffect(() => {
     axiosInstance
@@ -76,7 +76,7 @@ const Katalog = () => {
       navigate("/login");
     }
     axiosInstance.get(
-      `/liked-moto${id}?user_id=${storedUserData.id}&count=${isLiked}`
+      `/liked-moto/${id}?user_id=${storedUserData.id}&count=${isLiked}`
     );
   };
 
@@ -101,35 +101,41 @@ const Katalog = () => {
         <div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 mt-4">
             {cars.map((car) => (
-              <div key={car.id} className="border p-4 rounded-lg shadow-md">
+              <div
+                key={car.id}
+                className="h-[450px] border rounded-lg shadow-md"
+              >
                 <Link to={`/motorcycles/${car.id}`}>
                   <button
                     onClick={() => handleLinkClick(`/motorcycles/${car.id}`)}
-                    className="w-full h-40"
+                    className="w-full h-48 sm:h-52 md:h-60 lg:h-64"
                   >
                     <img
                       src={car.image}
                       alt={`Car ${car.id}`}
-                      className="w-full h-40 object-cover mb-2"
+                      className="w-full h-full rounded object-cover mb-2"
                     />
                   </button>
                 </Link>
-                <p className="text-lg font-bold">{car.name}</p>
-                <div className="flex justify-between items-center">
-                  <p className="text-lg font-bold">
-                    ${car.price.toLocaleString()}
-                  </p>
-                  <p className="text-md text-gray-600">{car.year}</p>
+                <div className="px-4 py-2">
+                  <p className="text-lg font-bold">{car.name}</p>
+                  <div className="flex justify-between items-center">
+                    <p className="text-lg font-bold">
+                      ${car.price.toLocaleString()}
+                    </p>
+                    <p className="text-md text-gray-600">{car.year}</p>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <p className="text-md text-gray-600"> {car.mileage} km</p>
+                    <p className="text-md text-gray-600">
+                      {car.fuelConsumption}
+                    </p>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <p className="text-md text-gray-600">{car.createdIn}</p>
+                    <p className="text-md text-gray-600">{car.engineType}</p>
+                  </div>
                 </div>
-                <div className="flex justify-between items-center">
-                  <p className="text-md text-gray-600"> {car.mileage} km</p>
-                  <p className="text-md text-gray-600">{car.fuelConsumption}</p>
-                </div>
-                <div className="flex justify-between items-center">
-                  <p className="text-md text-gray-600">{car.createdIn}</p>
-                  <p className="text-md text-gray-600">{car.engineType}</p>
-                </div>
-                <p className="text-sm text-gray-800 mt-2">{car.description}</p>
                 <div className="mt-2 flex justify-end items-center">
                   <button
                     onClick={() => toggleLike(car.id)}
@@ -138,7 +144,7 @@ const Katalog = () => {
                     {likedId.includes(car.id) ? (
                       <FcLike size={24} />
                     ) : (
-                      <span className="material-symbols-outlined">
+                      <span className="material-symbols-outlined text-[#989898]">
                         favorite
                       </span>
                     )}

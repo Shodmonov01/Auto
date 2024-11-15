@@ -8,14 +8,20 @@ import { useLanguage } from "../components/Context/LanguageContext";
 
 const MainPageCarsCatalog = () => {
   const [cars, setCars] = useState([]);
-  const [likedCars, setLikedCars] = useState(new Set());
+  const [likedId, setLikedId] = useState();
   const { language } = useLanguage();
+  const storedUserData = JSON.parse(localStorage.getItem("userData"));
+  const navigate = useNavigate();
 
   const translations = {
     ru: { catalog: "АВТОМОБИЛЬНЫЙ КАТАЛОГ", watchCatalog: "Перейти в каталог" },
     uzb: { catalog: "AVTO KATALOGI", watchCatalog: "Katalogga o'ting" },
     en: { catalog: "AUTOMOBILE CATALOG", watchCatalog: "Go to the catalog" },
   };
+  useEffect(() => {
+    const savedLike = JSON.parse(localStorage.getItem("likedCars")) || [];
+    setLikedId(savedLike);
+  }, []);
 
   useEffect(() => {
     axiosInstance
@@ -24,7 +30,7 @@ const MainPageCarsCatalog = () => {
         if (Array.isArray(response.data)) {
           const apiCars = response.data.slice(-6).map((car) => ({
             id: car.id,
-            name: `Sedan - ${car.drive}`,
+            name: car.model,
             year: car.year,
             image: car.image[0],
             price: car.cost,
@@ -33,6 +39,7 @@ const MainPageCarsCatalog = () => {
             fuelConsumption: `${car.volume} L`,
             engineType: car.fuel,
             likes: 0,
+            drive: car.drive,
             description: car.description,
           }));
           setCars(apiCars);
@@ -48,23 +55,23 @@ const MainPageCarsCatalog = () => {
       });
   }, []);
 
-  const handleLike = (id) => {
-    setCars((prevCars) =>
-      prevCars.map((car) =>
-        car.id === id
-          ? { ...car, likes: likedCars.has(id) ? car.likes - 1 : car.likes + 1 }
-          : car
-      )
+  const toggleLike = (id) => {
+    let ids = [...likedId];
+    if (!likedId.includes(id)) {
+      ids.push(id);
+    } else {
+      ids = ids.filter((item) => item !== id);
+    }
+    localStorage.setItem("likedCars", JSON.stringify(ids));
+    setLikedId(ids);
+    const isLiked = ids.includes(id) ? 1 : -1;
+    if (!storedUserData) {
+      navigate("/login");
+    }
+    axiosInstance.post(
+      `/liked-car/${id}?user_id=${storedUserData.id}&count=${isLiked}`
     );
-    setLikedCars((prevLikes) => {
-      const newLikes = new Set(prevLikes);
-      if (newLikes.has(id)) newLikes.delete(id);
-      else newLikes.add(id);
-      return newLikes;
-    });
   };
-
-  const navigate = useNavigate();
 
   const handleLinkClick = (path) => {
     window.scrollTo(0, 0);
@@ -94,12 +101,14 @@ const MainPageCarsCatalog = () => {
                 </button>
               </Link>
               <div className="px-4 py-2">
-                <p className="text-lg">{car.name}</p>
+                <p className="text-lg">
+                  {car.name}, {car.year}
+                </p>
                 <div className="flex justify-between items-center">
                   <p className="text-lg font-bold">
                     ${car.price.toLocaleString()}
                   </p>
-                  <p className="text-md text-gray-600">{car.year}</p>
+                  <p className="text-md text-gray-600">{car.drive}</p>
                 </div>
                 <div className="flex justify-between items-center">
                   <p className="text-md text-gray-600">{car.mileage} km</p>
@@ -111,15 +120,15 @@ const MainPageCarsCatalog = () => {
                 </div>
                 <div className="mt-2 flex justify-end items-center">
                   <button
-                    onClick={() => handleLike(car.id)}
-                    className={` px-2 rounded ${
-                      likedCars.has(car.id) ? "bg-gray-400" : ""
-                    }`}
+                    onClick={() => toggleLike(car.id)}
+                    className={` px-2 rounded `}
                   >
-                    {likedCars.has(car.id) ? (
-                      <IoHeartDislikeOutline className="mr-1" />
+                    {likedId.includes(car.id) ? (
+                      <FcLike size={24} />
                     ) : (
-                      <FcLike className="mr-1" />
+                      <span className="material-symbols-outlined">
+                        favorite
+                      </span>
                     )}
                   </button>
                 </div>
