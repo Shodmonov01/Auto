@@ -1,19 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { FcLike } from "react-icons/fc";
-import { IoHeartDislikeOutline } from "react-icons/io5";
-import { MdOutlineArrowRightAlt } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
 import axiosInstance from "../../axiosConfig";
-import { useLanguage } from "../Context/LanguageContext";
 import StillSelecting from "../StillSelecting";
 import MotorcyclesFilters from "./MotorcyclesFilters";
 
 const Katalog = () => {
   const [pageSize, setPageSize] = useState(12);
   const [cars, setCars] = useState([]);
-  const [likedCars, setLikedCars] = useState(new Set());
+  const [likedId, setLikedId] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const { language } = useLanguage();
+  const storedUserData = JSON.parse(localStorage.getItem("userData"));
+  const navigate = useNavigate();
 
   const translations = {
     ru: {
@@ -26,6 +24,10 @@ const Katalog = () => {
       watchCatalog: "Go to the catalog",
     },
   };
+  useEffect(() => {
+    const likedMotos = JSON.parse(localStorage.getItem("LikedMoto")) || [];
+    setLikedId(likedMotos);
+  },[]);
 
   useEffect(() => {
     axiosInstance
@@ -60,26 +62,22 @@ const Katalog = () => {
       });
   }, [pageSize, currentPage]);
 
-  const handleLike = (id) => {
-    setCars((prevCars) =>
-      prevCars.map((car) =>
-        car.id === id
-          ? {
-              ...car,
-              likes: likedCars.has(id) ? car.likes - 1 : car.likes + 1,
-            }
-          : car
-      )
+  const toggleLike = (id) => {
+    let ids = [...likedId];
+    if (!likedId.includes(id)) {
+      ids.push(id);
+    } else {
+      ids = ids.filter((item) => item !== id);
+    }
+    localStorage.setItem("LikedMoto", JSON.stringify(ids));
+    setLikedId(ids);
+    const isLiked = ids.includes(id) ? 1 : -1;
+    if (!storedUserData) {
+      navigate("/login");
+    }
+    axiosInstance.get(
+      `/liked-moto${id}?user_id=${storedUserData.id}&count=${isLiked}`
     );
-    setLikedCars((prevLikes) => {
-      const newLikes = new Set(prevLikes);
-      if (newLikes.has(id)) {
-        newLikes.delete(id);
-      } else {
-        newLikes.add(id);
-      }
-      return newLikes;
-    });
   };
 
   const handlePageChange = (pageNumber) => {
@@ -90,14 +88,6 @@ const Katalog = () => {
     }
   };
   const totalPages = 4;
-
-  // const getCurrentPageCars = () => {
-  //   const startIndex = (currentPage - 1) * carsPerPage;
-  //   const endIndex = startIndex + carsPerPage;
-  //   return cars.slice(startIndex, endIndex);
-  // };
-
-  const navigate = useNavigate();
 
   const handleLinkClick = (path) => {
     window.scrollTo(0, 0);
@@ -142,19 +132,15 @@ const Katalog = () => {
                 <p className="text-sm text-gray-800 mt-2">{car.description}</p>
                 <div className="mt-2 flex justify-end items-center">
                   <button
-                    onClick={() => handleLike(car.id)}
-                    className={`py-1 px-2 rounded ${
-                      likedCars.has(car.id) ? "bg-gray-400" : ""
-                    }`}
+                    onClick={() => toggleLike(car.id)}
+                    className={`py-1 px-2 rounded `}
                   >
-                    {likedCars.has(car.id) ? (
-                      <>
-                        <IoHeartDislikeOutline className="mr-1" />
-                      </>
+                    {likedId.includes(car.id) ? (
+                      <FcLike size={24} />
                     ) : (
-                      <>
-                        <FcLike className="mr-1" />
-                      </>
+                      <span className="material-symbols-outlined">
+                        favorite
+                      </span>
                     )}
                   </button>
                 </div>
@@ -186,22 +172,6 @@ const Katalog = () => {
           })}
         </div>
       </div>
-      {/* <div className="flex items-center justify-end gap-2 m-4">
-        <div>
-          <b className="text-xl">
-            <u>
-              <button onClick={() => handleLinkClick("/about-cars")}>
-                <Link className="text-[#293843] hover:text-black" to="/about-cars">
-                  {translations[language].watchCatalog}
-                </Link>
-              </button>
-            </u>
-          </b>
-        </div>
-        <div>
-          <MdOutlineArrowRightAlt size={30} />
-        </div>
-      </div> */}
       <StillSelecting />
     </>
   );

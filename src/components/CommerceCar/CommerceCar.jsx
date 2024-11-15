@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { FcLike } from "react-icons/fc";
 import { Link, useNavigate } from "react-router-dom";
 import axiosInstance from "../../axiosConfig";
-import { useLanguage } from "../Context/LanguageContext";
 import CommerceFilters from "./CommerceFilters";
 import StillSelecting from "../StillSelecting";
 
@@ -11,25 +10,12 @@ const Katalog = () => {
   const [cars, setCars] = useState([]);
   const [likedId, setLikedId] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const { language } = useLanguage();
-  const [carId, setCarId] = useState(null);
   const storedUserData = JSON.parse(localStorage.getItem("userData"));
 
-  const translations = {
-    ru: {
-      watchCatalog: "Перейти в каталог",
-    },
-    uzb: {
-      watchCatalog: "Katalogga o'ting",
-    },
-    en: {
-      watchCatalog: "Go to the catalog",
-    },
-  };
   useEffect(() => {
-    const savedLike =
-      JSON.parse(localStorage.getItem("likedCommerce-car")) || [];
-    setLikedId(savedLike);
+    const savedLikes =
+      JSON.parse(localStorage.getItem("LikedCommerce-car")) || [];
+    setLikedId(savedLikes);
   }, []);
 
   useEffect(() => {
@@ -64,6 +50,7 @@ const Katalog = () => {
         );
       });
   }, [currentPage, pageSize]);
+
   const toggleLike = (id) => {
     let ids = [...likedId];
     if (!likedId.includes(id)) {
@@ -71,8 +58,8 @@ const Katalog = () => {
     } else {
       ids = ids.filter((item) => item !== id);
     }
-    localStorage.setItem("likedCommerce-car", JSON.stringify(ids));
-    setCarId(ids);
+    localStorage.setItem("LikedCommerce-car", JSON.stringify(ids));
+    setLikedId(ids);
     const isLiked = ids.includes(id) ? 1 : -1;
     if (!storedUserData.id) {
       navigate("/login");
@@ -140,15 +127,11 @@ const Katalog = () => {
                     className={`py-1 px-2 rounded `}
                   >
                     {likedId.includes(car.id) ? (
-                      <>
-                        <FcLike size={24} />
-                      </>
+                      <FcLike size={24} />
                     ) : (
-                      <>
-                        <span className="material-symbols-outlined">
-                          favorite
-                        </span>
-                      </>
+                      <span className="material-symbols-outlined">
+                        favorite
+                      </span>
                     )}
                   </button>
                 </div>
@@ -180,22 +163,6 @@ const Katalog = () => {
           })}
         </div>
       </div>
-      {/* <div className="flex items-center justify-end gap-2 m-4">
-        <div>
-          <b className="text-xl">
-            <u>
-              <button onClick={() => handleLinkClick("/about-cars")}>
-                <Link className="text-[#293843] hover:text-black" to="/about-cars">
-                  {translations[language].watchCatalog}
-                </Link>
-              </button>
-            </u>
-          </b>
-        </div>
-        <div>
-          <MdOutlineArrowRightAlt size={30} />
-        </div>
-      </div> */}
       <StillSelecting />
     </>
   );

@@ -12,15 +12,8 @@ const MainPageCarsCatalog = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(12);
   const totalPages = 4;
-  const { language } = useLanguage();
   const storedUserData = JSON.parse(localStorage.getItem("userData"));
   const navigate = useNavigate();
-
-  const translations = {
-    ru: { catalog: "АВТОМОБИЛЬНЫЙ КАТАЛОГ", watchCatalog: "Перейти в каталог" },
-    uzb: { catalog: "AVTO KATALOGI", watchCatalog: "Katalogga o'ting" },
-    en: { catalog: "AUTOMOBILE CATALOG", watchCatalog: "Go to the catalog" },
-  };
 
   useEffect(() => {
     const savedLikes = JSON.parse(localStorage.getItem("likedCars")) || [];
