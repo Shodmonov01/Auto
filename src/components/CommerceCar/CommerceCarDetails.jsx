@@ -221,7 +221,7 @@ const CarDetails = () => {
                   <span className="font-semibold text-gray-900">
                     {translations[language].milage}:
                   </span>
-                  {car.result.milage.toLocaleString()} км
+                  {car.result.milage} км
                 </p>
                 <p>
                   <span className="font-semibold text-gray-900">
@@ -259,7 +259,7 @@ const CarDetails = () => {
                 <span className="text-green-600">
                   <span className="bg-blue-600 text-white px-4 py-2 rounded">
                     {translations[language].price}: $
-                    {car.result.cost.toLocaleString()}
+                    {car.result.cost}
                   </span>
                 </span>
               </p>

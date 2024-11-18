@@ -14,6 +14,12 @@ const Katalog = () => {
   const storedUserData = JSON.parse(localStorage.getItem("userData"));
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const savedLikes =
+      JSON.parse(localStorage.getItem("likedCommerce")) || [];
+    setLikedId(savedLikes);
+  }, []);
+
   const toggleLike = (id) => {
     let ids = [...likedId];
     let isLiked = !likedId.includes(id);
@@ -24,7 +30,7 @@ const Katalog = () => {
       ids = ids.filter((item) => item !== id);
     }
 
-    localStorage.setItem("LikedCommerce-car", JSON.stringify(ids));
+    localStorage.setItem("likedCommerce", JSON.stringify(ids));
     setLikedId(ids);
 
     if (!storedUserData) {
@@ -89,12 +95,6 @@ const Katalog = () => {
   };
 
   useEffect(() => {
-    const savedLikes =
-      JSON.parse(localStorage.getItem("LikedCommerce-car")) || [];
-    setLikedId(savedLikes);
-  }, []);
-
-  useEffect(() => {
     axiosInstance
       .get("/commerce-cars", { params: { page: currentPage, pageSize } })
       .then((response) => {
@@ -156,7 +156,7 @@ const Katalog = () => {
                   </p>
                   <div className="flex justify-between items-center">
                     <p className="text-lg font-bold">
-                      ${car.price.toLocaleString()}
+                      ${car.price}
                     </p>
                     <p>{car.drive}</p>
                   </div>

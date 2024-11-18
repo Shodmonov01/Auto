@@ -11,6 +11,8 @@ import { FaDollarSign, FaCaretDown } from "react-icons/fa";
 const Update = () => {
   const [error, setError] = useState("");
   const [imageFiles, setImageFiles] = useState([]);
+  const storedUserData = JSON.parse(localStorage.getItem("userData")) || [];
+  const [endpoint, setEndpoint] = useState("/add-car");
   const [formData, setFormData] = useState({
     color: "",
     country: "",
@@ -25,13 +27,32 @@ const Update = () => {
     doors: 4,
     body: "",
     statement: "",
+    condition: "new",
     description: "",
     stock: 1,
-    authoremail: "javohiryusupovvv2006@gmail.com",
+    authoremail: storedUserData?.email,
     rate: "",
     model: "",
     mark: "BMW",
   });
+  const handleNavClick = (path) => {
+    let newEndpoint;
+    switch (path) {
+      case "automobile":
+        newEndpoint = "/add-automobile";
+        break;
+      case "electric":
+        newEndpoint = "/add-commerce-car";
+        break;
+      case "motorbike":
+        newEndpoint = "/add-motorcycle";
+        break;
+      default:
+        newEndpoint = "/add-car";
+    }
+
+    setEndpoint(newEndpoint);
+  };
 
   const handleOptionChange = (field, value) => {
     setFormData((prevData) => ({
@@ -53,7 +74,7 @@ const Update = () => {
         setError("");
         acc.push({
           url: URL.createObjectURL(file),
-          file: file,
+          file,
         });
         return acc;
       }
@@ -66,7 +87,7 @@ const Update = () => {
     setImageFiles((prevFiles) => prevFiles.filter((_, i) => i !== index));
   };
 
-  const handleSubmit = async (url) => {
+  const handleSubmit = async () => {
     const data = new FormData();
     imageFiles.forEach((file) => data.append("image", file.file));
     for (const key in formData) {
@@ -74,7 +95,7 @@ const Update = () => {
     }
 
     try {
-      const response = await axiosInstance.post(url, data, {
+      const response = await axiosInstance.post(endpoint, data, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -108,21 +129,21 @@ const Update = () => {
           <br />
           <nav className="flex bg-[#F4F4F4] justify-between items-center border rounded-l-[50px] rounded-r-[50px]">
             <Link
-              onClick={(e) => handleSubmit("add-car")}
+              onClick={() => handleNavClick("automobile")}
               to={"automobile"}
               className="font-bold py-2 px-4 rounded-full hover:bg-white transition duration-300 ease-in-out transform hover:scale-102"
             >
               Automobile
             </Link>
             <Link
-              onClick={(e) => handleSubmit("/add-commerce-car")}
+              onClick={() => handleNavClick("electric")}
               to={"electric"}
               className="font-bold py-2 px-4 rounded-full hover:bg-white transition duration-300 ease-in-out transform hover:scale-102"
             >
               Electric Car
             </Link>
             <Link
-              onClick={(e) => handleSubmit("/add-motorcycle")}
+              onClick={() => handleNavClick("motorbike")}
               to={"motorbike"}
               className="font-bold py-2 px-4 rounded-full hover:bg-white transition duration-300 ease-in-out transform hover:scale-102"
             >
@@ -152,7 +173,12 @@ const Update = () => {
             >
               <option value="Модель">Модель</option>
               <option value="Tahoe">Tahoe</option>
-              <option value="BMW m5 cs">BMW m5 cs</option>
+              <option value="BMW">BMW m5 cs</option>
+              <option value="Ducati">Ducati</option>
+              <option value="Yamaha">Yamaha</option>
+              <option value="Kawasaki">Kawasaki</option>
+              <option value="Suzuki">Suzuki</option>
+              <option value="Honda">Honda</option>
             </select>
             <IoMdArrowDropdown
               className="absolute top-[28px] right-4 transform -translate-y-1/2 pointer-events-none"
@@ -243,6 +269,7 @@ const Update = () => {
               className="bg-[#F6F6F6] p-2 rounded-[5px]"
             >
               <option value="AWD">AWD</option>
+              <option value="chain">chain</option>
               <option value="FWD">FWD</option>
             </select>
           </div>
@@ -265,6 +292,7 @@ const Update = () => {
               className="bg-[#F6F6F6] p-2 rounded-[5px]"
             >
               <option value="hatchback">hatchback</option>
+              <option value="sport">sport</option>
               <option value="crossover">crossover</option>
               <option value="sedan">sedan</option>
               <option value="convertible">convertible</option>
@@ -429,7 +457,7 @@ const Update = () => {
 
         <button
           className="w-full max-w-[792px] text-[#2684E5] bg-[#D7EAFF] rounded-[5px] py-3 sm:py-4 md:py-[17px] px-4 sm:px-6 md:px-[43px] hover:bg-[#2684E5] hover:text-white transition duration-100"
-          onClick={handleSubmit}
+          onClick={() => handleSubmit()}
         >
           Опубликовать объявление
         </button>

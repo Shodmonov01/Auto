@@ -7,6 +7,7 @@ const Rate = () => {
   const [car, setCar] = useState(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [deleteReason, setDeleteReason] = useState("");
+  const storedUserData = JSON.parse(localStorage.getItem("userData"));
 
   const fetchCarData = async () => {
     try {
@@ -43,7 +44,7 @@ const Rate = () => {
       try {
         console.log(car.id);
         await axiosInstance.delete(`/delete-car/${car.id}`, {
-          data: { authoremail: car.authoremail, reason: deleteReason },
+          data: { authoremail: storedUserData?.email, reason: deleteReason },
         });
         console.log("Car deleted successfully");
         setCar(null);

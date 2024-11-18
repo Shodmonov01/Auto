@@ -26,7 +26,7 @@ const Katalog = () => {
     },
   };
   useEffect(() => {
-    const likedMotos = JSON.parse(localStorage.getItem("LikedMoto")) || [];
+    const likedMotos = JSON.parse(localStorage.getItem("likedMoto")) || [];
     setLikedId(likedMotos);
   }, []);
 
@@ -70,7 +70,7 @@ const Katalog = () => {
     } else {
       ids = ids.filter((item) => item !== id);
     }
-    localStorage.setItem("LikedMoto", JSON.stringify(ids));
+    localStorage.setItem("likedMoto", JSON.stringify(ids));
     setLikedId(ids);
     const isLiked = ids.includes(id) ? 1 : -1;
     if (!storedUserData) {
@@ -157,7 +157,7 @@ const Katalog = () => {
                   <p className="text-lg font-bold">{car.name}</p>
                   <div className="flex justify-between items-center">
                     <p className="text-lg font-bold">
-                      ${car.price.toLocaleString()}
+                      ${car.price}
                     </p>
                     <p className="text-md text-gray-600">{car.year}</p>
                   </div>

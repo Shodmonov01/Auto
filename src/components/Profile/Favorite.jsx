@@ -16,28 +16,52 @@ const Favorite = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const savedLikes = JSON.parse(localStorage.getItem("likedCars")) || [];
-    setLikedId(savedLikes);
+    const savedCar = JSON.parse(localStorage.getItem("likedCars")) || [];
+    const savedCommerce =
+      JSON.parse(localStorage.getItem("likedCommerce")) || [];
+    const savedMoto = JSON.parse(localStorage.getItem("likedMoto")) || [];
+
+    const combinedLikes = [
+      ...new Set([...savedCar, ...savedCommerce, ...savedMoto]),
+    ];
+
+    setLikedId(combinedLikes);
   }, []);
+  const type = selectedCategory;
+  const filterData =
+    selectedCategory === "cars"
+      ? cars.filter((car) => likedId.includes(car.id))
+      : selectedCategory === "commerce"
+      ? commerce.filter((item) => likedId.includes(item.id))
+      : selectedCategory && type === "moto"
+      ? moto.filter((bike) => likedId.includes(bike.id))
+      : [];
 
   const toggleLike = (id) => {
-    let ids = [...likedId];
+    let updatedLikedIds = [...likedId];
     if (!likedId.includes(id)) {
-      ids.push(id);
+      updatedLikedIds.push(id);
     } else {
-      ids = ids.filter((item) => item !== id);
-      setCars((prevCars) => prevCars.filter((car) => car.id !== id));
-    }
-    localStorage.setItem("likedCars", JSON.stringify(ids));
-    setLikedId(ids);
-    const isLiked = ids.includes(id) ? 1 : -1;
-    if (!storedUserData) {
-      navigate("/login");
+      updatedLikedIds = updatedLikedIds.filter((item) => item !== id);
     }
 
-    axiosInstance.post(
-      `/liked-car/${id}?user_id=${userData.id}&count=${isLiked}`
-    );
+    if (type === "car") {
+      localStorage.setItem("likedCars", JSON.stringify(updatedLikedIds));
+    } else if (type === "commerce") {
+      localStorage.setItem("likedCommerce", JSON.stringify(updatedLikedIds));
+    } else if (type === "moto") {
+      localStorage.setItem("likedMoto", JSON.stringify(updatedLikedIds));
+    }
+
+    setLikedId(updatedLikedIds);
+    if (!storedUserData) {
+      navigate("/login");
+    } else {
+      const isLiked = updatedLikedIds.includes(id) ? 1 : -1;
+      axiosInstance.post(
+        `/liked-car/${id}?user_id=${userData.id}&count=${isLiked}`
+      );
+    }
   };
 
   useEffect(() => {
@@ -109,14 +133,6 @@ const Favorite = () => {
 
     fetchFavorites();
   }, [userData?.email]);
-  const filterData =
-    selectedCategory === "cars"
-      ? cars.filter((car) => likedId.includes(car.id))
-      : selectedCategory === "commerce"
-      ? commerce.filter((item) => likedId.includes(item.id))
-      : selectedCategory === "moto"
-      ? moto.filter((bike) => likedId.includes(bike.id))
-      : [];
 
   const handleUnLikeButton = () => {
     Swal.fire({
@@ -139,8 +155,11 @@ const Favorite = () => {
     <div className="p-4">
       <h2 className="text-2xl font-bold">Избранное</h2>
       <button onClick={() => setSelectedCategory("cars")}>cars</button>
+      <br />
       <button onClick={() => setSelectedCategory("commerce")}>commerce</button>
+      <br />
       <button onClick={() => setSelectedCategory("moto")}>moto</button>
+      <br />
       {filterData.length === 0 ? (
         <div className="flex flex-col items-center justify-center">
           <img src={imageOfCars} alt="imageOfCars" className="mb-6" />
@@ -180,9 +199,7 @@ const Favorite = () => {
                   {car.name}, {car.year}
                 </p>
                 <div className="flex justify-between items-center">
-                  <p className="text-lg font-bold">
-                    ${car.price.toLocaleString()}
-                  </p>
+                  <p className="text-lg font-bold">${car.price}</p>
                   <p>{car.drive}</p>
                 </div>
                 <div className="flex justify-between items-center">
@@ -196,15 +213,15 @@ const Favorite = () => {
               </div>
               <div className="mt-2 flex justify-end items-center">
                 <button
-                  onClick={() => toggleLike(car.id)}
+                  onClick={() => {
+                    toggleLike(car.id);
+                  }}
                   className={`py-1 px-2 rounded`}
                 >
                   {likedId.includes(car.id) ? (
                     <FcLike onClick={handleUnLikeButton} size={24} />
                   ) : (
-                    <span className="material-symbols-outlined text-[#989898]">
-                      favorite
-                    </span>
+                    <FcLike size={24} />
                   )}
                 </button>
               </div>
