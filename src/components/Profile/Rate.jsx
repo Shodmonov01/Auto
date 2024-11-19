@@ -12,10 +12,10 @@ const Rate = () => {
   const fetchCarData = async () => {
     try {
       const response = await axiosInstance.get("/cars", {
-        params: { page: 1, pageSize: 3 },
+        params: { page: 2, pageSize: 1 },
       });
       if (Array.isArray(response.data) && response.data.length > 0) {
-        const carData = response.data[1];
+        const carData = response.data[0];
         setCar({
           id: carData.id,
           name: `Sedan - ${carData.drive}`,
@@ -43,9 +43,12 @@ const Rate = () => {
     if (car && deleteReason) {
       try {
         console.log(car.id);
-        await axiosInstance.delete(`/delete-car/${car.id}`, {
-          data: { authoremail: storedUserData?.email, reason: deleteReason },
-        });
+        await axiosInstance.delete(
+          `/delete-car/${car.id}?authoremail=${encodeURIComponent(
+            storedUserData?.email
+          )}&reason=${encodeURIComponent(deleteReason)}`
+        );
+
         console.log("Car deleted successfully");
         setCar(null);
         setIsDialogOpen(false);

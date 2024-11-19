@@ -27,13 +27,15 @@ const Favorite = () => {
 
     setLikedId(combinedLikes);
   }, []);
+
   const type = selectedCategory;
+
   const filterData =
     selectedCategory === "cars"
       ? cars.filter((car) => likedId.includes(car.id))
       : selectedCategory === "commerce"
       ? commerce.filter((item) => likedId.includes(item.id))
-      : selectedCategory && type === "moto"
+      : selectedCategory === "moto"
       ? moto.filter((bike) => likedId.includes(bike.id))
       : [];
 
@@ -154,12 +156,33 @@ const Favorite = () => {
   return (
     <div className="p-4">
       <h2 className="text-2xl font-bold">Избранное</h2>
-      <button onClick={() => setSelectedCategory("cars")}>cars</button>
-      <br />
-      <button onClick={() => setSelectedCategory("commerce")}>commerce</button>
-      <br />
-      <button onClick={() => setSelectedCategory("moto")}>moto</button>
-      <br />
+      <div className="flex space-x-4">
+        <button
+          onClick={() => setSelectedCategory("cars")}
+          className={`${
+            selectedCategory === "cars" ? "bg-blue-600" : "bg-blue-400"
+          } text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300 transition duration-300 mb-2`}
+        >
+          Cars
+        </button>
+        <button
+          onClick={() => setSelectedCategory("commerce")}
+          className={`${
+            selectedCategory === "commerce" ? "bg-blue-600" : "bg-blue-400"
+          } text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300 transition duration-300 mb-2`}
+        >
+          Commerce
+        </button>
+        <button
+          onClick={() => setSelectedCategory("moto")}
+          className={`${
+            selectedCategory === "moto" ? "bg-blue-600" : "bg-blue-400"
+          } text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300 transition duration-300 mb-2`}
+        >
+          Moto
+        </button>
+      </div>
+
       {filterData.length === 0 ? (
         <div className="flex flex-col items-center justify-center">
           <img src={imageOfCars} alt="imageOfCars" className="mb-6" />
@@ -182,11 +205,8 @@ const Favorite = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-4 mt-4">
           {filterData.map((car) => (
             <div key={car.id} className="h-[450px] border rounded-lg shadow-md">
-              <Link to={`/about-cars/${car.id}`}>
-                <button
-                  onClick={() => handleLinkClick(`/about-cars/${car.id}`)}
-                  className="w-full h-48 sm:h-52 md:h-60 lg:h-64"
-                >
+              <Link>
+                <button className="w-full h-48 sm:h-52 md:h-60 lg:h-64">
                   <img
                     src={car.image}
                     alt={`Car ${car.id}`}
