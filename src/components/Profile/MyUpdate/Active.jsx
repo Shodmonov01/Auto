@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axiosInstance from "../../../axiosConfig";
+import axiosInstance from "../../../config/axiosConfig";
 import { PiDotsThreeCircleVerticalLight } from "react-icons/pi";
 
 const Active = () => {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axiosInstance from "../../axiosConfig";
+import axiosInstance from "../../config/axiosConfig";
 import { CiCircleMore } from "react-icons/ci";
 import { FaRegEye } from "react-icons/fa";
 

@@ -5,7 +5,7 @@ import ElectricCar from "./UpdatedCars.jsx/ElectricCar";
 import MotorBike from "./UpdatedCars.jsx/MotorBike";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { MdPhotoCamera } from "react-icons/md";
-import axiosInstance from "../../axiosConfig";
+import axiosInstance from "../../config/axiosConfig";
 import { FaDollarSign, FaCaretDown } from "react-icons/fa";
 
 const Update = () => {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axiosConfig from "../axiosConfig";
+import axiosConfig from "../config/axiosConfig";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import StillSelecting from "./StillSelecting";
 import { IoIosArrowForward } from "react-icons/io";

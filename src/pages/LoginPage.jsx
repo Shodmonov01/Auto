@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axiosInstance from "../axiosConfig";
+import axiosInstance from "../config/axiosConfig";
 import { useNavigate, Link, useLocation } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Swal from "sweetalert2";
@@ -20,7 +20,6 @@ const LoginPage = () => {
 
   const next_url = searchParams.get("next_url");
   const id = searchParams.get("user_id");
- 
 
   const translations = {
     ru: {

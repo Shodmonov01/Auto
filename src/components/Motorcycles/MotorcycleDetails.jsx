@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
-import axiosInstance from "../../axiosConfig";
+import axiosInstance from "../../config/axiosConfig";
 import { AiOutlineMessage } from "react-icons/ai";
 import { useLanguage } from "../Context/LanguageContext";
 import { IoIosArrowRoundForward } from "react-icons/io";
@@ -258,8 +258,7 @@ const CarDetails = () => {
               <p className="text-3xl font-bold text-gray-900">
                 <span className="text-green-600">
                   <span className="bg-blue-600 text-white px-4 py-2 rounded">
-                    {translations[language].price}: $
-                    {car.result.cost}
+                    {translations[language].price}: ${car.result.cost}
                   </span>
                 </span>
               </p>

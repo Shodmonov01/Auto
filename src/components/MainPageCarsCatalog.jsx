@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { FcLike } from "react-icons/fc";
 import { MdOutlineArrowRightAlt } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
-import axiosInstance from "../axiosConfig";
+import axiosInstance from "../config/axiosConfig";
 import { useLanguage } from "../components/Context/LanguageContext";
 import Swal from "sweetalert2";
 

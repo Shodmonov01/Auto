@@ -14,7 +14,7 @@ import { CiMenuFries } from "react-icons/ci";
 import { useLanguage } from "./Context/LanguageContext";
 import { FaVk } from "react-icons/fa";
 import { useUser } from "./Context/UserContext";
-import { socket } from "../socket";
+import { socket } from "../config/socket";
 
 const translations = {
   ru: {

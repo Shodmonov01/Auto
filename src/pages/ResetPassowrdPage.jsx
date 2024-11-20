@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axiosInstance from "../axiosConfig";
+import axiosInstance from "../config/axiosConfig";
 import { useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa"; // Import the icons
 import { useLanguage } from "../components/Context/LanguageContext";
@@ -27,7 +27,7 @@ const ResetPasswordPage = () => {
         newPassword,
       });
 
-      if (response.status === 200) {
+      if (response.status === 200 || response.status === 201) {
         setSuccess(true);
         setError("");
         navigate("/login");

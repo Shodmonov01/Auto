@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import axiosInstance from "../axiosConfig";
+import axiosInstance from "../config/axiosConfig";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { useLanguage } from "../components/Context/LanguageContext";

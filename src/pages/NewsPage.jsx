@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { useLanguage } from "../components/Context/LanguageContext";
-import axiosInstance from "../axiosConfig";
+import axiosInstance from "../config/axiosConfig";
 import { useNavigate } from "react-router-dom";
 
 const NewsPage = () => {

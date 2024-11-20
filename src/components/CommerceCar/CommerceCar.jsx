@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FcLike } from "react-icons/fc";
 import { Link, useNavigate } from "react-router-dom";
-import axiosInstance from "../../axiosConfig";
+import axiosInstance from "../../config/axiosConfig";
 import CommerceFilters from "./CommerceFilters";
 import StillSelecting from "../StillSelecting";
 import Swal from "sweetalert2";
@@ -15,8 +15,7 @@ const Katalog = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const savedLikes =
-      JSON.parse(localStorage.getItem("likedCommerce")) || [];
+    const savedLikes = JSON.parse(localStorage.getItem("likedCommerce")) || [];
     setLikedId(savedLikes);
   }, []);
 
@@ -155,9 +154,7 @@ const Katalog = () => {
                     {car.name}, {car.year}
                   </p>
                   <div className="flex justify-between items-center">
-                    <p className="text-lg font-bold">
-                      ${car.price}
-                    </p>
+                    <p className="text-lg font-bold">${car.price}</p>
                     <p>{car.drive}</p>
                   </div>
                   <div className="flex justify-between items-center">

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
-import axiosInstance from "../../axiosConfig";
+import axiosInstance from "../../config/axiosConfig";
 import { AiOutlineMessage } from "react-icons/ai";
 import { useLanguage } from "../Context/LanguageContext";
 import { IoIosArrowRoundForward } from "react-icons/io";
@@ -263,32 +263,32 @@ const CarDetails = () => {
                   </span>
                 </span>
               </p>
-                <>
-                  <div className="flex items-center justify-between shadow p-2 rounded">
-                    <div className="flex items-center gap-4">
-                      <Link to={"/profile"}>
-                        <p className="rounded-full py-2 px-4 flex items-center justify-center bg-[#EEEEEE]">
-                          {car.userData.name
-                            ? car.userData.name.charAt(0).toUpperCase()
-                            : ""}
-                        </p>
-                      </Link>
-                      <div className="flex flex-col">
-                        <h1>{car.userData.name}</h1>
-                        <p className="text-[#989898]">
-                          {translations[language].rating} 5.0
-                        </p>
-                      </div>
-                    </div>
-                    <div
-                      onClick={() => handleClick(car.userData.id)}
-                      className="border-l-2 border-[#F0F0F0] flex items-center gap-2 p-2 cursor-pointer"
-                    >
-                      <AiOutlineMessage className="text-blue-500" />
-                      <p>{translations[language].writeMessage}</p>
+              <>
+                <div className="flex items-center justify-between shadow p-2 rounded">
+                  <div className="flex items-center gap-4">
+                    <Link to={"/profile"}>
+                      <p className="rounded-full py-2 px-4 flex items-center justify-center bg-[#EEEEEE]">
+                        {car.userData.name
+                          ? car.userData.name.charAt(0).toUpperCase()
+                          : ""}
+                      </p>
+                    </Link>
+                    <div className="flex flex-col">
+                      <h1>{car.userData.name}</h1>
+                      <p className="text-[#989898]">
+                        {translations[language].rating} 5.0
+                      </p>
                     </div>
                   </div>
-                </>
+                  <div
+                    onClick={() => handleClick(car.userData.id)}
+                    className="border-l-2 border-[#F0F0F0] flex items-center gap-2 p-2 cursor-pointer"
+                  >
+                    <AiOutlineMessage className="text-blue-500" />
+                    <p>{translations[language].writeMessage}</p>
+                  </div>
+                </div>
+              </>
             </div>
           </div>
 

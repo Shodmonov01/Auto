@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FcLike } from "react-icons/fc";
 import { Link, useNavigate } from "react-router-dom";
-import axiosInstance from "../../axiosConfig";
+import axiosInstance from "../../config/axiosConfig";
 import imageOfCars from "../../assets/images/imageOfCars.svg";
 import Swal from "sweetalert2";
 
