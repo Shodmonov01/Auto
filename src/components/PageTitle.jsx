@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
-// eslint-disable-next-line react/prop-types
 const PageTitle = ({ title }) => {
   const location = useLocation();
 
@@ -9,7 +8,7 @@ const PageTitle = ({ title }) => {
     document.title = title;
   }, [location, title]);
 
-  return null; // This component doesn't render anything
+  return null; // This component doesn't render anything, in order to change title name.
 };
 
 export default PageTitle;
