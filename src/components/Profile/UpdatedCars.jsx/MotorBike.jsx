@@ -2,7 +2,7 @@ import React from 'react'
 
 const MotorBike = () => {
   return (
-    <div>MotorBike</div>
+    <div></div>
   )
 }
 

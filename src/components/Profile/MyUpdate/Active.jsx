@@ -49,7 +49,6 @@ const Active = () => {
     fetchCars();
   }, [token]);
 
-  // Handle car deletion
   const handleDelete = async () => {
     if (!selectedCar || !deleteReason) {
       alert("Please select a reason for deletion.");
@@ -58,13 +57,13 @@ const Active = () => {
 
     try {
       await axiosInstance.delete(`/delete-car/${selectedCar.id}`, {
-        data: { authoremail: selectedCar.authoremail, reason: deleteReason },
+        params: { authoremail: selectedCar.authoremail, reason: deleteReason },
       });
       console.log("Car deleted successfully");
 
       setCars((prevCars) =>
         prevCars.filter((car) => car.id !== selectedCar.id)
-      ); 
+      );
       setSelectedCar(null);
       setDeleteReason("");
       setIsDialogOpen(false);
@@ -76,7 +75,6 @@ const Active = () => {
     }
   };
 
-  // Dialog Component
   const Dialog = ({ car, onClose, onDelete }) => (
     <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
       <div className="bg-white rounded-lg p-4 shadow-lg w-96">

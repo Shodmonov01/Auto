@@ -27,7 +27,6 @@ const Update = () => {
     doors: 4,
     body: "",
     statement: "",
-    condition: "new",
     description: "",
     stock: 1,
     authoremail: storedUserData?.email,
@@ -39,7 +38,7 @@ const Update = () => {
     let newEndpoint;
     switch (path) {
       case "automobile":
-        newEndpoint = "/add-automobile";
+        newEndpoint = "/add-car";
         break;
       case "electric":
         newEndpoint = "/add-commerce-car";
@@ -179,6 +178,7 @@ const Update = () => {
               <option value="Kawasaki">Kawasaki</option>
               <option value="Suzuki">Suzuki</option>
               <option value="Honda">Honda</option>
+              <option value="Mercedes-Benz">Mercedes-Benz</option>
             </select>
             <IoMdArrowDropdown
               className="absolute top-[28px] right-4 transform -translate-y-1/2 pointer-events-none"
@@ -232,7 +232,6 @@ const Update = () => {
               onChange={(e) => handleOptionChange("engine", e.target.value)}
               className="bg-[#F6F6F6] p-2 rounded-[5px]"
             >
-              <option value="Бензин">Бензин</option>
               <option value="petrol">petrol</option>
               <option value="electric">electric</option>
               <option value="diesel">diesal</option>
@@ -270,6 +269,8 @@ const Update = () => {
             >
               <option value="AWD">AWD</option>
               <option value="chain">chain</option>
+              <option value="belt">belt</option>
+              <option value="shaft">shaft</option>
               <option value="FWD">FWD</option>
             </select>
           </div>
@@ -296,6 +297,18 @@ const Update = () => {
               <option value="crossover">crossover</option>
               <option value="sedan">sedan</option>
               <option value="convertible">convertible</option>
+              <option value="coupe">coupe</option>
+              <option value="pickup">pickup</option>
+              <option value="suv">suv</option>
+              <option value="van">van</option>
+              <option value="mpv">mpv</option>
+              <option value="jeep">jeep</option>
+              <option value="wagon">wagon</option>
+              <option value="cabriolet">cabriolet</option>
+              <option value="roadster">roadster</option>
+              <option value="touring">touring</option>
+              <option value="standart">standart</option>
+              <option value="dual-sport">dual-sport</option>
             </select>
           </div>
           <div className="flex justify-between items-center border-t py-4">
