@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axiosInstance from "../../../config/axiosConfig";
-import { PiDotsThreeCircleVerticalLight } from "react-icons/pi";
+import { FaRegEye } from "react-icons/fa";
+import { CiCircleMore } from "react-icons/ci";
+import Loader from "../../../utils/Loader";
 
 const REASONS = ["Sold on YouCar", "Sold elsewhere", "Other reason"];
 
@@ -12,7 +14,6 @@ const Archive = () => {
 
   const token = localStorage.getItem("token") || "";
 
-  // Fetch cars from the API
   useEffect(() => {
     const fetchCars = async () => {
       try {
@@ -33,6 +34,7 @@ const Archive = () => {
             image: item.image[0],
             likes: item.liked,
             authoremail: item.authoremail,
+            seen: item.seen,
           }));
           setCars(formattedCars);
         } else {
@@ -127,39 +129,47 @@ const Archive = () => {
     <div className="flex w-full flex-wrap items-start bg-white shadow-md rounded-lg p-4 mx-auto">
       {cars.length > 0 ? (
         cars.map((car) => (
-          <div key={car.id} className="flex w-full mb-4">
-            <div className="w-1/2">
+          <div
+            key={car.id}
+            className="flex flex-col md:flex-row w-full items-start bg-white shadow-md rounded-lg p-4 mb-4"
+          >
+            <div className="w-full md:w-1/2 flex gap-4">
               <img
                 src={car.image}
                 alt={car.name}
-                className="w-full h-auto rounded-lg"
+                className="w-full md:w-[186px] h-[125px] object-cover rounded-lg"
               />
+              <div>
+                <h2 className="text-lg md:text-xl text-gray-800">{car.name}</h2>
+                <p className="text-sm md:text-lg font-semibold">{car.price}$</p>
+                <p className="text-sm md:text-base">{car.country}</p>
+              </div>
             </div>
-            <div className="w-1/2 pl-4 space-y-2">
-              <h2 className="text-xl font-bold text-gray-800">{car.name}</h2>
-              <p className="text-sm text-gray-600">Model: {car.model}</p>
-              <p className="text-sm text-gray-600">Mark: {car.mark}</p>
-              <p className="text-lg font-semibold text-blue-600">
-                Price: ${car.price}
-              </p>
+            <div className="w-full md:w-1/2 mt-4 md:mt-0 md:pl-4 space-y-2">
+              <div className="flex space-x-2">
+                <FaRegEye />
+                <p className="text-sm text-gray-600">{car.seen}</p>
+              </div>
               <div className="flex items-center space-x-2">
                 <span className="text-gray-500">❤️</span>
-                <p className="text-sm">{car.likes} likes</p>
+                <p className="text-sm">{car.likes}</p>
               </div>
             </div>
             <button
               onClick={() => {
-                setIsDialogOpen(true);
                 setSelectedCar(car);
+                setIsDialogOpen(true);
               }}
-              className="ml-4"
+              className="mt-4 md:mt-0 ml-auto md:ml-0"
             >
-              <PiDotsThreeCircleVerticalLight size={24} />
+              <CiCircleMore size={24} />
             </button>
           </div>
         ))
       ) : (
-        <p className="text-center text-gray-500">Loading...</p>
+        <p>
+          <Loader />
+        </p>
       )}
 
       {isDialogOpen && selectedCar && (

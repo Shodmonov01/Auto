@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useLanguage } from "../components/Context/LanguageContext";
 import axiosInstance from "../config/axiosConfig";
 import { useNavigate } from "react-router-dom";
+import Loader from "../utils/Loader";
 
 const NewsPage = () => {
   const { language } = useLanguage();
@@ -59,11 +60,7 @@ const NewsPage = () => {
   }
 
   if (loading) {
-    return (
-      <div className="flex justify-center items-center h-64">
-        <p className="text-xl text-gray-500">Loading news...</p>
-      </div>
-    );
+    return <Loader />;
   }
 
   return (

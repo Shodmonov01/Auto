@@ -7,33 +7,64 @@ import { IoMdArrowDropdown } from "react-icons/io";
 import { MdPhotoCamera } from "react-icons/md";
 import axiosInstance from "../../config/axiosConfig";
 import { FaDollarSign, FaCaretDown } from "react-icons/fa";
+import { useParams } from "react-router-dom";
 
 const Update = () => {
   const [error, setError] = useState("");
   const [imageFiles, setImageFiles] = useState([]);
   const storedUserData = JSON.parse(localStorage.getItem("userData")) || [];
   const [endpoint, setEndpoint] = useState("/add-car");
+  const { id } = useParams();
   const [formData, setFormData] = useState({
     color: "",
     country: "",
-    year: 2024,
-    cost: 0,
+    year: null,
+    cost: null,
     engine: "",
-    milage: 0,
+    milage: null,
     volume: "",
-    horsepower: 500,
+    horsepower: null,
     drive: "",
     checkpoint: "",
-    doors: 4,
+    doors: null,
     body: "",
     statement: "",
     description: "",
-    stock: 1,
+    stock: 0,
     authoremail: storedUserData?.email,
     rate: "",
     model: "",
     mark: "BMW",
   });
+  useEffect(() => {
+     if (!id) {
+       console.warn("ID is undefined");
+       return;
+     }
+    // const controller = new AbortController();
+
+    const fetchCar = async () => {
+      try {
+        const response = await axiosInstance.get(`/cars/${id}`, {
+          // signal: controller.signal,
+        });
+        console.log(response.data);
+      } catch (error) {
+        if (error.name === "AbortError") {
+          console.log("Fetch aborted");
+        } else {
+          console.error(error.message);
+        }
+      }
+    };
+
+    fetchCar();
+
+    return () => {
+      controller.abort();
+    };
+  }, [id]);
+
   const handleNavClick = (path) => {
     let newEndpoint;
     switch (path) {
@@ -477,9 +508,9 @@ const Update = () => {
 
         <div className="mt-8 w-full flex justify-center ">
           <Routes>
-            <Route path="automobile" element={<Automobile />} />
-            <Route path="electric" element={<ElectricCar />} />
-            <Route path="motorbike" element={<MotorBike />} />
+            <Route path="automobile/:id" element={<Automobile />} />
+            <Route path="electric/:id" element={<ElectricCar />} />
+            <Route path="motorbike/:id" element={<MotorBike />} />
           </Routes>
         </div>
       </div>

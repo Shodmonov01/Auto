@@ -4,6 +4,7 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 import StillSelecting from "./StillSelecting";
 import { IoIosArrowForward } from "react-icons/io";
 import { BsArrowUpRight } from "react-icons/bs";
+import Loader from "../utils/Loader";
 
 const NewsBy = () => {
   const [news, setNews] = useState(null);
@@ -40,11 +41,7 @@ const NewsBy = () => {
   }, []);
 
   if (loading) {
-    return (
-      <div className="flex justify-center items-center h-screen">
-        <div className="loader animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-500"></div>
-      </div>
-    );
+    return <Loader />;
   }
 
   if (error) {

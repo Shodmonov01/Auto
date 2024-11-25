@@ -60,9 +60,8 @@ const AboutUs = () => {
     formDataObj.append("name", formData.name);
     formDataObj.append("number", formData.number);
 
-    // You can now send formDataObj to your backend or handle the form submission
     console.log("Form submitted:", formDataObj);
-    setIsModalOpen(false); // Close modal after form submission
+    setIsModalOpen(false); 
   };
 
   return (

@@ -1,9 +1,10 @@
-import React from 'react'
+import React from "react";
 
 const ElectricCar = () => {
   return (
-    <div></div>
-  )
-}
+    <>
+    </>
+  );
+};
 
-export default ElectricCar
+export default ElectricCar;

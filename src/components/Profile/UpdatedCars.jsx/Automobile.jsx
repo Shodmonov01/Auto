@@ -1,9 +1,10 @@
-import React from 'react'
+import React from "react";
 
 const Automobile = () => {
   return (
-    <div></div>
-  )
-}
+    <div>
+    </div>
+  );
+};
 
-export default Automobile
+export default Automobile;

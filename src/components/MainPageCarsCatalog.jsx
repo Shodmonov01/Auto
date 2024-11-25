@@ -141,7 +141,7 @@ const MainPageCarsCatalog = () => {
                 </p>
                 <div className="flex justify-between items-center">
                   <p className="text-lg font-bold">
-                    ${car.price.toLocaleString()}
+                    ${car.price}
                   </p>
                   <p className="text-md text-gray-600">{car.drive}</p>
                 </div>
