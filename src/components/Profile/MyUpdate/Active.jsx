@@ -5,11 +5,13 @@ import { FaTimes } from "react-icons/fa"; // Import the close icon
 import { FaRegEye } from "react-icons/fa";
 import { CiCircleMore } from "react-icons/ci";
 import Loader from "../../../utils/Loader";
+import { useNavigate } from "react-router-dom";
 
 const Active = () => {
   const [cars, setCars] = useState([]);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [selectedCarId, setSelectedCarId] = useState(null);
+  const navigate = useNavigate();
 
   const token = localStorage.getItem("token") || "";
 
@@ -19,7 +21,6 @@ const Active = () => {
         const response = await axiosInstance.get("/user-dashboard", {
           headers: { Authorization: `Bearer ${token}` },
         });
-
         const carData = response?.data?.yours?.result?.cars;
 
         if (Array.isArray(carData)) {
@@ -40,15 +41,21 @@ const Active = () => {
           console.error("Unexpected response format:", response.data);
         }
       } catch (error) {
-        console.error(
-          "Error fetching car data:",
-          error.response?.data || error.message
-        );
+        if (error.response?.status === 401) {
+          localStorage.removeItem("token");
+          localStorage.removeItem("userData");
+          navigate("/login");
+        } else {
+          console.error(
+            "Error fetching car data:",
+            error.response?.data || error.message
+          );
+        }
       }
     };
 
     fetchCars();
-  }, []);
+  }, [token, navigate]);
 
   const Dialog = ({ carId }) => (
     <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">

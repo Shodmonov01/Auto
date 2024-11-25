@@ -37,16 +37,12 @@ const Update = () => {
     mark: "BMW",
   });
   useEffect(() => {
-     if (!id) {
-       console.warn("ID is undefined");
-       return;
-     }
-    // const controller = new AbortController();
+    const controller = new AbortController();
 
     const fetchCar = async () => {
       try {
-        const response = await axiosInstance.get(`/cars/${id}`, {
-          // signal: controller.signal,
+        const response = await axiosInstance.get(`/cars/${22}`, {
+          signal: controller.signal,
         });
         console.log(response.data);
       } catch (error) {
