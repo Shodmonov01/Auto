@@ -41,7 +41,7 @@ const Update = () => {
 
     const fetchCar = async () => {
       try {
-        const response = await axiosInstance.get(`/cars/${22}`, {
+        const response = await axiosInstance.get(`/cars/${id}`, {
           signal: controller.signal,
         });
         console.log(response.data);
@@ -60,6 +60,14 @@ const Update = () => {
       controller.abort();
     };
   }, [id]);
+
+  // useEffect(() => {
+  //   const fetchCarToUPdate = async () => {
+  //     const res = axiosInstance.put(`update-car${id}`);
+  //   };
+  //   fetchCarToUPdate;
+  //   f;
+  // }, []);
 
   const handleNavClick = (path) => {
     let newEndpoint;

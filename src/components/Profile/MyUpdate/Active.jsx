@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axiosInstance from "../../../config/axiosConfig";
 import { Link } from "react-router-dom";
-import { FaTimes } from "react-icons/fa"; // Import the close icon
+import { FaTimes } from "react-icons/fa";
 import { FaRegEye } from "react-icons/fa";
 import { CiCircleMore } from "react-icons/ci";
 import Loader from "../../../utils/Loader";
@@ -21,6 +21,7 @@ const Active = () => {
         const response = await axiosInstance.get("/user-dashboard", {
           headers: { Authorization: `Bearer ${token}` },
         });
+
         const carData = response?.data?.yours?.result?.cars;
 
         if (Array.isArray(carData)) {
@@ -44,7 +45,8 @@ const Active = () => {
         if (error.response?.status === 401) {
           localStorage.removeItem("token");
           localStorage.removeItem("userData");
-          navigate("/login");
+          const nextUrl = window.location.pathname + window.location.search;
+          navigate(`/login?nextUrl=${encodeURIComponent(nextUrl)}`);
         } else {
           console.error(
             "Error fetching car data:",
@@ -68,6 +70,12 @@ const Active = () => {
         </button>
 
         <div className="flex flex-col space-y-4">
+          <Link
+            className="text-[#293843] text-[15px] font-medium hover:text-blue-600 transition-all duration-200"
+            to={`/update`}
+          >
+            Опубликовать
+          </Link>
           <Link
             className="text-[#293843] text-[15px] font-medium hover:text-blue-600 transition-all duration-200"
             to={`/update/automobile/${carId}`}

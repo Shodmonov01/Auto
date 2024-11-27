@@ -16,10 +16,13 @@ const LoginPage = () => {
   const { isLogged, setIsLogged } = useUser();
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
+  const search = new URLSearchParams(location.search);
+
   const navigate = useNavigate();
 
   const next_url = searchParams.get("next_url");
   const id = searchParams.get("user_id");
+  const nextUrl = search.get("nextUrl");
 
   const translations = {
     ru: {
@@ -91,7 +94,6 @@ const LoginPage = () => {
         title: translations[language].loginSuccess,
       });
 
-      navigate("/");
       setIsLogged(true);
     } catch (error) {
       console.error("Ошибка входа:", error);
@@ -114,6 +116,16 @@ const LoginPage = () => {
       next_url ? navigate(`/message?user_id=${id}`) : navigate("/");
     }
   }, [isLogged]);
+
+  useEffect(() => {
+    if (isLogged) {
+      if (nextUrl) {
+        navigate(decodeURIComponent(nextUrl));
+      } else {
+        navigate("/");
+      }
+    }
+  }, [isLogged, nextUrl, navigate]);
 
   return (
     <div className="flex items-center justify-center min-h-[480px] bg-gray-100">
